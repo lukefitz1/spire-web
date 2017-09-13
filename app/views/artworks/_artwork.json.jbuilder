@@ -1,0 +1,2 @@
+json.extract! artwork, :id, :ojbId, :artType, :title, :date, :medium, :image, :description, :dimensions, :frame_dimensions, :condition, :currentLocation, :source, :dateAcquired, :amountPaid, :currentValue, :notes, :notesImage, :additionalInfoLabel, :additionalInfoText, :additionalInfoImage, :additionalPdf, :reviewedBy, :reviewedDate, :provenance, :artists_id, :customers_id, :created_at, :updated_at
+json.url artwork_url(artwork, format: :json)

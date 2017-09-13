@@ -1,0 +1,169 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Ojbid:</strong>
+  <%= @artwork.ojbId %>
+</p>
+
+<p>
+  <strong>Arttype:</strong>
+  <%= @artwork.artType %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @artwork.title %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @artwork.date %>
+</p>
+
+<p>
+  <strong>Medium:</strong>
+  <%= @artwork.medium %>
+</p>
+
+<!-- <p>
+  <strong>Image:</strong>
+  <%= @artwork.image %>
+</p> -->
+
+<p>
+  <strong>Image:</strong>
+  <% if @artwork.image.thumb.url %>
+    <%= image_tag @artwork.image.thumb.url %>
+  <% end %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @artwork.description %>
+</p>
+
+<p>
+  <strong>Dimensions:</strong>
+  <%= @artwork.dimensions %>
+</p>
+
+<p>
+  <strong>Frame dimensions:</strong>
+  <%= @artwork.frame_dimensions %>
+</p>
+
+<p>
+  <strong>Condition:</strong>
+  <%= @artwork.condition %>
+</p>
+
+<p>
+  <strong>Currentlocation:</strong>
+  <%= @artwork.currentLocation %>
+</p>
+
+<p>
+  <strong>Source:</strong>
+  <%= @artwork.source %>
+</p>
+
+<p>
+  <strong>Dateacquired:</strong>
+  <%= @artwork.dateAcquired %>
+</p>
+
+<p>
+  <strong>Amountpaid:</strong>
+  <%= @artwork.amountPaid %>
+</p>
+
+<p>
+  <strong>Currentvalue:</strong>
+  <%= @artwork.currentValue %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @artwork.notes %>
+</p>
+
+<!-- <p>
+  <strong>Notesimage:</strong>
+  <%= @artwork.notesImage %>
+</p> -->
+
+<p>
+  <strong>Notes Image:</strong>
+  <% if @artwork.notesImage.thumb.url %>
+    <%= image_tag @artwork.notesImage.thumb.url %>
+  <% end %>
+</p>
+
+<p>
+  <strong>Additionalinfolabel:</strong>
+  <%= @artwork.additionalInfoLabel %>
+</p>
+
+<p>
+  <strong>Additionalinfotext:</strong>
+  <%= @artwork.additionalInfoText %>
+</p>
+
+<!-- <p>
+  <strong>Additionalinfoimage:</strong>
+  <%= @artwork.additionalInfoImage %>
+</p> -->
+
+<p>
+  <strong>Additional Info Image:</strong>
+  <% if @artwork.additionalInfoImage.thumb.url %>
+    <%= image_tag @artwork.additionalInfoImage.thumb.url %>
+  <% end %>
+</p>
+
+<p>
+  <strong>Additionalpdf:</strong>
+  <%= @artwork.additionalPdf %>
+</p>
+
+<p>
+  <strong>Reviewedby:</strong>
+  <%= @artwork.reviewedBy %>
+</p>
+
+<p>
+  <strong>Revieweddate:</strong>
+  <%= @artwork.reviewedDate %>
+</p>
+
+<p>
+  <strong>Provenance:</strong>
+  <%= @artwork.provenance %>
+</p>
+
+<!-- <p>
+  <strong>Artists:</strong>
+  <%= @artwork.artist_id %>
+</p> -->
+
+<p>
+  <strong>Artist:</strong>
+  <% unless @artwork.artist.blank? %>
+    <%= @artwork.artist.firstName %><%= ' ' %><%= @artwork.artist.lastName %>
+  <% end %>
+</p>
+
+<!-- <p>
+  <strong>Customers:</strong>
+  <%= @artwork.customer_id %>
+</p> -->
+
+<p>
+  <strong>Customer:</strong>
+  <% unless @artwork.customer.blank? %>
+    <%= @artwork.customer.firstName %><%= ' ' %><%= @artwork.customer.lastName %>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_artwork_path(@artwork) %> |
+<%= link_to 'Back', artworks_path %>

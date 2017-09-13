@@ -1,0 +1,187 @@
+<%= form_with(model: artwork, local: true) do |form| %>
+  <% if artwork.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(artwork.errors.count, "error") %> prohibited this artwork from being saved:</h2>
+
+      <ul>
+      <% artwork.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :ojbId %>
+    <%= form.text_field :ojbId, id: :artwork_ojbId %>
+  </div>
+
+  <div class="field">
+    <%= form.label :artType %>
+    <%= form.text_field :artType, id: :artwork_artType %>
+  </div>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, id: :artwork_title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :date %>
+    <%= form.text_field :date, id: :artwork_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :medium %>
+    <%= form.text_field :medium, id: :artwork_medium %>
+  </div>
+
+  <!-- <div class="field">
+    <%= form.label :image %>
+    <%= form.text_field :image, id: :artwork_image %>
+  </div> -->
+
+  <div class="field">
+    <%= form.label :image %>
+    <%= form.file_field :image, id: :artwork_image %>
+    <% if form.object.image? %>
+      <%= image_tag form.object.image.thumb.url %>
+      <%= form.label :remove_image %>
+      <%= form.check_box :remove_image %> 
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, id: :artwork_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :dimensions %>
+    <%= form.text_field :dimensions, id: :artwork_dimensions %>
+  </div>
+
+  <div class="field">
+    <%= form.label :frame_dimensions %>
+    <%= form.text_field :frame_dimensions, id: :artwork_frame_dimensions %>
+  </div>
+
+  <div class="field">
+    <%= form.label :condition %>
+    <%= form.text_field :condition, id: :artwork_condition %>
+  </div>
+
+  <div class="field">
+    <%= form.label :currentLocation %>
+    <%= form.text_field :currentLocation, id: :artwork_currentLocation %>
+  </div>
+
+  <div class="field">
+    <%= form.label :source %>
+    <%= form.text_field :source, id: :artwork_source %>
+  </div>
+
+  <div class="field">
+    <%= form.label :dateAcquired %>
+    <%= form.text_field :dateAcquired, id: :artwork_dateAcquired %>
+  </div>
+
+  <div class="field">
+    <%= form.label :amountPaid %>
+    <%= form.text_field :amountPaid, id: :artwork_amountPaid %>
+  </div>
+
+  <div class="field">
+    <%= form.label :currentValue %>
+    <%= form.text_field :currentValue, id: :artwork_currentValue %>
+  </div>
+
+  <div class="field">
+    <%= form.label :notes %>
+    <%= form.text_area :notes, id: :artwork_notes %>
+  </div>
+
+  <!-- <div class="field">
+    <%= form.label :notesImage %>
+    <%= form.text_field :notesImage, id: :artwork_notesImage %>
+  </div> -->
+
+  <div class="field">
+    <%= form.label :notesImage %>
+    <%= form.file_field :notesImage, id: :artwork_notesImage %>
+    <% if form.object.notesImage? %>
+      <%= image_tag form.object.notesImage.thumb.url %>
+      <%= form.label :remove_notesImage %>
+      <%= form.check_box :remove_notesImage %> 
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= form.label :additionalInfoLabel %>
+    <%= form.text_field :additionalInfoLabel, id: :artwork_additionalInfoLabel %>
+  </div>
+
+  <div class="field">
+    <%= form.label :additionalInfoText %>
+    <%= form.text_area :additionalInfoText, id: :artwork_additionalInfoText %>
+  </div>
+
+  <!-- <div class="field">
+    <%= form.label :additionalInfoImage %>
+    <%= form.text_field :additionalInfoImage, id: :artwork_additionalInfoImage %>
+  </div> -->
+
+  <div class="field">
+    <%= form.label :additionalInfoImage %>
+    <%= form.file_field :additionalInfoImage, id: :artwork_additionalInfoImage %>
+    <% if form.object.additionalInfoImage? %>
+      <%= image_tag form.object.additionalInfoImage.thumb.url %>
+      <%= form.label :remove_additionalInfoImage %>
+      <%= form.check_box :remove_additionalInfoImage %> 
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= form.label :additionalPdf %>
+    <%= form.text_field :additionalPdf, id: :artwork_additionalPdf %>
+  </div>
+
+  <div class="field">
+    <%= form.label :reviewedBy %>
+    <%= form.text_field :reviewedBy, id: :artwork_reviewedBy %>
+  </div>
+
+  <div class="field">
+    <%= form.label :reviewedDate %>
+    <%= form.text_field :reviewedDate, id: :artwork_reviewedDate %>
+  </div>
+
+  <div class="field">
+    <%= form.label :provenance %>
+    <%= form.text_area :provenance, id: :artwork_provenance %>
+  </div>
+
+  <!-- <div class="field">
+    <%= form.label :artist_id %>
+    <%= form.text_field :artist_id, id: :artwork_artist_id %>
+  </div> -->
+
+  <div class="field">
+    <%= form.label :artist_id %>
+    <%= form.select(:artist_id, Artist.all.collect { |artist| [artist.firstName + ' ' + artist.lastName, artist.id]}, include_blank: true) %>
+  </div>
+
+  <!-- <div class="field">
+    <%= form.label :customer_id %>
+    <%= form.text_field :customer_id, id: :artwork_customer_id %>
+  </div> -->
+
+  <div class="field">
+    <%= form.label :customer_id %>
+    <%= form.select(:customer_id, Customer.all.collect { |customer| [customer.firstName + ' ' + customer.lastName, customer.id]}, include_blank: true) %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

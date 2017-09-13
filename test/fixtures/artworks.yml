@@ -1,0 +1,57 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ojbId: MyString
+  artType: MyString
+  title: MyString
+  date: MyString
+  medium: MyString
+  image: MyString
+  description: MyText
+  dimensions: MyString
+  frame_dimensions: MyString
+  condition: MyString
+  currentLocation: MyString
+  source: MyString
+  dateAcquired: MyString
+  amountPaid: MyString
+  currentValue: MyString
+  notes: MyText
+  notesImage: MyString
+  additionalInfoLabel: MyString
+  additionalInfoText: MyText
+  additionalInfoImage: MyString
+  additionalPdf: MyString
+  reviewedBy: MyString
+  reviewedDate: MyString
+  provenance: MyText
+  artists: one
+  customers: one
+
+two:
+  ojbId: MyString
+  artType: MyString
+  title: MyString
+  date: MyString
+  medium: MyString
+  image: MyString
+  description: MyText
+  dimensions: MyString
+  frame_dimensions: MyString
+  condition: MyString
+  currentLocation: MyString
+  source: MyString
+  dateAcquired: MyString
+  amountPaid: MyString
+  currentValue: MyString
+  notes: MyText
+  notesImage: MyString
+  additionalInfoLabel: MyString
+  additionalInfoText: MyText
+  additionalInfoImage: MyString
+  additionalPdf: MyString
+  reviewedBy: MyString
+  reviewedDate: MyString
+  provenance: MyText
+  artists: two
+  customers: two
