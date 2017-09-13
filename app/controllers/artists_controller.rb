@@ -21,6 +21,14 @@ class ArtistsController < ApplicationController
   def edit
   end
 
+  # GET artist/import
+  def import_artists
+    Artist.import(params[:file])
+
+    # after import, redirect to homepage
+    redirect_to root_url, notice: "Data imported successfully!"
+  end
+
   # POST /artists
   # POST /artists.json
   def create

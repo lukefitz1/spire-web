@@ -21,6 +21,31 @@ class ArtworksController < ApplicationController
   def edit
   end
 
+  # GET artworks/import
+  def import
+    Artwork.import(params[:file])
+
+    # after import, redirect to homepage
+    redirect_to root_url, notice: "Data imported successfully!"
+  end
+
+  # GET artworks/preview/1
+  def preview
+    @artwork = Artwork.find(params[:id])
+  end
+
+  def preview_pdf
+    @artwork = Artwork.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: 'filename',
+          template: 'artworks/preview_pdf.pdf.erb',
+          show_as_html: params.key?('debug')
+      end
+    end
+  end
+  
   # POST /artworks
   # POST /artworks.json
   def create

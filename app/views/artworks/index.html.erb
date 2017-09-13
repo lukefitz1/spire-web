@@ -97,10 +97,11 @@
             <%= artwork.customer.firstName %><%= ' ' %><%= artwork.customer.lastName %>
           <% end %>     
         </td>
-        
+
         <td><%= link_to 'Show', artwork %></td>
         <td><%= link_to 'Edit', edit_artwork_path(artwork) %></td>
         <td><%= link_to 'Destroy', artwork, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Preview', preview_path(artwork) %></td>
       </tr>
     <% end %>
   </tbody>
@@ -109,3 +110,9 @@
 <br>
 
 <%= link_to 'New Artwork', new_artwork_path %>
+
+<h4>Import that data!</h4>
+  <%= form_tag import_path, multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Import Artwork" %>
+<% end %>

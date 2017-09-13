@@ -21,6 +21,14 @@ class CustomersController < ApplicationController
   def edit
   end
 
+  # GET artworks/import
+  def import_customers
+    Customer.import(params[:file])
+
+    # after import, redirect to homepage
+    redirect_to root_url, notice: "Data imported successfully!"
+  end
+
   # POST /customers
   # POST /customers.json
   def create

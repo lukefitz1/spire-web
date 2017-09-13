@@ -29,3 +29,9 @@
 <br>
 
 <%= link_to 'New Artist', new_artist_path %>
+
+<h4>Import that data!</h4>
+  <%= form_tag import_artists_path, multipart: true do %>
+    <%= file_field_tag :file %>
+    <%= submit_tag "Import Artists" %>
+<% end %>
