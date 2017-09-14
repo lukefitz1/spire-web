@@ -16,5 +16,7 @@ module ArtCollectorWeb
     # -- all .rb files in that directory are automatically loaded.
     
     config.serve_static_assets = true
+
+    config.assets.precompile += ['https://spire-art-services.herokuapp.com/assets/stylesheets/artworks.scss']
   end
 end
