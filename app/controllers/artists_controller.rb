@@ -26,7 +26,7 @@ class ArtistsController < ApplicationController
     Artist.import(params[:file])
 
     # after import, redirect to homepage
-    redirect_to root_url, notice: "Data imported successfully!"
+    redirect_to 'artists#index', notice: "Data imported successfully!"
   end
 
   # POST /artists

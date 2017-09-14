@@ -25,7 +25,6 @@ Rails.application.routes.draw do
 	  get '/artworks/import', to: "artworks#import", as: "import"
 	  get '/artists/import_artists', to: "artists#import_artists", as: "import_artists"
 	  get '/customers/import_customers', to: "customers#import_customers", as: "import_customers"
-	  get '/artworks/preview/:id', to: "artworks#preview", as: "preview"
 	  get '/artworks/preview_pdf/:id', to: "artworks#preview_pdf", as: "preview_pdf"
 
 	  resources :artworks do

@@ -1,3 +1,195 @@
 // Place all the styles related to the Artworks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+body {
+	margin-top: 5px;
+}
+
+.bg-gray {
+    background-color: #EBEBEB;
+}
+
+.light-blue {
+    color: #96A9BF;
+}
+
+.darker-blue {
+    color: #4A6E98;
+}
+
+.black {
+	color: #000000
+}
+
+.preview-container {
+	position: relative;
+	width: 900px;
+	height: 1320px;
+	max-height: 1320px;
+	margin-left: auto;
+    margin-right: auto;
+    border-left: 1px solid #777777;
+    border-right: 1px solid #777777;
+    overflow: auto;	
+}
+
+.bold {
+	font-weight: bold;
+}
+
+.avenirnext {
+	font-family: 'AvenirNext';
+}
+
+.banner {
+    padding: 10px 10px 0px 10px;
+}
+
+.bottom-banner {
+	position: absolute;
+	bottom: 5px;
+	width: 100%;
+}
+
+header {
+    padding: 0px 15px 10px 15px;
+}
+
+.top {
+    height: 25px;
+    padding: 10px;
+}
+
+.top .left {
+    width: 33%;
+    float: left;
+    font-weight: bold;
+}
+
+.top .middle {
+    width: 33%;
+    float: left;
+    text-align: center;
+}
+
+.top .right {
+    width: 33%;
+    float: left;
+    text-align: right;
+}
+
+.main {
+    height: 60px;
+    border-top: 3px solid #777777;
+    border-bottom: 1px solid #777777;
+    display: block;
+}
+
+.main .title {
+    float: left;
+    height: 60px;
+    line-height: 60px;
+    width: 80%;
+    padding-left: 5px;
+}
+
+.collection-title {
+    font-size: 32px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.main .logo {
+    float: right;
+    height: 60px;
+    position: relative;
+    width: 19%;
+}
+
+.logo-img {
+    max-height: 80%;  
+    max-width: 100%; 
+    position: absolute;
+    right: 0px;
+    top: 4px;
+}
+
+.subheading {
+    padding: 10px 0px 10px 5px;
+    border-bottom: 1px solid #777777;
+    font-size: 20px;
+}
+
+.column-left {
+    width: 51.5%;
+    display: block;
+    float: left;
+    margin-right: 13px;
+    padding-top: 10px;
+}
+
+.column-right {
+    width: 44.5%;
+    display: block;
+    float: right;
+    margin-right: 15px;
+}
+
+.label-block {
+    clear: both;
+    font-size: 20px;
+    padding: 5px 22px 5px 10px
+}
+
+.label-block .value {
+    display: inline;
+}
+
+.label-heading {
+    padding: 11px 10px 11px 0px;
+    border-top: 2px dotted #4A6E98;
+    border-bottom: 2px dotted #4A6E98;
+}
+
+.big-img img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.hide {
+    display: none;
+}
+
+.divider {
+    height: 30px;
+}
+
+.block-value {
+    font-size: 16px;
+}
+
+.bio {
+    line-height: 23px;
+}
+
+.label-block img {
+    float: right;
+}
+
+.downloadbutton {
+	position: fixed;
+    top: 5px;
+    left: 5px;
+}
+
+.notes-image {
+    margin-top: 35px;
+    max-width: 183px;
+}
+
+.info-image {
+    margin-top: 35px;
+    max-width: 172px;
+}

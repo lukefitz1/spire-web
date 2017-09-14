@@ -26,7 +26,7 @@ class ArtworksController < ApplicationController
     Artwork.import(params[:file])
 
     # after import, redirect to homepage
-    redirect_to root_url, notice: "Data imported successfully!"
+    redirect_to 'artworks#index', notice: "Data imported successfully!"
   end
 
   # GET artworks/preview/1

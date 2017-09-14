@@ -1,0 +1,103 @@
+<%= wicked_pdf_stylesheet_link_tag "bootstrap-sprockets" %>
+<%= wicked_pdf_stylesheet_link_tag "bootstrap" %>
+<%= wicked_pdf_stylesheet_link_tag "artists" %>
+<%= wicked_pdf_stylesheet_link_tag "customers" %>
+<%= wicked_pdf_stylesheet_link_tag "artworks" %>
+
+<div class="preview-container black">
+	<div class="banner">
+		<div class="top avenirnext">
+			<div class="left">Collection Object ID <%= @artwork.ojbId %></div>
+			<div class="middle">Catalog Sheet</div>
+			<div class="right">Examined: <%= @artwork.reviewedBy %> <%= @artwork.reviewedDate %></div>
+		</div>
+	</div>
+
+	<header>
+		<div class="main">
+			<div class="title">
+				<p class="avenirnext collection-title"><%= @artwork.customer.collectionName %></p>
+			</div>
+			<div class="logo">
+				<%= wicked_pdf_image_tag 'spire-logo.png', class: 'logo-img'%>
+			</div>
+		</div>
+		<div class="bottom">
+			<div class="subheading avenirnext">Collection Inventory 2017 | Prepared by Spire Art Services</div>
+		</div>
+	</header> 
+
+	<div>
+      	<div class="column-left bg-gray avenirnext">
+	        <div class="label-block">
+	          <span class="bold">Type:</span><p class="value"> <%= @artwork.artType %></p>
+	        </div>
+	        <div class="label-block">
+	          <span class="bold">Artist:</span><p class="value"> <%= @artwork.artist.lastName %>, <%= @artwork.artist.firstName %></p>
+	        </div>
+	        <div class="label-block">
+	          <span class="bold">Title:</span><p class="value"> <%= @artwork.title %></p>
+	        </div>
+	        <div class="label-block">
+	          <span class="bold">Medium:</span><p class="value"> <%= @artwork.medium %></p>
+	        </div>
+	        <div class="label-block">
+	          <span class="bold">Description:</span><p class="value"> <%= @artwork.description %></p>
+	        </div>
+	        <div class="label-block">  
+	          <span class="bold">Dimensions (HxWxD):</span><p class="value"> <%= @artwork.dimensions %></p>
+	        </div>
+	        <div class="label-block">
+	          <span class="bold">Dimensions Frame:</span><p class="value"> <%= @artwork.frame_dimensions %></p>
+	        </div>
+	        <div class="label-block">
+	          <span class="bold">Condition:</span><p class="value"> <%= @artwork.condition %></p>
+	        </div>
+	        <div class="label-block">
+	          <span class="bold">Current Location:</span><p class="value"> <%= @artwork.currentLocation %></p>
+	        </div>
+	        <div class="label-block">
+	          <span class="bold">Source:</span><p class="value"> <%= @artwork.source %></p>
+	        </div><br />
+	        <div class="label-block">
+	          <p class="label-heading bold">Provenance:</p><p class="block-value"> <%= @artwork.provenance %></p>
+	        </div>
+	        <div class="label-block">
+	          <% if @artwork.notesImage.thumb.url %>
+	          	  <%= wicked_pdf_image_tag @artwork.notesImage, class: 'notes-image' %>
+	          <% end %>
+	          
+	          <p class="label-heading bold">Note:</p>
+	          <p class="block-value"><%= @artwork.notes %></p>
+	        </div>
+	        <div class="label-block">
+	          <% if @artwork.additionalInfoImage.thumb.url %>
+	          	<%= wicked_pdf_image_tag @artwork.additionalInfoImage, class: 'info-image' %>
+	          <% end %>
+
+	          <p class="label-heading bold"><%= @artwork.additionalInfoLabel %>:</p>
+	          <p class="block-value"> <%= @artwork.additionalInfoText %></p>
+	        </div>
+    	</div>
+
+    	<div class="column-right">
+			<div class="big-img">
+				<%= wicked_pdf_image_tag @artwork.image %>
+			</div>
+			<div class="bio">
+				<h3 class="bold">Artist&#39s Biography</h3>
+				<p class="bold"><%= @artwork.artist.biography %></p>
+			</div>
+		</div>
+
+  	</div>
+
+  	<div class="bottom-banner">
+		<div class="top avenirnext">
+			<div class="left">Collection Object ID <%= @artwork.ojbId %></div>
+			<div class="middle">Catalog Sheet</div>
+			<div class="right">Examined: <%= @artwork.reviewedBy %> <%= @artwork.reviewedDate %></div>
+		</div>
+	</div>
+
+</div>
