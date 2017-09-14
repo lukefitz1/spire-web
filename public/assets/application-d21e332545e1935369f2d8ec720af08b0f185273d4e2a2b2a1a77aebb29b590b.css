@@ -1,0 +1,358 @@
+/* line 5, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+body {
+  margin-top: 5px;
+}
+
+/* line 9, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+.bg-gray {
+  background-color: #EBEBEB;
+}
+
+/* line 13, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+.light-blue {
+  color: #96A9BF;
+}
+
+/* line 17, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+.darker-blue {
+  color: #4A6E98;
+}
+
+/* line 21, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+.black {
+  color: #000000;
+}
+
+/* line 25, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+.preview-container {
+  position: relative;
+  width: 900px;
+  height: 1320px;
+  max-height: 1320px;
+  margin-left: auto;
+  margin-right: auto;
+  border-left: 1px solid #777777;
+  border-right: 1px solid #777777;
+  overflow: auto;
+}
+
+/* line 37, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+.bold {
+  font-weight: bold;
+}
+
+/* line 41, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+.avenirnext {
+  font-family: 'AvenirNext';
+}
+
+/* line 45, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+.banner {
+  padding: 10px 10px 0px 10px;
+}
+
+/* line 49, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+.bottom-banner {
+  position: absolute;
+  bottom: 5px;
+  width: 100%;
+}
+
+/* line 55, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+header {
+  padding: 0px 15px 10px 15px;
+}
+
+/* line 59, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+.top {
+  height: 25px;
+  padding: 10px;
+}
+
+/* line 64, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+.top .left {
+  width: 33%;
+  float: left;
+  font-weight: bold;
+}
+
+/* line 70, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+.top .middle {
+  width: 33%;
+  float: left;
+  text-align: center;
+}
+
+/* line 76, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+.top .right {
+  width: 33%;
+  float: left;
+  text-align: right;
+}
+
+/* line 82, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+.main {
+  height: 60px;
+  border-top: 3px solid #777777;
+  border-bottom: 1px solid #777777;
+  display: block;
+}
+
+/* line 89, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+.main .title {
+  float: left;
+  height: 60px;
+  line-height: 60px;
+  width: 80%;
+  padding-left: 5px;
+}
+
+/* line 97, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+.collection-title {
+  font-size: 32px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+/* line 103, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+.main .logo {
+  float: right;
+  height: 60px;
+  position: relative;
+  width: 19%;
+}
+
+/* line 110, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+.logo-img {
+  max-height: 80%;
+  max-width: 100%;
+  position: absolute;
+  right: 0px;
+  top: 4px;
+}
+
+/* line 118, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+.subheading {
+  padding: 10px 0px 10px 5px;
+  border-bottom: 1px solid #777777;
+  font-size: 20px;
+}
+
+/* line 124, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+.column-left {
+  width: 51.5%;
+  display: block;
+  float: left;
+  margin-right: 13px;
+  padding-top: 10px;
+}
+
+/* line 132, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+.column-right {
+  width: 44.5%;
+  display: block;
+  float: right;
+  margin-right: 15px;
+}
+
+/* line 139, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+.label-block {
+  clear: both;
+  font-size: 20px;
+  padding: 5px 22px 5px 10px;
+}
+
+/* line 145, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+.label-block .value {
+  display: inline;
+}
+
+/* line 149, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+.label-heading {
+  padding: 11px 10px 11px 0px;
+  border-top: 2px dotted #4A6E98;
+  border-bottom: 2px dotted #4A6E98;
+}
+
+/* line 155, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+.big-img img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* line 161, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+.hide {
+  display: none;
+}
+
+/* line 165, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+.divider {
+  height: 30px;
+}
+
+/* line 169, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+.block-value {
+  font-size: 16px;
+}
+
+/* line 173, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+.bio {
+  line-height: 23px;
+}
+
+/* line 177, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+.label-block img {
+  float: right;
+}
+
+/* line 181, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+.downloadbutton {
+  position: fixed;
+  top: 5px;
+  left: 5px;
+}
+
+/* line 187, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+.notes-image {
+  margin-top: 35px;
+  max-width: 183px;
+}
+
+/* line 192, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/artworks.scss */
+.info-image {
+  margin-top: 35px;
+  max-width: 172px;
+}
+/* line 1, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/scaffolds.scss */
+body {
+  background-color: #fff;
+  color: #333;
+  margin: 33px;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+/* line 10, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/scaffolds.scss */
+p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+/* line 16, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/scaffolds.scss */
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+/* line 22, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/scaffolds.scss */
+a {
+  color: #000;
+}
+/* line 25, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/scaffolds.scss */
+a:visited {
+  color: #666;
+}
+/* line 29, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/scaffolds.scss */
+a:hover {
+  color: #fff;
+  background-color: #000;
+}
+
+/* line 35, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/scaffolds.scss */
+th {
+  padding-bottom: 5px;
+}
+
+/* line 39, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/scaffolds.scss */
+td {
+  padding: 0 5px 7px;
+}
+
+/* line 44, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/scaffolds.scss */
+div.field, div.actions {
+  margin-bottom: 10px;
+}
+
+/* line 49, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/scaffolds.scss */
+#notice {
+  color: green;
+}
+
+/* line 53, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/scaffolds.scss */
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+/* line 59, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/scaffolds.scss */
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px 7px 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+/* line 66, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/scaffolds.scss */
+#error_explanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px -7px 0;
+  background-color: #c00;
+  color: #fff;
+}
+/* line 76, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/scaffolds.scss */
+#error_explanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+
+/* line 82, /Users/blueacorn/Sites/art-collector-web/app/assets/stylesheets/scaffolds.scss */
+label {
+  display: block;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+
+ */
+
+
+.nav {
+	border: 1px solid black;
+}
+
+ul {
+	margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333333;
+}
+
+li {
+	float: left;
+}
+
+li a {
+	display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
+}
