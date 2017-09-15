@@ -1,9 +1,9 @@
 require 'carrierwave/orm/activerecord'
 
 CarrierWave.configure do |config|
-	config.storage    = :aws
-	config.aws_bucket = ENV.fetch('spire-art-bucket')
-	config.aws_acl    = 'public-read'
+	# config.storage    = :aws
+	# config.aws_bucket = ENV.fetch('spire-art-bucket')
+	# config.aws_acl    = 'public-read'
 
 #   # Optionally define an asset host for configurations that are fronted by a
 #   # content host, such as CloudFront.
@@ -18,11 +18,11 @@ CarrierWave.configure do |config|
 #     cache_control: 'max-age=604800'
 #   }
 
-  config.aws_credentials = {
-    access_key_id:     ENV.fetch('AWS_ACCESS_KEY_ID'),
-    secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY'),
-    region:            ENV.fetch('AWS_REGION') # Required
-  }
+  # config.aws_credentials = {
+  #   access_key_id:     ENV.fetch('AWS_ACCESS_KEY_ID'),
+  #   secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY'),
+  #   region:            ENV.fetch('AWS_REGION') # Required
+  # }
 
 #   # Optional: Signing of download urls, e.g. for serving private content through
 #   # CloudFront. Be sure you have the `cloudfront-signer` gem installed and
