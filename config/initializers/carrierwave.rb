@@ -1,9 +1,9 @@
 require 'carrierwave/orm/activerecord'
 
-# CarrierWave.configure do |config|
-#   config.storage    = :aws
-#   config.aws_bucket = ENV.fetch('spire-art-bucket')
-#   config.aws_acl    = 'public-read'
+CarrierWave.configure do |config|
+	config.storage    = :aws
+	config.aws_bucket = ENV.fetch('spire-art-bucket')
+	config.aws_acl    = 'public-read'
 
 #   # Optionally define an asset host for configurations that are fronted by a
 #   # content host, such as CloudFront.
@@ -30,4 +30,4 @@ require 'carrierwave/orm/activerecord'
 #   # config.aws_signer = -> (unsigned_url, options) do
 #   #   Aws::CF::Signer.sign_url(unsigned_url, options)
 #   # end
-# end
+end
