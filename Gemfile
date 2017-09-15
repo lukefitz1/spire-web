@@ -71,3 +71,7 @@ gem 'awesome_print', '~> 1.8'
 # pdf generator
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
+
+gem 'carrierwave-aws'
+gem 'aws-sdk', '~> 2'
+
