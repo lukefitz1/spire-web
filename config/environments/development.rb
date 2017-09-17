@@ -53,4 +53,10 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  S3_BUCKET = ENV['S3_BUCKET']
+  AWS_ACCESS_KEY_ID = ENV['AWS_ACCESS_KEY_ID']
+  AWS_SECRET_ACCESS_KEY = ENV['AWS_SECRET_ACCESS_KEY']
+  AWS_REGION = ENV["AWS_REGION"]
+
 end
