@@ -61,7 +61,6 @@
         <td><%= artwork.currentValue %></td>
         <td><%= artwork.notes %></td>
 
-        <!-- <td><%= artwork.notesImage %></td> -->
         <td>
           <% if artwork.notesImage.thumb.url %>
             <%= image_tag artwork.notesImage.thumb.url %>
@@ -71,7 +70,6 @@
         <td><%= artwork.additionalInfoLabel %></td>
         <td><%= artwork.additionalInfoText %></td>
         
-        <!-- <td><%= artwork.additionalInfoImage %></td> -->
         <td>
           <% if artwork.additionalInfoImage.thumb.url %>
             <%= image_tag artwork.additionalInfoImage.thumb.url %>
@@ -83,14 +81,12 @@
         <td><%= artwork.reviewedDate %></td>
         <td><%= artwork.provenance %></td>
         
-        <!-- <td><%= artwork.artist_id %></td> -->
         <td>
           <% unless artwork.artist.blank? %>
             <%= artwork.artist.firstName %><%= ' ' %><%= artwork.artist.lastName %>
           <% end %> 
         </td>
 
-        <!-- <td><%= artwork.customer_id %></td> -->
         <td>
           <% unless artwork.customer.blank? %>
             <%= artwork.customer.firstName %><%= ' ' %><%= artwork.customer.lastName %>

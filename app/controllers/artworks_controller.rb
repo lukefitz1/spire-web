@@ -42,8 +42,8 @@ class ArtworksController < ApplicationController
         render pdf: 'filename',
           template: 'artworks/preview_pdf.pdf.erb',
           # show_as_html: params.key?('debug'),
-          #disable_smart_shrinking: true
-          #encoding: 'TEXT'
+          # disable_smart_shrinking: true,
+          # encoding: 'TEXT'
           image_quality: 100,
           no_pdf_compression: true
       end
