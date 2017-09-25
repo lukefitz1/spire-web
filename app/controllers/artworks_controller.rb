@@ -23,7 +23,7 @@ class ArtworksController < ApplicationController
 
   # GET artworks/import
   def import
-    Artwork.import(params[:file])
+    Artwork.import(params[:file], params[:customer_id], params[:collection_id])
 
     # after import, redirect to homepage
     redirect_to 'artworks#index', notice: "Data imported successfully!"
@@ -41,11 +41,11 @@ class ArtworksController < ApplicationController
       format.pdf do
         render pdf: 'filename',
           template: 'artworks/preview_pdf.pdf.erb',
-          show_as_html: params.key?('debug'),
+          show_as_html: params.key?('debug')
           # disable_smart_shrinking: true,
           # encoding: 'TEXT'
-          image_quality: 100,
-          no_pdf_compression: true
+          # image_quality: 100
+          # no_pdf_compression: true
       end
     end
   end
@@ -98,6 +98,6 @@ class ArtworksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def artwork_params
-      params.require(:artwork).permit(:ojbId, :artType, :title, :date, :medium, :image, :description, :dimensions, :frame_dimensions, :condition, :currentLocation, :source, :dateAcquired, :amountPaid, :currentValue, :notes, :notesImage, :additionalInfoLabel, :additionalInfoText, :additionalInfoImage, :additionalPdf, :reviewedBy, :reviewedDate, :provenance, :artist_id, :customer_id, :remove_image, :remove_additionalInfoImage, :remove_notesImage)
+      params.require(:artwork).permit(:ojbId, :artType, :title, :date, :medium, :image, :description, :dimensions, :frame_dimensions, :condition, :currentLocation, :source, :dateAcquired, :amountPaid, :currentValue, :notes, :notesImage, :additionalInfoLabel, :additionalInfoText, :additionalInfoImage, :additionalPdf, :reviewedBy, :reviewedDate, :provenance, :artist_id, :customer_id, :remove_image, :remove_additionalInfoImage, :remove_notesImage, :collection_id)
     end
 end

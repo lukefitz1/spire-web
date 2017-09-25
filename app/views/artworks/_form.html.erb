@@ -161,24 +161,19 @@
     <%= form.text_area :provenance, id: :artwork_provenance %>
   </div>
 
-  <!-- <div class="field">
-    <%= form.label :artist_id %>
-    <%= form.text_field :artist_id, id: :artwork_artist_id %>
-  </div> -->
-
   <div class="field">
     <%= form.label :artist_id %>
     <%= form.select(:artist_id, Artist.all.collect { |artist| [artist.firstName + ' ' + artist.lastName, artist.id]}, include_blank: true) %>
   </div>
 
-  <!-- <div class="field">
-    <%= form.label :customer_id %>
-    <%= form.text_field :customer_id, id: :artwork_customer_id %>
-  </div> -->
-
   <div class="field">
     <%= form.label :customer_id %>
     <%= form.select(:customer_id, Customer.all.collect { |customer| [customer.firstName + ' ' + customer.lastName, customer.id]}, include_blank: true) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :collection_id %>
+    <%= form.select(:collection_id, Collection.all.collect { |collection| [collection.collectionName, collection.id]}, include_blank: true) %>
   </div>
 
   <div class="actions">

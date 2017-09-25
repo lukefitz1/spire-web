@@ -2,6 +2,7 @@ class Customer < ApplicationRecord
 	require 'csv'
 
 	has_many :artworks
+	has_many :collections
 
 	def self.import(file)
 		# loops through csv data

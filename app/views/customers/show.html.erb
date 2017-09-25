@@ -1,6 +1,11 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <strong>ID:</strong>
+  <%= @customer.id %>
+</p>
+
+<p>
   <strong>Firstname:</strong>
   <%= @customer.firstName %>
 </p>
@@ -10,107 +15,147 @@
   <%= @customer.lastName %>
 </p>
 
-<p>
-  <strong>Collectionname:</strong>
-  <%= @customer.collectionName %>
-</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Ojbid</th>
-      <th>Arttype</th>
-      <th>Title</th>
-      <th>Date</th>
-      <th>Medium</th>
-      <th>Image</th>
-      <th>Description</th>
-      <th>Dimensions</th>
-      <th>Frame dimensions</th>
-      <th>Condition</th>
-      <th>Currentlocation</th>
-      <th>Source</th>
-      <th>Dateacquired</th>
-      <th>Amountpaid</th>
-      <th>Currentvalue</th>
-      <th>Notes</th>
-      <th>Notesimage</th>
-      <th>Additionalinfolabel</th>
-      <th>Additionalinfotext</th>
-      <th>Additionalinfoimage</th>
-      <th>Additionalpdf</th>
-      <th>Reviewedby</th>
-      <th>Revieweddate</th>
-      <th>Provenance</th>
-      <th>Artists</th>
-      <th>Customers</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @customer.artworks.each do |artwork| %>
+<% @customer.collections.each do |collection| %>
+  <table>
+    <thead>
       <tr>
-        <td><%= artwork.ojbId %></td>
-        <td><%= artwork.artType %></td>
-        <td><%= artwork.title %></td>
-        <td><%= artwork.date %></td>
-        <td><%= artwork.medium %></td>
+        <th>Collection ID</th>
+        <th>Collectionname</th>
+        <th>Customer</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
 
-        <!-- <td><%= artwork.image %></td> -->
-        <td>
-          <% if artwork.image.thumb.url %>
-            <%= image_tag artwork.image.thumb.url %>
-          <% end %>
-        </td>
-
-        <td><%= artwork.description %></td>
-        <td><%= artwork.dimensions %></td>
-        <td><%= artwork.frame_dimensions %></td>
-        <td><%= artwork.condition %></td>
-        <td><%= artwork.currentLocation %></td>
-        <td><%= artwork.source %></td>
-        <td><%= artwork.dateAcquired %></td>
-        <td><%= artwork.amountPaid %></td>
-        <td><%= artwork.currentValue %></td>
-        <td><%= artwork.notes %></td>
-        <td>
-          <% if artwork.notesImage.thumb.url %>
-            <%= image_tag artwork.notesImage.thumb.url %>
-          <% end %>
-        </td>
-
-        <td><%= artwork.additionalInfoLabel %></td>
-        <td><%= artwork.additionalInfoText %></td>
+    <tbody>
+      <tr>
+        <td><%= collection.id %></td>
+        <td><%= collection.collectionName %></td>
         
         <td>
-          <% if artwork.additionalInfoImage.thumb.url %>
-            <%= image_tag artwork.additionalInfoImage.thumb.url %>
-          <% end %>
-        </td>
-
-        <td><%= artwork.additionalPdf %></td>
-        <td><%= artwork.reviewedBy %></td>
-        <td><%= artwork.reviewedDate %></td>
-        <td><%= artwork.provenance %></td>
-
-        <td>
-          <% unless artwork.artist.blank? %>
-            <%= artwork.artist.firstName %><%= ' ' %><%= artwork.artist.lastName %>
-          <% end %> 
-        </td>
-
-        <td>
-          <% unless artwork.customer.blank? %>
-            <%= artwork.customer.firstName %><%= ' ' %><%= artwork.customer.lastName %>
+          <% unless collection.customer.blank? %>
+            <%= collection.customer.firstName %><%= ' ' %><%= collection.customer.lastName %>
           <% end %>     
         </td>
 
-        <td><%= link_to 'PDF', preview_pdf_path(format: :pdf) %></td>
       </tr>
+    </tbody>
+  </table>
+
+  <!-- Artworks Table -->
+  <% unless collection.artworks.blank? %>
+    <!-- <a class="show-artwork">Show Artwork</a>
+    <a class="hide-artwork">Hide Artwork</a> -->
+    
+    <div class="artwork-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Ojbid</th>
+            <th>Arttype</th>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Medium</th>
+            <th>Image</th>
+            <th>Description</th>
+            <th>Dimensions</th>
+            <th>Frame dimensions</th>
+            <th>Condition</th>
+            <th>Currentlocation</th>
+            <th>Source</th>
+            <th>Dateacquired</th>
+            <th>Amountpaid</th>
+            <th>Currentvalue</th>
+            <th>Notes</th>
+            <th>Notesimage</th>
+            <th>Additionalinfolabel</th>
+            <th>Additionalinfotext</th>
+            <th>Additionalinfoimage</th>
+            <th>Additionalpdf</th>
+            <th>Reviewedby</th>
+            <th>Revieweddate</th>
+            <th>Provenance</th>
+            <th>Artists</th>
+            <th>Customers</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% collection.artworks.each do |artwork| %>
+            <tr>
+              <td><%= artwork.ojbId %></td>
+              <td><%= artwork.artType %></td>
+              <td><%= artwork.title %></td>
+              <td><%= artwork.date %></td>
+              <td><%= artwork.medium %></td>
+
+              <td>
+                <% if artwork.image.thumb.url %>
+                  <%= image_tag artwork.image.thumb.url %>
+                <% end %>
+              </td>
+
+              <td><%= artwork.description %></td>
+              <td><%= artwork.dimensions %></td>
+              <td><%= artwork.frame_dimensions %></td>
+              <td><%= artwork.condition %></td>
+              <td><%= artwork.currentLocation %></td>
+              <td><%= artwork.source %></td>
+              <td><%= artwork.dateAcquired %></td>
+              <td><%= artwork.amountPaid %></td>
+              <td><%= artwork.currentValue %></td>
+              <td><%= artwork.notes %></td>
+              <td>
+                <% if artwork.notesImage.thumb.url %>
+                  <%= image_tag artwork.notesImage.thumb.url %>
+                <% end %>
+              </td>
+
+              <td><%= artwork.additionalInfoLabel %></td>
+              <td><%= artwork.additionalInfoText %></td>
+              
+              <td>
+                <% if artwork.additionalInfoImage.thumb.url %>
+                  <%= image_tag artwork.additionalInfoImage.thumb.url %>
+                <% end %>
+              </td>
+
+              <td><%= artwork.additionalPdf %></td>
+              <td><%= artwork.reviewedBy %></td>
+              <td><%= artwork.reviewedDate %></td>
+              <td><%= artwork.provenance %></td>
+
+              <td>
+                <% unless artwork.artist.blank? %>
+                  <%= artwork.artist.firstName %><%= ' ' %><%= artwork.artist.lastName %>
+                <% end %> 
+              </td>
+
+              <td>
+                <% unless artwork.customer.blank? %>
+                  <%= artwork.customer.firstName %><%= ' ' %><%= artwork.customer.lastName %>
+                <% end %>     
+              </td>
+
+              <td><%= link_to 'PDF', preview_pdf_path(format: :pdf) %></td>
+            </tr>
+          <% end %>
+        
+        </tbody>
+      </table>
+    </div>
+
+    <h4>Import that data!</h4>
+      <%= form_tag import_path, multipart: true do %>
+        <%= file_field_tag :file %>
+        <%= hidden_field_tag(:customer_id, @customer.id) %>
+        <%= hidden_field_tag(:collection_id, collection.id) %>
+        <%= submit_tag "Import Artwork" %>
     <% end %>
-  </tbody>
-</table>
+
+  <% end %>
+
+<% end %>
 
 <%= link_to 'Edit', edit_customer_path(@customer) %> |
 <%= link_to 'Back', customers_path %>

@@ -141,11 +141,6 @@
   <%= @artwork.provenance %>
 </p>
 
-<!-- <p>
-  <strong>Artists:</strong>
-  <%= @artwork.artist_id %>
-</p> -->
-
 <p>
   <strong>Artist:</strong>
   <% unless @artwork.artist.blank? %>
@@ -153,15 +148,17 @@
   <% end %>
 </p>
 
-<!-- <p>
-  <strong>Customers:</strong>
-  <%= @artwork.customer_id %>
-</p> -->
-
 <p>
   <strong>Customer:</strong>
   <% unless @artwork.customer.blank? %>
     <%= @artwork.customer.firstName %><%= ' ' %><%= @artwork.customer.lastName %>
+  <% end %>
+</p>
+
+<p>
+  <strong>Collection:</strong>
+  <% unless @artwork.collection.blank? %>
+    <%= @artwork.collection.collectionName %>
   <% end %>
 </p>
 

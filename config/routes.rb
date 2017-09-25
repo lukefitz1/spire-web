@@ -14,6 +14,9 @@ Rails.application.routes.draw do
 
 		  # artwork api route
 		  resources :artwork
+
+		  # collection api route
+		  resources :collections
 		end
 	end
 
@@ -39,6 +42,7 @@ Rails.application.routes.draw do
 	  	collection { post :import_customers }
 	  end
 
+	  resources :collections
 	end
 
 	root to: redirect('/users/sign_in')
