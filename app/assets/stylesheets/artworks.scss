@@ -48,9 +48,10 @@ body {
 }
 
 .bottom-banner {
-	position: absolute;
+	/*position: absolute;*/
 	bottom: 5px;
 	width: 100%;
+    clear: both;
 }
 
 header {
@@ -128,6 +129,7 @@ header {
     float: left;
     margin-right: 13px;
     padding-top: 10px;
+    height: 100%;
 }
 
 .column-right {
@@ -197,4 +199,8 @@ header {
 .info-image {
     margin-top: 35px;
     max-width: 172px;
+}
+
+.full-height {
+    height: 100%;
 }
