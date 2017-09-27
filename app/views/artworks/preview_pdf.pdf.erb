@@ -16,7 +16,7 @@
 	<header>
 		<div class="main">
 			<div class="title">
-				<p class="avenirnext collection-title"><%= @artwork.collection.collectionName %></p>
+				<p class="avenirnext collection-title"><span class="bold"><%= @artwork.collection.identifier %></span> <%= @artwork.collection.collectionName %></p>
 			</div>
 			<div class="logo">
 				<%= wicked_pdf_image_tag 'spire-logo.png', class: 'logo-img'%>
@@ -86,7 +86,7 @@
 			</div>
 			<div class="bio">
 				<h3 class="bold">Artist&#39s Biography</h3>
-				<p class="bold text-justify"><%= @artwork.artist.biography %></p>
+				<p class="bold text-justify avenirnext"><%= @artwork.artist.biography %></p>
 			</div>
 		</div>
 

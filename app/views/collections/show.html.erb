@@ -6,6 +6,11 @@
 </p>
 
 <p>
+  <strong>Identifier:</strong>
+  <%= @collection.identifier %>
+</p>
+
+<p>
   <strong>Customer:</strong>
   <% unless @collection.customer.blank? %>
     <%= @collection.customer.firstName %><%= ' ' %><%= @collection.customer.lastName %>
