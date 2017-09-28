@@ -31,7 +31,7 @@ body {
     margin-right: auto;
     border-left: 1px solid #777777;
     border-right: 1px solid #777777;
-    overflow: auto;	
+    /*overflow: auto;*/
 }
 
 .bold {
@@ -40,7 +40,6 @@ body {
 
 .avenirnext {
 	font-family: 'Avenir Next';
-    /*font-family: 'Times New Roman' */
 }
 
 .banner {
@@ -48,8 +47,8 @@ body {
 }
 
 .bottom-banner {
-	/*position: absolute;*/
-	bottom: 5px;
+	position: absolute; 
+	bottom: 0px;
 	width: 100%;
     clear: both;
 }
@@ -129,7 +128,7 @@ header {
     float: left;
     margin-right: 13px;
     padding-top: 10px;
-    height: 100%;
+    height: 82%;
 }
 
 .column-right {
@@ -199,8 +198,4 @@ header {
 .info-image {
     margin-top: 35px;
     max-width: 172px;
-}
-
-.full-height {
-    height: 100%;
 }
