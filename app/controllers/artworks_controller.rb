@@ -41,7 +41,8 @@ class ArtworksController < ApplicationController
       format.pdf do
         render pdf: 'filename',
           template: 'artworks/preview_pdf.pdf.erb',
-          show_as_html: params.key?('debug')
+          show_as_html: params.key?('debug'),
+          encoding: 'UTF-8'
       end
     end
   end
