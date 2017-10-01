@@ -39,7 +39,10 @@ body {
 }
 
 .avenirnext {
-	font-family: 'Avenir Next';
+	/* font-family: 'Times New Roman'; */
+    /* font-family: 'Avenir Next'; */
+    font-family: 'Avenir Next';
+      src:url('Avenir Next.ttc');
 }
 
 .banner {
@@ -58,7 +61,7 @@ header {
 }
 
 .top {
-    height: 25px;
+    height: 15px;
     padding: 10px;
 }
 
@@ -76,7 +79,7 @@ header {
 
 .top .right {
     width: 33%;
-    float: left;
+    float: right;
     text-align: right;
 }
 
@@ -198,4 +201,12 @@ header {
 .info-image {
     margin-top: 35px;
     max-width: 172px;
+}
+
+.italics {
+    font-style: italic;
+}
+
+.twelve {
+    font-size: 12px;
 }

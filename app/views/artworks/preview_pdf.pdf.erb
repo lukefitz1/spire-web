@@ -6,10 +6,10 @@
 
 <div class="preview-container black">
 	<div class="banner">
-		<div class="top avenirnext">
+		<div class="top avenirnext twelve">
 			<div class="left">Collection Object ID <%= @artwork.ojbId %></div>
 			<div class="middle">Catalog Sheet</div>
-			<div class="right">Examined: <%= @artwork.reviewedBy %> <%= @artwork.reviewedDate %></div>
+			<div class="right date-examined">Examined: <%= @artwork.reviewedBy %> <%= @artwork.reviewedDate %></div>
 		</div>
 	</div>
 
@@ -33,11 +33,25 @@
 	          <span class="bold">Type:</span><p class="value"> <%= @artwork.artType %></p>
 	        </div>
 	        <div class="label-block">
-	          <span class="bold">Artist:</span><p class="value"> <%= @artwork.artist.lastName %>, <%= @artwork.artist.firstName %></p>
+	          <span class="bold">Artist:</span><p class="value"> <%= @artwork.artist.lastName %>, <%= @artwork.artist.firstName %> <% if @artwork.artist.additionalInfo %>
+	          		<% if @artwork.artist.additionalInfo != "" %>
+	          		  (<%= @artwork.artist.additionalInfo %>)
+	          		<% end %>
+	          	  <% end %></p>
 	        </div>
-	        <div class="label-block">
-	          <span class="bold">Title:</span><p class="value"> <%= @artwork.title %></p>
-	        </div>
+
+	        <% if @artwork.title == 'Untitled' %>
+		        <div class="label-block">
+		          <span class="bold">Title:</span>
+	          	  <p class="value"> <%= @artwork.title %></p><% if @artwork.date %>, <%= @artwork.date %><% end %>
+		        </div>
+	        <% else %>
+		        <div class="label-block">
+		          <span class="bold">Title:</span>
+		          <p class="value italics"> <%= @artwork.title %></p><% if @artwork.date %>, <%= @artwork.date %><% end %>
+		        </div>
+	        <% end %>
+
 	        <div class="label-block">
 	          <span class="bold">Medium:</span><p class="value"> <%= @artwork.medium %></p>
 	        </div>
@@ -58,6 +72,13 @@
 	        </div>
 	        <div class="label-block">
 	          <span class="bold">Source:</span><p class="value"> <%= @artwork.source %></p>
+	        </div>
+	        <div class="label-block">
+	          <% if @artwork.dateAcquiredLabel && @artwork.dateAcquiredLabel != "" %>
+	            <span class="bold"><%= @artwork.dateAcquiredLabel %>:</span><p class="value"> <%= @artwork.dateAcquired %></p>
+	          <% else %>
+	            <span class="bold">Date Acquired:</span><p class="value"> <%= @artwork.dateAcquired %></p>
+	          <% end %>        
 	        </div><br />
 	        <div class="label-block">
 	          <p class="label-heading bold">Provenance:</p><p class="block-value"> <%= @artwork.provenance %></p>
@@ -86,14 +107,14 @@
 			</div>
 			<div class="bio">
 				<h3 class="bold">Artist&#39s Biography</h3>
-				<p class="bold text-justify avenirnext"><%= @artwork.artist.biography %></p>
+				<p class="text-justify avenirnext"><%= @artwork.artist.biography %></p>
 			</div>
 		</div>
 
   	</div>
 
   	<div class="bottom-banner">
-		<div class="top avenirnext">
+		<div class="top avenirnext twelve">
 			<div class="left">Collection Object ID <%= @artwork.ojbId %></div>
 			<div class="middle">Catalog Sheet</div>
 			<div class="right">Examined: <%= @artwork.reviewedBy %> <%= @artwork.reviewedDate %></div>

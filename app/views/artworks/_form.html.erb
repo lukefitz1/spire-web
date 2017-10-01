@@ -36,11 +36,6 @@
     <%= form.text_field :medium, id: :artwork_medium %>
   </div>
 
-  <!-- <div class="field">
-    <%= form.label :image %>
-    <%= form.text_field :image, id: :artwork_image %>
-  </div> -->
-
   <div class="field">
     <%= form.label :image %>
     <%= form.file_field :image, id: :artwork_image %>
@@ -53,7 +48,7 @@
 
   <div class="field">
     <%= form.label :description %>
-    <%= form.text_area :description, id: :artwork_description %>
+    <%= form.text_area :description, id: :artwork_description, cols: "50", rows: "10" %>
   </div>
 
   <div class="field">
@@ -82,6 +77,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :dateAcquiredLabel %>
+    <%= form.text_field :dateAcquiredLabel, id: :artwork_dateAcquiredLabel %>
+  </div>
+
+  <div class="field">
     <%= form.label :dateAcquired %>
     <%= form.text_field :dateAcquired, id: :artwork_dateAcquired %>
   </div>
@@ -98,13 +98,8 @@
 
   <div class="field">
     <%= form.label :notes %>
-    <%= form.text_area :notes, id: :artwork_notes %>
+    <%= form.text_area :notes, id: :artwork_notes, cols: "50", rows: "10" %>
   </div>
-
-  <!-- <div class="field">
-    <%= form.label :notesImage %>
-    <%= form.text_field :notesImage, id: :artwork_notesImage %>
-  </div> -->
 
   <div class="field">
     <%= form.label :notesImage %>
@@ -123,13 +118,8 @@
 
   <div class="field">
     <%= form.label :additionalInfoText %>
-    <%= form.text_area :additionalInfoText, id: :artwork_additionalInfoText %>
+    <%= form.text_area :additionalInfoText, id: :artwork_additionalInfoText, cols: "50", rows: "10" %>
   </div>
-
-  <!-- <div class="field">
-    <%= form.label :additionalInfoImage %>
-    <%= form.text_field :additionalInfoImage, id: :artwork_additionalInfoImage %>
-  </div> -->
 
   <div class="field">
     <%= form.label :additionalInfoImage %>
@@ -158,7 +148,7 @@
 
   <div class="field">
     <%= form.label :provenance %>
-    <%= form.text_area :provenance, id: :artwork_provenance %>
+    <%= form.text_area :provenance, id: :artwork_provenance, cols: "50", rows: "10" %>
   </div>
 
   <div class="field">

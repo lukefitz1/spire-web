@@ -25,11 +25,6 @@
   <%= @artwork.medium %>
 </p>
 
-<!-- <p>
-  <strong>Image:</strong>
-  <%= @artwork.image %>
-</p> -->
-
 <p>
   <strong>Image:</strong>
   <% if @artwork.image.thumb.url %>
@@ -68,6 +63,11 @@
 </p>
 
 <p>
+  <strong>Date Acquired Label:</strong>
+  <%= @artwork.dateAcquiredLabel %>
+</p>
+
+<p>
   <strong>Dateacquired:</strong>
   <%= @artwork.dateAcquired %>
 </p>
@@ -87,11 +87,6 @@
   <%= @artwork.notes %>
 </p>
 
-<!-- <p>
-  <strong>Notesimage:</strong>
-  <%= @artwork.notesImage %>
-</p> -->
-
 <p>
   <strong>Notes Image:</strong>
   <% if @artwork.notesImage.thumb.url %>
@@ -108,11 +103,6 @@
   <strong>Additionalinfotext:</strong>
   <%= @artwork.additionalInfoText %>
 </p>
-
-<!-- <p>
-  <strong>Additionalinfoimage:</strong>
-  <%= @artwork.additionalInfoImage %>
-</p> -->
 
 <p>
   <strong>Additional Info Image:</strong>

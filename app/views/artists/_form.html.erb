@@ -22,8 +22,13 @@
   </div>
 
   <div class="field">
+    <%= form.label :additionalInfo %>
+    <%= form.text_field :additionalInfo, id: :artist_additionalInfo %>
+  </div>
+
+  <div class="field">
     <%= form.label :biography %>
-    <%= form.text_area :biography, id: :artist_biography %>
+    <%= form.text_area :biography, id: :artist_biography, cols: "70", rows: "25" %>
   </div>
 
   <div class="actions">
