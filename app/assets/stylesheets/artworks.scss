@@ -31,15 +31,34 @@ body {
     margin-right: auto;
     border-left: 1px solid #777777;
     border-right: 1px solid #777777;
-    /*overflow: auto;*/
 }
 
 .bold {
 	font-weight: bold;
 }
 
+.lighter {
+    font-weight: lighter;
+}
+
 .avenirnext {
     font-family: 'Avenir Next';
+}
+
+.avenirnextmed {
+    font-family: 'AvenirNext-Medium';
+}
+
+.avenirnextdemibold {
+    font-family: 'AvenirNext-DemiBold';
+}
+
+.avenirnextultralight {
+    font-family: 'AvenirNext-UltraLight';
+}
+
+.avenirnextbold {
+    font-family: 'AvenirNext-Bold';
 }
 
 .banner {
@@ -65,7 +84,6 @@ header {
 .top .left {
     width: 33%;
     float: left;
-    font-weight: bold;
 }
 
 .top .middle {
