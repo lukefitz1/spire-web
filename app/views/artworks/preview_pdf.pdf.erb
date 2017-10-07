@@ -107,7 +107,7 @@
 			</div>
 			<div class="bio">
 				<h3 class="bold">Artist&#39s Biography</h3>
-				<p class="text-justify avenirnext"><%= @artwork.artist.biography %></p>
+				<p class="text-justify avenirnext" id="artist-bio"><%= @artwork.artist.biography %></p>
 			</div>
 		</div>
 
@@ -122,3 +122,15 @@
 	</div>
 
 </div>
+    
+<script>
+  // self executing function here
+  (function() {
+    bio = document.getElementById('artist-bio');
+    if (bio.textContent.length < 1325) {
+    	bio.style.fontSize = '16px';
+    } else {
+    	bio.style.fontSize = '15px';
+    }
+  })();
+</script>

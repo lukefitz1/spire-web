@@ -12,12 +12,12 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :ojbId %>
+    <%= form.label :ojbId, 'Object ID' %>
     <%= form.text_field :ojbId, id: :artwork_ojbId %>
   </div>
 
   <div class="field">
-    <%= form.label :artType %>
+    <%= form.label :artType, 'Art Type' %>
     <%= form.text_field :artType, id: :artwork_artType %>
   </div>
 
@@ -37,7 +37,7 @@
   </div>
 
   <div class="field">
-    <%= form.label :image %>
+    <%= form.label :image, 'Main Image' %>
     <%= form.file_field :image, id: :artwork_image %>
     <% if form.object.image? %>
       <%= image_tag form.object.image.thumb.url %>
@@ -57,7 +57,7 @@
   </div>
 
   <div class="field">
-    <%= form.label :frame_dimensions %>
+    <%= form.label :frame_dimensions, "Frame Dimensions" %>
     <%= form.text_field :frame_dimensions, id: :artwork_frame_dimensions %>
   </div>
 
@@ -67,7 +67,7 @@
   </div>
 
   <div class="field">
-    <%= form.label :currentLocation %>
+    <%= form.label :currentLocation, 'Current Location' %>
     <%= form.text_field :currentLocation, id: :artwork_currentLocation %>
   </div>
 
@@ -77,22 +77,22 @@
   </div>
 
   <div class="field">
-    <%= form.label :dateAcquiredLabel %>
+    <%= form.label :dateAcquiredLabel, 'Date Acquired Label' %>
     <%= form.text_field :dateAcquiredLabel, id: :artwork_dateAcquiredLabel %>
   </div>
 
   <div class="field">
-    <%= form.label :dateAcquired %>
+    <%= form.label :dateAcquired, 'Date Acquired' %>
     <%= form.text_field :dateAcquired, id: :artwork_dateAcquired %>
   </div>
 
   <div class="field">
-    <%= form.label :amountPaid %>
+    <%= form.label :amountPaid, 'Amount Paid' %>
     <%= form.text_field :amountPaid, id: :artwork_amountPaid %>
   </div>
 
   <div class="field">
-    <%= form.label :currentValue %>
+    <%= form.label :currentValue, 'Current Value' %>
     <%= form.text_field :currentValue, id: :artwork_currentValue %>
   </div>
 
@@ -102,7 +102,7 @@
   </div>
 
   <div class="field">
-    <%= form.label :notesImage %>
+    <%= form.label :notesImage, 'Notes Image' %>
     <%= form.file_field :notesImage, id: :artwork_notesImage %>
     <% if form.object.notesImage? %>
       <%= image_tag form.object.notesImage.thumb.url %>
@@ -112,17 +112,17 @@
   </div>
 
   <div class="field">
-    <%= form.label :additionalInfoLabel %>
+    <%= form.label :additionalInfoLabel, 'Additional Info Label' %>
     <%= form.text_field :additionalInfoLabel, id: :artwork_additionalInfoLabel %>
   </div>
 
   <div class="field">
-    <%= form.label :additionalInfoText %>
+    <%= form.label :additionalInfoText, 'Additional Info Text' %>
     <%= form.text_area :additionalInfoText, id: :artwork_additionalInfoText, cols: "50", rows: "10" %>
   </div>
 
   <div class="field">
-    <%= form.label :additionalInfoImage %>
+    <%= form.label :additionalInfoImage, 'Additional Info Image' %>
     <%= form.file_field :additionalInfoImage, id: :artwork_additionalInfoImage %>
     <% if form.object.additionalInfoImage? %>
       <%= image_tag form.object.additionalInfoImage.thumb.url %>
@@ -132,17 +132,17 @@
   </div>
 
   <div class="field">
-    <%= form.label :additionalPdf %>
+    <%= form.label :additionalPdf, 'Additional PDF' %>
     <%= form.text_field :additionalPdf, id: :artwork_additionalPdf %>
   </div>
 
   <div class="field">
-    <%= form.label :reviewedBy %>
+    <%= form.label :reviewedBy, 'Reviewed By' %>
     <%= form.text_field :reviewedBy, id: :artwork_reviewedBy %>
   </div>
 
   <div class="field">
-    <%= form.label :reviewedDate %>
+    <%= form.label :reviewedDate, 'Reviewed Date' %>
     <%= form.text_field :reviewedDate, id: :artwork_reviewedDate %>
   </div>
 

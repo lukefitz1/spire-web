@@ -1,12 +1,12 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Ojbid:</strong>
+  <strong>Object ID:</strong>
   <%= @artwork.ojbId %>
 </p>
 
 <p>
-  <strong>Arttype:</strong>
+  <strong>Art Type:</strong>
   <%= @artwork.artType %>
 </p>
 
@@ -26,7 +26,7 @@
 </p>
 
 <p>
-  <strong>Image:</strong>
+  <strong>Main Image:</strong>
   <% if @artwork.image.thumb.url %>
     <%= image_tag @artwork.image.thumb.url %>
   <% end %>
@@ -43,7 +43,7 @@
 </p>
 
 <p>
-  <strong>Frame dimensions:</strong>
+  <strong>Frame Dimensions:</strong>
   <%= @artwork.frame_dimensions %>
 </p>
 
@@ -53,7 +53,7 @@
 </p>
 
 <p>
-  <strong>Currentlocation:</strong>
+  <strong>Current Location:</strong>
   <%= @artwork.currentLocation %>
 </p>
 
@@ -68,17 +68,17 @@
 </p>
 
 <p>
-  <strong>Dateacquired:</strong>
+  <strong>Date Acquired:</strong>
   <%= @artwork.dateAcquired %>
 </p>
 
 <p>
-  <strong>Amountpaid:</strong>
+  <strong>Amount Paid:</strong>
   <%= @artwork.amountPaid %>
 </p>
 
 <p>
-  <strong>Currentvalue:</strong>
+  <strong>Current Value:</strong>
   <%= @artwork.currentValue %>
 </p>
 
@@ -95,12 +95,12 @@
 </p>
 
 <p>
-  <strong>Additionalinfolabel:</strong>
+  <strong>Additional Info Label:</strong>
   <%= @artwork.additionalInfoLabel %>
 </p>
 
 <p>
-  <strong>Additionalinfotext:</strong>
+  <strong>Additional Info Text:</strong>
   <%= @artwork.additionalInfoText %>
 </p>
 
@@ -112,17 +112,17 @@
 </p>
 
 <p>
-  <strong>Additionalpdf:</strong>
+  <strong>Additional PDF:</strong>
   <%= @artwork.additionalPdf %>
 </p>
 
 <p>
-  <strong>Reviewedby:</strong>
+  <strong>Reviewed By:</strong>
   <%= @artwork.reviewedBy %>
 </p>
 
 <p>
-  <strong>Revieweddate:</strong>
+  <strong>Reviewed Date:</strong>
   <%= @artwork.reviewedDate %>
 </p>
 
