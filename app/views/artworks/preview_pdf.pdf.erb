@@ -30,10 +30,10 @@
 	<div>
       	<div class="column-left bg-gray avenirnext">
 	        <div class="label-block">
-	          <span class="avenirnextdemibold">Type:</span><p class="value"> <%= @artwork.artType %></p>
+	          <span class="avenirnextbold">Type:</span><p class="value"> <%= @artwork.artType %></p>
 	        </div>
 	        <div class="label-block">
-	          <span class="avenirnextdemibold">Artist:</span><p class="value"> <%= @artwork.artist.lastName %>, <%= @artwork.artist.firstName %> <% if @artwork.artist.additionalInfo %>
+	          <span class="avenirnextbold">Artist:</span><p class="value"> <%= @artwork.artist.lastName %>, <%= @artwork.artist.firstName %> <% if @artwork.artist.additionalInfo %>
 	          		<% if @artwork.artist.additionalInfo != "" %>
 	          		  (<%= @artwork.artist.additionalInfo %>)
 	          		<% end %>
@@ -42,53 +42,53 @@
 
 	        <% if @artwork.title == 'Untitled' %>
 		        <div class="label-block">
-		          <span class="avenirnextdemibold">Title:</span>
+		          <span class="avenirnextbold">Title:</span>
 	          	  <p class="value"> <%= @artwork.title %></p><% if @artwork.date %>, <%= @artwork.date %><% end %>
 		        </div>
 	        <% else %>
 		        <div class="label-block">
-		          <span class="avenirnextdemibold">Title:</span>
+		          <span class="avenirnextbold">Title:</span>
 		          <p class="value italics"> <%= @artwork.title %></p><% if @artwork.date %>, <%= @artwork.date %><% end %>
 		        </div>
 	        <% end %>
 
 	        <div class="label-block">
-	          <span class="avenirnextdemibold">Medium:</span><p class="value"> <%= @artwork.medium %></p>
+	          <span class="avenirnextbold">Medium:</span><p class="value"> <%= @artwork.medium %></p>
 	        </div>
 	        <div class="label-block">
-	          <span class="avenirnextdemibold">Description:</span><p class="value"> <%= @artwork.description %></p>
+	          <span class="avenirnextbold">Description:</span><p class="value"> <%= @artwork.description %></p>
 	        </div>
 	        <div class="label-block">  
-	          <span class="avenirnextdemibold">Dimensions (HxWxD):</span><p class="value"> <%= @artwork.dimensions %></p>
+	          <span class="avenirnextbold">Dimensions (HxWxD):</span><p class="value"> <%= @artwork.dimensions %></p>
 	        </div>
 	        <div class="label-block">
-	          <span class="avenirnextdemibold">Dimensions Frame:</span><p class="value"> <%= @artwork.frame_dimensions %></p>
+	          <span class="avenirnextbold">Dimensions Frame:</span><p class="value"> <%= @artwork.frame_dimensions %></p>
 	        </div>
 	        <div class="label-block">
-	          <span class="avenirnextdemibold">Condition:</span><p class="value"> <%= @artwork.condition %></p>
+	          <span class="avenirnextbold">Condition:</span><p class="value"> <%= @artwork.condition %></p>
 	        </div>
 	        <div class="label-block">
-	          <span class="avenirnextdemibold">Current Location:</span><p class="value"> <%= @artwork.currentLocation %></p>
+	          <span class="avenirnextbold">Current Location:</span><p class="value"> <%= @artwork.currentLocation %></p>
 	        </div>
 	        <div class="label-block">
-	          <span class="avenirnextdemibold">Source:</span><p class="value"> <%= @artwork.source %></p>
+	          <span class="avenirnextbold">Source:</span><p class="value"> <%= @artwork.source %></p>
 	        </div>
 	        <div class="label-block">
 	          <% if @artwork.dateAcquiredLabel && @artwork.dateAcquiredLabel != "" %>
-	            <span class="avenirnextdemibold"><%= @artwork.dateAcquiredLabel %>:</span><p class="value"> <%= @artwork.dateAcquired %></p>
+	            <span class="avenirnextbold"><%= @artwork.dateAcquiredLabel %>:</span><p class="value"> <%= @artwork.dateAcquired %></p>
 	          <% else %>
-	            <span class="avenirnextdemibold">Date Acquired:</span><p class="value"> <%= @artwork.dateAcquired %></p>
+	            <span class="avenirnextbold">Date Acquired:</span><p class="value"> <%= @artwork.dateAcquired %></p>
 	          <% end %>        
 	        </div><br />
 	        <div class="label-block">
-	          <p class="label-heading avenirnextdemibold">Provenance:</p><p class="block-value"> <%= @artwork.provenance %></p>
+	          <p class="label-heading avenirnextbold">Provenance:</p><p class="block-value"> <%= @artwork.provenance %></p>
 	        </div>
 	        <div class="label-block">
 	          <% if @artwork.notesImage.thumb.url %>
 	          	  <%= wicked_pdf_image_tag @artwork.notesImage, class: 'notes-image' %>
 	          <% end %>
 	          
-	          <p class="label-heading avenirnextdemibold">Note:</p>
+	          <p class="label-heading avenirnextbold">Note:</p>
 	          <p class="block-value"><%= @artwork.notes %></p>
 	        </div>
 	        <div class="label-block">
@@ -96,7 +96,7 @@
 	          	<%= wicked_pdf_image_tag @artwork.additionalInfoImage, class: 'info-image' %>
 	          <% end %>
 
-	          <p class="label-heading avenirnextdemibold"><%= @artwork.additionalInfoLabel %>:</p>
+	          <p class="label-heading avenirnextbold"><%= @artwork.additionalInfoLabel %>:</p>
 	          <p class="block-value"> <%= @artwork.additionalInfoText %></p>
 	        </div>
     	</div>

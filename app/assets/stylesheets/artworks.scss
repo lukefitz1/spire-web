@@ -45,20 +45,16 @@ body {
     font-family: 'Avenir Next';
 }
 
-.avenirnextmed {
-    font-family: 'AvenirNext-Medium';
-}
-
-.avenirnextdemibold {
-    font-family: 'AvenirNext-DemiBold';
-}
-
 .avenirnextultralight {
-    font-family: 'AvenirNext-UltraLight';
+    font-weight: 200;
+}
+
+.avenirnextmed {
+    font-weight: 500;
 }
 
 .avenirnextbold {
-    font-family: 'AvenirNext-Bold';
+    font-weight: 700;
 }
 
 .banner {
