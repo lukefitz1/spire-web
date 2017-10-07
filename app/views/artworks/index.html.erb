@@ -2,33 +2,35 @@
 
 <h1>Artworks</h1>
 
+<%= link_to 'New Artwork', new_artwork_path %><br /><br />
+
 <table>
   <thead>
     <tr>
-      <th>Ojbid</th>
-      <th>Arttype</th>
+      <th>Object ID</th>
+      <th>Art Type</th>
       <th>Title</th>
       <th>Date</th>
       <th>Medium</th>
       <th>Image</th>
       <th>Description</th>
       <th>Dimensions</th>
-      <th>Frame dimensions</th>
+      <th>Frame Dimensions</th>
       <th>Condition</th>
-      <th>Currentlocation</th>
+      <th>Current Location</th>
       <th>Source</th>
-      <th>DateacquiredLabel</th>
-      <th>Dateacquired</th>
-      <th>Amountpaid</th>
-      <th>Currentvalue</th>
+      <th>Date Acquired Label</th>
+      <th>Date Acquired</th>
+      <th>Amount Paid</th>
+      <th>Current Value</th>
       <th>Notes</th>
-      <th>Notesimage</th>
-      <th>Additionalinfolabel</th>
-      <th>Additionalinfotext</th>
-      <th>Additionalinfoimage</th>
-      <th>Additionalpdf</th>
-      <th>Reviewedby</th>
-      <th>Revieweddate</th>
+      <th>Notes Image</th>
+      <th>Additional Info Label</th>
+      <th>Additional Info Text</th>
+      <th>Additional Info Image</th>
+      <th>Additional PDF</th>
+      <th>Reviewed By</th>
+      <th>Reviewed Date</th>
       <th>Provenance</th>
       <th>Artists</th>
       <th>Customers</th>
@@ -111,8 +113,6 @@
 </table>
 
 <br>
-
-<%= link_to 'New Artwork', new_artwork_path %>
 
 <!-- <h4>Import that data!</h4>
   <%= form_tag import_path, multipart: true do %>

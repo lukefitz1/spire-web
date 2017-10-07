@@ -2,11 +2,13 @@
 
 <h1>Artists</h1>
 
+<%= link_to 'New Artist', new_artist_path %><br /><br />
+
 <table>
   <thead>
     <tr>
-      <th>Firstname</th>
-      <th>Lastname</th>
+      <th>First Name</th>
+      <th>Last Name</th>
       <th>Additional Artist Info</th>
       <th>Biography</th>
       <th colspan="3"></th>
@@ -29,8 +31,6 @@
 </table>
 
 <br>
-
-<%= link_to 'New Artist', new_artist_path %>
 
 <h4>Import that data!</h4>
   <%= form_tag import_artists_path, multipart: true do %>
