@@ -34,8 +34,11 @@ class ArtworksController < ApplicationController
     @artwork = Artwork.find(params[:id])
   end
 
+  # GET artworks/preview_pdf/1
   def preview_pdf
     @artwork = Artwork.find(params[:id])
+    puts @artwork
+
     respond_to do |format|
       format.html
       format.pdf do
