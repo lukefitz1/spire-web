@@ -156,8 +156,10 @@ header {
 
 .big-img img {
     display: block;
-    width: 100%;
-    height: auto;
+    margin: auto;
+    width: auto;
+    max-height: 500px;
+    max-width: 400px;
 }
 
 .hide {
