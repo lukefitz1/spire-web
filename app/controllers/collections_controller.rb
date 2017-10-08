@@ -20,9 +20,6 @@ class CollectionsController < ApplicationController
   # GET /collections/new
   def new_from_customer
     @collection = Collection.new(:customer_id => params[:cust_id])
-
-    # redirect BACK to customer show page
-    redirect_to action: "customer#show", id: params[:cust_id]
   end
 
   # GET /collections/1/edit
@@ -33,11 +30,18 @@ class CollectionsController < ApplicationController
   # POST /collections.json
   def create
     @collection = Collection.new(collection_params)
+    cust_id = collection_params[:customer_id]
+    redirect = params[:redirect]
 
     respond_to do |format|
       if @collection.save
-        format.html { redirect_to @collection, notice: 'Collection was successfully created.' }
-        format.json { render :show, status: :created, location: @collection }
+        if redirect
+          format.html { redirect_to customer_url(cust_id), notice: 'Collection was successfully created.' }
+          format.json { render :show, status: :created, location: @collection }
+        else
+          format.html { redirect_to @collection, notice: 'Collection was successfully created.' }
+          format.json { render :show, status: :created, location: @collection }
+        end
       else
         format.html { render :new }
         format.json { render json: @collection.errors, status: :unprocessable_entity }

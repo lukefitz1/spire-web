@@ -17,6 +17,11 @@ class ArtworksController < ApplicationController
     @artwork = Artwork.new
   end
 
+  # GET /collections/new
+  def new_from_collection
+    @artwork = Artwork.new(:customer_id => params[:cust_id], :collection_id => params[:coll_id])
+  end
+
   # GET /artworks/1/edit
   def edit
   end
@@ -54,11 +59,18 @@ class ArtworksController < ApplicationController
   # POST /artworks.json
   def create
     @artwork = Artwork.new(artwork_params)
+    cust_id = artwork_params[:customer_id]
+    redirect = params[:redirect]
 
     respond_to do |format|
       if @artwork.save
-        format.html { redirect_to @artwork, notice: 'Artwork was successfully created.' }
-        format.json { render :show, status: :created, location: @artwork }
+        if redirect
+          format.html { redirect_to customer_url(cust_id), notice: 'Artwork was successfully created.' }
+          format.json { render :show, status: :created, location: @artwork }
+        else
+          format.html { redirect_to @artwork, notice: 'Artwork was successfully created.' }
+          format.json { render :show, status: :created, location: @artwork }
+        end
       else
         format.html { render :new }
         format.json { render json: @artwork.errors, status: :unprocessable_entity }

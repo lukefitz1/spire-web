@@ -1,5 +1,7 @@
 <h2>Log in</h2>
 
+<% content_for :title, "Art Collector Web" %>
+
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
     <%= f.label :email %><br />
@@ -24,3 +26,15 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
+
+<script>
+  // self executing function here
+  (function() {
+    title = document.title
+    nav = document.getElementById('nav')
+
+    if (title == 'Login') {
+      nav.style.display = 'none'
+    }
+  })();
+</script>

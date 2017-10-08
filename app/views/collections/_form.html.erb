@@ -27,6 +27,10 @@
   </div>
 
   <div class="actions">
+    <% if params[:redirect] %>
+      <%= hidden_field_tag(:redirect, 'true') %>
+    <% end %>
+
     <%= form.submit %>
   </div>
 <% end %>

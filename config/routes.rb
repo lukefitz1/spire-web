@@ -29,7 +29,9 @@ Rails.application.routes.draw do
 	  get '/artists/import_artists', to: "artists#import_artists", as: "import_artists"
 	  get '/customers/import_customers', to: "customers#import_customers", as: "import_customers"
 	  get '/artworks/preview_pdf/:id', to: "artworks#preview_pdf", as: "preview_pdf"
-	  get '/collections/new_from_customer', to: "collections#new", as: "new_from_customer"
+	  get '/collections/new_from_customer', to: 'collections#new', as: 'new_from_customer'
+	  
+	  get '/artworks/new_from_collection', to: 'artworks#new', as: 'new_from_collection'
 
 	  resources :artworks do
 	  	collection { post :import }
