@@ -21,14 +21,9 @@
     <%= form.text_field :identifier, id: :collection_identifier %>
   </div>
 
-<!--   <div class="field">
-    <%= form.label :customer_id %>
-    <%= form.text_field :customer_id, id: :collection_customer_id %>
-  </div> -->
-
   <div class="field">
     <%= form.label :customer_id %>
-    <%= form.select(:customer_id, Customer.all.collect { |customer| [customer.firstName + ' ' + customer.lastName, customer.id]}, include_blank: true) %>
+    <%= form.select(:customer_id, Customer.all.collect { |customer| [customer.firstName + ' ' + customer.lastName, customer.id]}, :selected => params[:cust_id], include_blank: true) %>
   </div>
 
   <div class="actions">

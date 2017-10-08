@@ -15,6 +15,8 @@
   <%= @customer.lastName %>
 </p>
 
+<%= link_to 'New Collection', new_from_customer_path(:cust_id => @customer.id) %><br /><br />
+
 <% @customer.collections.each do |collection| %>
   <table>
     <thead>

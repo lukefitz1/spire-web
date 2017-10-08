@@ -17,6 +17,14 @@ class CollectionsController < ApplicationController
     @collection = Collection.new
   end
 
+  # GET /collections/new
+  def new_from_customer
+    @collection = Collection.new(:customer_id => params[:cust_id])
+
+    # redirect BACK to customer show page
+    redirect_to action: "customer#show", id: params[:cust_id]
+  end
+
   # GET /collections/1/edit
   def edit
   end
