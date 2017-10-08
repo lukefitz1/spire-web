@@ -96,6 +96,11 @@ class ArtworksController < ApplicationController
   # DELETE /artworks/1.json
   def destroy
     @artwork.destroy
+    puts "Hello"
+    puts params[:redirect]
+    puts params[:class]
+    puts :class
+
     respond_to do |format|
       format.html { redirect_to artworks_url, notice: 'Artwork was successfully destroyed.' }
       format.json { head :no_content }

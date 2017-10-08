@@ -16,27 +16,16 @@
       <th>Date</th>
       <th>Medium</th>
       <th>Image</th>
-      <!-- <th>Description</th> -->
       <th>Dimensions</th>
       <th>Frame Dimensions</th>
       <th>Current Location</th>
-      <!-- <th>Condition</th> -->
       <th>Source</th>
-      <!-- <th>Date Acquired Label</th> -->
       <th>Date Acquired</th>
       <th>Notes</th>
       <th>Amount Paid</th>
       <th>Current Value</th>
       <th>Notes Image</th>
       <th>Additional Info Image</th>
-      <!-- <th>Additional Info Label</th>
-      <th>Additional Info Text</th>
-      <th>Additional PDF</th>
-      <th>Reviewed By</th>
-      <th>Reviewed Date</th>
-      <th>Provenance</th>
-      <th>Customer</th>
-      <th>Collection</th> -->
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -63,18 +52,10 @@
           <% end %>
         </td>
 
-        <!-- <td><%= artwork.description %></td> -->
-
         <td><%= artwork.dimensions %></td>
         <td><%= artwork.frame_dimensions %></td>
         <td><%= artwork.currentLocation %></td>
-
-        <!-- <td><%= artwork.condition %></td> -->
-        
         <td><%= artwork.source %></td>
-
-        <!-- <td><%= artwork.dateAcquiredLabel %></td> -->
-
         <td><%= artwork.dateAcquired %></td>
         <td><%= artwork.notes %></td>
         <td><%= artwork.amountPaid %></td>
@@ -92,25 +73,6 @@
           <% end %>
         </td>
 
-        <!-- <td><%= artwork.additionalInfoLabel %></td>
-        <td><%= artwork.additionalInfoText %></td>
-        <td><%= artwork.additionalPdf %></td>
-        <td><%= artwork.reviewedBy %></td>
-        <td><%= artwork.reviewedDate %></td>
-        <td><%= artwork.provenance %></td>
-
-        <td>
-          <% unless artwork.customer.blank? %>
-            <%= artwork.customer.firstName %><%= ' ' %><%= artwork.customer.lastName %>
-          <% end %>     
-        </td>
-
-        <td>
-          <% unless artwork.collection.blank? %>
-            <%= artwork.collection.collectionName %>
-          <% end %>  
-        </td> -->
-
         <td><%= link_to 'Show', artwork %></td>
         <td><%= link_to 'Edit', edit_artwork_path(artwork) %></td>
         <td><%= link_to 'Destroy', artwork, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -118,12 +80,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<!-- <h4>Import that data!</h4>
-  <%= form_tag import_path, multipart: true do %>
-    <%= file_field_tag :file %>
-    <%= hidden_field_tag(:customer_id, 2) %>
-    <%= submit_tag "Import Artwork" %>
-<% end %> -->
