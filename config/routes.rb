@@ -42,7 +42,10 @@ Rails.application.routes.draw do
 	  	collection { post :import_customers }
 	  end
 
-	  resources :collections
+	  resources :collections do
+	  	
+	  end
+
 	end
 
 	root to: redirect('/users/sign_in')

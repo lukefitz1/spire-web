@@ -2,6 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@font-face {
+    font-family: "Silly People";
+    src: url('/assets/Silly_People');
+}
+
 body {
 	margin-top: 5px;
 }
@@ -46,7 +51,8 @@ body {
 }
 
 .avenirnextlocal {
-    font-family: 'Paint';
+    /*font-family: 'Paint';*/
+    font-family: "Silly People";
 }
 
 .avenirnextultralight {
