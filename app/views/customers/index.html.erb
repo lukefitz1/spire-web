@@ -32,6 +32,6 @@
 
 <h4>Import that data!</h4>
   <%= form_tag import_customers_path, multipart: true do %>
-    <%= file_field_tag :file %>
+    <%= file_field_tag :file, :required => true %>
     <%= submit_tag "Import Customers" %>
 <% end %>
