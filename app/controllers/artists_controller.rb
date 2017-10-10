@@ -25,8 +25,8 @@ class ArtistsController < ApplicationController
   def import_artists
     Artist.import(params[:file])
 
-    # after import, redirect to homepage
-    redirect_to 'artists#index', notice: "Data imported successfully!"
+    # after import, redirect to artists index
+    redirect_to artists_url, notice: 'Artist was successfully destroyed.'
   end
 
   # POST /artists

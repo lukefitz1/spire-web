@@ -31,7 +31,7 @@ class ArtworksController < ApplicationController
     Artwork.import(params[:file], params[:customer_id], params[:collection_id])
 
     # after import, redirect to homepage
-    redirect_to 'artworks#index', notice: "Data imported successfully!"
+    redirect_to "/customers/#{params[:customer_id]}", notice: "Data imported successfully!"
   end
 
   # GET artworks/preview/1
