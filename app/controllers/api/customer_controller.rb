@@ -37,4 +37,23 @@ class Api::CustomerController < Api::BaseController
 	def edit
 	end
 
+	# POST /customers
+	# POST /customers.json
+	def create
+		@customer = Customer.new(customer_params)
+
+		respond_to do |format|
+			if @customer.save 
+		  		format.json { render :json => @customer, status: :created }
+		  	else
+		  		format.json { render json: @customer.errors, status: :unprocessable_entity }
+		  	end
+		end
+	end
+
+	# Never trust parameters from the scary internet, only allow the white list through.
+	def customer_params
+		params.require(:customer).permit(:firstName, :lastName)
+	end
+
 end

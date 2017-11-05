@@ -37,4 +37,25 @@ class Api::CollectionsController < Api::BaseController
     def edit
     end
 
+	# POST /collections
+	# POST /collections.json
+	def create
+		@collection = Collection.new(collection_params)
+		cust_id = collection_params[:customer_id]
+		redirect = params[:redirect]
+
+		respond_to do |format|
+		 	if @collection.save 
+		  		format.json { render :json => @collection, status: :created }
+		  	else
+		  		format.json { render json: @collection.errors, status: :unprocessable_entity }
+		  	end
+		end
+	end
+
+	# Never trust parameters from the scary internet, only allow the white list through.
+    def collection_params
+      	params.require(:collection).permit(:collectionName, :customer_id, :identifier)
+    end
+
 end
