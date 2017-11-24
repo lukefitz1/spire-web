@@ -1,6 +1,6 @@
 class CreateArtworks < ActiveRecord::Migration[5.1]
   def change
-    create_table :artworks do |t|
+    create_table :artworks, id: :uuid do |t|
       t.string :ojbId
       t.string :artType
       t.string :title
@@ -25,8 +25,8 @@ class CreateArtworks < ActiveRecord::Migration[5.1]
       t.string :reviewedBy
       t.string :reviewedDate
       t.text :provenance
-      t.references :artists, foreign_key: true
-      t.references :customers, foreign_key: true
+      t.references :artists, type: :uuid, foreign_key: true
+      t.references :customers, type: :uuid, foreign_key: true
 
       t.timestamps
     end

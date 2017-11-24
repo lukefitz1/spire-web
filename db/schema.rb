@@ -14,8 +14,9 @@ ActiveRecord::Schema.define(version: 20171007160555) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pgcrypto"
 
-  create_table "artists", force: :cascade do |t|
+  create_table "artists", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "firstName"
     t.string "lastName"
     t.text "biography"
@@ -24,7 +25,7 @@ ActiveRecord::Schema.define(version: 20171007160555) do
     t.string "additionalInfo"
   end
 
-  create_table "artworks", force: :cascade do |t|
+  create_table "artworks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "ojbId"
     t.string "artType"
     t.string "title"
@@ -51,25 +52,25 @@ ActiveRecord::Schema.define(version: 20171007160555) do
     t.text "provenance"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "artist_id"
-    t.bigint "customer_id"
-    t.bigint "collection_id"
+    t.uuid "artist_id"
+    t.uuid "customer_id"
+    t.uuid "collection_id"
     t.string "dateAcquiredLabel"
     t.index ["artist_id"], name: "index_artworks_on_artist_id"
     t.index ["collection_id"], name: "index_artworks_on_collection_id"
     t.index ["customer_id"], name: "index_artworks_on_customer_id"
   end
 
-  create_table "collections", force: :cascade do |t|
+  create_table "collections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "collectionName"
-    t.bigint "customer_id"
+    t.uuid "customer_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "identifier"
     t.index ["customer_id"], name: "index_collections_on_customer_id"
   end
 
-  create_table "customers", force: :cascade do |t|
+  create_table "customers", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "firstName"
     t.string "lastName"
     t.datetime "created_at", null: false
