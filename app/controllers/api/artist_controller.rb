@@ -38,7 +38,7 @@ class Api::ArtistController < Api::BaseController
 
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def artist_params
-		params.require(:artist).permit(:firstName, :lastName, :biography, :additionalInfo)
+		params.require(:artist).permit(:id, :firstName, :lastName, :biography, :additionalInfo)
 	end
 
 end
