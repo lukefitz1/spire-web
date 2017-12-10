@@ -7,10 +7,9 @@ class Api::CustomerController < Api::BaseController
 		@customer = Customer.all
 
 		respond_to do |format|
+			puts "FUCK"
 			format.json { 
-				render :json => @customer, :include => { 
-					:collection => {}
-				} 
+				render :json => @customer
 			}
 		end
 	end
@@ -53,7 +52,7 @@ class Api::CustomerController < Api::BaseController
 
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def customer_params
-		params.require(:customer).permit(:firstName, :lastName)
+		params.require(:customer).permit(:id, :firstName, :lastName)
 	end
 
 end
