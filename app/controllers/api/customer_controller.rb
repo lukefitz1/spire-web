@@ -7,7 +7,6 @@ class Api::CustomerController < Api::BaseController
 		@customer = Customer.all
 
 		respond_to do |format|
-			puts "FUCK"
 			format.json { 
 				render :json => @customer
 			}
