@@ -158,12 +158,12 @@
 
   <div class="field">
     <%= form.label :customer_id %>
-    <%= form.select(:customer_id, Customer.all.collect { |customer| [customer.firstName + ' ' + customer.lastName, customer.id]}, :selected => params[:cust_id], include_blank: true) %>
+    <%= form.select(:customer_id, Customer.all.collect { |customer| [customer.firstName + ' ' + customer.lastName, customer.id]}, :selected => params[:customer_id], include_blank: true) %>
   </div>
 
   <div class="field">
     <%= form.label :collection_id %>
-    <%= form.select(:collection_id, Collection.all.collect { |collection| [collection.collectionName, collection.id]}, :selected => params[:coll_id], include_blank: true) %>
+    <%= form.select(:collection_id, Collection.all.collect { |collection| [collection.collectionName, collection.id]}, :selected => params[:collection_id], include_blank: true) %>
   </div>
 
   <div class="actions">
