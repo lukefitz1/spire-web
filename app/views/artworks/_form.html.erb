@@ -133,7 +133,13 @@
 
   <div class="field">
     <%= form.label :additionalPdf, 'Additional PDF' %>
-    <%= form.text_field :additionalPdf, id: :artwork_additionalPdf %>
+    <%= form.file_field :additionalPdf, id: :additionalInfoImage %>
+
+    <% if form.object.additionalPdf? %>
+      <%= form.label :additionalPdf, id: :artwork_additionalPdf %>
+      <%= form.label :remove_additionalPdf %>
+      <%= form.check_box :remove_additionalPdf %> 
+    <% end %>
   </div>
 
   <div class="field">

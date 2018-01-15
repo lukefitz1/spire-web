@@ -4,7 +4,7 @@ class ArtistsController < ApplicationController
   # GET /artists
   # GET /artists.json
   def index
-    @artists = Artist.all
+    @artists = Artist.order(:lastName)
   end
 
   # GET /artists/1
@@ -32,15 +32,34 @@ class ArtistsController < ApplicationController
   # POST /artists
   # POST /artists.json
   def create
-    @artist = Artist.new(artist_params)
+    match = false
 
-    respond_to do |format|
-      if @artist.save
-        format.html { redirect_to @artist, notice: 'Artist was successfully created.' }
-        format.json { render :show, status: :created, location: @artist }
-      else
-        format.html { render :new }
-        format.json { render json: @artist.errors, status: :unprocessable_entity }
+    artists = Artist.all
+    artists.each { |artist| 
+      if artist_params["firstName"] == artist.firstName
+        if artist_params["lastName"] == artist.lastName
+          match = true
+          break
+        end
+      end
+    }
+
+    if match 
+      respond_to do |format|
+        format.html { redirect_to new_artist_url, notice: 'Artist already exists' }
+      end
+
+    else
+      @artist = Artist.new(artist_params)
+
+      respond_to do |format|
+        if @artist.save
+          format.html { redirect_to @artist, notice: 'Artist was successfully created.' }
+          format.json { render :show, status: :created, location: @artist }
+        else
+          format.html { render :new }
+          format.json { render json: @artist.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

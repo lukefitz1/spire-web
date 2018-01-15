@@ -77,7 +77,7 @@
 	        <div class="label-block">
 	          <% if @artwork.dateAcquiredLabel && @artwork.dateAcquiredLabel != "" %>
 	            <span class="avenirnextbold"><%= @artwork.dateAcquiredLabel %>:</span><p class="value"> <%= @artwork.dateAcquired %></p>
-	          <% else %>
+	          <% elsif @artwork.dateAcquired && @artwork.dateAcquired != "" %>
 	            <span class="avenirnextbold">Date Acquired:</span><p class="value"> <%= @artwork.dateAcquired %></p>
 	          <% end %>        
 	        </div><br />
@@ -92,14 +92,16 @@
 	          <p class="label-heading avenirnextbold">Note:</p>
 	          <p class="block-value"><%= @artwork.notes %></p>
 	        </div>
-	        <div class="label-block">
-	          <% if @artwork.additionalInfoImage.thumb.url %>
-	          	<%= wicked_pdf_image_tag @artwork.additionalInfoImage, class: 'info-image' %>
-	          <% end %>
+		    <% if @artwork.additionalInfoText && @artwork.additionalInfoText != ""%>
+		        <div class="label-block">
+		          <% if @artwork.additionalInfoImage.thumb.url %>
+		          	<%= wicked_pdf_image_tag @artwork.additionalInfoImage, class: 'info-image' %>
+		          <% end %>
 
-	          <p class="label-heading avenirnextbold"><%= @artwork.additionalInfoLabel %>:</p>
-	          <p class="block-value"> <%= @artwork.additionalInfoText %></p>
-	        </div>
+		          <p class="label-heading avenirnextbold"><%= @artwork.additionalInfoLabel %>:</p>
+		          <p class="block-value"> <%= @artwork.additionalInfoText %></p>
+		        </div>
+		    <% end %>
     	</div>
 
     	<div class="column-right">
@@ -114,13 +116,13 @@
 
   	</div>
 
-  	<div class="bottom-banner">
+  	<!-- div class="bottom-banner">
 		<div class="top avenirnext twelve">
 			<div class="left avenirnextbold">Collection Object ID <%= @artwork.ojbId %></div>
 			<div class="middle">Catalog Sheet</div>
 			<div class="right">Examined: <%= @artwork.reviewedBy %> <%= @artwork.reviewedDate %></div>
 		</div>
-	</div>
+	</div> -->
 
 </div>
     

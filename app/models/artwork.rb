@@ -8,6 +8,7 @@ class Artwork < ApplicationRecord
   mount_uploader :image, ImageUploader
   mount_uploader :notesImage, ImageUploader
   mount_uploader :additionalInfoImage, ImageUploader
+  mount_uploader :additionalPdf, PdfUploader
 
   def self.import(file, customer_id, collection_id)
   	# loops through csv data
