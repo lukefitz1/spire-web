@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171007160555) do
+ActiveRecord::Schema.define(version: 20180115222118) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,8 @@ ActiveRecord::Schema.define(version: 20171007160555) do
     t.uuid "customer_id"
     t.uuid "collection_id"
     t.string "dateAcquiredLabel"
+    t.string "notesImageTwo"
+    t.string "additionalInfoImageTwo"
     t.index ["artist_id"], name: "index_artworks_on_artist_id"
     t.index ["collection_id"], name: "index_artworks_on_collection_id"
     t.index ["customer_id"], name: "index_artworks_on_customer_id"

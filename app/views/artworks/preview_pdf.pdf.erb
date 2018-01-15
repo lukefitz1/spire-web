@@ -86,16 +86,45 @@
 	        </div>
 	        <div class="label-block">
 	          <% if @artwork.notesImage.thumb.url %>
-	          	  <%= wicked_pdf_image_tag @artwork.notesImage, class: 'notes-image' %>
+	          	
+				<div class="notes-images-block">
+					<div class="notes-image-one padding-bottom-five">
+						<!-- <img src="/Users/blueacorn/Sites/art-collector-web/test_images/signature.jpg" alt="logo"> -->
+						<%= wicked_pdf_image_tag @artwork.notesImage%>
+					</div>
+					<% if @artwork.notesImage.thumb.url %>
+						<div class="notes-image-two">
+							<!-- <img src="/Users/blueacorn/Sites/art-collector-web/test_images/another_signature.jpg" alt="logo"> -->
+							<%= wicked_pdf_image_tag @artwork.notesImageTwo %>
+						</div>
+						<!-- <div class="image-two">
+							<img src="/Users/blueacorn/Sites/art-collector-web/test_images/document-image.jpg" alt="logo" class="image-two">
+						</div> -->
+					<% end %>
+				</div>
+
 	          <% end %>
-	          
+
 	          <p class="label-heading avenirnextbold">Note:</p>
 	          <p class="block-value"><%= @artwork.notes %></p>
 	        </div>
 		    <% if @artwork.additionalInfoText && @artwork.additionalInfoText != ""%>
 		        <div class="label-block">
 		          <% if @artwork.additionalInfoImage.thumb.url %>
-		          	<%= wicked_pdf_image_tag @artwork.additionalInfoImage, class: 'info-image' %>
+
+		          	<div class="add-info-images-block">
+						<div class="add-info-image-one">
+							<%= wicked_pdf_image_tag @artwork.additionalInfoImage, class: 'info-image' %>
+						</div>
+
+						<% if @artwork.additionalInfoImageTwo.thumb.url %>
+							<div class="add-info-image-two">
+								<%= wicked_pdf_image_tag @artwork.additionalInfoImageTwo, class: 'info-image' %>
+							</div>
+						<% end %>
+
+					</div>
+
 		          <% end %>
 
 		          <p class="label-heading avenirnextbold"><%= @artwork.additionalInfoLabel %>:</p>

@@ -112,6 +112,16 @@
   </div>
 
   <div class="field">
+    <%= form.label :notesImageTwo, 'Notes Image Two' %>
+    <%= form.file_field :notesImageTwo, id: :artwork_notesImageTwo %>
+    <% if form.object.notesImageTwo? %>
+      <%= image_tag form.object.notesImageTwo.thumb.url %>
+      <%= form.label :remove_notesImageTwo %>
+      <%= form.check_box :remove_notesImageTwo %> 
+    <% end %>
+  </div>
+
+  <div class="field">
     <%= form.label :additionalInfoLabel, 'Additional Info Label' %>
     <%= form.text_field :additionalInfoLabel, id: :artwork_additionalInfoLabel %>
   </div>
@@ -128,6 +138,16 @@
       <%= image_tag form.object.additionalInfoImage.thumb.url %>
       <%= form.label :remove_additionalInfoImage %>
       <%= form.check_box :remove_additionalInfoImage %> 
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= form.label :additionalInfoImageTwo, 'Additional Info Image Two' %>
+    <%= form.file_field :additionalInfoImageTwo, id: :artwork_additionalInfoImageTwo %>
+    <% if form.object.additionalInfoImageTwo? %>
+      <%= image_tag form.object.additionalInfoImageTwo.thumb.url %>
+      <%= form.label :remove_additionalInfoImageTwo %>
+      <%= form.check_box :remove_additionalInfoImageTwo %> 
     <% end %>
   </div>
 

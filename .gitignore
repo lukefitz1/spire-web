@@ -25,3 +25,6 @@
 .env
 
 todo
+
+/app/views/artworks/preview.html
+/test_images

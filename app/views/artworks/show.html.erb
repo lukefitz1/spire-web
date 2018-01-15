@@ -97,6 +97,13 @@
 </p>
 
 <p>
+  <strong>Notes Image:</strong>
+  <% if @artwork.notesImageTwo.thumb.url %>
+    <%= image_tag @artwork.notesImageTwo.thumb.url %>
+  <% end %>
+</p>
+
+<p>
   <strong>Additional Info Label:</strong>
   <%= @artwork.additionalInfoLabel %>
 </p>
@@ -110,6 +117,13 @@
   <strong>Additional Info Image:</strong>
   <% if @artwork.additionalInfoImage.thumb.url %>
     <%= image_tag @artwork.additionalInfoImage.thumb.url %>
+  <% end %>
+</p>
+
+<p>
+  <strong>Additional Info Image Two:</strong>
+  <% if @artwork.additionalInfoImageTwo.thumb.url %>
+    <%= image_tag @artwork.additionalInfoImageTwo.thumb.url %>
   <% end %>
 </p>
 

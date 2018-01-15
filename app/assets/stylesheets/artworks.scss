@@ -205,14 +205,14 @@ header {
     text-align: justify;
 }
 
-.label-block img {
-    float: right;
-}
-
 .downloadbutton {
 	position: fixed;
     top: 5px;
     left: 5px;
+}
+
+label-block img {
+    float: right;
 }
 
 .notes-image {
@@ -220,9 +220,47 @@ header {
     max-width: 183px;
 }
 
+.notes-images-block {
+    float: right;
+}
+
+.notes-image-one > img {
+    margin-top: 35px;
+    max-width: 183px;
+    max-height: 175px;
+}
+
+.notes-image-two > img {
+    max-width: 183px;
+    max-height: 175px;
+}
+
+.padding-bottom-five {
+    padding-bottom: 5px;
+}
+
+.padding-right-five {
+    padding-right: 12px;
+}
+
+.add-info-images-block img {
+    float: right;
+}
+
 .info-image {
     margin-top: 35px;
-    max-width: 172px;
+    max-width: 150px;
+}
+
+.notes-image-one > img {
+    margin-top: 35px;
+    max-width: 183px;
+    max-height: 175px;
+}
+
+.notes-image-two > img {
+    max-width: 183px;
+    max-height: 175px;
 }
 
 .italics {

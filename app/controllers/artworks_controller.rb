@@ -42,7 +42,7 @@ class ArtworksController < ApplicationController
   # GET artworks/preview_pdf/1
   def preview_pdf
     @artwork = Artwork.find(params[:id])
-    puts @artwork
+    # puts @artwork
 
     respond_to do |format|
       format.html
@@ -51,6 +51,32 @@ class ArtworksController < ApplicationController
           template: 'artworks/preview_pdf.pdf.erb',
           show_as_html: params.key?('debug'),
           encoding: 'UTF-8'
+      end
+    end
+  end
+
+  def fancy_report
+    @artwork = Artwork.find(params[:id])
+    # puts @artwork
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        doc2 = @artwork.additionalPdf
+        puts "Doc 2: #{doc2}"
+
+        doc1 = render pdf: 'filename',
+          template: 'artworks/preview_pdf.pdf.erb',
+          show_as_html: params.key?('debug'),
+          encoding: 'UTF-8'
+        doc = render_to_string(doc1)
+
+        # doc2 = @artwork.additionalPdf
+       
+
+        puts "First PDF: #{doc1}, Second PDF: #{doc2}"        
+        # pdf_file = MultipagePdfRenderer.combine([doc1, doc2])
+        # send_data pdf_file, type: 'application/pdf', disposition: 'inline'
       end
     end
   end
@@ -96,7 +122,7 @@ class ArtworksController < ApplicationController
   # DELETE /artworks/1.json
   def destroy
     @artwork.destroy
-    puts "Hello"
+    # puts "Hello"
     puts params[:redirect]
     puts params[:class]
     puts :class
@@ -115,6 +141,6 @@ class ArtworksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def artwork_params
-      params.require(:artwork).permit(:ojbId, :artType, :title, :date, :medium, :image, :description, :dimensions, :frame_dimensions, :condition, :currentLocation, :source, :dateAcquired, :amountPaid, :currentValue, :notes, :notesImage, :additionalInfoLabel, :additionalInfoText, :additionalInfoImage, :additionalPdf, :reviewedBy, :reviewedDate, :provenance, :artist_id, :customer_id, :remove_image, :remove_additionalInfoImage, :remove_notesImage, :collection_id, :dateAcquiredLabel)
+      params.require(:artwork).permit(:ojbId, :artType, :title, :date, :medium, :image, :description, :dimensions, :frame_dimensions, :condition, :currentLocation, :source, :dateAcquired, :amountPaid, :currentValue, :notes, :notesImage, :notesImageTwo, :additionalInfoLabel, :additionalInfoText, :additionalInfoImage, :additionalInfoImageTwo, :additionalPdf, :reviewedBy, :reviewedDate, :provenance, :artist_id, :customer_id, :remove_image, :remove_additionalInfoImage, :remove_additionalInfoImageTwo, :remove_notesImage, :remove_notesImageTwo, :collection_id, :dateAcquiredLabel)
     end
 end
