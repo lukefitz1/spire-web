@@ -74,7 +74,9 @@
             <th>Amount Paid</th>
             <th>Current Value</th>
             <th>Notes Image</th>
+            <th>Notes Image Two</th>
             <th>Additional Info Image</th>
+            <th>Additional Info Image Two</th>
             <th colspan="4"></th>
           </tr>
         </thead>
@@ -117,12 +119,25 @@
               </td>
 
               <td>
+                <% if artwork.notesImageTwo.thumb.url %>
+                  <%= image_tag artwork.notesImageTwo.thumb.url %>
+                <% end %>
+              </td>
+
+              <td>
                 <% if artwork.additionalInfoImage.thumb.url %>
                   <%= image_tag artwork.additionalInfoImage.thumb.url %>
                 <% end %>
               </td>
 
+              <td>
+                <% if artwork.additionalInfoImageTwo.thumb.url %>
+                  <%= image_tag artwork.additionalInfoImageTwo.thumb.url %>
+                <% end %>
+              </td>
+
               <td><%= link_to 'PDF', preview_pdf_path(artwork, format: :pdf) %></td>
+              <!-- <td><%= link_to 'PDFF', fancy_report_path(artwork, format: :pdf) %></td> -->
             </tr>
           <% end %>
         
