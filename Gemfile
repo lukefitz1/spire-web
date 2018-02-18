@@ -78,3 +78,5 @@ gem 'wkhtmltopdf-binary-edge', '~> 0.12.4.0'
 
 gem 'carrierwave-aws'
 gem 'aws-sdk', '~> 2'
+gem 'combine_pdf'
+gem 'net-http2'

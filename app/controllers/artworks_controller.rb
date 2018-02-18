@@ -57,28 +57,60 @@ class ArtworksController < ApplicationController
 
   def fancy_report
     @artwork = Artwork.find(params[:id])
-    # puts @artwork
 
-    respond_to do |format|
-      format.html
-      format.pdf do
-        doc2 = @artwork.additionalPdf
-        puts "Doc 2: #{doc2}"
+    # respond_to do |format|
+    #   format.html
+    #   format.pdf do
+    #     doc2 = @artwork.additionalPdf
+    #     puts "Doc 2: #{doc2}"
 
-        doc1 = render pdf: 'filename',
-          template: 'artworks/preview_pdf.pdf.erb',
-          show_as_html: params.key?('debug'),
-          encoding: 'UTF-8'
-        doc = render_to_string(doc1)
-
-        # doc2 = @artwork.additionalPdf
+    #     doc1 = render pdf: 'filename',
+    #       template: 'artworks/preview_pdf.pdf.erb',
+    #       show_as_html: params.key?('debug'),
+    #       encoding: 'UTF-8'
+    #     doc = render_to_string(doc1)
+    #     doc2 = @artwork.additionalPdf
        
 
-        puts "First PDF: #{doc1}, Second PDF: #{doc2}"        
-        # pdf_file = MultipagePdfRenderer.combine([doc1, doc2])
-        # send_data pdf_file, type: 'application/pdf', disposition: 'inline'
-      end
-    end
+    #     puts "First PDF: #{doc1}, Second PDF: #{doc2}"        
+    #     pdf_file = MultipagePdfRenderer.combine([doc1, doc2])
+    #     send_data pdf_file, type: 'application/pdf', disposition: 'inline'
+    #   end
+    # end
+
+    # doc1 = render_to_string(render pdf: 'filename.pdf',
+    #                                 template: 'artworks/preview_pdf.pdf.erb')
+    # doc2 = render_to_string(@artwork.additionalPdf)
+    # pdf_fil = pdf_file = MultipagePdfRenderer.combine([doc1, doc2])
+    # send_data pdf_file, type: 'application/pdf', disposition: 'inline'
+
+    # respond_to do |format|
+    #   format.html
+    #   format.pdf do
+    #     # render pdf: "filename_test",
+    #     #   template: 'artworks/preview_pdf.pdf.erb',
+    #     #   show_as_html: params.key?('debug'),
+    #     #   encoding: 'UTF-8',
+    #     #   save_to_file: Rails.root.join('public', "test.pdf"),
+    #     #   save_only: true
+
+    #       doc2 = Rails.root.join('public', "test.pdf")
+    #       doc3 = render_to_string(doc2)
+
+    #       doc1 = @artwork.additionalPdf
+    #       pdf_file = MultipagePdfRenderer.combine([doc1, doc2])
+    #       send_data pdf_file, type: 'application/pdf', disposition: 'inline'
+    #   end
+    # end
+
+    url = 'https://spire-art-bucket-dev.s3.amazonaws.com/uploads/artwork/additionalPdf/fe620bd0-d59c-4c29-8dfa-5ab8b709564b/test-pdf-2.pdf'
+    resp = Net::HTTP.get_response(URI.parse(url)).body
+    pdf = CombinePDF.new
+    pdf << CombinePDF.load(Rails.root.join('public', "test.pdf"))
+    pdf << CombinePDF.parse(resp)
+    pdf.save Rails.root.join('public', 'combined.pdf')
+    
+    send_file("#{Rails.root}/public/combined.pdf")
   end
   
   # POST /artworks
