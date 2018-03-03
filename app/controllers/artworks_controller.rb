@@ -71,22 +71,9 @@ class ArtworksController < ApplicationController
       end
     end
 
-    # puts "PDF generation"
-    # respond_to do |format|
-    #   format.html
-    #   format.pdf do
-    #     render pdf: "filename_test",
-    #       template: 'artworks/preview_pdf.pdf.erb',
-    #       encoding: 'UTF-8',
-    #       # save_to_file: Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"),
-    #       # save_only: true
-    #   end
-    # end
-
-    # puts "Before File.open"
-    # File.open(Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf")) do |file|
-    #   something = upload.store!(file)
-    # end
+    File.open(Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf")) do |file|
+      something = upload.store!(file)
+    end
 
     # puts "Before defining URL"
     # url = "https://spire-art-bucket-dev.s3.amazonaws.com/uploads/artwork/additionalPdf/#{@artwork[:id]}/#{@artwork[:additionalPdf]}"
