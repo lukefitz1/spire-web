@@ -79,7 +79,7 @@ class ArtworksController < ApplicationController
     
     pdf = CombinePDF.new
     pdf << CombinePDF.load(Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"))
-    pdf << CombinePDF.parse(resp)
+    # pdf << CombinePDF.parse(resp)
     pdf.save Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf")
     
     send_file("#{Rails.root}/public/#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf")
