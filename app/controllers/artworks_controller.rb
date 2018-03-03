@@ -65,10 +65,12 @@ class ArtworksController < ApplicationController
         render pdf: 'filename',
           template: 'artworks/preview_pdf.pdf.erb',
           show_as_html: params.key?('debug'),
-          encoding: 'UTF-8'
+          encoding: 'UTF-8',
+          save_to_file: Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"),
+          save_only: true
       end
     end
-    
+
     # puts "PDF generation"
     # respond_to do |format|
     #   format.html
