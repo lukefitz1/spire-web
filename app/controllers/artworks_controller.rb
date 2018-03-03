@@ -71,9 +71,10 @@ class ArtworksController < ApplicationController
       end
     end
 
-    # File.open(Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf")) do |file|
-    #   something = upload.store!(file)
-    # end
+    File.open(Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf")) do |file|
+      $stdout.print "File: #{file}"
+      something = upload.store!(file)
+    end
 
     # puts "Before defining URL"
     # url = "https://spire-art-bucket-dev.s3.amazonaws.com/uploads/artwork/additionalPdf/#{@artwork[:id]}/#{@artwork[:additionalPdf]}"
