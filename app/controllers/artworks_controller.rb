@@ -59,30 +59,33 @@ class ArtworksController < ApplicationController
     upload = TempPdfUploader.new
     timestamp = Time.now.strftime("%y%m%d%H%M%S")
 
+    puts "PDF generation"
     respond_to do |format|
       format.html
       format.pdf do
         render pdf: "filename_test",
           template: 'artworks/preview_pdf.pdf.erb',
           encoding: 'UTF-8',
-          save_to_file: Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"),
-          save_only: true
+          # save_to_file: Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"),
+          # save_only: true
       end
     end
 
-    File.open(Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf")) do |file|
-      something = upload.store!(file)
-    end
+    # puts "Before File.open"
+    # File.open(Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf")) do |file|
+    #   something = upload.store!(file)
+    # end
 
-    url = "https://spire-art-bucket-dev.s3.amazonaws.com/uploads/artwork/additionalPdf/#{@artwork[:id]}/#{@artwork[:additionalPdf]}"
-    resp = Net::HTTP.get_response(URI.parse(url)).body
+    # puts "Before defining URL"
+    # url = "https://spire-art-bucket-dev.s3.amazonaws.com/uploads/artwork/additionalPdf/#{@artwork[:id]}/#{@artwork[:additionalPdf]}"
+    # resp = Net::HTTP.get_response(URI.parse(url)).body
     
-    pdf = CombinePDF.new
-    pdf << CombinePDF.load(Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"))
-    pdf << CombinePDF.parse(resp)
-    pdf.save Rails.root.join('public', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf")
+    # pdf = CombinePDF.new
+    # pdf << CombinePDF.load(Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"))
+    # pdf << CombinePDF.parse(resp)
+    # pdf.save Rails.root.join('public', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf")
     
-    send_file("#{Rails.root}/public/#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf")
+    # send_file("#{Rails.root}/public/#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf")
   end
   
   # POST /artworks
