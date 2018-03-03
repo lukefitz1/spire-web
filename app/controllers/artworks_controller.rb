@@ -70,15 +70,15 @@ class ArtworksController < ApplicationController
       end
     end
 
-    url = "https://spire-art-bucket-dev.s3.amazonaws.com/uploads/artwork/additionalPdf/#{@artwork[:id]}/#{@artwork[:additionalPdf]}"
+    # url = "https://spire-art-bucket-dev.s3.amazonaws.com/uploads/artwork/additionalPdf/#{@artwork[:id]}/#{@artwork[:additionalPdf]}"
 
-    resp = Net::HTTP.get_response(URI.parse(url)).body
-    pdf = CombinePDF.new
-    pdf << CombinePDF.load(Rails.root.join('public', "template_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"))
-    pdf << CombinePDF.parse(resp)
-    pdf.save Rails.root.join('public', "#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf")
+    # resp = Net::HTTP.get_response(URI.parse(url)).body
+    # pdf = CombinePDF.new
+    # pdf << CombinePDF.load(Rails.root.join('public', "template_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"))
+    # pdf << CombinePDF.parse(resp)
+    # pdf.save Rails.root.join('public', "#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf")
     
-    send_file("#{Rails.root}/public/#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf")
+    # send_file("#{Rails.root}/public/#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf")
   end
   
   # POST /artworks
