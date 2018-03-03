@@ -1,3 +1,5 @@
+require 'base64'
+
 class ArtworksController < ApplicationController
   before_action :set_artwork, only: [:show, :edit, :update, :destroy]
 
@@ -57,6 +59,7 @@ class ArtworksController < ApplicationController
   def fancy_report
     @artwork = Artwork.find(params[:id])
     upload = TempPdfUploader.new
+    pdf = CombinePDF.new
     timestamp = Time.now.strftime("%y%m%d%H%M%S")
 
     respond_to do |format|
@@ -75,12 +78,14 @@ class ArtworksController < ApplicationController
     end
 
     url = "https://spire-art-bucket-dev.s3.amazonaws.com/uploads/artwork/additionalPdf/#{@artwork[:id]}/#{@artwork[:additionalPdf]}"
-    resp = Net::HTTP.get_response(URI.parse(url)).body
+    additional_pdf = Net::HTTP.get(URI.parse(url))
     
-    pdf = CombinePDF.new
     pdf << CombinePDF.load(Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"))
     
-    pdf << CombinePDF.parse(resp)
+    pdf_data = Base64.encode64(open(url).read).force_encoding('UTF-8'); nil
+
+    pdf << CombinePDF.parse(Base64.decode64(pdf_data).force_encoding('UTF-8')); nil
+    # pdf << CombinePDF.parse(pdf_data)
 
     pdf.save Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf")
     send_file("#{Rails.root}/tmp/#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf")
