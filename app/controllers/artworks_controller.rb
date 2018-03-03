@@ -57,33 +57,32 @@ class ArtworksController < ApplicationController
   def fancy_report
     @artwork = Artwork.find(params[:id])
     upload = TempPdfUploader.new
+    timestamp = Time.now.strftime("%y%m%d%H%M%S")
 
     respond_to do |format|
       format.html
       format.pdf do
         render pdf: "filename_test",
           template: 'artworks/preview_pdf.pdf.erb',
-          show_as_html: params.key?('debug'),
           encoding: 'UTF-8',
-          # save_to_file: Rails.root.join('public', "template_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"),
-          save_to_file: upload.store!("template_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"),
+          save_to_file: Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"),
           save_only: true
       end
     end
 
-    # upload.store!(Rails.root.join('public', "template_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"))
+    File.open(Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf")) do |file|
+      something = upload.store!(file)
+    end
 
-    puts "TESTTEST"
     url = "https://spire-art-bucket-dev.s3.amazonaws.com/uploads/artwork/additionalPdf/#{@artwork[:id]}/#{@artwork[:additionalPdf]}"
-    puts "URL: #{url}"
-
-    # resp = Net::HTTP.get_response(URI.parse(url)).body
-    # pdf = CombinePDF.new
-    # pdf << CombinePDF.load(Rails.root.join('public', "template_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"))
-    # pdf << CombinePDF.parse(resp)
-    # pdf.save Rails.root.join('public', "#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf")
+    resp = Net::HTTP.get_response(URI.parse(url)).body
     
-    # send_file("#{Rails.root}/public/#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf")
+    pdf = CombinePDF.new
+    pdf << CombinePDF.load(Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"))
+    pdf << CombinePDF.parse(resp)
+    pdf.save Rails.root.join('public', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf")
+    
+    send_file("#{Rails.root}/public/#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf")
   end
   
   # POST /artworks
