@@ -42,7 +42,6 @@ class ArtworksController < ApplicationController
   # GET artworks/preview_pdf/1
   def preview_pdf
     @artwork = Artwork.find(params[:id])
-    # puts @artwork
 
     respond_to do |format|
       format.html
@@ -57,6 +56,7 @@ class ArtworksController < ApplicationController
 
   def fancy_report
     @artwork = Artwork.find(params[:id])
+    upload = TempPdfUploader.new
 
     respond_to do |format|
       format.html
@@ -65,12 +65,17 @@ class ArtworksController < ApplicationController
           template: 'artworks/preview_pdf.pdf.erb',
           show_as_html: params.key?('debug'),
           encoding: 'UTF-8',
-          save_to_file: Rails.root.join('public', "template_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"),
+          # save_to_file: Rails.root.join('public', "template_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"),
+          save_to_file: upload.store!("template_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"),
           save_only: true
       end
     end
 
-    # url = "https://spire-art-bucket-dev.s3.amazonaws.com/uploads/artwork/additionalPdf/#{@artwork[:id]}/#{@artwork[:additionalPdf]}"
+    # upload.store!(Rails.root.join('public', "template_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"))
+
+    puts "TESTTEST"
+    url = "https://spire-art-bucket-dev.s3.amazonaws.com/uploads/artwork/additionalPdf/#{@artwork[:id]}/#{@artwork[:additionalPdf]}"
+    puts "URL: #{url}"
 
     # resp = Net::HTTP.get_response(URI.parse(url)).body
     # pdf = CombinePDF.new

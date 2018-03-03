@@ -16,16 +16,11 @@ class Artwork < ApplicationRecord
   	# loops through csv data
   	CSV.foreach(file.path, headers:true) do |row|
   		# create new artwork
-      # puts "Customer ID in model: #{customer_id}"
       hash = row.to_hash
-      # puts "ORIGINAL: #{hash}"
       hash[:customer_id] = customer_id.to_i
       hash[:collection_id] = collection_id.to_i
-      # puts "UPDATED: #{hash}"
-      # puts "Customer ID: #{hash['customer']}"
 
   		Artwork.create! hash
-      # Artwork.create! row.to_hash
   	end
   end
 
