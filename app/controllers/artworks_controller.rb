@@ -59,17 +59,17 @@ class ArtworksController < ApplicationController
     upload = TempPdfUploader.new
     timestamp = Time.now.strftime("%y%m%d%H%M%S")
 
-    puts "PDF generation"
-    respond_to do |format|
-      format.html
-      format.pdf do
-        render pdf: "filename_test",
-          template: 'artworks/preview_pdf.pdf.erb',
-          encoding: 'UTF-8',
-          # save_to_file: Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"),
-          # save_only: true
-      end
-    end
+    # puts "PDF generation"
+    # respond_to do |format|
+    #   format.html
+    #   format.pdf do
+    #     render pdf: "filename_test",
+    #       template: 'artworks/preview_pdf.pdf.erb',
+    #       encoding: 'UTF-8',
+    #       # save_to_file: Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"),
+    #       # save_only: true
+    #   end
+    # end
 
     # puts "Before File.open"
     # File.open(Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf")) do |file|
