@@ -74,12 +74,12 @@ class ArtworksController < ApplicationController
       something = upload.store!(file)
     end
 
-    url = "https://spire-art-bucket-dev.s3.amazonaws.com/uploads/artwork/additionalPdf/#{@artwork[:id]}/#{@artwork[:additionalPdf]}"
-    resp = Net::HTTP.get_response(URI.parse(url)).body
+    # url = "https://spire-art-bucket-dev.s3.amazonaws.com/uploads/artwork/additionalPdf/#{@artwork[:id]}/#{@artwork[:additionalPdf]}"
+    # resp = Net::HTTP.get_response(URI.parse(url)).body
     
     pdf = CombinePDF.new
     pdf << CombinePDF.load(Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"))
-    # pdf << CombinePDF.parse(resp)
+    pdf << CombinePDF.parse("https://spire-art-bucket-dev.s3.amazonaws.com/uploads/artwork/additionalPdf/#{@artwork[:id]}/#{@artwork[:additionalPdf]}")
     pdf.save Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf")
     
     send_file("#{Rails.root}/tmp/#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf")
