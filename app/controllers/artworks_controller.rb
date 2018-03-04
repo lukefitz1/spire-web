@@ -100,7 +100,7 @@ class ArtworksController < ApplicationController
     client.addPdfFile(Rails.root.join('tmp', 'crossing_fingers.pdf'))
 
     # run the conversion and write the result to a file
-    client.convertToFile(Rails.root.join('tmp', 'offer.pdf'))
+    client.convertToFile("#{Rails.root}/tmp/offer.pdf")
 
     # download the combined pdf file
     send_file("#{Rails.root}/tmp/offer.pdf")
