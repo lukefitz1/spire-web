@@ -1,7 +1,3 @@
-require 'base64'
-require 'open-uri'
-require 'tempfile'
-
 class ArtworksController < ApplicationController
   before_action :set_artwork, only: [:show, :edit, :update, :destroy]
 
@@ -83,11 +79,11 @@ class ArtworksController < ApplicationController
     end
 
     url = "https://spire-art-bucket-dev.s3.amazonaws.com/uploads/artwork/additionalPdf/#{@artwork[:id]}/#{@artwork[:additionalPdf]}"
-    puts "URL: #{url}"
+    # puts "URL: #{url}"
 
-    test_url = 'http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf'
-    additional_pdf = Net::HTTP.get(URI.parse(test_url))
-    puts "Additional PDF: #{additional_pdf}"
+    # test_url = 'http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf'
+    # additional_pdf = Net::HTTP.get(URI.parse(test_url))
+    # puts "Additional PDF: #{additional_pdf}"
 
     # io     = open('http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf')
     # reader = PDF::Reader.new(io)
@@ -97,7 +93,7 @@ class ArtworksController < ApplicationController
 
     open('tmp/sample.pdf', 'wb') do |file|
       file << open('http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf').read
-      puts "File: #{file}"
+      # puts "File: #{file}"
     end
 
     client.addPdfFile(Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"))
