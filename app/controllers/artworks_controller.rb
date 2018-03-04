@@ -85,7 +85,7 @@ class ArtworksController < ApplicationController
     
     # tried open-uri here, didn't seem to work either
     pdf_data = Base64.encode64(open(url).read).force_encoding('UTF-8'); nil
-    pdf << CombinePDF.parse(Base64.decode64(pdf_data).force_encoding('UTF-8')); nil
+    # pdf << CombinePDF.parse(Base64.decode64(pdf_data).force_encoding('UTF-8')); nil
 
     # pdf << CombinePDF.parse(additional_pdf)
 
