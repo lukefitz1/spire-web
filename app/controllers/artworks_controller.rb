@@ -1,4 +1,5 @@
 require 'base64'
+require 'open-uri'
 
 class ArtworksController < ApplicationController
   before_action :set_artwork, only: [:show, :edit, :update, :destroy]
@@ -82,10 +83,11 @@ class ArtworksController < ApplicationController
     
     pdf << CombinePDF.load(Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"))
     
+    # tried open-uri here, didn't seem to work either
     pdf_data = Base64.encode64(open(url).read).force_encoding('UTF-8'); nil
-
     pdf << CombinePDF.parse(Base64.decode64(pdf_data).force_encoding('UTF-8')); nil
-    # pdf << CombinePDF.parse(pdf_data)
+
+    # pdf << CombinePDF.parse(additional_pdf)
 
     pdf.save Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf")
     send_file("#{Rails.root}/tmp/#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf")
