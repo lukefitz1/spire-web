@@ -79,15 +79,14 @@ class ArtworksController < ApplicationController
     end
 
     url = "https://spire-art-bucket-dev.s3.amazonaws.com/uploads/artwork/additionalPdf/#{@artwork[:id]}/#{@artwork[:additionalPdf]}"
-    additional_pdf = Net::HTTP.get(URI.parse(url))
+    # additional_pdf = Net::HTTP.get(URI.parse(url))
     
     pdf << CombinePDF.load(Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"))
-    
-    # tried open-uri here, didn't seem to work either
-    pdf_data = open(url).read; nil
-    pdf << CombinePDF.parse(pdf_data); nil
+    pdf << CombinePDF.parse(Net::HTTP.get(URI.parse(url)))
 
-    # pdf << CombinePDF.parse(additional_pdf)
+    # tried open-uri here, didn't seem to work either
+    # pdf_data = open(url).read; nil
+    # pdf << CombinePDF.parse(pdf_data); nil
 
     pdf.save Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf")
     send_file("#{Rails.root}/tmp/#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf")
