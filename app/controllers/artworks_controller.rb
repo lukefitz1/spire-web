@@ -93,7 +93,7 @@ class ArtworksController < ApplicationController
 
     open('tmp/sample.pdf', 'wb') do |file|
       file << open('http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf').read
-      # puts "File: #{file}"
+      upload.store!(file)
     end
 
     client.addPdfFile(Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"))
@@ -132,9 +132,9 @@ class ArtworksController < ApplicationController
     # run the conversion and write the result to a file
     client.convertToFile(Rails.root.join('tmp', 'offer.pdf'))
     
-    # # rescue Pdfcrowd::Error => why
-    # # # report the error to the standard error stream
-    # # STDERR.puts "Pdfcrowd Error: #{why}"
+    rescue Pdfcrowd::Error => why
+    # report the error to the standard error stream
+    STDERR.puts "Pdfcrowd Error: #{why}"
 
     # download the combined pdf file
     send_file("#{Rails.root}/tmp/offer.pdf")
