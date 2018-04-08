@@ -1,4 +1,5 @@
 class Artwork < ApplicationRecord
+  default_scope { order(ojbId: :asc) }
   require 'csv'
 
   belongs_to :artist, optional: true
