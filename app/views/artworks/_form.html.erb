@@ -179,7 +179,7 @@
 
   <div class="field">
     <%= form.label :artist_id %>
-    <%= form.select(:artist_id, Artist.all.collect { |artist| [artist.firstName + ' ' + artist.lastName, artist.id]}, include_blank: true) %>
+    <%= form.select(:artist_id, Artist.all.collect { |artist| [artist.firstName + ' ' + artist.lastName, artist.id]}.sort, include_blank: true) %>
   </div>
 
   <div class="field">
