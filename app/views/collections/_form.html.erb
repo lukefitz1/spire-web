@@ -23,7 +23,7 @@
 
   <div class="field">
     <%= form.label :customer_id %>
-    <%= form.select(:customer_id, Customer.all.collect { |customer| [customer.firstName + ' ' + customer.lastName, customer.id]}, include_blank: true) %>
+    <%= form.select(:customer_id, Customer.all.collect { |customer| [customer.firstName + ' ' + customer.lastName, customer.id]}, include_blank: true, :selected => params[:cust_id]) %>
   </div>
 
   <div class="actions">
