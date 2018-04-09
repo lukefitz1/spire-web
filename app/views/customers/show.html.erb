@@ -58,6 +58,7 @@
       <table>
         <thead>
           <tr>
+            <th>Artwork ID</th>
             <th>Object ID</th>
             <th>Art Type</th>
             <th>Title</th>
@@ -84,6 +85,7 @@
         <tbody>
           <% collection.artworks.each do |artwork| %>
             <tr>
+              <td><%= artwork.id %></td>
               <td><%= artwork.ojbId %></td>
               <td><%= artwork.artType %></td>
               <td><%= artwork.title %></td>
@@ -136,6 +138,7 @@
                 <% end %>
               </td>
 
+              <td><%= link_to 'Edit', edit_artwork_path(artwork) %></td>
               <td><%= link_to 'PDF', preview_pdf_path(artwork, format: :pdf) %></td>
               <td><%= link_to 'Combined_PDF', fancy_report_path(artwork, format: :pdf) %></td>
             </tr>

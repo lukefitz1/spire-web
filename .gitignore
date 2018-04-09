@@ -23,8 +23,12 @@
 .env
 
 todo
+todo_two
 
 /app/views/artworks/preview.html
 /test_images
 
 db_dumps/
+
+app/assets/fonts/
+public/
