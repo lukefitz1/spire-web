@@ -184,10 +184,21 @@ class ArtworksController < ApplicationController
   # PATCH/PUT /artworks/1
   # PATCH/PUT /artworks/1.json
   def update
+    cust_id = artwork_params[:customer_id]
+    redirect = params[:redirect]
+    
     respond_to do |format|
       if @artwork.update(artwork_params)
-        format.html { redirect_to @artwork, notice: 'Artwork was successfully updated.' }
-        format.json { render :show, status: :ok, location: @artwork }
+        # format.html { redirect_to @artwork, notice: 'Artwork was successfully updated.' }
+        # format.json { render :show, status: :ok, location: @artwork }
+
+        if redirect
+          format.html { redirect_to customer_url(cust_id), notice: 'Artwork was successfully updated.' }
+          format.json { render :show, status: :ok, location: @artwork }
+        else
+          format.html { redirect_to @artwork, notice: 'Artwork was successfully updated.' }
+          format.json { render :show, status: :ok, location: @artwork }
+        end
       else
         format.html { render :edit }
         format.json { render json: @artwork.errors, status: :unprocessable_entity }
