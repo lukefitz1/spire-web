@@ -1,6 +1,8 @@
 class Artist < ApplicationRecord
 	require 'csv'
 
+	default_scope { order(firstName: :asc) }
+
 	has_many :artworks
 
 	def self.import(file)

@@ -1,6 +1,7 @@
 class Artwork < ApplicationRecord
-  default_scope { order(ojbId: :asc) }
   require 'csv'
+
+  default_scope { order(ojbId: :asc) }
 
   belongs_to :artist, optional: true
   belongs_to :customer, optional: true
