@@ -1,0 +1,153 @@
+<div class="preview-container black">
+	<div class="banner">
+		<div class="top avenirnext twelve">
+			<div class="left avenirnextbold">Collection Object ID <%= @artwork.ojbId %></div>
+			<div class="middle">Catalog Sheet</div>
+			<div class="right date-examined">Examined: <%= @artwork.reviewedBy %> <%= @artwork.reviewedDate %></div>
+		</div>
+	</div>
+
+	<header>
+		<div class="main">
+			<div class="title">
+				<p class="avenirnext collection-title"><span class="avenirnextbold"><%= @artwork.collection.identifier %></span> <span class="avenirnextultralight"><%= @artwork.collection.collectionName %></span></p>
+			</div>
+			<div class="logo">
+				<%= image_tag 'spire-logo.png', class: 'logo-img'%>
+			</div>
+		</div>
+		<div class="bottom">
+			<div class="subheading avenirnext">Collection Inventory 2018 | Prepared by Spire Art Services</div>
+		</div>
+	</header> 
+
+	<div>
+      	<div class="column-left bg-gray avenirnextlocal">
+	        <div class="label-block">
+	          <span class="avenirnextbold">Type:</span><p class="value"> <%= @artwork.artType %></p>
+	        </div>
+	        <div class="label-block">
+	          <span class="avenirnextbold">Artist:</span><p class="value"> <%= @artwork.artist.lastName %>, <%= @artwork.artist.firstName %> <% if @artwork.artist.additionalInfo %>
+	          		<% if @artwork.artist.additionalInfo != "" %>
+	          		  (<%= @artwork.artist.additionalInfo %>)
+	          		<% end %>
+	          	  <% end %></p>
+	        </div>
+
+	        <% if @artwork.title == 'Untitled' %>
+		        <div class="label-block">
+		          <span class="avenirnextbold">Title:</span>
+	          	  <p class="value"> <%= @artwork.title %></p><% if @artwork.date %>, <%= @artwork.date %><% end %>
+		        </div>
+	        <% else %>
+		        <div class="label-block">
+		          <span class="avenirnextbold">Title:</span>
+		          <p class="value italics"> <%= @artwork.title %></p><% if @artwork.date %>, <%= @artwork.date %><% end %>
+		        </div>
+	        <% end %>
+
+	        <div class="label-block">
+	          <span class="avenirnextbold">Medium:</span><p class="value"> <%= @artwork.medium %></p>
+	        </div>
+	        <div class="label-block">
+	          <span class="avenirnextbold">Description:</span><p class="value"> <%= @artwork.description %></p>
+	        </div>
+	        <div class="label-block">  
+	          <span class="avenirnextbold">Dimensions (HxWxD):</span><p class="value"> <%= @artwork.dimensions %></p>
+	        </div>
+	        <div class="label-block">
+	          <span class="avenirnextbold">Dimensions Frame:</span><p class="value"> <%= @artwork.frame_dimensions %></p>
+	        </div>
+	        <div class="label-block">
+	          <span class="avenirnextbold">Condition:</span><p class="value"> <%= @artwork.condition %></p>
+	        </div>
+	        <div class="label-block">
+	          <span class="avenirnextbold">Current Location:</span><p class="value"> <%= @artwork.currentLocation %></p>
+	        </div>
+	        <div class="label-block">
+	          <span class="avenirnextbold">Source:</span><p class="value"> <%= @artwork.source %></p>
+	        </div>
+	        <div class="label-block">
+	          <% if @artwork.dateAcquiredLabel && @artwork.dateAcquiredLabel != "" %>
+	            <span class="avenirnextbold"><%= @artwork.dateAcquiredLabel %>:</span><p class="value"> <%= @artwork.dateAcquired %></p>
+	          <% elsif @artwork.dateAcquired && @artwork.dateAcquired != "" %>
+	            <span class="avenirnextbold">Date Acquired:</span><p class="value"> <%= @artwork.dateAcquired %></p>
+	          <% end %>        
+	        </div><br />
+	        <div class="label-block">
+	          <p class="label-heading avenirnextbold">Provenance:</p><p class="block-value"> <%= @artwork.provenance %></p>
+	        </div>
+	        <div class="label-block">
+	          <% if @artwork.notesImage.thumb.url %>
+	          	
+				<div class="notes-images-block">
+					<div class="notes-image-one padding-bottom-five">
+						<!-- <img src="/Users/blueacorn/Sites/art-collector-web/test_images/signature.jpg" alt="logo"> -->
+						<%= image_tag @artwork.notesImage%>
+					</div>
+					<% if @artwork.notesImage.thumb.url %>
+						<div class="notes-image-two">
+							<!-- <img src="/Users/blueacorn/Sites/art-collector-web/test_images/another_signature.jpg" alt="logo"> -->
+							<%= image_tag @artwork.notesImageTwo %>
+						</div>
+						<!-- <div class="image-two">
+							<img src="/Users/blueacorn/Sites/art-collector-web/test_images/document-image.jpg" alt="logo" class="image-two">
+						</div> -->
+					<% end %>
+				</div>
+
+	          <% end %>
+
+	          <p class="label-heading avenirnextbold">Note:</p>
+	          <p class="block-value"><%= @artwork.notes %></p>
+	        </div>
+		    <% if @artwork.additionalInfoText && @artwork.additionalInfoText != ""%>
+		        <div class="label-block">
+		          <% if @artwork.additionalInfoImage.thumb.url %>
+
+		          	<div class="add-info-images-block">
+						<div class="add-info-image-one">
+							<%= image_tag @artwork.additionalInfoImage, class: 'info-image' %>
+						</div>
+
+						<% if @artwork.additionalInfoImageTwo.thumb.url %>
+							<div class="add-info-image-two">
+								<%= image_tag @artwork.additionalInfoImageTwo, class: 'info-image' %>
+							</div>
+						<% end %>
+
+					</div>
+
+		          <% end %>
+
+		          <p class="label-heading avenirnextbold"><%= @artwork.additionalInfoLabel %>:</p>
+		          <p class="block-value"> <%= @artwork.additionalInfoText %></p>
+		        </div>
+		    <% end %>
+    	</div>
+
+    	<div class="column-right">
+			<div class="big-img">
+				<%= image_tag @artwork.image %>
+			</div>
+			<div class="bio">
+				<h3 class="bold">Artist&#39s Biography</h3>
+				<p class="text-justify avenirnext" id="artist-bio"><%= @artwork.artist.biography %></p>
+			</div>
+		</div>
+
+  	</div>
+
+</div>
+    
+<script>
+  // self executing function here
+  (function() {
+    bio = document.getElementById('artist-bio');
+    if (bio.textContent.length < 1325) {
+    	bio.style.fontSize = '16px';
+    } else {
+    	bio.style.fontSize = '15px';
+    }
+  })();
+</script>

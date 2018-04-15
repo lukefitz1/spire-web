@@ -33,6 +33,7 @@ Rails.application.routes.draw do
 	  get '/artworks/new_from_customer_collection', to: 'artworks#new', as: 'new_from_customer_collection'
 	  get '/artworks/new_from_collection', to: 'artworks#new', as: 'new_from_collection'
 	  get '/artworks/fancy_report/:id', to: "artworks#fancy_report", as: "fancy_report"
+	  get 'artworks/preview_html/:id', to: 'artworks#preview_html', as: 'preview_html'
 
 	  resources :artworks do
 	  	collection { post :import }

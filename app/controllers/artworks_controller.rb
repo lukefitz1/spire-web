@@ -43,6 +43,10 @@ class ArtworksController < ApplicationController
 
   end
 
+  def preview_html
+    @artwork = Artwork.find(params[:id])
+  end
+
   # GET /artworks/1/edit
   def edit
     if params[:coll_id]
