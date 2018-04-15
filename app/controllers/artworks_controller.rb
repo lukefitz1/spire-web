@@ -15,15 +15,44 @@ class ArtworksController < ApplicationController
   # GET /artworks/new
   def new
     @artwork = Artwork.new
+
+    if params[:collection_redirect]
+      session[:coll_redirect] = params[:collection_redirect]
+      puts "New from Collection IF: #{session[:coll_redirect]}"
+    end
   end
 
   # GET /collections/new
-  def new_from_collection
+  def new_from_customer_collection
+    puts "New from customer collection"
+
     @artwork = Artwork.new(:customer_id => params[:cust_id], :collection_id => params[:coll_id])
+  end
+
+  def new_from_collection
+    puts "New from collection"
+
+    @artwork = Artwork.new(:collection_id => params[:coll_id])
+
+    puts "Redirect: #{params[:collection_redirect]}"
+
+    if params[:collection_redirect]
+      session[:coll_redirect] = params[:collection_redirect]
+      puts "New from Collection IF: #{session[:coll_redirect]}"
+    end
+
   end
 
   # GET /artworks/1/edit
   def edit
+    if params[:coll_id]
+      session[:coll_id] = params[:coll_id]
+    end
+
+    if params[:collection_redirect]
+      session[:coll_redirect] = params[:collection_redirect]
+    end
+
   end
 
   # GET artworks/import
@@ -163,13 +192,21 @@ class ArtworksController < ApplicationController
   def create
     @artwork = Artwork.new(artwork_params)
     cust_id = artwork_params[:customer_id]
+    coll_id = artwork_params[:collection_id]
+
     redirect = params[:redirect]
+    coll_redirect = session[:coll_redirect]
+    puts "Coll redirect: #{coll_redirect}"
 
     respond_to do |format|
       if @artwork.save
         if redirect
           format.html { redirect_to customer_url(cust_id), notice: 'Artwork was successfully created.' }
           format.json { render :show, status: :created, location: @artwork }
+        elsif coll_redirect
+          format.html { redirect_to collection_url(coll_id), notice: 'Artwork was successfully created.' }
+          format.json { render :show, status: :created, location: @artwork }
+          session[:coll_redirect] = false
         else
           format.html { redirect_to @artwork, notice: 'Artwork was successfully created.' }
           format.json { render :show, status: :created, location: @artwork }
@@ -186,15 +223,20 @@ class ArtworksController < ApplicationController
   def update
     cust_id = artwork_params[:customer_id]
     redirect = params[:redirect]
+
+    coll_id = session[:coll_id]
+    collection_redirect = session[:coll_redirect]
     
     respond_to do |format|
       if @artwork.update(artwork_params)
-        # format.html { redirect_to @artwork, notice: 'Artwork was successfully updated.' }
-        # format.json { render :show, status: :ok, location: @artwork }
 
         if redirect
           format.html { redirect_to customer_url(cust_id), notice: 'Artwork was successfully updated.' }
           format.json { render :show, status: :ok, location: @artwork }
+        elsif collection_redirect
+          format.html { redirect_to collection_url(coll_id), notice: 'Artwork was successfully updated.' }
+          format.json { render :show, status: :ok, location: @artwork }
+          session[:coll_redirect] = false
         else
           format.html { redirect_to @artwork, notice: 'Artwork was successfully updated.' }
           format.json { render :show, status: :ok, location: @artwork }
@@ -210,10 +252,6 @@ class ArtworksController < ApplicationController
   # DELETE /artworks/1.json
   def destroy
     @artwork.destroy
-    # puts "Hello"
-    puts params[:redirect]
-    puts params[:class]
-    puts :class
 
     respond_to do |format|
       format.html { redirect_to artworks_url, notice: 'Artwork was successfully destroyed.' }
@@ -229,6 +267,6 @@ class ArtworksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def artwork_params
-      params.require(:artwork).permit(:ojbId, :artType, :title, :date, :medium, :image, :description, :dimensions, :frame_dimensions, :condition, :currentLocation, :source, :dateAcquired, :amountPaid, :currentValue, :notes, :notesImage, :notesImageTwo, :additionalInfoLabel, :additionalInfoText, :additionalInfoImage, :additionalInfoImageTwo, :additionalPdf, :reviewedBy, :reviewedDate, :provenance, :artist_id, :customer_id, :remove_image, :remove_additionalInfoImage, :remove_additionalInfoImageTwo, :remove_notesImage, :remove_notesImageTwo, :collection_id, :dateAcquiredLabel)
+      params.require(:artwork).permit(:coll_id, :collection_redirect, :ojbId, :artType, :title, :date, :medium, :image, :description, :dimensions, :frame_dimensions, :condition, :currentLocation, :source, :dateAcquired, :amountPaid, :currentValue, :notes, :notesImage, :notesImageTwo, :additionalInfoLabel, :additionalInfoText, :additionalInfoImage, :additionalInfoImageTwo, :additionalPdf, :reviewedBy, :reviewedDate, :provenance, :artist_id, :customer_id, :remove_image, :remove_additionalInfoImage, :remove_additionalInfoImageTwo, :remove_notesImage, :remove_notesImageTwo, :collection_id, :dateAcquiredLabel, :remove_additionalPdf)
     end
 end

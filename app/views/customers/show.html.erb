@@ -47,7 +47,7 @@
     </tbody>
   </table>
 
-  <%= link_to 'New Artwork', new_from_collection_path(:cust_id => @customer.id, :coll_id => collection.id, :redirect => true) %><br /><br />
+  <%= link_to 'New Artwork', new_from_customer_collection_path(:cust_id => @customer.id, :coll_id => collection.id, :redirect => true) %><br /><br />
   
   <!-- Artworks Table -->
   <% unless collection.artworks.blank? %>

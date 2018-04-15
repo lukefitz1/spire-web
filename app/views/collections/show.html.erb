@@ -19,6 +19,8 @@
   <% end %>
 </p>
 
+<%= link_to 'New Artwork', new_from_collection_path(:coll_id => @collection.id, :collection_redirect => true) %><br /><br />
+
 <% unless @collection.artworks.blank? %>
 
   <!-- Artworks Table -->
@@ -88,6 +90,8 @@
               <%= image_tag artwork.additionalInfoImage.thumb.url %>
             <% end %>
           </td>
+
+          <td><%= link_to 'Edit', edit_artwork_path(artwork, :coll_id => @collection.id, :collection_redirect => true) %></td>
         </tr>
       <% end %>
     </tbody>
