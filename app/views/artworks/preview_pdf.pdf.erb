@@ -89,17 +89,12 @@
 	          	
 				<div class="notes-images-block">
 					<div class="notes-image-one padding-bottom-five">
-						<!-- <img src="/Users/blueacorn/Sites/art-collector-web/test_images/signature.jpg" alt="logo"> -->
-						<%= wicked_pdf_image_tag @artwork.notesImage%>
+						<%= wicked_pdf_image_tag @artwork.notesImage %>
 					</div>
-					<% if @artwork.notesImage.thumb.url %>
+					<% if @artwork.notesImageTwo.thumb.url %>
 						<div class="notes-image-two">
-							<!-- <img src="/Users/blueacorn/Sites/art-collector-web/test_images/another_signature.jpg" alt="logo"> -->
 							<%= wicked_pdf_image_tag @artwork.notesImageTwo %>
 						</div>
-						<!-- <div class="image-two">
-							<img src="/Users/blueacorn/Sites/art-collector-web/test_images/document-image.jpg" alt="logo" class="image-two">
-						</div> -->
 					<% end %>
 				</div>
 
