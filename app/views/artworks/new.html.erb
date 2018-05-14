@@ -5,3 +5,119 @@
 <%= render 'form', artwork: @artwork %>
 
 <%= link_to 'Back', artworks_path %>
+
+<!-- Trigger/Open The Modal -->
+<%= link_to "New Artist", new_artist_path, remote: true, id: "myBtn" %>
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Add New Artist</p>
+
+    <%= form_with(url: {:controller => "artists", :action => "ajax_create"}, model: @artist, remote: true, id: 'ajax-form')  do | artist_form | %>
+	  <% if @artist.errors.any? %>
+	    <div id="error_explanation">
+	      <h2><%= pluralize(@artist.errors.count, "error") %> prohibited this artist from being saved:</h2>
+
+	      <ul>
+	      <% @artist.errors.full_messages.each do |message| %>
+	        <li><%= message %></li>
+	      <% end %>
+	      </ul>
+	    </div>
+	  <% end %>
+
+	  <div class="field">
+	    <%= artist_form.label :firstName %>
+	    <%= artist_form.text_field :firstName, id: :artist_firstName %>
+	  </div>
+
+	  <div class="field">
+	    <%= artist_form.label :lastName %>
+	    <%= artist_form.text_field :lastName, id: :artist_lastName %>
+	  </div>
+
+	  <div class="field">
+	    <%= artist_form.label :additionalInfo %>
+	    <%= artist_form.text_field :additionalInfo, id: :artist_additionalInfo %>
+	  </div>
+
+	  <div class="field">
+	    <%= artist_form.label :biography %>
+	    <%= artist_form.text_area :biography, id: :artist_biography, cols: "70", rows: "25" %>
+	  </div>
+
+	  <div class="actions">
+	    <%= artist_form.submit :id => 'submitBtn'%>
+	  </div>
+	<% end %>
+</div>
+
+<script>
+	// Get the modal
+	var modal = document.getElementById('myModal');
+
+	// Get the button that opens the modal
+	var btn = document.getElementById("myBtn");
+
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+
+	// Form submti button
+	var submitBtn = document.getElementById("submitBtn")
+
+	// When the user clicks the button, open the modal 
+	btn.onclick = function() {
+	    modal.style.display = "block";
+	}
+
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+	    modal.style.display = "none";
+	}
+
+	// Close the modal when form is submitted
+	submitBtn.onclick = function() {
+		// console.log(artists)
+	    modal.style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+	    if (event.target == modal) {
+	        modal.style.display = "none";
+	    }
+	}
+
+	$('#ajax-form').on('ajax:success', updateArtists)
+
+	function updateArtists(event, data) {
+		var artists_select = document.getElementsByName("artwork[artist_id]")[0]
+		var select_options = document.getElementsByName("artwork[artist_id]")[0].options;
+		var select_options_length = document.getElementsByName("artwork[artist_id]")[0].options.length;
+
+		for (i = 0; i < event.detail[0].artists.length; i++) {
+			var artist_name = event.detail[0].artists[i].firstName + " " + event.detail[0].artists[i].lastName;
+			var artist_id = event.detail[0].artists[i].id
+
+			for (j = 1; j < select_options_length; j++) {
+				var select_name_value = document.getElementsByName("artwork[artist_id]")[0].options[j].innerText;
+				found = false
+
+				if (artist_name == select_name_value) {
+					found = true
+					break;
+				} else if (found == false && j == (select_options_length - 1)) {
+					var new_artist = document.createElement("option");
+					new_artist.text = artist_name;
+					new_artist.value = artist_id;
+					artists_select.add(new_artist);
+				}
+			}
+		}
+	}
+
+</script>

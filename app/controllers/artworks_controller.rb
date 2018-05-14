@@ -15,6 +15,7 @@ class ArtworksController < ApplicationController
   # GET /artworks/new
   def new
     @artwork = Artwork.new
+    @artist = Artist.new
 
     if params[:collection_redirect]
       session[:coll_redirect] = params[:collection_redirect]
