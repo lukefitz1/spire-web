@@ -108,28 +108,23 @@ class ArtworksController < ApplicationController
       end
     end
 
-    File.open(Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf")) do |file|
+    # create the main template pdf file, save it to tmp directory
+    temp_art_name = "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"
+    File.open(Rails.root.join('tmp', temp_art_name)) do |file|
       something = upload.store!(file)
     end
-
-    url = "https://spire-art-bucket-dev.s3.amazonaws.com/uploads/artwork/additionalPdf/#{@artwork[:id]}/#{@artwork[:additionalPdf]}"
-
-
-    open('tmp/sample.pdf', 'wb') do |file|
-      file << open('http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf').read
-      upload.store!(file)
-    end
-
-
+   
+    
+    url = "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/artwork/additionalPdf/#{@artwork[:id]}/#{@artwork[:additionalPdf]}"
     open(Rails.root.join('tmp', 'crossing_fingers.pdf'), 'wb') do |file|
-      file << open('http://unec.edu.az/application/uploads/2014/12/pdf-sample.pdf').read
+      file << open(url).read
 
-      # https://s3.amazonaws.com/spire-art-bucket/uploads/temp_pdf/180304215941_obj.001_Test_artwork.pdf
       open(Rails.root.join('tmp', 'template.pdf'), 'wb') do |file2|
-        file2 << open('https://s3.amazonaws.com/spire-art-bucket/uploads/temp_pdf/180304215941_obj.001_Test_artwork.pdf').read
+        file2 << open(Rails.root.join('tmp', temp_art_name)).read
       end
     end
 
+    # combine files
     client.addPdfFile(Rails.root.join('tmp', 'template.pdf'))
     client.addPdfFile(Rails.root.join('tmp', 'crossing_fingers.pdf'))
 
@@ -138,58 +133,6 @@ class ArtworksController < ApplicationController
 
     # download the combined pdf file
     send_file("#{Rails.root}/tmp/offer.pdf")
-
-
-
-    # client.addPdfFile(Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"))
-    # client.addPdfFile(Rails.root.join('tmp', 'sample.pdf'))
-
-    # pdf_data = send_data(additional_pdf, :disposition => 'attachment', :type => "application/pdf")
-    # puts "PDF data: #{pdf_data}"
-    
-    # test_test_pdf = send_data data.read, filename: "test_test.pdf", type: "application/pdf", disposition: 'inline', stream: 'true', buffer_size: '4096' 
-    # send_file(test_test_pdf)
-
-    # tried this one, doens't seem to work - combinepdf can't parse the additionalPdf file for some reason
-    # pdf << CombinePDF.load(Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"))
-    # pdf << CombinePDF.parse(additional_pdf)
-
-    # tried open-uri here, didn't seem to work either
-    # pdf_data = open(test_url).read; nil
-    # puts "PDF Data: #{Base64.decode64(pdf_data)}"
-    # puts "PDF Data: #{pdf_data}"
-    # pdf << CombinePDF.parse(pdf_data); nil
-
-    # save the combined file to the tmp folder (probably can remove this because it wont save anyway) 
-    # pdf.save Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf")
-
-    #
-    # Trying out PDF crowds beta API 2 that allows for combing pdfs
-    #
-
-    # download = open(url)
-    # pdf_file = IO.copy_stream(download, "#{@artwork[:additionalPdf]}")
-    
-    # # configure the conversion
-    # client.addPdfFile(Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"))
-    # client.addPdfFile(io)
-
-    # # run the conversion and write the result to a file
-    # client.convertToFile(Rails.root.join('tmp', 'offer.pdf'))
-    
-    # rescue Pdfcrowd::Error => why
-    # # report the error to the standard error stream
-    # STDERR.puts "Pdfcrowd Error: #{why}"
-
-    # # download the combined pdf file
-    # send_file("#{Rails.root}/tmp/offer.pdf")
-
-    #
-    # Trying out PDF crowds beta API 2 that allows for combing pdfs
-    #
-
-    # download the combined pdf file
-    # send_file("#{Rails.root}/tmp/#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf")
   end
   
   # POST /artworks
