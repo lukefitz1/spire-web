@@ -114,19 +114,26 @@ class ArtworksController < ApplicationController
       something = upload.store!(file)
     end
    
-    
-    url = "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/artwork/additionalPdf/#{@artwork[:id]}/#{@artwork[:additionalPdf]}"
-    open(Rails.root.join('tmp', 'crossing_fingers.pdf'), 'wb') do |file|
-      file << open(url).read
-
+    if !@artwork[:additionalPdf]
       open(Rails.root.join('tmp', 'template.pdf'), 'wb') do |file2|
         file2 << open(Rails.root.join('tmp', temp_art_name)).read
       end
-    end
 
-    # combine files
-    client.addPdfFile(Rails.root.join('tmp', 'template.pdf'))
-    client.addPdfFile(Rails.root.join('tmp', 'crossing_fingers.pdf'))
+      client.addPdfFile(Rails.root.join('tmp', 'template.pdf'))
+    else
+      url = "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/artwork/additionalPdf/#{@artwork[:id]}/#{@artwork[:additionalPdf]}"
+      open(Rails.root.join('tmp', 'crossing_fingers.pdf'), 'wb') do |file|
+        file << open(url).read
+
+        open(Rails.root.join('tmp', 'template.pdf'), 'wb') do |file2|
+          file2 << open(Rails.root.join('tmp', temp_art_name)).read
+        end
+      end
+
+      # combine files
+      client.addPdfFile(Rails.root.join('tmp', 'template.pdf'))
+      client.addPdfFile(Rails.root.join('tmp', 'crossing_fingers.pdf'))
+    end
 
     # run the conversion and write the result to a file
     client.convertToFile("#{Rails.root}/tmp/offer.pdf")
