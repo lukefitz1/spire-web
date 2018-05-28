@@ -32,4 +32,4 @@ db_dumps/
 
 app/assets/fonts/
 public/uploads
-app/assets/archived
+public/assets/archived
