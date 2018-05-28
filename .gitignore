@@ -32,4 +32,5 @@ db_dumps/
 
 app/assets/fonts/
 public/uploads
-public/assets/archived
+public/assets/archived/
+bin/backups/
