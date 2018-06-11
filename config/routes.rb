@@ -33,8 +33,10 @@ Rails.application.routes.draw do
 	  get '/artworks/new_from_customer_collection', to: 'artworks#new', as: 'new_from_customer_collection'
 	  get '/artworks/new_from_collection', to: 'artworks#new', as: 'new_from_collection'
 	  get '/artworks/fancy_report/:id', to: "artworks#fancy_report", as: "fancy_report"
-	  get 'artworks/preview_html/:id', to: 'artworks#preview_html', as: 'preview_html'
+	  get '/artworks/preview_html/:id', to: 'artworks#preview_html', as: 'preview_html'
 	  post '/artists/ajax_create', to: 'artists#ajax_create', as: 'ajax_create'
+	  get '/collections/preview_table/:id', to: 'collections#preview_table', as: 'preview_table'
+	  get '/collections/pdf_table/:id', to: 'collections#pdf_table', as: 'pdf_table'
 
 	  resources :artworks do
 	  	collection { post :import }

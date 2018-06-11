@@ -47,6 +47,10 @@
     </tbody>
   </table>
 
+  <%= link_to 'View Table', preview_table_path(:coll_id => collection.id) %><br /><br />
+
+  <%= link_to 'PDF Table', pdf_table_path(:coll_id => collection.id, format: :pdf) %><br /><br />
+
   <%= link_to 'New Artwork', new_from_customer_collection_path(:cust_id => @customer.id, :coll_id => collection.id, :redirect => true) %><br /><br />
   
   <!-- Artworks Table -->

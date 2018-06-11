@@ -22,6 +22,27 @@ class CollectionsController < ApplicationController
     @collection = Collection.new(:customer_id => params[:cust_id])
   end
 
+  # GET 
+  def preview_table
+    @collection = Collection.find(params[:coll_id])
+  end
+
+  # GET
+  def pdf_table
+    @collection = Collection.find(params[:coll_id])
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: 'table-preview',
+          template: 'collections/pdf_table.pdf.erb',
+          orientation: 'Landscape',
+          show_as_html: params.key?('debug'),
+          encoding: 'UTF-8'
+      end
+    end
+  end
+
   # GET /collections/1/edit
   def edit
   end
