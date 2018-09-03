@@ -95,7 +95,9 @@ class ArtworksController < ApplicationController
     timestamp = Time.now.strftime("%y%m%d%H%M%S")
 
     # create the API client instance
-    client = Pdfcrowd::PdfToPdfClient.new("lukefitz1", "4340f6a216a4039b0ca0c8035c738f4e")
+    # I currently have 2 different licenses so I can keep getting it fo free
+    # client = Pdfcrowd::PdfToPdfClient.new("lukefitz1", "4340f6a216a4039b0ca0c8035c738f4e")
+    client = Pdfcrowd::PdfToPdfClient.new("lukefitz2", "89e129dfaf7246d5c784f3e943bba23f")
 
     respond_to do |format|
       format.html
