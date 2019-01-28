@@ -97,7 +97,8 @@ class ArtworksController < ApplicationController
     # create the API client instance
     # I currently have 2 different licenses so I can keep getting it fo free
     # client = Pdfcrowd::PdfToPdfClient.new("lukefitz1", "4340f6a216a4039b0ca0c8035c738f4e")
-    client = Pdfcrowd::PdfToPdfClient.new("lukefitz2", "89e129dfaf7246d5c784f3e943bba23f")
+    # client = Pdfcrowd::PdfToPdfClient.new("lukefitz2", "89e129dfaf7246d5c784f3e943bba23f")
+    client = Pdfcrowd::PdfToPdfClient.new("spireart", "4ca5bdb67c50b7a3ca5d9a207de070e0")
 
     respond_to do |format|
       format.html
