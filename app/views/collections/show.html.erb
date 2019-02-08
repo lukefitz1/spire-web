@@ -103,5 +103,18 @@
   </table>
 <% end %>
 
+<h4>Import that data!</h4>
+  <%= form_tag import_path, multipart: true do %>
+    <%= file_field_tag :file, :required => true %>
+    
+    <% unless @collection.customer.blank? %>
+      <%= hidden_field_tag(:customer_id, @collection.customer.id) %>
+    <% end %>
+
+    <%= hidden_field_tag(:collection_id, @collection.id) %>
+    <%= hidden_field_tag(:collection_flag, true) %>
+    <%= submit_tag "Import Artwork" %>
+<% end %>
+
 <%= link_to 'Edit', edit_collection_path(@collection) %> |
 <%= link_to 'Back', collections_path %>
