@@ -13,6 +13,11 @@
 </p>
 
 <p>
+  <strong>Year:</strong>
+  <%= @collection.year %>
+</p>
+
+<p>
   <strong>Customer:</strong>
   <% unless @collection.customer.blank? %>
     <%= @collection.customer.firstName %><%= ' ' %><%= @collection.customer.lastName %>
