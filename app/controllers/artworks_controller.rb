@@ -19,29 +19,10 @@ class ArtworksController < ApplicationController
 
     if params[:collection_redirect]
       session[:coll_redirect] = params[:collection_redirect]
-      puts "New from Collection IF: #{session[:coll_redirect]}"
     end
-  end
-
-  # GET /collections/new
-  def new_from_customer_collection
-    puts "New from customer collection"
-
-    @artwork = Artwork.new(:customer_id => params[:cust_id], :collection_id => params[:coll_id])
-  end
-
-  def new_from_collection
-    puts "New from collection"
-
-    @artwork = Artwork.new(:collection_id => params[:coll_id])
-
-    puts "Redirect: #{params[:collection_redirect]}"
-
-    if params[:collection_redirect]
-      session[:coll_redirect] = params[:collection_redirect]
-      puts "New from Collection IF: #{session[:coll_redirect]}"
+    if params[:customer_redirect]
+      session[:cust_redirect] = params[:customer_redirect]
     end
-
   end
 
   def preview_html
@@ -100,9 +81,6 @@ class ArtworksController < ApplicationController
     timestamp = Time.now.strftime("%y%m%d%H%M%S")
 
     # create the API client instance
-    # I currently have 2 different licenses so I can keep getting it fo free
-    # client = Pdfcrowd::PdfToPdfClient.new("lukefitz1", "4340f6a216a4039b0ca0c8035c738f4e")
-    # client = Pdfcrowd::PdfToPdfClient.new("lukefitz2", "89e129dfaf7246d5c784f3e943bba23f")
     client = Pdfcrowd::PdfToPdfClient.new("spireart", "4ca5bdb67c50b7a3ca5d9a207de070e0")
 
     respond_to do |format|
@@ -168,19 +146,19 @@ class ArtworksController < ApplicationController
     @artwork = Artwork.new(artwork_params)
     cust_id = artwork_params[:customer_id]
     coll_id = artwork_params[:collection_id]
-
-    redirect = params[:redirect]
+    cust_redirect = session[:cust_redirect]
     coll_redirect = session[:coll_redirect]
 
     respond_to do |format|
       if @artwork.save
-        if redirect
+        if cust_redirect
           format.html { redirect_to customer_url(cust_id), notice: 'Artwork was successfully created.' }
           format.json { render :show, status: :created, location: @artwork }
+          session.delete(:cust_redirect )
         elsif coll_redirect
           format.html { redirect_to collection_url(coll_id), notice: 'Artwork was successfully created.' }
           format.json { render :show, status: :created, location: @artwork }
-          session[:coll_redirect] = false
+          session.delete(:coll_redirect)
         else
           format.html { redirect_to @artwork, notice: 'Artwork was successfully created.' }
           format.json { render :show, status: :created, location: @artwork }
@@ -210,7 +188,7 @@ class ArtworksController < ApplicationController
         elsif collection_redirect
           format.html { redirect_to collection_url(coll_id), notice: 'Artwork was successfully updated.' }
           format.json { render :show, status: :ok, location: @artwork }
-          session[:coll_redirect] = false
+          session[:coll_redirect].delete = false
         else
           format.html { redirect_to @artwork, notice: 'Artwork was successfully updated.' }
           format.json { render :show, status: :ok, location: @artwork }
