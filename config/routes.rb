@@ -37,7 +37,8 @@ Rails.application.routes.draw do
 	  post '/artists/ajax_create', to: 'artists#ajax_create', as: 'ajax_create'
 	  get '/collections/preview_table/:id', to: 'collections#preview_table', as: 'preview_table'
 	  get '/collections/pdf_table/:id', to: 'collections#pdf_table', as: 'pdf_table'
-
+	  get '/artworks/search_by_objid', to: 'artworks#search_by_objid'
+	  
 	  resources :artworks do
 	  	collection { post :import }
 	  end

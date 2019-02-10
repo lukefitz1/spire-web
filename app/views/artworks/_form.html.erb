@@ -1,4 +1,4 @@
-<%= form_with(model: artwork, local: true) do |form| %>
+<%= form_with(model: artwork, local: true, id: "new-artwork-form") do |form| %>
   <% if artwork.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(artwork.errors.count, "error") %> prohibited this artwork from being saved:</h2>
@@ -14,6 +14,7 @@
   <div class="field">
     <%= form.label :ojbId, 'Object ID' %>
     <%= form.text_field :ojbId, id: :artwork_ojbId %>
+    <p class="obj-id-error">This ID is already taken</p>
   </div>
 
   <div class="field">
@@ -210,3 +211,42 @@
     <%= form.submit %>
   </div>
 <% end %>
+
+<script>
+  var objIdErrorExists = false;
+
+  $('#artwork_ojbId').blur(function() {
+    console.log($('#artwork_ojbId').val());
+
+    $.ajax({
+      url: "search_by_objid", 
+      data: {"objid": $('#artwork_ojbId').val()}, 
+      success: function(data) { 
+        console.log("Success: " + data.obj_id_exists);
+
+        if (data.obj_id_exists) {
+          $('#artwork_ojbId').removeClass('obj-id-green').addClass('obj-id-red');
+          $('.obj-id-error').css("display", "block");
+          objIdErrorExists = true;
+        } 
+        else {
+          $('#artwork_ojbId').removeClass('obj-id-red').addClass('obj-id-green');
+          $('.obj-id-error').css("display", "none");
+          objIdErrorExists = false;
+        }
+
+      }, 
+      cache: false
+    });
+  });
+
+  $("#new-artwork-form").submit(function(e) {
+    console.log("Form submitted!");
+    console.log("Is there an error? " + objIdErrorExists);
+
+    if(objIdErrorExists) {
+      $('html, body').animate({scrollTop: ($('#new-artwork-form').offset().top)},500);
+      return false;
+      }
+  });
+</script>

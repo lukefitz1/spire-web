@@ -2,11 +2,34 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+table {
+	border-spacing: 0px;
+}
+
+.art-table-data {
+	padding: 0px 5px;	
+}
+
 .art-table {
-	border: 1px solid black;
-	max-width: 1320px;
+	border: 1px solid #E5E5E5;
+	max-width: 1400px;
+	color: #808080;
 }
 
 .art-table tr:nth-child(even) {
-	background-color: #ADD8E6;
+	background-color: #f8f6ff;
+}
+
+.art-table-header {
+	background-color: #6c7ae0;
+	color: white;
+}
+
+.art-table-header > tr > th {
+	padding: 10px 0px;
+}
+
+div.art-table > table > tbody > tr > td > img {
+	margin-top: 20%;
+	margin-bottom: 20%;
 }

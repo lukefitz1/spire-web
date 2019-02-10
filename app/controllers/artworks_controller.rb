@@ -149,6 +149,18 @@ class ArtworksController < ApplicationController
     # download the combined pdf file
     send_file("#{Rails.root}/tmp/offer.pdf")
   end
+
+  def search_by_objid
+    art = Artwork.where(ojbId: params[:objid]).first
+
+    respond_to do |format|
+      if art.nil?
+        format.json { render json: { "obj_id_exists": false }  }
+      else
+        format.json { render json: { "obj_id_exists": true } }
+      end
+    end
+  end
   
   # POST /artworks
   # POST /artworks.json
@@ -159,7 +171,6 @@ class ArtworksController < ApplicationController
 
     redirect = params[:redirect]
     coll_redirect = session[:coll_redirect]
-    puts "Coll redirect: #{coll_redirect}"
 
     respond_to do |format|
       if @artwork.save

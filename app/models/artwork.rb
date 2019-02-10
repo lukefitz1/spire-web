@@ -14,10 +14,9 @@ class Artwork < ApplicationRecord
   mount_uploader :additionalInfoImageTwo, ImageUploader
   mount_uploader :additionalPdf, PdfUploader
 
-  def self.import(file, customer_id, collection_id)
-  	puts "This is the customer ID FUCK: #{customer_id}"
-    puts "This is the collection ID FUCK: #{collection_id}"
+  validates_uniqueness_of :ojbId
 
+  def self.import(file, customer_id, collection_id)
     # loops through csv data
   	CSV.foreach(file.path, headers:true) do |row|
   		# create new artwork
