@@ -211,6 +211,14 @@ class ArtworksController < ApplicationController
     end
   end
 
+  def destroy_multiple
+    Artwork.destroy(params[:art_ids])
+    respond_to do |format|
+      format.html { redirect_to artworks_url, notice: 'Artworks were successfully deleted' }
+      format.json { head :no_content }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_artwork

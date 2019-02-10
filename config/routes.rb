@@ -38,6 +38,7 @@ Rails.application.routes.draw do
 	  get '/collections/preview_table/:id', to: 'collections#preview_table', as: 'preview_table'
 	  get '/collections/pdf_table/:id', to: 'collections#pdf_table', as: 'pdf_table'
 	  get '/artworks/search_by_objid', to: 'artworks#search_by_objid'
+	  delete 'artworks/destroy_multiple', to: 'artworks#destroy_multiple'
 	  
 	  resources :artworks do
 	  	collection { post :import }
