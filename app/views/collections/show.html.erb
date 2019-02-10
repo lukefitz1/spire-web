@@ -24,7 +24,11 @@
   <% end %>
 </p>
 
-<%= link_to 'New Artwork', new_from_collection_path(:coll_id => @collection.id, :collection_redirect => true) %><br /><br />
+<% if @collection.customer %>
+  <%= link_to 'New Artwork', new_from_collection_path(:coll_id => @collection.id, :cust_id => @collection.customer.id, :collection_redirect => true) %><br /><br />
+<% else %>
+  <%= link_to 'New Artwork', new_from_collection_path(:coll_id => @collection.id, :collection_redirect => true) %><br /><br />
+<% end %>
 
 <% unless @collection.artworks.blank? %>
 
@@ -120,7 +124,12 @@
     <%= submit_tag "Import Artwork" %>
 <% end %>
 
-<%= link_to 'Edit', edit_collection_path(@collection, :cust_id => @collection.customer.id) %> |
+<% if @collection.customer %>
+  <%= link_to 'Edit', edit_collection_path(@collection, :cust_id => @collection.customer.id) %> |
+<% else %>
+  <%= link_to 'Edit', edit_collection_path(@collection) %> |
+<% end %>
+
 <%= link_to 'Back', collections_path %>
 
 <script>
