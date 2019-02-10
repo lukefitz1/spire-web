@@ -97,6 +97,10 @@
           </td>
 
           <td><%= link_to 'Edit', edit_artwork_path(artwork, :coll_id => @collection.id, :collection_redirect => true) %></td>
+          <td><%= link_to 'HTML Preview', preview_html_path(artwork) %></td>
+          <td><%= link_to 'PDF', preview_pdf_path(artwork, format: :pdf) %></td>
+          <td><%= link_to 'Combined_PDF', fancy_report_path(artwork, format: :pdf) %></td>
+
         </tr>
       <% end %>
     </tbody>
@@ -116,5 +120,17 @@
     <%= submit_tag "Import Artwork" %>
 <% end %>
 
-<%= link_to 'Edit', edit_collection_path(@collection) %> |
+<%= link_to 'Edit', edit_collection_path(@collection, :cust_id => @collection.customer.id) %> |
 <%= link_to 'Back', collections_path %>
+
+<script>
+  // self executing function here
+  (function() {
+    bio = document.getElementById('artist-bio');
+    if (bio.textContent.length < 1325) {
+      bio.style.fontSize = '16px';
+    } else {
+      bio.style.fontSize = '15px';
+    }
+  })();
+</script>
