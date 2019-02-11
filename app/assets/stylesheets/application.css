@@ -88,6 +88,11 @@ li a {
     text-align: center;
 }
 
+#fancy-login > div.common-links > a {
+    background-color: white;
+    color: black;
+}
+
 .login-header {
     text-align: center;
     font-size: 23px;
