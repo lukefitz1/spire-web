@@ -83,6 +83,20 @@ li a {
     font-size: 17px;
 }
 
+.pw-reset-button {
+    display: block;
+    margin: auto;
+    padding: 13px 65px; 
+    background:#ccc; 
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    font-size: 17px;
+    margin-top: 20px;
+    margin-bottom: 12px;
+}
+
 .forgot-pw-link {
     display: block;
     text-align: center;
