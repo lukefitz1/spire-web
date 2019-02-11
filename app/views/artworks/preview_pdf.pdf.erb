@@ -130,7 +130,9 @@
 
     	<div class="column-right">
 			<div class="big-img">
-				<%= wicked_pdf_image_tag @artwork.image %>
+				<% if @artwork.image %>
+					<%= wicked_pdf_image_tag @artwork.image %>
+				<% end %>
 			</div>
 			<div class="bio">
 				<h3 class="bold">Artist&#39s Biography</h3>

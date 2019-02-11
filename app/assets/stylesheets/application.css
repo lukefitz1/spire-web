@@ -36,3 +36,69 @@ li a {
     padding: 16px;
     text-decoration: none;
 }
+
+#fancy-login {
+    /* border: 1px solid gray; */
+    max-width: 500px;
+    margin: 50px auto 0px auto;
+    padding: 40px 10px;
+    border-radius: 20px;
+}
+
+#user_email {
+    height: 40px;
+    width: 250px;
+    border: none;
+    border-bottom: 1px solid gray;
+    display: block;
+    margin: auto;
+}
+
+#user_password {
+    height: 40px;
+    width: 250px;
+    border: none;
+    border-bottom: 1px solid gray;
+    display: block;
+    margin: auto;
+}
+
+.remember-me-div {
+    margin-left: 122px;
+}
+
+.remember-me {
+    display: inline;
+}
+
+.login-button {
+    display: block;
+    margin: auto;
+    padding: 13px 100px; 
+    background:#ccc; 
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    font-size: 17px;
+}
+
+.forgot-pw-link {
+    display: block;
+    text-align: center;
+}
+
+.login-header {
+    text-align: center;
+    font-size: 23px;
+}
+
+.logo-image {
+    display: block;
+    margin: auto;
+    width: 20%;
+    height: auto;
+}
+
+.login-form {}
+.common-links {}
