@@ -49,18 +49,18 @@ class CollectionsController < ApplicationController
         client.setCookies("_art_collector_web_session=VEh1OEVtRFMxby9nd2dxeDEwWXZLeVhwMFlrOHMzNlAyRkpBM0tYb3FyUXBmRlgwZ3U5aGJpRkNPY0draUEvKzZhMFBUOU5aYWdpNlBBUkttbGgvdTRjcXpXY3ZrL29ETkk1V011ai9IVHdHYkV2WVBXWXZNaEcyOFRWYVNkZjVYMVhPc2Nsc3lSNDNnaXhXU3g4dGNFZEN5UE1iSnhPQUJOQ3d4aURCZ2lLVW5qZFVXdkNRcStTYTNIeW9tcFh2TkdaVzRreE8yaDV2Ynk1TjlwSDdnU1JVYUU2dW5keWduVHJQTWxIY090VT0tLTZ3YUNnQi9pWWMyenU1YXJ6YVd3NWc9PQ%3D%3D--17d5cfcaf0d9484bea841c6bfdd2789a770fd5e2")
 
         # run the conversion and write the result to a file
-        # client.convertUrlToFile("https://spire-art-services.herokuapp.com/collections/pdf_table/7cb49999-433c-4490-85bc-0e59950f5547.pdf?coll_id=b1b51182-33b5-4f31-a546-5073678fe779", 'example.pdf')
-        # create output file for conversion result
-        output_file = open("example.pdf", "wb")
+        client.convertUrlToFile("https://spire-art-services.herokuapp.com/collections/pdf_crowd_table/7cb49999-433c-4490-85bc-0e59950f5547?coll_id=b1b51182-33b5-4f31-a546-5073678fe779", 'example.pdf')
+        # # create output file for conversion result
+        # output_file = open("example.pdf", "wb")
 
-        # run the conversion and store the result into a pdf variable
-        pdf = client.convertUrl("https://spire-art-services.herokuapp.com/collections/pdf_table/7cb49999-433c-4490-85bc-0e59950f5547.pdf?coll_id=b1b51182-33b5-4f31-a546-5073678fe779")
+        # # run the conversion and store the result into a pdf variable
+        # pdf = client.convertUrl("https://spire-art-services.herokuapp.com/collections/pdf_crowd_table/7cb49999-433c-4490-85bc-0e59950f5547?coll_id=b1b51182-33b5-4f31-a546-5073678fe779")
 
-        # write the pdf into the output file
-        output_file.write(pdf)
+        # # write the pdf into the output file
+        # output_file.write(pdf)
 
-        # close the output file
-        output_file.close()
+        # # close the output file
+        # output_file.close()
     rescue Pdfcrowd::Error => why
         # report the error
         STDERR.puts "Pdfcrowd Error: #{why}"
