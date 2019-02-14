@@ -53,17 +53,10 @@ class CollectionsController < ApplicationController
 
         # run the conversion and store the result into a pdf variable
         # pdf = client.convertUrl("https://spire-art-services.herokuapp.com/collections/pdf_crowd_table/7cb49999-433c-4490-85bc-0e59950f5547?coll_id=b1b51182-33b5-4f31-a546-5073678fe779")
-        pdf = client.convertUrl("http://example.com/")
+        pdf = client.convertUrl("http://www.example.com")
 
         # write the pdf into the output file
         output_file.write(pdf)
-
-
-        # run the conversion and write the result to a file
-        client.convertFile(output_file)
-
-        # download the combined pdf file
-        send_file(output_file)
 
         # close the output file
         output_file.close()
