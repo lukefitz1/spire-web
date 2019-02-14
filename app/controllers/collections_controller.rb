@@ -70,6 +70,11 @@ class CollectionsController < ApplicationController
     end
   end
 
+  def send_that_file
+    # download the combined pdf file
+    send_file("#{Rails.root}/tmp/example.pdf")
+  end
+
   # GET
   def pdf_table
     @collection = Collection.find(params[:coll_id])
