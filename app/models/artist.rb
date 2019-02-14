@@ -5,6 +5,8 @@ class Artist < ApplicationRecord
 
 	has_many :artworks
 
+  mount_uploader :artist_image, ImageUploader
+
 	def self.import(file)
   	# loops through csv data
   	CSV.foreach(file.path, headers:true) do |row|

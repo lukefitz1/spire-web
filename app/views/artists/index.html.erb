@@ -9,6 +9,7 @@
 <table>
   <thead>
     <tr>
+      <th>Artist Image</th>
       <th>First Name</th>
       <th>Last Name</th>
       <th>Additional Artist Info</th>
@@ -20,6 +21,12 @@
   <tbody>
     <% @artists.each do |artist| %>
       <tr>
+        <td>
+          <% if artist.artist_image.thumb.url %>
+            <%= image_tag artist.artist_image.thumb.url %>
+          <% end %>
+        </td>
+        
         <td><%= artist.firstName %></td>
         <td><%= artist.lastName %></td>
         <td><%= artist.additionalInfo %></td>

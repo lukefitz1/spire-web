@@ -22,6 +22,16 @@
   </div>
 
   <div class="field">
+    <%= form.label :artist_image, 'Artist Image' %>
+    <%= form.file_field :artist_image, id: :artist_image %>
+    <% if form.object.artist_image? %>
+      <%= image_tag form.object.artist_image.thumb.url %>
+      <%= form.label :remove_image %>
+      <%= form.check_box :remove_image %> 
+    <% end %>
+  </div>
+
+  <div class="field">
     <%= form.label :additionalInfo %>
     <%= form.text_field :additionalInfo, id: :artist_additionalInfo %>
   </div>
