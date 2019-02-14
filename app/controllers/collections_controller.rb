@@ -33,37 +33,40 @@ class CollectionsController < ApplicationController
 
   # GET 
   def pdf_crowd_table
-    # begin
-    #     # create the API client instance
-    #     client = Pdfcrowd::HtmlToPdfClient.new("spireart", "4ca5bdb67c50b7a3ca5d9a207de070e0")
-    #     # client.setHttpAuth("lukefitz1@gmail.com", "pass4luke")
-    #     client.setCookies("#{cookie_name}=#{cookie_value}")
-    #     puts "Cookie: #{cookie_name}=#{cookie_value}"
-    #     # puts "Session: #{request.session_options[:id]}"
-    #     # client.setCookies("#{cookie_name}=#{request.session_options[:id]}")
+    begin
+      # create the API client instance
+      client = Pdfcrowd::HtmlToPdfClient.new("spireart", "4ca5bdb67c50b7a3ca5d9a207de070e0")
 
-    #     # create output file for conversion result
-    #     output_file = open(Rails.root.join('tmp', 'example.pdf'), 'wb')
+      # create output file for conversion result
+      output_file = open("example.pdf", "wb")
 
-    #     # run the conversion and store the result into a pdf variable
-    #     pdf = client.convertUrl("https://spire-art-services.herokuapp.com/collections/pdf_crowd_table/7cb49999-433c-4490-85bc-0e59950f5547?coll_id=b1b51182-33b5-4f31-a546-5073678fe779")
+      # run the conversion and store the result into a pdf variable
+      # pdf = client.convertUrl("http://www.example.com")
+      pdf = client.convertUrl("https://spire-art-services.herokuapp.com/collections/pdf_crowd_table/#{params[:id]}?coll_id=#{params[:coll_id]}")
 
-    #     # write the pdf into the output file
-    #     output_file.write(pdf)
+      # write the pdf into the output file
+      output_file.write(pdf)
 
-    #     # close the output file
-    #     output_file.close()
+      # download
+      send_file(output_file)
 
-    #     # download the combined pdf file
-    #     send_file("#{Rails.root}/tmp/example.pdf")
-    # rescue Pdfcrowd::Error => why
-    #     # report the error
-    #     STDERR.puts "Pdfcrowd Error: #{why}"
+      # close the output file
+      output_file.close()
+    rescue Pdfcrowd::Error => why
+      # report the error
+      STDERR.puts "Pdfcrowd Error: #{why}"
 
-    #     # handle the exception here or rethrow and handle it at a higher level
-    #     raise
-    # end
+      # handle the exception here or rethrow and handle it at a higher level
+      raise
+    end
     
+    # download file
+    # send_file(output_file)
+    # generate_pdf
+    # send_file("#{Rails.root}/tmp/example.pdf")
+  end
+
+  def generate_pdf
     begin
       @collection = Collection.find(params[:coll_id])
       puts "Collection ID: #{params[:coll_id]}"
@@ -87,10 +90,6 @@ class CollectionsController < ApplicationController
 
       # close the output file
       output_file.close()
-
-      # download file
-      # send_file(output_file)
-      send_file("#{Rails.root}/tmp/example.pdf")
     rescue Pdfcrowd::Error => why
       # report the error
       STDERR.puts "Pdfcrowd Error: #{why}"
@@ -99,7 +98,7 @@ class CollectionsController < ApplicationController
       raise
     end
   end
-
+  
   def send_that_file
     # download the combined pdf file
     send_file("#{Rails.root}/tmp/example.pdf")
