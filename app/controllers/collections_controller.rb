@@ -77,7 +77,8 @@ class CollectionsController < ApplicationController
         puts "Cookie: _art_collector_web_session=#{cookies[:_art_collector_web_session]}"
         
         # create output file for conversion result
-        output_file = open("example.pdf", "wb")
+        # output_file = open("example.pdf", "wb")
+        output_file = open(Rails.root.join('tmp', 'example.pdf'), 'wb')
 
         # run the conversion and store the result into a pdf variable
         # pdf = client.convertUrl("http://www.example.com")
@@ -86,11 +87,12 @@ class CollectionsController < ApplicationController
         # write the pdf into the output file
         output_file.write(pdf)
 
-        # download file
-        send_file(output_file)
-
         # close the output file
         output_file.close()
+
+        # download file
+        # send_file(output_file)
+        send_file("#{Rails.root}/tmp/example.pdf")
     rescue Pdfcrowd::Error => why
         # report the error
         STDERR.puts "Pdfcrowd Error: #{why}"
