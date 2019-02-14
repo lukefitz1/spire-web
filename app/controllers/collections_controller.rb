@@ -41,23 +41,42 @@ class CollectionsController < ApplicationController
     begin
         # create the API client instance
         client = Pdfcrowd::HtmlToPdfClient.new("spireart", "4ca5bdb67c50b7a3ca5d9a207de070e0")
-        client.setHttpAuth("lukefitz1@gmail.com", "pass4luke")
+        # client.setHttpAuth("lukefitz1@gmail.com", "pass4luke")
         # client.setCookies("_art_collector_web_session=STB5c3RoZGdLTXV2WHdUQ2p1ME9xQlJpWUhxR0pXZUIremUwZytEcWt3M1pFRllsdlE1UTh3SkxwUEFIaXRWUTRyK2wwSWZxbi9rM2xZcHpENGNNK3JDRjZpZ2wrUFYzeWJtS0RhbmlyUE85cDFvWW0zYXdsRndNOEk5U0crUUYyVVhEZThBTktVd0Q4ZkEyS1V6Y0l3cHI3cWdZMG1weVU0c1dBZU1XNlhGalp5SlBHcEZBQ2xDeWFoaVpYWmw5ZlJ5RXhRbmRtR1NOSUhzUkI0Mm5pd3hYSjBxSjdMc0NiTHlySFJLdmtobz0tLWxxejNJbGllNUZpUzBOd2ZhYzFycXc9PQ%3D%3D--1a2bd1da45a7e584aa9356b5c0b2d050c2deb8e0")
         # client.setCookies("#{cookie_name}=#{cookie_value}")
+        # client.setCookies("#{cookie_name}=#{cookie_value}")
         # puts "Cookie: #{cookie_name}=#{cookie_value}"
+        puts "Session: #{request.session_options[:id]}"
+        client.setCookies("#{cookie_name}=#{request.session_options[:id]}")
 
         # create output file for conversion result
+        # output_file = open("example.pdf", "wb")
         output_file = open(Rails.root.join('tmp', 'example.pdf'), 'wb')
 
         # run the conversion and store the result into a pdf variable
         pdf = client.convertUrl("https://spire-art-services.herokuapp.com/collections/pdf_crowd_table/7cb49999-433c-4490-85bc-0e59950f5547?coll_id=b1b51182-33b5-4f31-a546-5073678fe779")
-        # pdf = client.convertUrl("http://www.example.com")
 
         # write the pdf into the output file
         output_file.write(pdf)
 
         # close the output file
         output_file.close()
+
+        # download the combined pdf file
+        send_file("#{Rails.root}/tmp/example.pdf")
+
+        # # create output file for conversion result
+        # output_file = open(Rails.root.join('tmp', 'example.pdf'), 'wb')
+
+        # # run the conversion and store the result into a pdf variable
+        # pdf = client.convertUrl("https://spire-art-services.herokuapp.com/collections/pdf_crowd_table/7cb49999-433c-4490-85bc-0e59950f5547?coll_id=b1b51182-33b5-4f31-a546-5073678fe779")
+        # # pdf = client.convertUrl("http://www.example.com")
+
+        # # write the pdf into the output file
+        # output_file.write(pdf)
+
+        # # close the output file
+        # output_file.close()
 
         # download the combined pdf file
         # send_file("#{Rails.root}/tmp/example.pdf")
