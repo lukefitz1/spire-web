@@ -55,6 +55,9 @@ class CollectionsController < ApplicationController
       # write the pdf into the output file
       output_file.write(pdf)
 
+      # download
+      send_file("#{Rails.root}/tmp/example.pdf")
+
       # close the output file
       output_file.close()
     rescue Pdfcrowd::Error => why
