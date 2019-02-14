@@ -61,6 +61,7 @@ class CollectionsController < ApplicationController
 
         # download the combined pdf file
         # send_file("#{Rails.root}/tmp/example.pdf")
+        send_that_file
     rescue Pdfcrowd::Error => why
         # report the error
         STDERR.puts "Pdfcrowd Error: #{why}"
