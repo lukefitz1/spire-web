@@ -33,11 +33,6 @@ class CollectionsController < ApplicationController
 
   # GET 
   def pdf_crowd_table
-    @collection = Collection.find(params[:coll_id])
-    puts "Collection ID: #{params[:coll_id]}"
-    puts "Customer ID: #{params[:id]}"
-    cookie_value = cookies[:_art_collector_web_session]
-    
     # begin
     #     # create the API client instance
     #     client = Pdfcrowd::HtmlToPdfClient.new("spireart", "4ca5bdb67c50b7a3ca5d9a207de070e0")
@@ -70,35 +65,38 @@ class CollectionsController < ApplicationController
     # end
     
     begin
-        # create the API client instance
-        client = Pdfcrowd::HtmlToPdfClient.new("spireart", "4ca5bdb67c50b7a3ca5d9a207de070e0")
-        client.setCookies("_art_collector_web_session=#{cookies[:_art_collector_web_session]}")
-        client.setCookies("_art_collector_web_session=#{cookies[:_art_collector_web_session]}")
-        puts "Cookie: _art_collector_web_session=#{cookies[:_art_collector_web_session]}"
-        
-        # create output file for conversion result
-        # output_file = open("example.pdf", "wb")
-        output_file = open(Rails.root.join('tmp', 'example.pdf'), 'wb')
+      @collection = Collection.find(params[:coll_id])
+      puts "Collection ID: #{params[:coll_id]}"
+      puts "Customer ID: #{params[:id]}"
+      
+      # create the API client instance
+      client = Pdfcrowd::HtmlToPdfClient.new("spireart", "4ca5bdb67c50b7a3ca5d9a207de070e0")
+      client.setCookies("_art_collector_web_session=#{cookies[:_art_collector_web_session]}")
+      puts "Cookie: _art_collector_web_session=#{cookies[:_art_collector_web_session]}"
+      
+      # create output file for conversion result
+      # output_file = open("example.pdf", "wb")
+      output_file = open(Rails.root.join('tmp', 'example.pdf'), 'wb')
 
-        # run the conversion and store the result into a pdf variable
-        # pdf = client.convertUrl("http://www.example.com")
-        pdf = client.convertUrl("https://spire-art-services.herokuapp.com/collections/pdf_crowd_table/#{params[:id]}?coll_id=#{params[:coll_id]}")
+      # run the conversion and store the result into a pdf variable
+      # pdf = client.convertUrl("http://www.example.com")
+      pdf = client.convertUrl("https://spire-art-services.herokuapp.com/collections/pdf_crowd_table/#{params[:id]}?coll_id=#{params[:coll_id]}")
 
-        # write the pdf into the output file
-        output_file.write(pdf)
+      # write the pdf into the output file
+      output_file.write(pdf)
 
-        # close the output file
-        output_file.close()
+      # close the output file
+      output_file.close()
 
-        # download file
-        # send_file(output_file)
-        send_file("#{Rails.root}/tmp/example.pdf")
+      # download file
+      # send_file(output_file)
+      send_file("#{Rails.root}/tmp/example.pdf")
     rescue Pdfcrowd::Error => why
-        # report the error
-        STDERR.puts "Pdfcrowd Error: #{why}"
+      # report the error
+      STDERR.puts "Pdfcrowd Error: #{why}"
 
-        # handle the exception here or rethrow and handle it at a higher level
-        raise
+      # handle the exception here or rethrow and handle it at a higher level
+      raise
     end
   end
 
