@@ -146,7 +146,7 @@ GEM
       hashery (~> 2.0)
       ruby-rc4
       ttfunk
-    pdfcrowd (4.2)
+    pdfcrowd (4.4.2)
     pg (0.21.0)
     public_suffix (3.0.0)
     puma (3.10.0)
@@ -260,7 +260,7 @@ DEPENDENCIES
   mini_magick (~> 4.8)
   net-http2
   pdf-reader
-  pdfcrowd
+  pdfcrowd (~> 4.4, >= 4.4.2)
   pg (~> 0.18)
   puma (~> 3.7)
   rails (~> 5.1.4)

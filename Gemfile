@@ -81,5 +81,6 @@ gem 'carrierwave-aws'
 gem 'aws-sdk', '~> 2'
 gem 'combine_pdf'
 gem 'net-http2'
-gem 'pdfcrowd'
+# gem 'pdfcrowd' - 4.2
+gem 'pdfcrowd', '~> 4.4', '>= 4.4.2'
 gem 'pdf-reader'
