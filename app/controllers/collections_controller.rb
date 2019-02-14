@@ -45,7 +45,8 @@ class CollectionsController < ApplicationController
       puts "Customer ID: #{params[:id]}"
       
       # create the API client instance
-      client = Pdfcrowd::HtmlToPdfClient.new("spireart", "4ca5bdb67c50b7a3ca5d9a207de070e0")
+      # client = Pdfcrowd::HtmlToPdfClient.new("spireart", "4ca5bdb67c50b7a3ca5d9a207de070e0")
+      client = Pdfcrowd::HtmlToPdfClient.new("lukefitz1", "4340f6a216a4039b0ca0c8035c738f4e")
       client.setCookies("_art_collector_web_session=#{cookies[:_art_collector_web_session]}")
       puts "Cookie: _art_collector_web_session=#{cookies[:_art_collector_web_session]}"
       
