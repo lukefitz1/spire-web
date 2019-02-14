@@ -49,7 +49,7 @@ class CollectionsController < ApplicationController
         client.setCookies("#{cookie_name}=#{cookie_value}")
         
         # create output file for conversion result
-        output_file = open("example.pdf", "wb")
+        output_file = open(Rails.root.join('tmp', 'example.pdf'), 'wb')
 
         # run the conversion and store the result into a pdf variable
         # pdf = client.convertUrl("https://spire-art-services.herokuapp.com/collections/pdf_crowd_table/7cb49999-433c-4490-85bc-0e59950f5547?coll_id=b1b51182-33b5-4f31-a546-5073678fe779")
@@ -57,27 +57,15 @@ class CollectionsController < ApplicationController
 
         # write the pdf into the output file
         output_file.write(pdf)
-        
-        # add pdf file 
-        client.addPdfFile(pdf)
 
         # run the conversion and write the result to a file
-        client.convertToFile("#{Rails.root}/tmp/offer.pdf")
+        client.convertToFile("#{Rails.root}/tmp/converted.pdf")
 
         # download the combined pdf file
-        send_file("#{Rails.root}/tmp/offer.pdf")
+        send_file("#{Rails.root}/tmp/converted.pdf")
 
-        # # download the combined pdf file
-        # send_file("#{Rails.root}/tmp/offer1234.pdf")
-        
-        # # close the output file
-        # output_file.close()
-
-        # # run the conversion and write the result to a file
-        # client.convertToFile("#{Rails.root}/tmp/offer.pdf")
-
-        # # download the combined pdf file
-        # send_file("#{Rails.root}/tmp/offer.pdf")
+        # close the output file
+        output_file.close()
     rescue Pdfcrowd::Error => why
         # report the error
         STDERR.puts "Pdfcrowd Error: #{why}"
