@@ -41,8 +41,8 @@ class CollectionsController < ApplicationController
     begin
         # create the API client instance
         client = Pdfcrowd::HtmlToPdfClient.new("spireart", "4ca5bdb67c50b7a3ca5d9a207de070e0")
-        # client.setHttpAuth("lukefitz1@gmail.com", "pass4luke")
-        client.setCookies("_art_collector_web_session=STB5c3RoZGdLTXV2WHdUQ2p1ME9xQlJpWUhxR0pXZUIremUwZytEcWt3M1pFRllsdlE1UTh3SkxwUEFIaXRWUTRyK2wwSWZxbi9rM2xZcHpENGNNK3JDRjZpZ2wrUFYzeWJtS0RhbmlyUE85cDFvWW0zYXdsRndNOEk5U0crUUYyVVhEZThBTktVd0Q4ZkEyS1V6Y0l3cHI3cWdZMG1weVU0c1dBZU1XNlhGalp5SlBHcEZBQ2xDeWFoaVpYWmw5ZlJ5RXhRbmRtR1NOSUhzUkI0Mm5pd3hYSjBxSjdMc0NiTHlySFJLdmtobz0tLWxxejNJbGllNUZpUzBOd2ZhYzFycXc9PQ%3D%3D--1a2bd1da45a7e584aa9356b5c0b2d050c2deb8e0")
+        client.setHttpAuth("lukefitz1@gmail.com", "pass4luke")
+        # client.setCookies("_art_collector_web_session=STB5c3RoZGdLTXV2WHdUQ2p1ME9xQlJpWUhxR0pXZUIremUwZytEcWt3M1pFRllsdlE1UTh3SkxwUEFIaXRWUTRyK2wwSWZxbi9rM2xZcHpENGNNK3JDRjZpZ2wrUFYzeWJtS0RhbmlyUE85cDFvWW0zYXdsRndNOEk5U0crUUYyVVhEZThBTktVd0Q4ZkEyS1V6Y0l3cHI3cWdZMG1weVU0c1dBZU1XNlhGalp5SlBHcEZBQ2xDeWFoaVpYWmw5ZlJ5RXhRbmRtR1NOSUhzUkI0Mm5pd3hYSjBxSjdMc0NiTHlySFJLdmtobz0tLWxxejNJbGllNUZpUzBOd2ZhYzFycXc9PQ%3D%3D--1a2bd1da45a7e584aa9356b5c0b2d050c2deb8e0")
         # client.setCookies("#{cookie_name}=#{cookie_value}")
         # puts "Cookie: #{cookie_name}=#{cookie_value}"
 
