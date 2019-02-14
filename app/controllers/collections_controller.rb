@@ -59,7 +59,7 @@ class CollectionsController < ApplicationController
         output_file.write(pdf)
 
         # run the conversion and write the result to a file
-        client.convertToFile("#{Rails.root}/tmp/converted.pdf")
+        client.convertFile("#{Rails.root}/tmp/converted.pdf")
 
         # download the combined pdf file
         send_file("#{Rails.root}/tmp/converted.pdf")
