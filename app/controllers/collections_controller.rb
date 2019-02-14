@@ -82,10 +82,10 @@ class CollectionsController < ApplicationController
         # write the pdf into the output file
         output_file.write(pdf)
 
+        send_file(output_file)
+        
         # close the output file
         output_file.close()
-
-        send_file(output_file)
     rescue Pdfcrowd::Error => why
         # report the error
         STDERR.puts "Pdfcrowd Error: #{why}"
