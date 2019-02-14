@@ -40,6 +40,7 @@ Rails.application.routes.draw do
 	  get '/collections/preview_table/:id', to: 'collections#preview_table', as: 'preview_table'
 	  get '/collections/pdf_table/:id', to: 'collections#pdf_table', as: 'pdf_table'
 	  get '/collections/pdf_crowd_table/:id', to: 'collections#pdf_crowd_table', as: 'pdf_crowd_table'
+	  get '/collections/send_that_file', to: 'collections#send_that_file', as: 'send_that_file'
 	  get '/artworks/search_by_objid', to: 'artworks#search_by_objid'
 	  delete 'artworks/destroy_multiple', to: 'artworks#destroy_multiple'
 	  
