@@ -45,8 +45,8 @@ class CollectionsController < ApplicationController
         # create the API client instance
         client = Pdfcrowd::HtmlToPdfClient.new("spireart", "4ca5bdb67c50b7a3ca5d9a207de070e0")
         # client.setHttpAuth("lukefitz1@gmail.com", "pass4luke")
-        client.setCookies("_art_collector_web_session=VEh1OEVtRFMxby9nd2dxeDEwWXZLeVhwMFlrOHMzNlAyRkpBM0tYb3FyUXBmRlgwZ3U5aGJpRkNPY0draUEvKzZhMFBUOU5aYWdpNlBBUkttbGgvdTRjcXpXY3ZrL29ETkk1V011ai9IVHdHYkV2WVBXWXZNaEcyOFRWYVNkZjVYMVhPc2Nsc3lSNDNnaXhXU3g4dGNFZEN5UE1iSnhPQUJOQ3d4aURCZ2lLVW5qZFVXdkNRcStTYTNIeW9tcFh2TkdaVzRreE8yaDV2Ynk1TjlwSDdnU1JVYUU2dW5keWduVHJQTWxIY090VT0tLTZ3YUNnQi9pWWMyenU1YXJ6YVd3NWc9PQ%3D%3D--17d5cfcaf0d9484bea841c6bfdd2789a770fd5e2")
-        # client.setCookies("#{cookie_name}=#{cookie_value}")
+        # client.setCookies("_art_collector_web_session=VEh1OEVtRFMxby9nd2dxeDEwWXZLeVhwMFlrOHMzNlAyRkpBM0tYb3FyUXBmRlgwZ3U5aGJpRkNPY0draUEvKzZhMFBUOU5aYWdpNlBBUkttbGgvdTRjcXpXY3ZrL29ETkk1V011ai9IVHdHYkV2WVBXWXZNaEcyOFRWYVNkZjVYMVhPc2Nsc3lSNDNnaXhXU3g4dGNFZEN5UE1iSnhPQUJOQ3d4aURCZ2lLVW5qZFVXdkNRcStTYTNIeW9tcFh2TkdaVzRreE8yaDV2Ynk1TjlwSDdnU1JVYUU2dW5keWduVHJQTWxIY090VT0tLTZ3YUNnQi9pWWMyenU1YXJ6YVd3NWc9PQ%3D%3D--17d5cfcaf0d9484bea841c6bfdd2789a770fd5e2")
+        client.setCookies("#{cookie_name}=#{cookie_value}")
         
         # create output file for conversion result
         output_file = open("example.pdf", "wb")
@@ -57,9 +57,27 @@ class CollectionsController < ApplicationController
 
         # write the pdf into the output file
         output_file.write(pdf)
+        
+        # add pdf file 
+        client.addPdfFile(pdf)
 
-        # close the output file
-        output_file.close()
+        # run the conversion and write the result to a file
+        client.convertToFile("#{Rails.root}/tmp/offer.pdf")
+
+        # download the combined pdf file
+        send_file("#{Rails.root}/tmp/offer.pdf")
+
+        # # download the combined pdf file
+        # send_file("#{Rails.root}/tmp/offer1234.pdf")
+        
+        # # close the output file
+        # output_file.close()
+
+        # # run the conversion and write the result to a file
+        # client.convertToFile("#{Rails.root}/tmp/offer.pdf")
+
+        # # download the combined pdf file
+        # send_file("#{Rails.root}/tmp/offer.pdf")
     rescue Pdfcrowd::Error => why
         # report the error
         STDERR.puts "Pdfcrowd Error: #{why}"
