@@ -32,38 +32,10 @@ class CollectionsController < ApplicationController
   end
 
   # GET 
-  def pdf_crowd_table
-    begin
-      # create the API client instance
-      client = Pdfcrowd::HtmlToPdfClient.new("spireart", "4ca5bdb67c50b7a3ca5d9a207de070e0")
-
-      # create output file for conversion result
-      output_file = open("example.pdf", "wb")
-
-      # run the conversion and store the result into a pdf variable
-      # pdf = client.convertUrl("http://www.example.com")
-      pdf = client.convertUrl("https://spire-art-services.herokuapp.com/collections/pdf_crowd_table/#{params[:id]}?coll_id=#{params[:coll_id]}")
-
-      # write the pdf into the output file
-      output_file.write(pdf)
-
-      # download
-      send_file(output_file)
-
-      # close the output file
-      output_file.close()
-    rescue Pdfcrowd::Error => why
-      # report the error
-      STDERR.puts "Pdfcrowd Error: #{why}"
-
-      # handle the exception here or rethrow and handle it at a higher level
-      raise
-    end
-    
+  def pdf_crowd_table    
     # download file
-    # send_file(output_file)
-    # generate_pdf
-    # send_file("#{Rails.root}/tmp/example.pdf")
+    generate_pdf
+    send_file("#{Rails.root}/tmp/example.pdf")
   end
 
   def generate_pdf
