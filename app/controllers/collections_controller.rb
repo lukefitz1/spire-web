@@ -31,6 +31,41 @@ class CollectionsController < ApplicationController
     @collection = Collection.find(params[:coll_id])
   end
 
+  # GET
+  def download_pdf_table
+    begin
+      @collection = Collection.find(params[:coll_id])
+      puts "Collection ID: #{params[:coll_id]}"
+      puts "Customer ID: #{params[:id]}"
+      
+      # create the API client instance
+      # client = Pdfcrowd::HtmlToPdfClient.new("spireart", "4ca5bdb67c50b7a3ca5d9a207de070e0")
+      client = Pdfcrowd::HtmlToPdfClient.new("lukefitz1", "4340f6a216a4039b0ca0c8035c738f4e")
+      client.setCookies("_art_collector_web_session=#{cookies[:_art_collector_web_session]}")
+      puts "Cookie: _art_collector_web_session=#{cookies[:_art_collector_web_session]}"
+      
+      # create output file for conversion result
+      # output_file = open("example.pdf", "wb")
+      output_file = open(Rails.root.join('tmp', 'example.pdf'), 'wb')
+
+      # run the conversion and store the result into a pdf variable
+      # pdf = client.convertUrl("http://www.example.com")
+      pdf = client.convertUrl("https://spire-art-services.herokuapp.com/collections/pdf_crowd_table/#{params[:id]}?coll_id=#{params[:coll_id]}")
+
+      # write the pdf into the output file
+      output_file.write(pdf)
+
+      # close the output file
+      output_file.close()
+    rescue Pdfcrowd::Error => why
+      # report the error
+      STDERR.puts "Pdfcrowd Error: #{why}"
+
+      # handle the exception here or rethrow and handle it at a higher level
+      raise
+    end
+  end
+
   # GET 
   def pdf_crowd_table    
     # download file
