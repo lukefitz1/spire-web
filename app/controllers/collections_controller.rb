@@ -84,6 +84,8 @@ class CollectionsController < ApplicationController
 
         # close the output file
         output_file.close()
+
+        send_file(output_file)
     rescue Pdfcrowd::Error => why
         # report the error
         STDERR.puts "Pdfcrowd Error: #{why}"
