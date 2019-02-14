@@ -50,7 +50,7 @@ class CollectionsController < ApplicationController
 
       # run the conversion and store the result into a pdf variable
       # pdf = client.convertUrl("http://www.example.com")
-      pdf = client.convertUrl("https://spire-art-services.herokuapp.com/collections/pdf_crowd_table/#{params[:id]}?coll_id=#{params[:coll_id]}")
+      pdf = client.convertUrl("https://spire-art-services.herokuapp.com/collections/preview_table/#{params[:id]}?coll_id=#{params[:coll_id]}")
 
       # write the pdf into the output file
       output_file.write(pdf)
