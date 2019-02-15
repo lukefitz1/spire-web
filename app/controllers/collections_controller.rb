@@ -41,7 +41,7 @@ class CollectionsController < ApplicationController
       client = Pdfcrowd::HtmlToPdfClient.new("lukefitz1", "4340f6a216a4039b0ca0c8035c738f4e")
       client.setCookies("_art_collector_web_session=#{cookies[:_art_collector_web_session]}")
       client.setOrientation("landscape")
-      client.setViewport("1400", "768")
+      client.setViewport(1400, 768)
       # client.setMarginTop("0in")
       # client.setMarginBottom("0in")
       # client.setMarginRight("0in")
