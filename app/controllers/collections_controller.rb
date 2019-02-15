@@ -41,10 +41,11 @@ class CollectionsController < ApplicationController
       client = Pdfcrowd::HtmlToPdfClient.new("lukefitz1", "4340f6a216a4039b0ca0c8035c738f4e")
       client.setCookies("_art_collector_web_session=#{cookies[:_art_collector_web_session]}")
       client.setOrientation("landscape")
-      client.setMarginTop("0in")
-      client.setMarginBottom("0in")
-      client.setMarginRight("0in")
-      client.setMarginLeft("0in")
+      # client.setMarginTop("0in")
+      # client.setMarginBottom("0in")
+      # client.setMarginRight("0in")
+      # client.setMarginLeft("0in")
+      client.setNoMargins(true)
       
       # create output file for conversion result
       output_file = open(Rails.root.join('tmp', 'example.pdf'), 'wb')
