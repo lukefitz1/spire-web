@@ -188,7 +188,7 @@ class ArtworksController < ApplicationController
         elsif collection_redirect
           format.html { redirect_to collection_url(coll_id), notice: 'Artwork was successfully updated.' }
           format.json { render :show, status: :ok, location: @artwork }
-          session[:coll_redirect].delete = false
+          session.delete(:coll_redirect)
         else
           format.html { redirect_to @artwork, notice: 'Artwork was successfully updated.' }
           format.json { render :show, status: :ok, location: @artwork }
