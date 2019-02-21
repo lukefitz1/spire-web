@@ -46,7 +46,6 @@ class CollectionsController < ApplicationController
       client.setMarginBottom("0.1in")
       client.setMarginRight("0.1in")
       client.setMarginLeft("0.1in")
-      # client.setNoMargins(true)
       
       # create output file for conversion result
       output_file = open(Rails.root.join('tmp', 'example.pdf'), 'wb')
