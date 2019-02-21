@@ -41,12 +41,11 @@ class CollectionsController < ApplicationController
       client = Pdfcrowd::HtmlToPdfClient.new("lukefitz1", "4340f6a216a4039b0ca0c8035c738f4e")
       client.setCookies("_art_collector_web_session=#{cookies[:_art_collector_web_session]}")
       client.setOrientation("landscape")
-      client.setViewport(1450, 768)
+      client.setViewport(1400, 768)
       client.setMarginTop("0.1in")
       client.setMarginBottom("0.1in")
       client.setMarginRight("0.1in")
       client.setMarginLeft("0.1in")
-      client.setDisableSmartShrinking(true)
       # client.setNoMargins(true)
       
       # create output file for conversion result
