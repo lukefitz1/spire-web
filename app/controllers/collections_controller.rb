@@ -42,11 +42,11 @@ class CollectionsController < ApplicationController
       client.setCookies("_art_collector_web_session=#{cookies[:_art_collector_web_session]}")
       client.setOrientation("landscape")
       client.setViewport(1400, 768)
-      client.setMarginTop("0.2in")
-      client.setMarginBottom("0.2in")
-      client.setMarginRight("0.2in")
-      client.setMarginLeft("0.2in")
-      # client.setNoMargins(true)
+      # client.setMarginTop("0.2in")
+      # client.setMarginBottom("0.2in")
+      # client.setMarginRight("0.2in")
+      # client.setMarginLeft("0.2in")
+      client.setNoMargins(true)
       
       # create output file for conversion result
       output_file = open(Rails.root.join('tmp', 'example.pdf'), 'wb')
