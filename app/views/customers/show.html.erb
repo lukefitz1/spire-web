@@ -8,7 +8,6 @@
 </p>
 
 <p>
-  <!-- <strong id="artist-bio" class="avenirnextlocal">Firstname:</strong> -->
   <strong id="artist-bio">Firstname:</strong>
   <%= @customer.firstName %>
 </p>
@@ -18,155 +17,188 @@
   <%= @customer.lastName %>
 </p>
 
+<p>
+  <strong>Email Address:</strong>
+  <%= @customer.email_address %>
+</p>
+
+<p>
+  <strong>Phone Number:</strong>
+  <%= @customer.phone_number %>
+</p>
+
+<p>
+  <strong>Street Address:</strong>
+  <%= @customer.street_address %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @customer.city %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @customer.state %>
+</p>
+
+<p>
+  <strong>Zip:</strong>
+  <%= @customer.zip %>
+</p>
+
 <%= link_to 'New Collection', new_from_customer_path(:cust_id => @customer.id, :redirect => true) %><br /><br />
 
+<div class="collections-heading">Collections</div>
+
 <% @customer.collections.each do |collection| %>
+  <button class="art-panel"><%= collection.collectionName %></button>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Collection ID</th>
-        <th>Collectionname</th>
-        <th>Customer</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
+  <div class="artwork-table-customer">
+    <table>
+      <thead>
+        <tr>
+          <th>Collection ID</th>
+          <th>Collectionname</th>
+          <th>Customer</th>
+          <th colspan="3"></th>
+        </tr>
+      </thead>
 
-    <tbody>
-      <tr>
-        <td><%= collection.id %></td>
-        <td><%= collection.collectionName %></td>
-        
-        <td>
-          <% unless collection.customer.blank? %>
-            <%= collection.customer.firstName %><%= ' ' %><%= collection.customer.lastName %>
-          <% end %>     
-        </td>
+      <tbody>
+        <tr>
+          <td><%= collection.id %></td>
+          <td><%= collection.collectionName %></td>
+          
+          <td>
+            <% unless collection.customer.blank? %>
+              <%= collection.customer.firstName %><%= ' ' %><%= collection.customer.lastName %>
+            <% end %>     
+          </td>
 
-      </tr>
-    </tbody>
-  </table>
+        </tr>
+      </tbody>
+    </table>
 
-  <%= link_to 'View Table', preview_table_path(:coll_id => collection.id) %><br /><br />
+    <%= link_to 'View Table', preview_table_path(:coll_id => collection.id) %><br /><br />
 
-  <%= link_to 'PDF Table', pdf_table_path(:coll_id => collection.id, format: :pdf) %><br /><br />
+    <%= link_to 'PDF Table', pdf_table_path(:coll_id => collection.id, format: :pdf) %><br /><br />
 
-  <%= link_to 'PDF Crowd Table', download_pdf_table_path(:coll_id => collection.id, format: :pdf) %><br /><br />
+    <%= link_to 'PDF Crowd Table', download_pdf_table_path(:coll_id => collection.id, format: :pdf) %><br /><br />
 
-  <%= link_to 'New Artwork', new_from_customer_collection_path(:cust_id => @customer.id, :coll_id => collection.id, :customer_redirect => true) %><br /><br />
-  
-  <!-- Artworks Table -->
-  <% unless collection.artworks.blank? %>
-    <!-- <a class="show-artwork">Show Artwork</a>
-    <a class="hide-artwork">Hide Artwork</a> -->
-    <!-- <%= button_to "Art", class: "art-panel" %>-->
+    <%= link_to 'New Artwork', new_from_customer_collection_path(:cust_id => @customer.id, :coll_id => collection.id, :customer_redirect => true) %><br /><br />
+    
+    <!-- Artworks Table -->
+    <% unless collection.artworks.blank? %>
+      <!-- <a class="show-artwork">Show Artwork</a>
+      <a class="hide-artwork">Hide Artwork</a> -->
+      <!-- <%= button_to "Art", class: "art-panel" %>-->
 
-    <button class="art-panel">Pieces of Art</button>
-
-    <div class="artwork-table-customer">
-      <table>
-        <thead>
-          <tr>
-            <th>Artwork ID</th>
-            <th>Object ID</th>
-            <th>Art Type</th>
-            <th>Title</th>
-            <th>Artist</th>
-            <th>Date</th>
-            <th>Medium</th>
-            <th>Image</th>
-            <th>Dimensions</th>
-            <th>Frame Dimensions</th>
-            <th>Current Location</th>
-            <th>Source</th>
-            <th>Date Acquired</th>
-            <th>Notes</th>
-            <th>Amount Paid</th>
-            <th>Current Value</th>
-            <th>Notes Image</th>
-            <th>Notes Image Two</th>
-            <th>Additional Info Image</th>
-            <th>Additional Info Image Two</th>
-            <th colspan="4"></th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <% collection.artworks.each do |artwork| %>
+      <div>
+        <table>
+          <thead>
             <tr>
-              <td><%= artwork.id %></td>
-              <td><%= artwork.ojbId %></td>
-              <td><%= artwork.artType %></td>
-              <td><%= artwork.title %></td>
-
-              <td>
-                <% unless artwork.artist.blank? %>
-                  <%= artwork.artist.firstName %><%= ' ' %><%= artwork.artist.lastName %>
-                <% end %> 
-              </td>
-
-              <td><%= artwork.date %></td>
-              <td><%= artwork.medium %></td>
-
-              <td>
-                <% if artwork.image.thumb.url %>
-                  <%= image_tag artwork.image.thumb.url %>
-                <% end %>
-              </td>
-
-              <td><%= artwork.dimensions %></td>
-              <td><%= artwork.frame_dimensions %></td>
-              <td><%= artwork.currentLocation %></td>
-              <td><%= artwork.source %></td>
-              <td><%= artwork.dateAcquired %></td>
-              <td><%= artwork.notes %></td>
-              <td><%= artwork.amountPaid %></td>
-              <td><%= artwork.currentValue %></td>
-
-              <td>
-                <% if artwork.notesImage.thumb.url %>
-                  <%= image_tag artwork.notesImage.thumb.url %>
-                <% end %>
-              </td>
-
-              <td>
-                <% if artwork.notesImageTwo.thumb.url %>
-                  <%= image_tag artwork.notesImageTwo.thumb.url %>
-                <% end %>
-              </td>
-
-              <td>
-                <% if artwork.additionalInfoImage.thumb.url %>
-                  <%= image_tag artwork.additionalInfoImage.thumb.url %>
-                <% end %>
-              </td>
-
-              <td>
-                <% if artwork.additionalInfoImageTwo.thumb.url %>
-                  <%= image_tag artwork.additionalInfoImageTwo.thumb.url %>
-                <% end %>
-              </td>
-
-              <td><%= link_to 'HTML Preview', preview_html_path(artwork) %></td>
-              <td><%= link_to 'Edit', edit_artwork_path(artwork, :cust_id => @customer.id, :redirect => true) %></td>
-              <td><%= link_to 'PDF', preview_pdf_path(artwork, format: :pdf) %></td>
-              <td><%= link_to 'Combined_PDF', fancy_report_path(artwork, format: :pdf) %></td>
+              <th>Artwork ID</th>
+              <th>Object ID</th>
+              <th>Art Type</th>
+              <th>Title</th>
+              <th>Artist</th>
+              <th>Date</th>
+              <th>Medium</th>
+              <th>Image</th>
+              <th>Dimensions</th>
+              <th>Frame Dimensions</th>
+              <th>Current Location</th>
+              <th>Source</th>
+              <th>Date Acquired</th>
+              <th>Notes</th>
+              <th>Amount Paid</th>
+              <th>Current Value</th>
+              <th>Notes Image</th>
+              <th>Notes Image Two</th>
+              <th>Additional Info Image</th>
+              <th>Additional Info Image Two</th>
+              <th colspan="4"></th>
             </tr>
-          <% end %>
-        
-        </tbody>
-      </table>
-    </div>
+          </thead>
 
-  <% end %>
+          <tbody>
+            <% collection.artworks.each do |artwork| %>
+              <tr>
+                <td><%= artwork.id %></td>
+                <td><%= artwork.ojbId %></td>
+                <td><%= artwork.artType %></td>
+                <td><%= artwork.title %></td>
 
-  <h4>Import that data!</h4>
-    <%= form_tag import_path, multipart: true do %>
-      <%= file_field_tag :file, :required => true %>
-      <%= hidden_field_tag(:customer_id, @customer.id) %>
-      <%= hidden_field_tag(:collection_id, collection.id) %>
-      <%= submit_tag "Import Artwork" %>
-  <% end %>
+                <td>
+                  <% unless artwork.artist.blank? %>
+                    <%= artwork.artist.firstName %><%= ' ' %><%= artwork.artist.lastName %>
+                  <% end %> 
+                </td>
+
+                <td><%= artwork.date %></td>
+                <td><%= artwork.medium %></td>
+
+                <td>
+                  <% if artwork.image.thumb.url %>
+                    <%= image_tag artwork.image.thumb.url %>
+                  <% end %>
+                </td>
+
+                <td><%= artwork.dimensions %></td>
+                <td><%= artwork.frame_dimensions %></td>
+                <td><%= artwork.currentLocation %></td>
+                <td><%= artwork.source %></td>
+                <td><%= artwork.dateAcquired %></td>
+                <td><%= artwork.notes %></td>
+                <td><%= artwork.amountPaid %></td>
+                <td><%= artwork.currentValue %></td>
+
+                <td>
+                  <% if artwork.notesImage.thumb.url %>
+                    <%= image_tag artwork.notesImage.thumb.url %>
+                  <% end %>
+                </td>
+
+                <td>
+                  <% if artwork.notesImageTwo.thumb.url %>
+                    <%= image_tag artwork.notesImageTwo.thumb.url %>
+                  <% end %>
+                </td>
+
+                <td>
+                  <% if artwork.additionalInfoImage.thumb.url %>
+                    <%= image_tag artwork.additionalInfoImage.thumb.url %>
+                  <% end %>
+                </td>
+
+                <td>
+                  <% if artwork.additionalInfoImageTwo.thumb.url %>
+                    <%= image_tag artwork.additionalInfoImageTwo.thumb.url %>
+                  <% end %>
+                </td>
+
+                <td><%= link_to 'HTML Preview', preview_html_path(artwork) %></td>
+                <td><%= link_to 'Edit', edit_artwork_path(artwork, :cust_id => @customer.id, :redirect => true) %></td>
+                <td><%= link_to 'PDF', preview_pdf_path(artwork, format: :pdf) %></td>
+                <td><%= link_to 'Combined_PDF', fancy_report_path(artwork, format: :pdf) %></td>
+              </tr>
+            <% end %>
+          
+          </tbody>
+        </table>
+      </div>
+
+    <% end %>
+
+    <h4>Import that data!</h4>
+      <%= form_tag import_path, multipart: true do %>
+        <%= file_field_tag :file, :required => true %>
+        <%= hidden_field_tag(:customer_id, @customer.id) %>
+        <%= hidden_field_tag(:collection_id, collection.id) %>
+        <%= submit_tag "Import Artwork" %>
+    <% end %>
+  </div>
 
 <% end %>
 

@@ -24,6 +24,7 @@
 
 todo
 todo_two
+todo3
 
 /app/views/artworks/preview.html
 /test_images
@@ -34,3 +35,7 @@ app/assets/fonts/
 public/uploads
 public/assets/archived/
 bin/backups/
+
+old aws creds
+
+example.pdf

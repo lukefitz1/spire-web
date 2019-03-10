@@ -21,7 +21,69 @@
     <%= form.text_field :lastName, id: :customer_lastName %>
   </div>
 
+  <div class="field">
+    <%= form.label :email_address %>
+    <%= form.text_field :email_address, id: :customer_email_address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :phone_number %>
+    <%= form.text_field :phone_number, id: :customer_phone_number %>
+    <p class="phone-error">Phone number needs to be 10 digits long</p>
+  </div>
+
+  <div class="field">
+    <%= form.label :street_address %>
+    <%= form.text_field :street_address, id: :customer_street_address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :city %>
+    <%= form.text_field :city, id: :customer_city %>
+  </div>
+  
+  <div class="field">
+    <%= form.label :state %>
+    <%= form.select(:state, options_for_select(us_states, selected: @customer.state || nil), include_blank: true) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :zip %>
+    <%= form.text_field :zip, id: :customer_zip %>
+    <p class="zip-error">Zip code needs to be 5 digits long</p>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
+
+<script>
+  $('#customer_zip').blur(function() {
+    if (document.getElementById('customer_zip').value.length != 5 && document.getElementById('customer_zip').value.length != "") {
+      console.log("Zip code is not 5 digits long");
+      $('#customer_zip').removeClass('obj-id-green').addClass('obj-id-red');
+      $('.zip-error').css("display", "block");
+    }
+    else {
+      console.log("Zip code is 5 digits long");
+      $('#customer_zip').removeClass('obj-id-red');
+      $('.zip-error').css("display", "none");
+    }
+  });
+
+  // customer_phone_number
+  $('#customer_phone_number').blur(function() {
+    if (document.getElementById('customer_phone_number').value.length != 10 && document.getElementById('customer_phone_number').value.length != "") {
+      console.log("Phone number is not 10 digits long");
+      $('#customer_phone_number').removeClass('obj-id-green').addClass('obj-id-red');
+      $('.phone-error').css("display", "block");
+    }
+    else {
+      console.log("Phone number is 10 digits long");
+      $('#customer_phone_number').removeClass('obj-id-red');
+      $('.phone-error').css("display", "none");
+    }
+  });
+
+</script>
