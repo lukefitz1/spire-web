@@ -53,6 +53,16 @@
     <p class="zip-error">Zip code needs to be 5 digits long</p>
   </div>
 
+  <div class="field">
+    <%= form.label :referred_by %>
+    <%= form.text_field :referred_by, id: :customer_referred_by %>
+  </div>
+
+  <div class="field">
+    <%= form.label :project_notes %>
+    <%= form.text_area :project_notes, id: :project_notes, cols: "50", rows: "10" %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

@@ -47,6 +47,16 @@
   <%= @customer.zip %>
 </p>
 
+<p>
+  <strong>Referred By:</strong>
+  <%= @customer.referred_by %>
+</p>
+
+<p>
+  <strong>Project Notes:</strong>
+  <%= @customer.project_notes %>
+</p>
+
 <%= link_to 'New Collection', new_from_customer_path(:cust_id => @customer.id, :redirect => true) %><br /><br />
 
 <div class="collections-heading">Collections</div>
