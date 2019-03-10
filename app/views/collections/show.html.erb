@@ -111,6 +111,33 @@
   </table>
 <% end %>
 
+<%= link_to 'New Visit', new_visit_from_collection_path(:coll_id => @collection.id, :collection_redirect => true) %><br /><br />
+
+<% unless @collection.visits.blank? %>
+  <table>
+    <thead>
+      <tr>
+        <th>Visit notes</th>
+        <th>Visit date start</th>
+        <th>Visit date end</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @collection.visits.each do |visit| %>
+        <tr>
+          <td><%= visit.visit_notes %></td>
+          <td><%= visit.visit_date_start %></td>
+          <td><%= visit.visit_date_end %></td>
+          <td><%= link_to 'Edit', edit_visit_path(visit, :coll_id => @collection.id, :collection_redirect => true) %></td>
+          <td><%= link_to 'Delete', visit_path(:id => visit.id, :coll_id => @collection.id, :collection_redirect => true), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
 <h4>Import that data!</h4>
   <%= form_tag import_path, multipart: true do %>
     <%= file_field_tag :file, :required => true %>

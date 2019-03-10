@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190310191526) do
+ActiveRecord::Schema.define(version: 20190310195436) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -110,8 +110,19 @@ ActiveRecord::Schema.define(version: 20190310191526) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "visits", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.text "visit_notes"
+    t.date "visit_date_start"
+    t.date "visit_date_end"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.uuid "collection_id"
+    t.index ["collection_id"], name: "index_visits_on_collection_id"
+  end
+
   add_foreign_key "artworks", "artists"
   add_foreign_key "artworks", "collections"
   add_foreign_key "artworks", "customers"
   add_foreign_key "collections", "customers"
+  add_foreign_key "visits", "collections"
 end

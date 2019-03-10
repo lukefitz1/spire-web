@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   	
+  resources :visits
   	# get '/collections/pdf_crowd_table/:id', to: 'collections#pdf_crowd_table', as: 'pdf_crowd_table'
 
     # for the api calls
@@ -43,7 +44,8 @@ Rails.application.routes.draw do
 	  get '/artworks/search_by_objid', to: 'artworks#search_by_objid'
 	  delete 'artworks/destroy_multiple', to: 'artworks#destroy_multiple'
 	  get '/collections/download_pdf_table/:id', to: 'collections#download_pdf_table', as: 'download_pdf_table'
-	  
+	  get '/visits/new', to: 'visits#new', as: 'new_visit_from_collection'
+
 	  resources :artworks do
 	  	collection { post :import }
 	  end

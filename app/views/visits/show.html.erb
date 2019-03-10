@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Visit notes:</strong>
+  <%= @visit.visit_notes %>
+</p>
+
+<p>
+  <strong>Visit date start:</strong>
+  <%= @visit.visit_date_start %>
+</p>
+
+<p>
+  <strong>Visit date end:</strong>
+  <%= @visit.visit_date_end %>
+</p>
+
+<p>
+  <strong>Collection:</strong>
+  <% unless @visit.collection.blank? %>
+    <%= @visit.collection.collectionName %>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_visit_path(@visit) %> |
+<%= link_to 'Back', visits_path %>
