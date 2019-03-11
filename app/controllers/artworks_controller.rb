@@ -4,7 +4,7 @@ class ArtworksController < ApplicationController
   # GET /artworks
   # GET /artworks.json
   def index
-    @artworks = Artwork.all
+    @artworks = Artwork.page(params[:page]).per(10)
   end
 
   # GET /artworks/1

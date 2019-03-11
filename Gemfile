@@ -84,3 +84,4 @@ gem 'net-http2'
 # gem 'pdfcrowd' - 4.2
 gem 'pdfcrowd', '~> 4.4', '>= 4.4.2'
 gem 'pdf-reader'
+gem 'kaminari', '~> 1.1', '>= 1.1.1'

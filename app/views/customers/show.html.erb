@@ -108,15 +108,15 @@
         <table>
           <thead>
             <tr>
-              <th>Artwork ID</th>
+              <th>Image</th>
+              <!-- <th>Artwork ID</th> -->
               <th>Object ID</th>
               <th>Art Type</th>
               <th>Title</th>
               <th>Artist</th>
               <th>Date</th>
-              <th>Medium</th>
-              <th>Image</th>
-              <th>Dimensions</th>
+              <!-- <th>Medium</th> -->
+              <!-- <th>Dimensions</th>
               <th>Frame Dimensions</th>
               <th>Current Location</th>
               <th>Source</th>
@@ -127,7 +127,7 @@
               <th>Notes Image</th>
               <th>Notes Image Two</th>
               <th>Additional Info Image</th>
-              <th>Additional Info Image Two</th>
+              <th>Additional Info Image Two</th> -->
               <th colspan="4"></th>
             </tr>
           </thead>
@@ -135,7 +135,12 @@
           <tbody>
             <% collection.artworks.each do |artwork| %>
               <tr>
-                <td><%= artwork.id %></td>
+                <td>
+                  <% if artwork.image.thumb.url %>
+                    <%= image_tag artwork.image.thumb.url %>
+                  <% end %>
+                </td>
+                <!-- <td><%= artwork.id %></td> -->
                 <td><%= artwork.ojbId %></td>
                 <td><%= artwork.artType %></td>
                 <td><%= artwork.title %></td>
@@ -147,15 +152,8 @@
                 </td>
 
                 <td><%= artwork.date %></td>
-                <td><%= artwork.medium %></td>
-
-                <td>
-                  <% if artwork.image.thumb.url %>
-                    <%= image_tag artwork.image.thumb.url %>
-                  <% end %>
-                </td>
-
-                <td><%= artwork.dimensions %></td>
+                <!-- <td><%= artwork.medium %></td> -->
+                <!-- <td><%= artwork.dimensions %></td>
                 <td><%= artwork.frame_dimensions %></td>
                 <td><%= artwork.currentLocation %></td>
                 <td><%= artwork.source %></td>
@@ -186,7 +184,7 @@
                   <% if artwork.additionalInfoImageTwo.thumb.url %>
                     <%= image_tag artwork.additionalInfoImageTwo.thumb.url %>
                   <% end %>
-                </td>
+                </td> -->
 
                 <td><%= link_to 'HTML Preview', preview_html_path(artwork) %></td>
                 <td><%= link_to 'Edit', edit_artwork_path(artwork, :cust_id => @customer.id, :redirect => true) %></td>
