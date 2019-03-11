@@ -43,6 +43,7 @@ Rails.application.routes.draw do
 	  get '/collections/send_that_file', to: 'collections#send_that_file', as: 'send_that_file'
 	  get '/artworks/search_by_objid', to: 'artworks#search_by_objid'
 	  delete 'artworks/destroy_multiple', to: 'artworks#destroy_multiple'
+	  delete 'artists/destroy_multiple', to: 'artists#destroy_multiple'
 	  get '/collections/download_pdf_table/:id', to: 'collections#download_pdf_table', as: 'download_pdf_table'
 	  get '/visits/new', to: 'visits#new', as: 'new_visit_from_collection'
 

@@ -127,6 +127,14 @@ class ArtistsController < ApplicationController
     end
   end
 
+  def destroy_multiple
+    Artist.destroy(params[:artist_ids])
+    respond_to do |format|
+      format.html { redirect_to artists_url, notice: 'Artists were successfully deleted' }
+      format.json { head :no_content }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_artist
