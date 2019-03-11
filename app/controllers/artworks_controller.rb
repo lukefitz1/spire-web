@@ -175,7 +175,6 @@ class ArtworksController < ApplicationController
   def update
     cust_id = artwork_params[:customer_id]
     redirect = params[:redirect]
-
     coll_id = session[:coll_id]
     collection_redirect = session[:coll_redirect]
     

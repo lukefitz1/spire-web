@@ -31,6 +31,39 @@
     <%= form.select(:customer_id, Customer.all.collect { |customer| [customer.firstName + ' ' + customer.lastName, customer.id]}, include_blank: true, :selected => params[:cust_id]) %>
   </div>
 
+  <div class="field">
+    <%= form.label :customer_proposals, 'customer_proposals' %>
+    <%= form.file_field :customer_proposals, id: :collection_customer_proposals, multiple: true %>
+
+    <% if form.object.customer_proposals? %>
+      <% @collection.customer_proposals.each do |pdf| %>
+        <%= form.label pdf, id: pdf %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= form.label :customer_invoices, 'customer_invoices' %>
+    <%= form.file_field :customer_invoices, id: :collection_customer_invoices, multiple: true %>
+
+    <% if form.object.customer_invoices? %>
+      <% @collection.customer_invoices.each do |pdf| %>
+        <%= form.label pdf, id: pdf %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= form.label :additional_photos, 'additional_photos' %>
+    <%= form.file_field :additional_photos, id: :collection_additional_photos, multiple: true %>
+
+    <% if form.object.additional_photos? %>
+      <% @collection.additional_photos.each do |img| %>
+        <%= image_tag img.thumb.url %>
+      <% end %>
+    <% end %>
+  </div>
+
   <div class="actions">
     <% if params[:redirect] %>
       <%= hidden_field_tag(:redirect, 'true') %>

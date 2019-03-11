@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190310195436) do
+ActiveRecord::Schema.define(version: 20190311004331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,9 @@ ActiveRecord::Schema.define(version: 20190310195436) do
     t.datetime "updated_at", null: false
     t.string "identifier"
     t.string "year"
+    t.string "customer_proposals", default: [], array: true
+    t.string "customer_invoices", default: [], array: true
+    t.string "additional_photos", default: [], array: true
     t.index ["customer_id"], name: "index_collections_on_customer_id"
   end
 

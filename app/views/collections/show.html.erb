@@ -24,6 +24,27 @@
   <% end %>
 </p>
 
+<p>
+  <strong>Proposals:</strong>
+  <% @collection.customer_proposals.each do |pdf| %>
+    <%= pdf %>
+  <% end %>
+</p>
+
+<p>
+  <strong>Invoices:</strong>
+  <% @collection.customer_invoices.each do |pdf| %>
+    <%= pdf %>
+  <% end %>
+</p>
+
+<p>
+  <strong>Additional Photos:</strong>
+  <% @collection.additional_photos.each do |img| %>
+    <%= image_tag img.thumb.url %>
+  <% end %>
+</p>
+
 <% if @collection.customer %>
   <%= link_to 'New Artwork', new_from_collection_path(:coll_id => @collection.id, :cust_id => @collection.customer.id, :collection_redirect => true) %><br /><br />
 <% else %>

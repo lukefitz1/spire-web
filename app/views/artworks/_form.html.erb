@@ -154,7 +154,7 @@
 
   <div class="field">
     <%= form.label :additionalPdf, 'Additional PDF' %>
-    <%= form.file_field :additionalPdf, id: :additionalInfoImage %>
+    <%= form.file_field :additionalPdf, id: :additionalPdf %>
 
     <% if form.object.additionalPdf? %>
       <%= form.label :additionalPdf, id: :artwork_additionalPdf %>
