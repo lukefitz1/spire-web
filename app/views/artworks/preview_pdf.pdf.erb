@@ -31,14 +31,24 @@
       	<div class="column-left bg-gray avenirnextlocal">
 	        <div class="label-block">
 	          <span class="avenirnextbold">Type:</span><p class="value"> <%= @artwork.artType %></p>
-	          <!-- <span class="avenirnextbold">Type:</span><p class="value"> <%= @artwork.artType %></p> -->
 	        </div>
 	        <div class="label-block">
-	          <span class="avenirnextbold">Artist:</span><p class="value"> <%= @artwork.artist.lastName %>, <%= @artwork.artist.firstName %> <% if @artwork.artist.additionalInfo %>
+	          <span class="avenirnextbold">Artist:</span>
+	          <p class="value"> 
+	          	<% if @artwork.artist.firstName != '' && @artwork.artist.lastName != ''%>
+	          		<%= @artwork.artist.lastName %>, <%= @artwork.artist.firstName %>
+	          	<% elsif @artwork.artist.firstName != '' && @artwork.artist.lastName == '' %>
+	          		<%= @artwork.artist.firstName %>
+	          	<% else %>
+	          		<%= @artwork.artist.lastName %>	
+	          	<% end %>
+
+	          	<% if @artwork.artist.additionalInfo %>
 	          		<% if @artwork.artist.additionalInfo != "" %>
 	          		  (<%= @artwork.artist.additionalInfo %>)
 	          		<% end %>
-	          	  <% end %></p>
+	          	<% end %>
+	          </p>
 	        </div>
 
 	        <% if @artwork.title == 'Untitled' %>
