@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190311004331) do
+ActiveRecord::Schema.define(version: 20190505215334) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,9 +59,12 @@ ActiveRecord::Schema.define(version: 20190311004331) do
     t.string "dateAcquiredLabel"
     t.string "notesImageTwo"
     t.string "additionalInfoImageTwo"
+    t.uuid "general_information_id"
+    t.boolean "show_general_info"
     t.index ["artist_id"], name: "index_artworks_on_artist_id"
     t.index ["collection_id"], name: "index_artworks_on_collection_id"
     t.index ["customer_id"], name: "index_artworks_on_customer_id"
+    t.index ["general_information_id"], name: "index_artworks_on_general_information_id"
   end
 
   create_table "collections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -90,6 +93,13 @@ ActiveRecord::Schema.define(version: 20190311004331) do
     t.string "zip"
     t.string "referred_by"
     t.text "project_notes"
+  end
+
+  create_table "general_informations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "information_label"
+    t.text "information"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -126,6 +136,7 @@ ActiveRecord::Schema.define(version: 20190311004331) do
   add_foreign_key "artworks", "artists"
   add_foreign_key "artworks", "collections"
   add_foreign_key "artworks", "customers"
+  add_foreign_key "artworks", "general_informations"
   add_foreign_key "collections", "customers"
   add_foreign_key "visits", "collections"
 end

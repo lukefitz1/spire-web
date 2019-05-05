@@ -168,5 +168,13 @@
   <% end %>
 </p>
 
+<p>
+  <strong>General Information:</strong>
+  <% unless @artwork.general_information.blank? %>
+    <%= @artwork.general_information.information_label %>
+  <% end %>
+</p>
+
+
 <%= link_to 'Edit', edit_artwork_path(@artwork) %> |
 <%= link_to 'Back', artworks_path %>

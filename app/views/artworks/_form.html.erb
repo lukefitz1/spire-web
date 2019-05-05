@@ -203,6 +203,21 @@
     <% end %>
   </div>
 
+  <div class="field">
+    <%= form.label :show_general_info, "Need to add general information about this piece of art?" %>
+    <%= form.check_box :show_general_info, id: "add-general-info" %>
+  </div>
+  
+  <div class="field" id="general-info_block">
+    <%= form.label :general_information_id %>
+
+    <% if params[:general_information_id] %>
+      <%= form.select(:general_information_id, GeneralInformation.all.collect { |general_info| [general_info.information_label, general_info.id]}, include_blank: true, :selected => params[:general_informations_id]) %>
+    <% else %>
+      <%= form.select(:general_information_id, GeneralInformation.all.collect { |general_info| [general_info.information_label, general_info.id]}, include_blank: true) %>
+    <% end %>
+  </div>
+
   <div class="actions">
     <% if params[:redirect] %>
       <%= hidden_field_tag(:redirect, 'true') %>
@@ -249,4 +264,17 @@
       return false;
       }
   });
+
+  if ($('#add-general-info').attr('checked')) {
+    console.log("Checked!!");
+    $('#general-info_block').css("display", "block");
+  }
+
+  $('#add-general-info').click(function() {
+    if ($(this).is(':checked')) {
+      $('#general-info_block').css("display", "block");
+    } else {
+      $('#general-info_block').css("display", "none");
+    }
+  })
 </script>

@@ -6,6 +6,7 @@ class Artwork < ApplicationRecord
   belongs_to :artist, optional: true
   belongs_to :customer, optional: true
   belongs_to :collection, optional: true
+  belongs_to :general_information, optional: true
 
   mount_uploader :image, ImageUploader
   mount_uploader :notesImage, ImageUploader
@@ -15,6 +16,8 @@ class Artwork < ApplicationRecord
   mount_uploader :additionalPdf, PdfUploader
 
   validates_uniqueness_of :ojbId
+
+  # has_one :additional_info
 
   def self.import(file, customer_id, collection_id)
     # loops through csv data

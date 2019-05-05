@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   	
+  resources :general_informations
   resources :visits
   	# get '/collections/pdf_crowd_table/:id', to: 'collections#pdf_crowd_table', as: 'pdf_crowd_table'
 

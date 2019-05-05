@@ -150,8 +150,13 @@
 				<%= image_tag @artwork.image %>
 			</div>
 			<div class="bio">
-				<h3 class="bold">Artist&#39s Biography</h3>
-				<p class="text-justify avenirnext" id="artist-bio"><%= @artwork.artist.biography %></p>
+				<% if @artwork.show_general_info %>
+					<h3 class="bold"><%= @artwork.general_information.information_label %></h3>
+					<p class="text-justify avenirnext" id="artist-bio"><%= @artwork.general_information.information %></p>
+				<% else %>
+					<h3 class="bold">Artist&#39s Biography</h3>
+					<p class="text-justify avenirnext" id="artist-bio"><%= @artwork.artist.biography %></p>
+				<% end %>
 			</div>
 		</div>
 
