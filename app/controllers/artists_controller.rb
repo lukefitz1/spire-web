@@ -5,7 +5,27 @@ class ArtistsController < ApplicationController
   # GET /artists.json
   def index
     @artists = Artist.page(params[:page]).per(10)
-    # @artists = Artist.page(params[:page]).per(10)
+    # @artists = Artist.all
+    # @artists = Artist.search(params[:search])
+  end
+
+  def search
+    test = params[:search]
+    puts "Search term: #{test}"
+    # if search
+    #   artist = Artist.find_by(firstName: search)
+    #   if artist
+    #     self.where(artist_id: artist_name)
+    #   else  
+    #     Artist.all
+    #   end
+    # else
+    #   Artist.all
+    # end
+
+    # @artists = Artist.first(:conditions => ["firstName = ?", params[:search]])
+    # @artists = Artist.where("\"firstName\" LIKE ?", params[:search])
+    @artists = Artist.where("\"firstName\" LIKE ?", params[:search])
   end
 
   # GET /artists/1
@@ -143,6 +163,6 @@ class ArtistsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def artist_params
-      params.require(:artist).permit(:firstName, :lastName, :biography, :additionalInfo, :artist_image)
+      params.require(:artist).permit(:firstName, :lastName, :biography, :additionalInfo, :artist_image, :search)
     end
 end

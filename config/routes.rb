@@ -47,6 +47,7 @@ Rails.application.routes.draw do
 	  delete 'artists/destroy_multiple', to: 'artists#destroy_multiple'
 	  get '/collections/download_pdf_table/:id', to: 'collections#download_pdf_table', as: 'download_pdf_table'
 	  get '/visits/new', to: 'visits#new', as: 'new_visit_from_collection'
+	  get '/artists/search', to: 'artists#search', as: 'artist_search'
 
 	  resources :artworks do
 	  	collection { post :import }

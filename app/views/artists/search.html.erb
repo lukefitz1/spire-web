@@ -1,10 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<% content_for :title, "View Artists" %>
+<% content_for :title, "Search Artists" %>
 
-<h1>Artists</h1>
-
-<%= link_to 'New Artist', new_artist_path %><br /><br />
+<h1>Artists Search</h1>
 
 <h4>Search for Artist</h4>
 <%= form_tag(artist_search_path, method: :get) do %>
@@ -12,8 +10,6 @@
   <%= submit_tag ("Search") %>  
 <% end %>
 <br /><br />
-
-<%= form_tag('/artists/destroy_multiple', method: 'delete') do %>
 
 <table>
   <thead>
@@ -43,20 +39,7 @@
         <td><%= artist.biography %></td>
         <td><%= link_to 'Show', artist %></td>
         <td><%= link_to 'Edit', edit_artist_path(artist) %></td>
-        <td><%= link_to 'Destroy', artist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <td><%= check_box_tag "artist_ids[]", artist.id, false, class: 'selectable' %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<%= paginate @artists %><br /><br />
-
-<%= submit_tag "Delete selected" %>
-<% end %>
-
-<h4>Import that data!</h4>
-<%= form_tag import_artists_path, multipart: true do %>
-  <%= file_field_tag :file, :required => true %>
-  <%= submit_tag "Import Artists" %>
-<% end %>
