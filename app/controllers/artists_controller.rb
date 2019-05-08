@@ -10,8 +10,6 @@ class ArtistsController < ApplicationController
   end
 
   def search
-    test = params[:search]
-    puts "Search term: #{test}"
     # if search
     #   artist = Artist.find_by(firstName: search)
     #   if artist
@@ -25,7 +23,9 @@ class ArtistsController < ApplicationController
 
     # @artists = Artist.first(:conditions => ["firstName = ?", params[:search]])
     # @artists = Artist.where("\"firstName\" LIKE ?", params[:search])
-    @artists = Artist.where("\"firstName\" LIKE ?", params[:search])
+
+      # @artists = Artist.where("\"firstName\" ILIKE ? OR \"lastName\" LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%")
+    @artists = Artist.where("concat_ws(' ', \"firstName\", \"lastName\") ILIKE ?", "%#{params[:search]}%")
   end
 
   # GET /artists/1
