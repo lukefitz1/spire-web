@@ -48,6 +48,7 @@ Rails.application.routes.draw do
 	  get '/collections/download_pdf_table/:id', to: 'collections#download_pdf_table', as: 'download_pdf_table'
 	  get '/visits/new', to: 'visits#new', as: 'new_visit_from_collection'
 	  get '/artists/search', to: 'artists#search', as: 'artist_search'
+	  get '/artworks/search', to: 'artworks#search', as: 'artwork_search'
 
 	  resources :artworks do
 	  	collection { post :import }

@@ -7,6 +7,10 @@ class ArtworksController < ApplicationController
     @artworks = Artwork.page(params[:page]).per(10)
   end
 
+  def search
+    @artworks = Artwork.joins(:artist).where("concat_ws(' ', \"firstName\", \"lastName\") ILIKE ?", "%#{params[:search]}%").references(:artist)
+  end
+
   # GET /artworks/1
   # GET /artworks/1.json
   def show

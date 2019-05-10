@@ -6,6 +6,13 @@
 
 <%= link_to 'New Artwork', new_artwork_path %><br /><br />
 
+<h4>Search by Artist</h4>
+<%= form_tag(artwork_search_path, method: :get) do %>
+  <%= text_field_tag(:search) %>
+  <%= submit_tag ("Search") %>  
+<% end %>
+<br /><br />
+
 <%= form_tag('/artworks/destroy_multiple', method: 'delete') do %>
 
 <table>
