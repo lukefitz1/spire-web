@@ -52,9 +52,10 @@
 <% end %>
 
 <% unless @collection.artworks.blank? %>
+  <button class="art-panel-collection">View Artwork</button>
 
   <!-- Artworks Table -->
-  <table>
+  <table class="artwork-table-collection">
     <thead>
       <tr>
         <th>Image</th>
@@ -189,4 +190,24 @@
       bio.style.fontSize = '15px';
     }
   })();
+</script>
+<script>
+  var acc = document.getElementsByClassName("art-panel-collection");
+  var i;
+
+  for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function() {
+      /* Toggle between adding and removing the "active" class,
+      to highlight the button that controls the panel */
+      this.classList.toggle("active");
+
+      /* Toggle between hiding and showing the active panel */
+      var panel = this.nextElementSibling;
+      if (panel.style.display === "block") {
+        panel.style.display = "none";
+      } else {
+        panel.style.display = "block";
+      }
+    });
+  }
 </script>
