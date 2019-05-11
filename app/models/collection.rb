@@ -1,5 +1,5 @@
 class Collection < ApplicationRecord
-  has_many :artworks
+  has_many :artworks, dependent: :nullify
   has_many :visits
   
   belongs_to :customer, optional: true
