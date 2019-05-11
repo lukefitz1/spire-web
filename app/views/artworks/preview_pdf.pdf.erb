@@ -141,7 +141,7 @@
     	<div class="column-right">
 			<div class="big-img">
 				<% if @artwork.image %>
-					<%= wicked_pdf_image_tag @artwork.image %>
+					<%= wicked_pdf_image_tag @artwork.image unless @artwork.image.blank? %>
 				<% end %>
 			</div>
 			<div class="bio">
