@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190505215334) do
+ActiveRecord::Schema.define(version: 20190512041441) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(version: 20190505215334) do
     t.string "zip"
     t.string "referred_by"
     t.text "project_notes"
+    t.string "customer_photos", default: [], array: true
   end
 
   create_table "general_informations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

@@ -57,6 +57,14 @@
   <%= @customer.project_notes %>
 </p>
 
+<p>
+  <strong>Customer Photos:</strong>
+  <% @customer.customer_photos.each do |img| %>
+    <%= image_tag img.thumb.url %>
+  <% end %>
+</p>
+
+
 <%= link_to 'New Collection', new_from_customer_path(:cust_id => @customer.id, :redirect => true) %><br /><br />
 
 <div class="collections-heading">Collections</div>
@@ -185,6 +193,11 @@
                     <%= image_tag artwork.additionalInfoImageTwo.thumb.url %>
                   <% end %>
                 </td> -->
+                <td>
+                  <% if artwork.additionalInfoImageTwo.thumb.url %>
+                    <%= image_tag artwork.additionalInfoImageTwo.thumb.url %>
+                  <% end %>
+                </td> 
 
                 <td><%= link_to 'HTML Preview', preview_html_path(artwork) %></td>
                 <td><%= link_to 'Edit', edit_artwork_path(artwork, :cust_id => @customer.id, :redirect => true) %></td>
