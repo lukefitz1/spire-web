@@ -216,6 +216,9 @@
     <% else %>
       <%= form.select(:general_information_id, GeneralInformation.all.collect { |general_info| [general_info.information_label, general_info.id]}, include_blank: true) %>
     <% end %>
+  
+    <!-- Trigger/Open The Modal -->
+    <%= link_to "New General Information", new_general_information_path, remote: true, id: "open-gi-btn" %>
   </div>
 
   <div class="actions">

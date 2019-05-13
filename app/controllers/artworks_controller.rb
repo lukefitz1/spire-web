@@ -20,6 +20,7 @@ class ArtworksController < ApplicationController
   def new
     @artwork = Artwork.new
     @artist = Artist.new
+    @general_information = GeneralInformation.new
 
     if params[:collection_redirect]
       session[:coll_redirect] = params[:collection_redirect]
