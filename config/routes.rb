@@ -38,20 +38,18 @@ Rails.application.routes.draw do
 	  get '/artworks/new_from_collection', to: 'artworks#new', as: 'new_from_collection'
 	  get '/artworks/fancy_report/:id', to: "artworks#fancy_report", as: "fancy_report"
 	  get '/artworks/preview_html/:id', to: 'artworks#preview_html', as: 'preview_html'
-	  post '/artists/ajax_create', to: 'artists#ajax_create', as: 'ajax_create'
 	  get '/collections/preview_table/:id', to: 'collections#preview_table', as: 'preview_table'
 	  get '/collections/pdf_table/:id', to: 'collections#pdf_table', as: 'pdf_table'
 	  get '/collections/send_that_file', to: 'collections#send_that_file', as: 'send_that_file'
 	  get '/artworks/search_by_objid', to: 'artworks#search_by_objid'
-	  delete 'artworks/destroy_multiple', to: 'artworks#destroy_multiple'
-	  delete 'artists/destroy_multiple', to: 'artists#destroy_multiple'
 	  get '/collections/download_pdf_table/:id', to: 'collections#download_pdf_table', as: 'download_pdf_table'
 	  get '/visits/new', to: 'visits#new', as: 'new_visit_from_collection'
 	  get '/artists/search', to: 'artists#search', as: 'artist_search'
 	  get '/artworks/search', to: 'artworks#search', as: 'artwork_search'
+	  post '/artists/ajax_create', to: 'artists#ajax_create', as: 'ajax_create'
 	  post '/general_informations/ajax_create', to: 'general_informations#ajax_create', as: 'gi_ajax_create'
-
-	  # get '/users/sign_up', to: 'devise/registrations#new'
+	  delete 'artworks/destroy_multiple', to: 'artworks#destroy_multiple'
+	  delete 'artists/destroy_multiple', to: 'artists#destroy_multiple'
 
 	  resources :artworks do
 	  	collection { post :import }

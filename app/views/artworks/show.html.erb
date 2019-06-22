@@ -129,7 +129,7 @@
 
 <p>
   <strong>Additional PDF:</strong>
-  <%= @artwork.additionalPdf %>
+  <%= link_to "#{@artwork.additionalPdf.file.filename}", "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/artwork/additionalPdf/#{@artwork.id}/#{@artwork.additionalPdf.file.filename}", target: :_blank %>
 </p>
 
 <p>

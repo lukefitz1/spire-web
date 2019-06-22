@@ -27,14 +27,14 @@
 <p>
   <strong>Proposals:</strong>
   <% @collection.customer_proposals.each do |pdf| %>
-    <%= pdf %>
+    <%= link_to "#{pdf.file.filename}", "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/customer_proposals/#{@collection.id}/#{pdf.file.filename}", target: :_blank %>
   <% end %>
 </p>
 
 <p>
   <strong>Invoices:</strong>
   <% @collection.customer_invoices.each do |pdf| %>
-    <%= pdf %>
+    <%= link_to "#{pdf.file.filename}", "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/customer_invoices/#{@collection.id}/#{pdf.file.filename}", target: :_blank %>
   <% end %>
 </p>
 
