@@ -39,3 +39,13 @@ bin/backups/
 old aws creds
 
 example.pdf
+
+.idea/
+
+# Docker stuff
+Dockerfile
+db_setup.sh
+docker-compose.yml
+dump_08-04-2019_21_21_35.sql
+entrypoint.sh
+tmp/db/
