@@ -38,8 +38,11 @@
     <% if form.object.customer_proposals? %>
       <% @collection.customer_proposals.each do |pdf| %>
         <%= form.label pdf, id: pdf %>
+        <%= form.label :remove_customer_proposals %>
+        <%= form.check_box :remove_customer_proposals %> 
       <% end %>
     <% end %>
+
   </div>
 
   <div class="field">
@@ -49,6 +52,8 @@
     <% if form.object.customer_invoices? %>
       <% @collection.customer_invoices.each do |pdf| %>
         <%= form.label pdf, id: pdf %>
+        <%= form.label :remove_customer_invoices %>
+        <%= form.check_box :remove_customer_invoices %> 
       <% end %>
     <% end %>
   </div>
