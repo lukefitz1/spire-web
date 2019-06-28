@@ -60,58 +60,12 @@
 	</div>
 </div>
 
-<!-- The General Information Modal -->
-<div id="gi-modal" class="modal">
 
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="gi-modal-close">&times;</span>
-    <p>Add New General Information</p>
-
-    <%= form_with(url: {:controller => "general_informations", :action => "ajax_create"}, model: @general_information, remote: true, id: 'gi-ajax-form')  do | gi_form | %>
-	  <!-- This first check to see if the general information exists doesn't feel right, might have to come back to this --> 
-	  <% if @general_informations %>
-		  <% if @general_informations.errors.any? %>
-		    <div id="error_explanation">
-		      <h2><%= pluralize(@general_informations.errors.count, "error") %> prohibited this general_informations from being saved:</h2>
-
-		      <ul>
-		      <% @general_informations.errors.full_messages.each do |message| %>
-		        <li><%= message %></li>
-		      <% end %>
-		      </ul>
-		    </div>
-		  <% end %>
-	  <% end %>
-
-		<div class="field">
-		    <%= gi_form.label :information_label %>
-		    <%= gi_form.text_field :information_label, id: :general_information_information_label %>
-		</div>
-
-		<div class="field">
-		    <%= gi_form.label :information %>
-		    <%= gi_form.text_area :information, id: :general_information_information, cols: "50", rows: "10"  %>
-		</div>
-
-	  <div class="actions">
-	    <%= gi_form.submit :id => 'gi-submit-btn'%>
-	  </div>
-	<% end %>
-	</div>
-</div>
 
 <script>
-	// Get the modal
 	var modal = document.getElementById('myModal');
-
-	// Get the button that opens the modal
 	var btn = document.getElementById("myBtn");
-
-	// Get the <span> element that closes the modal
 	var span = document.getElementsByClassName("close")[0];
-
-	// Form submti button
 	var submitBtn = document.getElementById("submitBtn");
 
 	// When the user clicks the button, open the modal 
@@ -164,73 +118,4 @@
 			}
 		}
 	}
-
-	var giModal = document.getElementById('gi-modal');
-	var giBtn = document.getElementById("open-gi-btn");
-	var giSpan = document.getElementsByClassName("gi-modal-close")[0];
-	var giSubmitBtn = document.getElementById("gi-submit-btn");
-
-	// When the user clicks the button, open the modal 
-	giBtn.onclick = function() {
-		// console.log("clicking the gi btn to open the modal");
-	    giModal.style.display = "block";
-	}
-
-	// When the user clicks on <span> (x), close the modal
-	giSpan.onclick = function() {
-		// console.log("clicking the gi span to close the modal");
-	    giModal.style.display = "none";
-	}
-
-	// Close the modal when form is submitted
-	giSubmitBtn.onclick = function() {
-		// console.log(artists)
-		// console.log("closing the modal after submitting the form");
-	    giModal.style.display = "none";
-	}
-
-	// When the user clicks anywhere outside of the modal, close it 
-	window.onclick = function(event) {
-	    if (event.target == giModal) {
-	        giModal.style.display = "none";
-	    }
-
-	    if (event.target == modal) {
-	        modal.style.display = "none";
-	    }
-	}
-
-	$('#gi-ajax-form').on('ajax:success', updateGeneralInformation)
-
-	function updateGeneralInformation(event, data) {
-		// console.log("Update General Information method getting called!!");
-
-		var gi_select = document.getElementsByName("artwork[general_information_id]")[0]
-		var gi_select_options = document.getElementsByName("artwork[general_information_id]")[0].options;
-		var gi_select_options_length = document.getElementsByName("artwork[general_information_id]")[0].options.length;
-
-		console.log("event: " + event);
-		console.log("Array length: " + event.detail[0].general_informations.length);
-
-		for (i = 0; i < event.detail[0].general_informations.length; i++) {
-			var gi_label = event.detail[0].general_informations[i].information_label;
-			var gi_id = event.detail[0].general_informations[i].id;
-
-			for (j = 1; j < gi_select_options_length; j++) {
-				var select_name_value = document.getElementsByName("artwork[general_information_id]")[0].options[j].innerText;
-				found = false
-
-				if (gi_label == select_name_value) {
-					found = true
-					break;
-				} else if (found == false && j == (gi_select_options_length - 1)) {
-					var new_gi = document.createElement("option");
-					new_gi.text = gi_label;
-					new_gi.value = gi_id;
-					gi_select.add(new_gi);
-				}
-			}
-		}
-	}
-
 </script>

@@ -24,42 +24,6 @@ class GeneralInformationsController < ApplicationController
   # POST /general_informations
   # POST /general_informations.json
   def ajax_create
-    match = false
-
-    # artists = Artist.all
-    # artists.each { |artist| 
-    #   if artist_params["firstName"] == artist.firstName
-    #     if artist_params["lastName"] == artist.lastName
-    #       match = true
-    #       break
-    #     end
-    #   end
-    # }
-
-    # if match 
-    #   respond_to do |format|
-    #     format.html { redirect_to new_artist_url, notice: 'Artist already exists' }
-    # end
-
-    # else
-    #   @artist = Artist.new(artist_params)
-    #   @updated_artists = Artist.all
-
-    #   if request.xhr?
-    #     respond_to do |format|
-    #       if @artist.save
-    #         # format.json { render json: { artists: @updated_artists } }
-    #         format.json { render json: { artists: @updated_artists } }
-    #       else
-    #         format.html { render :new }
-    #         format.json { render json: @artist.errors, status: :unprocessable_entity }
-    #       end
-    #     end
-    #   end
-    # end
-    # raise params.inspect
-    puts "General Information Parameters: #{general_information_params}"
-
     @general_information = GeneralInformation.new(general_information_params)
     @updated_general_informations = GeneralInformation.all
 
