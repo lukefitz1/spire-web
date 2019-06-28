@@ -352,6 +352,10 @@
     }
   });
 
+  if ($("#add-general-info").is(':checked')){
+    $('#general-info_block').css("display", "block");
+  }
+
   var giModal = document.getElementById('gi-modal');
 	var giBtn = document.getElementById("open-gi-btn");
 	var giSpan = document.getElementsByClassName("gi-modal-close")[0];
