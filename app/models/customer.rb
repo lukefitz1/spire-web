@@ -3,6 +3,7 @@ class Customer < ApplicationRecord
 
 	has_many :artworks
 	has_many :collections
+	has_many :media
 
 	mount_uploaders :customer_photos, ImageUploader
 

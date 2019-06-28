@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   	
+  resources :media
   resources :general_informations
   resources :visits
   	# get '/collections/pdf_crowd_table/:id', to: 'collections#pdf_crowd_table', as: 'pdf_crowd_table'
@@ -21,6 +22,9 @@ Rails.application.routes.draw do
 
 		  # collection api route
 		  resources :collections
+
+		  # media api route
+		  resources :media
 		end
 	end
 

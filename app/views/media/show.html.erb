@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Media name:</strong>
+  <% if @medium.media_name %>
+    <%= image_tag @medium.media_name.thumb.url %>
+  <% end %>
+</p>
+
+<p>
+  <strong>Customer ID:</strong>
+  <%= @medium.customer_id %>
+</p>
+
+<%= link_to 'Edit', edit_medium_path(@medium) %> |
+<%= link_to 'Back', media_path %>
