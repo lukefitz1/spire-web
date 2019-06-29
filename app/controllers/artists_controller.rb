@@ -50,11 +50,16 @@ class ArtistsController < ApplicationController
       end
     }
 
-    if match 
-      respond_to do |format|
-        format.html { redirect_to new_artist_url, notice: 'Artist already exists' }
+    if match
+      if request.xhr?
+        respond_to do |format|
+          format.json { render json: { :error => "error - Artist already exists" }, :status => :unprocessable_entity}
+        end
+      else 
+        respond_to do |format|
+          format.html { redirect_to new_artist_url, notice: 'Artist already exists' }
+        end
       end
-
     else
       @artist = Artist.new(artist_params)
       @updated_artists = Artist.all
@@ -62,7 +67,6 @@ class ArtistsController < ApplicationController
       if request.xhr?
         respond_to do |format|
           if @artist.save
-            # format.json { render json: { artists: @updated_artists } }
             format.json { render json: { artists: @updated_artists } }
           else
             format.html { render :new }

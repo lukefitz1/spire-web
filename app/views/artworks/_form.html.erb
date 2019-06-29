@@ -320,6 +320,7 @@
 
 	  <div class="actions">
 	    <%= artist_form.submit :id => 'submitBtn'%>
+      <p class="artist-exists-error">Artist Already Exists!</p>
 	  </div>
 	<% end %>
 	</div>
@@ -450,7 +451,7 @@
 	// Close the modal when form is submitted
 	submitBtn.onclick = function() {
 		// console.log(artists)
-	    modal.style.display = "none";
+	    // modal.style.display = "none";
 	}
 
 	// When the user clicks anywhere outside of the modal, close it
@@ -505,10 +506,18 @@
 		}
 	}
 
-  $('#ajax-form').on('ajax:success', updateArtists)
+  $('#ajax-form').on('ajax:error', displayError);
+
+  function displayError(event, data) {
+    $('p.artist-exists-error').css("display", "block");
+  }
+
+  $('#ajax-form').on('ajax:success', updateArtists);
 
 	function updateArtists(event, data) {
-		var artists_select = document.getElementsByName("artwork[artist_id]")[0]
+		modal.style.display = "none";
+
+    var artists_select = document.getElementsByName("artwork[artist_id]")[0]
 		var select_options = document.getElementsByName("artwork[artist_id]")[0].options;
 		var select_options_length = document.getElementsByName("artwork[artist_id]")[0].options.length;
 
