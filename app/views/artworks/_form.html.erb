@@ -228,6 +228,9 @@
     
     <%= form.submit %>
   </div>
+
+  <!-- Trigger/Open The Modal -->
+  <%= link_to "New Artist", new_artist_path, remote: true, id: "myBtn" %>
 <% end %>
 
 <!-- The General Information Modal -->
@@ -271,10 +274,61 @@
   </div>
 </div>
 
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Add New Artist</p>
+
+    <%= form_with(url: {:controller => "artists", :action => "ajax_create"}, model: @artist, remote: true, id: 'ajax-form', scope: "artist")  do | artist_form | %>
+	  <!-- This first check to see if the artist exists doesn't feel right, might have to come back to this --> 
+	  <% if @artist %>
+		  <% if @artist.errors.any? %>
+		    <div id="error_explanation">
+		      <h2><%= pluralize(@artist.errors.count, "error") %> prohibited this artist from being saved:</h2>
+
+		      <ul>
+		      <% @artist.errors.full_messages.each do |message| %>
+		        <li><%= message %></li>
+		      <% end %>
+		      </ul>
+		    </div>
+		  <% end %>
+	  <% end %>
+
+	  <div class="field">
+	    <%= artist_form.label :firstName %>
+	    <%= artist_form.text_field :firstName, id: :artist_firstName %>
+	  </div>
+
+	  <div class="field">
+	    <%= artist_form.label :lastName %>
+	    <%= artist_form.text_field :lastName, id: :artist_lastName %>
+	  </div>
+
+	  <div class="field">
+	    <%= artist_form.label :additionalInfo %>
+	    <%= artist_form.text_field :additionalInfo, id: :artist_additionalInfo %>
+	  </div>
+
+	  <div class="field">
+	    <%= artist_form.label :biography %>
+	    <%= artist_form.text_area :biography, id: :artist_biography, cols: "70", rows: "25" %>
+	  </div>
+
+	  <div class="actions">
+	    <%= artist_form.submit :id => 'submitBtn'%>
+	  </div>
+	<% end %>
+	</div>
+</div>
+
 <script>
   $("#new-artwork-form").submit(function(e) {
-    console.log("Form submitted! - Artwork");
-    console.log("Is there an error (artwork)? " + objIdErrorExists);
+    // console.log("Form submitted! - Artwork");
+    // console.log("Is there an error (artwork)? " + objIdErrorExists);
 
     if(objIdErrorExists) {
       $('html, body').animate({scrollTop: ($('#new-artwork-form').offset().top)},500);
@@ -283,8 +337,8 @@
   });
 
   $("#gi-modal").submit(function(e) {
-    console.log("Form submitted! - GI");
-    console.log("Is there an error (GI)? " + objIdErrorExists);
+    // console.log("Form submitted! - GI");
+    // console.log("Is there an error (GI)? " + objIdErrorExists);
 
     if(objIdErrorExists) {
       $('html, body').animate({scrollTop: ($('#new-artwork-form').offset().top)},500);
@@ -297,13 +351,13 @@
   var objIdErrorExists = false;
 
   $('#artwork_ojbId').blur(function() {
-    console.log($('#artwork_ojbId').val());
+    // console.log($('#artwork_ojbId').val());
 
     $.ajax({
       url: "search_by_objid", 
       data: {"objid": $('#artwork_ojbId').val()}, 
       success: function(data) { 
-        console.log("Success: " + data.obj_id_exists);
+        // console.log("Success: " + data.obj_id_exists);
 
         if (data.obj_id_exists) {
           $('#artwork_ojbId').removeClass('obj-id-green').addClass('obj-id-red');
@@ -360,25 +414,51 @@
 	var giBtn = document.getElementById("open-gi-btn");
 	var giSpan = document.getElementsByClassName("gi-modal-close")[0];
 	var giSubmitBtn = document.getElementById("gi-submit-btn");
+  var modal = document.getElementById('myModal');
+	var btn = document.getElementById("myBtn");
+	var span = document.getElementsByClassName("close")[0];
+	var submitBtn = document.getElementById("submitBtn");
 
 	// When the user clicks the button, open the modal 
 	giBtn.onclick = function() {
-		console.log("clicking the gi btn to open the modal");
+		// console.log("clicking the gi btn to open the modal");
     giModal.style.display = "block";
 	}
 
 	// When the user clicks on <span> (x), close the modal
 	giSpan.onclick = function() {
-		console.log("clicking the gi span to close the modal");
+		// console.log("clicking the gi span to close the modal");
     giModal.style.display = "none";
 	}
 
 	// Close the modal when form is submitted
 	giSubmitBtn.onclick = function() {
-		console.log("closing the modal after submitting the gi form");
+		// console.log("closing the modal after submitting the gi form");
     giModal.style.display = "none";
 	}
 
+	// When the user clicks the button, open the modal 
+	btn.onclick = function() {
+	    modal.style.display = "block";
+	}
+
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+	    modal.style.display = "none";
+	}
+
+	// Close the modal when form is submitted
+	submitBtn.onclick = function() {
+		// console.log(artists)
+	    modal.style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+	    if (event.target == modal) {
+	        modal.style.display = "none";
+	    }
+	}
   // When the user clicks anywhere outside of the modal, close it 
   // window.onclick = function(event) {
   //   if (event.target == giModal) {
@@ -395,14 +475,14 @@
 	$('#gi-ajax-form').on('ajax:success', updateGeneralInformation)
 
 	function updateGeneralInformation(event, data) {
-		console.log("Update General Information method getting called!!");
+		// console.log("Update General Information method getting called!!");
 
 		var gi_select = document.getElementsByName("artwork[general_information_id]")[0]
 		var gi_select_options = document.getElementsByName("artwork[general_information_id]")[0].options;
 		var gi_select_options_length = document.getElementsByName("artwork[general_information_id]")[0].options.length;
 
-		console.log("event: " + event);
-		console.log("Array length: " + event.detail[0].general_informations.length);
+		// console.log("event: " + event);
+		// console.log("Array length: " + event.detail[0].general_informations.length);
 
 		for (i = 0; i < event.detail[0].general_informations.length; i++) {
 			var gi_label = event.detail[0].general_informations[i].information_label;
@@ -420,6 +500,34 @@
 					new_gi.text = gi_label;
 					new_gi.value = gi_id;
 					gi_select.add(new_gi);
+				}
+			}
+		}
+	}
+
+  $('#ajax-form').on('ajax:success', updateArtists)
+
+	function updateArtists(event, data) {
+		var artists_select = document.getElementsByName("artwork[artist_id]")[0]
+		var select_options = document.getElementsByName("artwork[artist_id]")[0].options;
+		var select_options_length = document.getElementsByName("artwork[artist_id]")[0].options.length;
+
+		for (i = 0; i < event.detail[0].artists.length; i++) {
+			var artist_name = event.detail[0].artists[i].firstName + " " + event.detail[0].artists[i].lastName;
+			var artist_id = event.detail[0].artists[i].id
+
+			for (j = 1; j < select_options_length; j++) {
+				var select_name_value = document.getElementsByName("artwork[artist_id]")[0].options[j].innerText;
+				found = false
+
+				if (artist_name == select_name_value) {
+					found = true
+					break;
+				} else if (found == false && j == (select_options_length - 1)) {
+					var new_artist = document.createElement("option");
+					new_artist.text = artist_name;
+					new_artist.value = artist_id;
+					artists_select.add(new_artist);
 				}
 			}
 		}
