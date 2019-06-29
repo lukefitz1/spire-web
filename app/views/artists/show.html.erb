@@ -29,5 +29,45 @@
   <%= @artist.biography %>
 </p>
 
+<p>
+  <strong>Pieces of Art:</strong>
+  <% unless @artist.artworks.blank? %>
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>Image</th>
+          <th>Object ID</th>
+          <th>Collection</th>
+          <th>Customer</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @artist.artworks.each do |artwork| %>
+          <tr>
+            <td>
+              <% if artwork.image.thumb.url %>
+                <%= image_tag artwork.image.thumb.url %>
+              <% end %>
+            </td>
+            <td><%= artwork.ojbId %></td>
+            <td>  
+              <% unless artwork.collection.blank? %>
+                <%= artwork.collection.collectionName %>
+              <% end %>
+            </td>
+            <td>
+              <% unless artwork.customer.blank? %>
+                <%= artwork.customer.firstName + " " + artwork.customer.lastName %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+      </table>
+    </div>
+  <% end %>
+</p>
+
 <%= link_to 'Edit', edit_artist_path(@artist) %> |
 <%= link_to 'Back', artists_path %>
