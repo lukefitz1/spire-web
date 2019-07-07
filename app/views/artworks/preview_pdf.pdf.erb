@@ -54,12 +54,12 @@
 	        <% if @artwork.title == 'Untitled' %>
 		        <div class="label-block">
 		          <span class="avenirnextbold">Title:</span>
-	          	  <p class="value"> <%= @artwork.title %></p><% if @artwork.date %>, <%= @artwork.date %><% end %>
+	          	  <p class="value"> <%= @artwork.title %></p><% if @artwork.date && @artwork.date != ""  %>,t <%= @artwork.date %><% end %>
 		        </div>
 	        <% else %>
 		        <div class="label-block">
 		          <span class="avenirnextbold">Title:</span>
-		          <p class="value italics"> <%= @artwork.title %></p><% if @artwork.date %>, <%= @artwork.date %><% end %>
+		          <p class="value italics"> <%= @artwork.title %></p><% if @artwork.date && @artwork.date != "" %>, <%= @artwork.date %><% end %>
 		        </div>
 	        <% end %>
 
