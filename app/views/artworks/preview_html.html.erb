@@ -18,7 +18,7 @@
 	<header>
 		<div class="main">
 			<div class="title">
-				<p class="avenirnext collection-title"><span class="avenirnextbold"><%= @artwork.collection.identifier %></span> <span class="avenirnextultralight"><%= @artwork.collection.collectionName %></span></p>
+				<p class="avenirnext collection-title" id="coll-title"><span class="avenirnextbold"><%= @artwork.collection.identifier %></span> <span class="avenirnextultralight"><%= @artwork.collection.collectionName %></span></p>
 			</div>
 			<div class="logo">
 				<%= image_tag 'spire-logo.png', class: 'logo-img'%>
@@ -172,6 +172,16 @@
     	bio.style.fontSize = '16px';
     } else {
     	bio.style.fontSize = '15px';
+    }
+  })();
+
+  // self executing function here
+  (function() {
+    title = document.getElementById('coll-title');
+    if (title.textContent.length < 30) {
+    	title.style.fontSize = '32px';
+    } else {
+    	title.style.fontSize = '28px';
     }
   })();
 </script>
