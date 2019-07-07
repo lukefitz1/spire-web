@@ -41,5 +41,103 @@
         <td><%= link_to 'Destroy', artist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
+
+    <!-- Trigger/Open The Modal -->
+    <%= link_to "New Artist", new_artist_path, remote: true, id: "myBtn" %>
   </tbody>
 </table>
+
+<!-- The Modal -->
+<div id="createArtistModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>Add New Artist</p>
+
+    <%= form_with(url: {:controller => "artists", :action => "ajax_create"}, model: @artist, remote: true, id: 'ajax-form', scope: "artist")  do | artist_form | %>
+	  <!-- This first check to see if the artist exists doesn't feel right, might have to come back to this --> 
+	  <% if @artist %>
+		  <% if @artist.errors.any? %>
+		    <div id="error_explanation">
+		      <h2><%= pluralize(@artist.errors.count, "error") %> prohibited this artist from being saved:</h2>
+
+		      <ul>
+		      <% @artist.errors.full_messages.each do |message| %>
+		        <li><%= message %></li>
+		      <% end %>
+		      </ul>
+		    </div>
+		  <% end %>
+	  <% end %>
+
+	  <div class="field">
+	    <%= artist_form.label :firstName %>
+	    <%= artist_form.text_field :firstName, id: :artist_firstName %>
+	  </div>
+
+	  <div class="field">
+	    <%= artist_form.label :lastName %>
+	    <%= artist_form.text_field :lastName, id: :artist_lastName %>
+	  </div>
+
+	  <div class="field">
+	    <%= artist_form.label :additionalInfo %>
+	    <%= artist_form.text_field :additionalInfo, id: :artist_additionalInfo %>
+	  </div>
+
+	  <div class="field">
+	    <%= artist_form.label :biography %>
+	    <%= artist_form.text_area :biography, id: :artist_biography, cols: "70", rows: "25" %>
+	  </div>
+
+	  <div class="actions">
+	    <%= artist_form.submit :id => 'submitBtn'%>
+      <p class="artist-exists-error">Artist Already Exists!</p>
+	  </div>
+	<% end %>
+	</div>
+</div>
+
+<script>
+  var modal = document.getElementById('createArtistModal');
+	var btn = document.getElementById("myBtn");
+	var span = document.getElementsByClassName("close")[0];
+	var submitBtn = document.getElementById("submitBtn");
+
+  // When the user clicks the button, open the modal 
+	btn.onclick = function() {
+	    modal.style.display = "block";
+	}
+
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+	    modal.style.display = "none";
+	}
+
+	// Close the modal when form is submitted
+	submitBtn.onclick = function() {
+		// console.log(artists)
+	    // modal.style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+	    if (event.target == modal) {
+	        modal.style.display = "none";
+	    }
+	}
+
+  $('#ajax-form').on('ajax:error', displayError);
+
+  function displayError(event, data) {
+    $('p.artist-exists-error').css("display", "block");
+  }
+
+  $('#ajax-form').on('ajax:success', updateArtists);
+
+	function updateArtists(event, data) {
+    location.reload();
+  }
+
+</script>
