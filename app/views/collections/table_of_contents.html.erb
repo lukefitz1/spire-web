@@ -1,0 +1,38 @@
+<script>
+	if (document.title = "Table Preview") {
+		document.getElementById("nav").style.display = 'none'; 
+    document.body.style.margin = '0px';
+	}
+</script>
+
+<div class='table-of-contents'>
+  <h1 class='collection-name'><%= @collection.collectionName %></h1>
+
+	<% unless @collection.artworks.blank? %>
+  <!-- Artworks Table -->
+  <table>
+    <thead class='toc-header'>
+      <tr>
+        <th>Object ID</th>
+        <th>Artist</th>
+        <th>Title</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @collection.artworks.each do |artwork| %>
+        <tr>
+          <td class='toc-data'><%= artwork.ojbId %></td>
+          <td class='toc-data'>
+            <% unless artwork.artist.blank? %>
+              <%= artwork.artist.firstName %><%= ' ' %><%= artwork.artist.lastName %>
+            <% end %> 
+          </td>
+          <td class='toc-data'><%= artwork.title %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+  
+</div>

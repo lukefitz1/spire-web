@@ -50,6 +50,8 @@ Rails.application.routes.draw do
 	  get '/visits/new', to: 'visits#new', as: 'new_visit_from_collection'
 	  get '/artists/search', to: 'artists#search', as: 'artist_search'
 	  get '/artworks/search', to: 'artworks#search', as: 'artwork_search'
+	  get '/collections/table_of_contents/:id', to: 'collections#table_of_contents', as: 'table_of_contents'
+
 	  post '/artists/ajax_create', to: 'artists#ajax_create', as: 'ajax_create'
 	  post '/general_informations/ajax_create', to: 'general_informations#ajax_create', as: 'gi_ajax_create'
 	  delete 'artworks/destroy_multiple', to: 'artworks#destroy_multiple'

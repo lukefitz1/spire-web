@@ -31,6 +31,10 @@ class CollectionsController < ApplicationController
     @collection = Collection.find(params[:coll_id])
   end
 
+  def table_of_contents
+    @collection = Collection.find(params[:coll_id])
+  end
+
   # GET
   def download_pdf_table
     begin

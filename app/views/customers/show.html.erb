@@ -98,44 +98,23 @@
       </tbody>
     </table>
 
+    <%= link_to 'Table of Contents', table_of_contents_path(:coll_id => collection.id) %><br /><br />
     <%= link_to 'View Table', preview_table_path(:coll_id => collection.id) %><br /><br />
-
     <%= link_to 'PDF Table', pdf_table_path(:coll_id => collection.id, format: :pdf) %><br /><br />
-
     <%= link_to 'PDF Crowd Table', download_pdf_table_path(:coll_id => collection.id, format: :pdf) %><br /><br />
-
     <%= link_to 'New Artwork', new_from_customer_collection_path(:cust_id => @customer.id, :coll_id => collection.id, :customer_redirect => true) %><br /><br />
     
-    <!-- Artworks Table -->
     <% unless collection.artworks.blank? %>
-      <!-- <a class="show-artwork">Show Artwork</a>
-      <a class="hide-artwork">Hide Artwork</a> -->
-      <!-- <%= button_to "Art", class: "art-panel" %>-->
-
       <div>
         <table>
           <thead>
             <tr>
               <th>Image</th>
-              <!-- <th>Artwork ID</th> -->
               <th>Object ID</th>
               <th>Art Type</th>
               <th>Title</th>
               <th>Artist</th>
               <th>Date</th>
-              <!-- <th>Medium</th> -->
-              <!-- <th>Dimensions</th>
-              <th>Frame Dimensions</th>
-              <th>Current Location</th>
-              <th>Source</th>
-              <th>Date Acquired</th>
-              <th>Notes</th>
-              <th>Amount Paid</th>
-              <th>Current Value</th>
-              <th>Notes Image</th>
-              <th>Notes Image Two</th>
-              <th>Additional Info Image</th>
-              <th>Additional Info Image Two</th> -->
               <th colspan="4"></th>
             </tr>
           </thead>
@@ -148,7 +127,6 @@
                     <%= image_tag artwork.image.thumb.url %>
                   <% end %>
                 </td>
-                <!-- <td><%= artwork.id %></td> -->
                 <td><%= artwork.ojbId %></td>
                 <td><%= artwork.artType %></td>
                 <td><%= artwork.title %></td>
@@ -160,45 +138,6 @@
                 </td>
 
                 <td><%= artwork.date %></td>
-                <!-- <td><%= artwork.medium %></td> -->
-                <!-- <td><%= artwork.dimensions %></td>
-                <td><%= artwork.frame_dimensions %></td>
-                <td><%= artwork.currentLocation %></td>
-                <td><%= artwork.source %></td>
-                <td><%= artwork.dateAcquired %></td>
-                <td><%= artwork.notes %></td>
-                <td><%= artwork.amountPaid %></td>
-                <td><%= artwork.currentValue %></td>
-
-                <td>
-                  <% if artwork.notesImage.thumb.url %>
-                    <%= image_tag artwork.notesImage.thumb.url %>
-                  <% end %>
-                </td>
-
-                <td>
-                  <% if artwork.notesImageTwo.thumb.url %>
-                    <%= image_tag artwork.notesImageTwo.thumb.url %>
-                  <% end %>
-                </td>
-
-                <td>
-                  <% if artwork.additionalInfoImage.thumb.url %>
-                    <%= image_tag artwork.additionalInfoImage.thumb.url %>
-                  <% end %>
-                </td>
-
-                <td>
-                  <% if artwork.additionalInfoImageTwo.thumb.url %>
-                    <%= image_tag artwork.additionalInfoImageTwo.thumb.url %>
-                  <% end %>
-                </td>
-                <td>
-                  <% if artwork.additionalInfoImageTwo.thumb.url %>
-                    <%= image_tag artwork.additionalInfoImageTwo.thumb.url %>
-                  <% end %>
-                </td> --> 
-
                 <td><%= link_to 'HTML Preview', preview_html_path(artwork) %></td>
                 <td><%= link_to 'Edit', edit_artwork_path(artwork, :cust_id => @customer.id, :redirect => true) %></td>
                 <td><%= link_to 'PDF', preview_pdf_path(artwork, format: :pdf) %></td>
