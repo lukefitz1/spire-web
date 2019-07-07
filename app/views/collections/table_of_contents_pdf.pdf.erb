@@ -1,0 +1,58 @@
+<%= wicked_pdf_stylesheet_link_tag "bootstrap-sprockets" %>
+<%= wicked_pdf_stylesheet_link_tag "bootstrap" %>
+<%= wicked_pdf_stylesheet_link_tag "collections" %>
+<%= wicked_pdf_stylesheet_link_tag "artists" %>
+<%= wicked_pdf_stylesheet_link_tag "customers" %>
+<%= wicked_pdf_stylesheet_link_tag "artworks" %>
+
+<script>
+	if (document.title = "Table Preview") {
+		document.getElementById("nav").style.display = 'none'; 
+    document.body.style.margin = '0px';
+	}
+</script>
+
+<div class='table-of-contents'>
+  <div class='collection-name'>
+    <h1 class='avenirnext'><span class="avenirnextbold"><%= @collection.identifier %> <span class="avenirnextultralight"><%= @collection.collectionName %></h1>
+  </div>
+  
+  <div class='toc-heading'>
+    <div class='toc-subheader'>
+      <h3 class='avenirnextultralight'>Collection Inventory <%= @collection.year %> | Prepared by Spire Art Services</h3>
+    </div>
+    <div class='toc-subheader-img'>
+      <%= wicked_pdf_image_tag 'spire-logo.png', class: 'toc-logo-img'%>
+    </div>
+  </div>
+
+	<% unless @collection.artworks.blank? %>
+  <!-- Artworks Table -->
+  <div class='toc-container'>
+    <table class='toc'>
+      <%# <thead class='toc-header'>
+        <tr>
+          <th>Object ID</th>
+          <th>Artist</th>
+          <th>Title</th>
+        </tr>
+      </thead> %>
+
+      <tbody>
+        <% @collection.artworks.each do |artwork| %>
+          <tr class='toc-row'>
+            <td class='toc-data-left'><%= artwork.ojbId %></td>
+            <td class='toc-data-middle'>
+              <% unless artwork.artist.blank? %>
+                <%= artwork.artist.firstName %><%= ' ' %><%= artwork.artist.lastName %>
+              <% end %> 
+            </td>
+            <td class='toc-data-right'><%= artwork.title %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
+  
+</div>

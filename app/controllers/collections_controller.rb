@@ -26,12 +26,31 @@ class CollectionsController < ApplicationController
     @collection = Collection.new(:customer_id => params[:cust_id])
   end
 
-  # GET 
-  def preview_table
+  # GET
+  def table_of_contents
     @collection = Collection.find(params[:coll_id])
   end
 
-  def table_of_contents
+  # GET
+  def table_of_contents_pdf
+    @collection = Collection.find(params[:coll_id])
+
+    puts 'At least we are hitting the correct controller!'
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: 'toc-pdf',
+          template: 'collections/table_of_contents_pdf.pdf.erb',
+          # orientation: 'Landscape',
+          show_as_html: params.key?('debug'),
+          encoding: 'UTF-8'
+      end
+    end
+  end
+
+  # GET 
+  def preview_table
     @collection = Collection.find(params[:coll_id])
   end
 

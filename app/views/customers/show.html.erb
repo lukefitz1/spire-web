@@ -99,6 +99,7 @@
     </table>
 
     <%= link_to 'Table of Contents', table_of_contents_path(:coll_id => collection.id) %><br /><br />
+    <%= link_to 'Table of Contents - PDF', table_of_contents_pdf_path(:coll_id => collection.id, format: :pdf) %><br /><br />
     <%= link_to 'View Table', preview_table_path(:coll_id => collection.id) %><br /><br />
     <%= link_to 'PDF Table', pdf_table_path(:coll_id => collection.id, format: :pdf) %><br /><br />
     <%= link_to 'PDF Crowd Table', download_pdf_table_path(:coll_id => collection.id, format: :pdf) %><br /><br />
