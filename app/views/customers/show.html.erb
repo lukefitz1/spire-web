@@ -192,12 +192,12 @@
                   <% if artwork.additionalInfoImageTwo.thumb.url %>
                     <%= image_tag artwork.additionalInfoImageTwo.thumb.url %>
                   <% end %>
-                </td> -->
+                </td>
                 <td>
                   <% if artwork.additionalInfoImageTwo.thumb.url %>
                     <%= image_tag artwork.additionalInfoImageTwo.thumb.url %>
                   <% end %>
-                </td> 
+                </td> --> 
 
                 <td><%= link_to 'HTML Preview', preview_html_path(artwork) %></td>
                 <td><%= link_to 'Edit', edit_artwork_path(artwork, :cust_id => @customer.id, :redirect => true) %></td>
