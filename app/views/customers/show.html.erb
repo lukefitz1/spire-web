@@ -115,7 +115,7 @@
               <th>Art Type</th>
               <th>Title</th>
               <th>Artist</th>
-              <th>Date</th>
+              <th>Additional PDF?</th>
               <th colspan="4"></th>
             </tr>
           </thead>
@@ -138,7 +138,11 @@
                   <% end %> 
                 </td>
 
-                <td><%= artwork.date %></td>
+                <td>
+                  <% if artwork.additionalPdf %>
+                    True
+                  <% end %>
+                </td>
                 <td><%= link_to 'HTML Preview', preview_html_path(artwork) %></td>
                 <td><%= link_to 'Edit', edit_artwork_path(artwork, :cust_id => @customer.id, :redirect => true) %></td>
                 <td><%= link_to 'PDF', preview_pdf_path(artwork, format: :pdf) %></td>
