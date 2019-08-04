@@ -96,11 +96,8 @@
 	          <% end %>        
 	        </div><br />
 	        <div class="label-block">
-            <%# <svg width="432px" height="25px" viewBox="525 0 3250 250">
-              <line x1="0" x2="4500" y1="100" y2="100" stroke="#4a6e98" stroke-width="40" stroke-linecap="round" stroke-dasharray="1, 80"></line>
-            </svg> %>
-            
-	          <p class="label-heading avenirnextbold">Provenance:</p><p class="block-value"> <%= @artwork.provenance %></p>
+	          <p class="label-heading avenirnextbold">Provenance:</p>
+            <p class="block-value provenance-content-area"> <%= @artwork.provenance %></p>
 	        </div>
 	        <div class="label-block">
 	          <% if @artwork.notesImage.thumb.url %>
@@ -120,33 +117,26 @@
 						</div> -->
 					<% end %>
 				</div>
-
 	          <% end %>
-
 	          <p class="label-heading avenirnextbold">Note:</p>
-	          <p class="block-value"><%= @artwork.notes %></p>
+	          <p class="block-value notes-content-area"><%= @artwork.notes %></p>
 	        </div>
-		    <% if @artwork.additionalInfoText && @artwork.additionalInfoText != ""%>
-		        <div class="label-block">
-		          <% if @artwork.additionalInfoImage.thumb.url %>
-
-		          	<div class="add-info-images-block">
-						<div class="add-info-image-one">
-							<%= image_tag @artwork.additionalInfoImage, class: 'info-image' %>
-						</div>
-
-						<% if @artwork.additionalInfoImageTwo.thumb.url %>
-							<div class="add-info-image-two">
-								<%= image_tag @artwork.additionalInfoImageTwo, class: 'info-image' %>
-							</div>
-						<% end %>
-
-					</div>
-
-		          <% end %>
-
+          <% if @artwork.additionalInfoText && @artwork.additionalInfoText != ""%>
+              <div class="label-block">
+                <% if @artwork.additionalInfoImage.thumb.url %>
+                  <div class="add-info-images-block">
+                    <div class="add-info-image-one">
+                      <%= image_tag @artwork.additionalInfoImage, class: 'info-image' %>
+                    </div>
+                    <% if @artwork.additionalInfoImageTwo.thumb.url %>
+                      <div class="add-info-image-two">
+                        <%= image_tag @artwork.additionalInfoImageTwo, class: 'info-image' %>
+                      </div>
+                    <% end %>
+                  </div>
+		        <% end %>
 		          <p class="label-heading avenirnextbold"><%= @artwork.additionalInfoLabel %>:</p>
-		          <p class="block-value"> <%= @artwork.additionalInfoText %></p>
+		          <p class="block-value additional-info-content-area"> <%= @artwork.additionalInfoText %></p>
 		        </div>
 		    <% end %>
     	</div>
@@ -175,21 +165,25 @@
 <script>
   // self executing function here
   (function() {
-    bio = document.getElementById('artist-bio');
-    if (bio.textContent.length < 1325) {
-    	bio.style.fontSize = '16px';
-    } else {
-    	bio.style.fontSize = '15px';
+    title = document.getElementById('coll-title');
+    if (title) {
+      if (title.textContent.length < 30) {
+        title.style.fontSize = '32px';
+      } else {
+        title.style.fontSize = '28px';
+      }
     }
   })();
 
   // self executing function here
   (function() {
-    title = document.getElementById('coll-title');
-    if (title.textContent.length < 30) {
-    	title.style.fontSize = '32px';
-    } else {
-    	title.style.fontSize = '28px';
+    bio = document.getElementById('artist-bio');
+    if (bio) {
+      if (bio.textContent.length < 1050) {
+        bio.style.fontSize = '16px';
+      } else {
+        bio.style.fontSize = '15px';
+      }
     }
   })();
 </script>

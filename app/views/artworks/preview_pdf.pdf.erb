@@ -94,7 +94,8 @@
 	          <% end %>        
 	        </div><br />
 	        <div class="label-block">
-	          <p class="label-heading avenirnextbold">Provenance:</p><p class="block-value"> <%= @artwork.provenance %></p>
+	          <p class="label-heading avenirnextbold">Provenance:</p>
+            <p class="block-value provenance-content-area"> <%= @artwork.provenance %></p>
 	        </div>
 	        <div class="label-block">
 	          <% if @artwork.notesImage.thumb.url %>
@@ -113,29 +114,24 @@
 	          <% end %>
 
 	          <p class="label-heading avenirnextbold">Note:</p>
-	          <p class="block-value"><%= @artwork.notes %></p>
+	          <p class="block-value notes-content-area"><%= @artwork.notes %></p>
 	        </div>
 		    <% if @artwork.additionalInfoText && @artwork.additionalInfoText != ""%>
 		        <div class="label-block">
 		          <% if @artwork.additionalInfoImage.thumb.url %>
-
 		          	<div class="add-info-images-block">
 						<div class="add-info-image-one">
 							<%= wicked_pdf_image_tag @artwork.additionalInfoImage, class: 'info-image' %>
 						</div>
-
 						<% if @artwork.additionalInfoImageTwo.thumb.url %>
 							<div class="add-info-image-two">
 								<%= wicked_pdf_image_tag @artwork.additionalInfoImageTwo, class: 'info-image' %>
 							</div>
 						<% end %>
-
 					</div>
-
 		          <% end %>
-
 		          <p class="label-heading avenirnextbold"><%= @artwork.additionalInfoLabel %>:</p>
-		          <p class="block-value"> <%= @artwork.additionalInfoText %></p>
+		          <p class="block-value additional-info-content-area"> <%= @artwork.additionalInfoText %></p>
 		        </div>
 		    <% end %>
     	</div>
@@ -174,21 +170,37 @@
 <script>
   // self executing function here
   (function() {
-    bio = document.getElementById('artist-bio');
-    if (bio.textContent.length < 1325) {
-    	bio.style.fontSize = '16px';
-    } else {
-    	bio.style.fontSize = '15px';
+    title = document.getElementById('coll-title');
+    if (title) {
+      if (title.textContent.length < 30) {
+        title.style.fontSize = '32px';
+      } else {
+        title.style.fontSize = '28px';
+      }
     }
   })();
 
   // self executing function here
   (function() {
-    title = document.getElementById('coll-title');
-    if (title.textContent.length < 30) {
-    	title.style.fontSize = '32px';
-    } else {
-    	title.style.fontSize = '28px';
+    bio = document.getElementById('artist-bio');
+    if (bio) {
+      if (bio.textContent.length < 1050) {
+        bio.style.fontSize = '16px';
+      } else {
+        bio.style.fontSize = '15px';
+      }
+    }
+  })();
+
+  // self executing function here
+  (function() {
+    noteContent = document.getElementById('notes-content-area');
+    if (noteContent) {
+      if (noteContent.textContent.length < 200) {
+        noteContent.style.fontSize = '16px';
+      } else {
+        noteContent.style.fontSize = '15px';
+      }
     }
   })();
 </script>
