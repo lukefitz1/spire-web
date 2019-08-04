@@ -37,19 +37,21 @@
 	        <div class="label-block">
 	          <span class="avenirnextbold">Artist:</span>
 	          <p class="value"> 
-	          	<% if @artwork.artist.firstName != '' && @artwork.artist.lastName != ''%>
-	          		<%= @artwork.artist.lastName %>, <%= @artwork.artist.firstName %>
-	          	<% elsif @artwork.artist.firstName != '' && @artwork.artist.lastName == '' %>
-	          		<%= @artwork.artist.firstName %>
-	          	<% else %>
-	          		<%= @artwork.artist.lastName %>	
-	          	<% end %>
+	          	<% if @artwork.artist %>
+                <% if @artwork.artist.firstName != '' && @artwork.artist.lastName != ''%>
+                  <%= @artwork.artist.lastName %>, <%= @artwork.artist.firstName %>
+                <% elsif @artwork.artist.firstName != '' && @artwork.artist.lastName == '' %>
+                  <%= @artwork.artist.firstName %>
+                <% else %>
+                  <%= @artwork.artist.lastName %>	
+                <% end %>
 
-	          	<% if @artwork.artist.additionalInfo %>
-	          		<% if @artwork.artist.additionalInfo != "" %>
-	          		  (<%= @artwork.artist.additionalInfo %>)
-	          		<% end %>
-	          	<% end %>
+                <% if @artwork.artist.additionalInfo %>
+                  <% if @artwork.artist.additionalInfo != "" %>
+                    (<%= @artwork.artist.additionalInfo %>)
+                  <% end %>
+                <% end %>
+              <% end %>
 	          </p>
 	        </div>
 
@@ -94,6 +96,10 @@
 	          <% end %>        
 	        </div><br />
 	        <div class="label-block">
+            <%# <svg width="432px" height="25px" viewBox="525 0 3250 250">
+              <line x1="0" x2="4500" y1="100" y2="100" stroke="#4a6e98" stroke-width="40" stroke-linecap="round" stroke-dasharray="1, 80"></line>
+            </svg> %>
+            
 	          <p class="label-heading avenirnextbold">Provenance:</p><p class="block-value"> <%= @artwork.provenance %></p>
 	        </div>
 	        <div class="label-block">
@@ -154,8 +160,10 @@
 					<h3 class="bold"><%= @artwork.general_information.information_label %></h3>
 					<p class="text-justify avenirnext" id="artist-bio"><%= @artwork.general_information.information %></p>
 				<% else %>
-					<h3 class="bold">Artist&#39s Biography</h3>
-					<p class="text-justify avenirnext" id="artist-bio"><%= @artwork.artist.biography %></p>
+          <% if @artwork.artist %>
+            <h3 class="bold">Artist&#39s Biography</h3>
+            <p class="text-justify avenirnext" id="artist-bio"><%= @artwork.artist.biography %></p>
+          <% end %>
 				<% end %>
 			</div>
 		</div>
