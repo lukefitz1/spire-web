@@ -103,11 +103,11 @@
         <% if @artwork.notesImage.thumb.url %>  
           <div class="notes-images-block">
             <div class="notes-image-one padding-bottom-five">
-              <%= image_tag @artwork.notesImage%>
+              <%= image_tag @artwork.notesImage.url unless @artwork.notesImage.nil? %>
             </div>
             <% if @artwork.notesImage.thumb.url %>
               <div class="notes-image-two">
-                <%= image_tag @artwork.notesImageTwo %>
+                <%= image_tag @artwork.notesImageTwo.url unless @artwork.notesImageTwo.nil? %>
               </div>
             <% end %>
           </div>
@@ -120,11 +120,11 @@
           <% if @artwork.additionalInfoImage.thumb.url %>
             <div class="add-info-images-block">
               <div class="add-info-image-one">
-                <%= image_tag @artwork.additionalInfoImage, class: 'info-image' %>
+                <%= image_tag @artwork.additionalInfoImage.url, class: 'info-image' %>
               </div>
               <% if @artwork.additionalInfoImageTwo.thumb.url %>
                 <div class="add-info-image-two">
-                  <%= image_tag @artwork.additionalInfoImageTwo, class: 'info-image' %>
+                  <%= image_tag @artwork.additionalInfoImageTwo.url, class: 'info-image' %>
                 </div>
               <% end %>
             </div>
@@ -138,7 +138,7 @@
     <div class="column-right">
 			<div class="big-img">
         <% if @artwork.image %>
-				  <%= image_tag @artwork.image %>
+				  <%= image_tag @artwork.image.url unless @artwork.image.nil? %>
         <% end %>
 			</div>
 			<div class="bio">
