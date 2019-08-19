@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.5.3'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -8,7 +9,7 @@ end
 gem 'dotenv-rails', groups: [:development, :test]
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.4'
+gem 'rails', '~> 5.2.2'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
 # Use Puma as the app server
@@ -58,33 +59,18 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise', '~> 4.3'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
-
-# file uploader
 gem 'carrierwave', '~> 1.1'
-
-# file manipulator
 gem 'mini_magick', '~> 4.8'
-
-# csv importer
 gem 'smarter_csv', '~> 1.1', '>= 1.1.4'
-
-# pretty printing 
 gem 'awesome_print', '~> 1.8'
-
-# pdf generator
 gem 'wicked_pdf'
-# gem 'wkhtmltopdf-binary'
-# gem 'wkhtmltopdf-binary-edge', '~> 0.12.4.0'
 gem 'wkhtmltopdf-binary', '~> 0.12.3.1'
-
 gem 'carrierwave-aws'
 gem 'aws-sdk', '~> 2'
 gem 'combine_pdf'
 gem 'net-http2'
-# gem 'pdfcrowd' - 4.2
 gem 'pdfcrowd', '~> 4.4', '>= 4.4.2'
 gem 'pdf-reader'
 gem 'kaminari', '~> 1.1', '>= 1.1.1'
-
 gem 'rubocop'
 # gem 'rufo'
