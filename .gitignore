@@ -45,3 +45,7 @@ docker-compose.yml
 dump_08-04-2019_21_21_35.sql
 entrypoint.sh
 tmp/db/
+
+# temporarily ignoring these images
+public/circle-cropped.png
+public/luke_circles.png
