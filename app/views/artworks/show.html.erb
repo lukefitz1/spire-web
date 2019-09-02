@@ -150,6 +150,11 @@
 </p>
 
 <p>
+  <strong>Custom Title:</strong>
+  <%= @artwork.custom_title %>
+</p>
+
+<p>
   <strong>Artist:</strong>
   <% unless @artwork.artist.blank? %>
     <%= @artwork.artist.firstName %><%= ' ' %><%= @artwork.artist.lastName %>

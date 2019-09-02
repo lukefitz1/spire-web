@@ -16,7 +16,11 @@
 	<header>
 		<div class="main">
 			<div class="title">
-				<p class="avenirnext collection-title" id="coll-title"><span class="avenirnextbold"><%= @artwork.collection.identifier %></span> <span class="avenirnextultralight"><%= @artwork.collection.collectionName %></span></p>
+        <% if @artwork.custom_title && @artwork.custom_title != '' %>
+          <p class="avenirnext collection-title" id="coll-title"><span class="avenirnextbold"><%= @artwork.custom_title %></span> <span class="avenirnextultralight"><%= @artwork.collection.collectionName %></span></p>
+        <% else %>
+          <p class="avenirnext collection-title" id="coll-title"><span class="avenirnextbold"><%= @artwork.collection.identifier %></span> <span class="avenirnextultralight"><%= @artwork.collection.collectionName %></span></p>
+        <% end %>
 			</div>
 			<div class="logo">
 				<%= wicked_pdf_image_tag 'spire-logo.png', class: 'logo-img'%>

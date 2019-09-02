@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190622223207) do
+ActiveRecord::Schema.define(version: 2019_09_02_231532) do
 
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
   enable_extension "pgcrypto"
+  enable_extension "plpgsql"
 
   create_table "artists", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "firstName"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20190622223207) do
     t.string "additionalInfoImageTwo"
     t.uuid "general_information_id"
     t.boolean "show_general_info"
+    t.string "custom_title"
     t.index ["artist_id"], name: "index_artworks_on_artist_id"
     t.index ["collection_id"], name: "index_artworks_on_collection_id"
     t.index ["customer_id"], name: "index_artworks_on_customer_id"

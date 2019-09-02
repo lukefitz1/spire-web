@@ -32,7 +32,7 @@ class ArtistsController < ApplicationController
     Artist.import(params[:file])
 
     # after import, redirect to artists index
-    redirect_to artists_url, notice: 'Artist was successfully destroyed.'
+    redirect_to artists_url, notice: "Artist was successfully destroyed."
   end
 
   # POST /artists
@@ -41,7 +41,7 @@ class ArtistsController < ApplicationController
     match = false
 
     artists = Artist.all
-    artists.each { |artist| 
+    artists.each { |artist|
       if artist_params["firstName"] == artist.firstName
         if artist_params["lastName"] == artist.lastName
           match = true
@@ -53,11 +53,11 @@ class ArtistsController < ApplicationController
     if match
       if request.xhr?
         respond_to do |format|
-          format.json { render json: { :error => "error - Artist already exists" }, :status => :unprocessable_entity}
+          format.json { render json: { :error => "error - Artist already exists" }, :status => :unprocessable_entity }
         end
-      else 
+      else
         respond_to do |format|
-          format.html { redirect_to new_artist_url, notice: 'Artist already exists' }
+          format.html { redirect_to new_artist_url, notice: "Artist already exists" }
         end
       end
     else
@@ -83,7 +83,7 @@ class ArtistsController < ApplicationController
     match = false
 
     artists = Artist.all
-    artists.each { |artist| 
+    artists.each { |artist|
       if artist_params["firstName"] == artist.firstName
         if artist_params["lastName"] == artist.lastName
           match = true
@@ -92,17 +92,16 @@ class ArtistsController < ApplicationController
       end
     }
 
-    if match 
+    if match
       respond_to do |format|
-        format.html { redirect_to new_artist_url, notice: 'Artist already exists' }
+        format.html { redirect_to new_artist_url, notice: "Artist already exists" }
       end
-
     else
       @artist = Artist.new(artist_params)
 
       respond_to do |format|
         if @artist.save
-          format.html { redirect_to @artist, notice: 'Artist was successfully created.' }
+          format.html { redirect_to @artist, notice: "Artist was successfully created." }
           format.json { render :show, status: :created, location: @artist }
         else
           format.html { render :new }
@@ -117,7 +116,7 @@ class ArtistsController < ApplicationController
   def update
     respond_to do |format|
       if @artist.update(artist_params)
-        format.html { redirect_to @artist, notice: 'Artist was successfully updated.' }
+        format.html { redirect_to @artist, notice: "Artist was successfully updated." }
         format.json { render :show, status: :ok, location: @artist }
       else
         format.html { render :edit }
@@ -131,7 +130,7 @@ class ArtistsController < ApplicationController
   def destroy
     @artist.destroy
     respond_to do |format|
-      format.html { redirect_to artists_url, notice: 'Artist was successfully destroyed.' }
+      format.html { redirect_to artists_url, notice: "Artist was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -139,19 +138,20 @@ class ArtistsController < ApplicationController
   def destroy_multiple
     Artist.destroy(params[:artist_ids])
     respond_to do |format|
-      format.html { redirect_to artists_url, notice: 'Artists were successfully deleted' }
+      format.html { redirect_to artists_url, notice: "Artists were successfully deleted" }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_artist
-      @artist = Artist.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def artist_params
-      params.require(:artist).permit(:firstName, :lastName, :biography, :additionalInfo, :artist_image, :search)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_artist
+    @artist = Artist.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def artist_params
+    params.require(:artist).permit(:firstName, :lastName, :biography, :additionalInfo, :artist_image, :search)
+  end
 end

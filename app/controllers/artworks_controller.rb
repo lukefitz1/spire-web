@@ -43,7 +43,6 @@ class ArtworksController < ApplicationController
     if params[:collection_redirect]
       session[:coll_redirect] = params[:collection_redirect]
     end
-
   end
 
   # GET artworks/import
@@ -71,11 +70,11 @@ class ArtworksController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: 'filename',
-          template: 'artworks/preview_pdf.pdf.erb',
-          show_as_html: params.key?('debug'),
-          encoding: 'UTF-8',
-          page_size: 'Letter'
+        render pdf: "filename",
+          template: "artworks/preview_pdf.pdf.erb",
+          show_as_html: params.key?("debug"),
+          encoding: "UTF-8",
+          page_size: "Letter"
       end
     end
   end
@@ -92,10 +91,10 @@ class ArtworksController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: 'filename',
-          template: 'artworks/preview_pdf.pdf.erb',
-          encoding: 'UTF-8',
-          save_to_file: Rails.root.join('tmp', "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"),
+        render pdf: "filename",
+          template: "artworks/preview_pdf.pdf.erb",
+          encoding: "UTF-8",
+          save_to_file: Rails.root.join("tmp", "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"),
           save_only: true,
           page_size: "Letter"
       end
@@ -103,29 +102,29 @@ class ArtworksController < ApplicationController
 
     # create the main template pdf file, save it to tmp directory
     temp_art_name = "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"
-    File.open(Rails.root.join('tmp', temp_art_name)) do |file|
+    File.open(Rails.root.join("tmp", temp_art_name)) do |file|
       something = upload.store!(file)
     end
-   
+
     if !@artwork[:additionalPdf]
-      open(Rails.root.join('tmp', 'template.pdf'), 'wb') do |file2|
-        file2 << open(Rails.root.join('tmp', temp_art_name)).read
+      open(Rails.root.join("tmp", "template.pdf"), "wb") do |file2|
+        file2 << open(Rails.root.join("tmp", temp_art_name)).read
       end
 
-      client.addPdfFile(Rails.root.join('tmp', 'template.pdf'))
+      client.addPdfFile(Rails.root.join("tmp", "template.pdf"))
     else
       url = "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/artwork/additionalPdf/#{@artwork[:id]}/#{@artwork[:additionalPdf]}"
-      open(Rails.root.join('tmp', 'crossing_fingers.pdf'), 'wb') do |file|
+      open(Rails.root.join("tmp", "crossing_fingers.pdf"), "wb") do |file|
         file << open(url).read
 
-        open(Rails.root.join('tmp', 'template.pdf'), 'wb') do |file2|
-          file2 << open(Rails.root.join('tmp', temp_art_name)).read
+        open(Rails.root.join("tmp", "template.pdf"), "wb") do |file2|
+          file2 << open(Rails.root.join("tmp", temp_art_name)).read
         end
       end
 
       # combine files
-      client.addPdfFile(Rails.root.join('tmp', 'template.pdf'))
-      client.addPdfFile(Rails.root.join('tmp', 'crossing_fingers.pdf'))
+      client.addPdfFile(Rails.root.join("tmp", "template.pdf"))
+      client.addPdfFile(Rails.root.join("tmp", "crossing_fingers.pdf"))
     end
 
     # run the conversion and write the result to a file
@@ -140,13 +139,13 @@ class ArtworksController < ApplicationController
 
     respond_to do |format|
       if art.nil?
-        format.json { render json: { "obj_id_exists": false }  }
+        format.json { render json: { "obj_id_exists": false } }
       else
         format.json { render json: { "obj_id_exists": true } }
       end
     end
   end
-  
+
   # POST /artworks
   # POST /artworks.json
   def create
@@ -159,15 +158,15 @@ class ArtworksController < ApplicationController
     respond_to do |format|
       if @artwork.save
         if cust_redirect
-          format.html { redirect_to customer_url(cust_id), notice: 'Artwork was successfully created.' }
+          format.html { redirect_to customer_url(cust_id), notice: "Artwork was successfully created." }
           format.json { render :show, status: :created, location: @artwork }
-          session.delete(:cust_redirect )
+          session.delete(:cust_redirect)
         elsif coll_redirect
-          format.html { redirect_to collection_url(coll_id), notice: 'Artwork was successfully created.' }
+          format.html { redirect_to collection_url(coll_id), notice: "Artwork was successfully created." }
           format.json { render :show, status: :created, location: @artwork }
           session.delete(:coll_redirect)
         else
-          format.html { redirect_to @artwork, notice: 'Artwork was successfully created.' }
+          format.html { redirect_to @artwork, notice: "Artwork was successfully created." }
           format.json { render :show, status: :created, location: @artwork }
         end
       else
@@ -184,19 +183,18 @@ class ArtworksController < ApplicationController
     redirect = params[:redirect]
     coll_id = session[:coll_id]
     collection_redirect = session[:coll_redirect]
-    
+
     respond_to do |format|
       if @artwork.update(artwork_params)
-
         if redirect
-          format.html { redirect_to customer_url(cust_id), notice: 'Artwork was successfully updated.' }
+          format.html { redirect_to customer_url(cust_id), notice: "Artwork was successfully updated." }
           format.json { render :show, status: :ok, location: @artwork }
         elsif collection_redirect
-          format.html { redirect_to collection_url(coll_id), notice: 'Artwork was successfully updated.' }
+          format.html { redirect_to collection_url(coll_id), notice: "Artwork was successfully updated." }
           format.json { render :show, status: :ok, location: @artwork }
           session.delete(:coll_redirect)
         else
-          format.html { redirect_to @artwork, notice: 'Artwork was successfully updated.' }
+          format.html { redirect_to @artwork, notice: "Artwork was successfully updated." }
           format.json { render :show, status: :ok, location: @artwork }
         end
       else
@@ -212,7 +210,7 @@ class ArtworksController < ApplicationController
     @artwork.destroy
 
     respond_to do |format|
-      format.html { redirect_to artworks_url, notice: 'Artwork was successfully destroyed.' }
+      format.html { redirect_to artworks_url, notice: "Artwork was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -220,19 +218,20 @@ class ArtworksController < ApplicationController
   def destroy_multiple
     Artwork.destroy(params[:art_ids])
     respond_to do |format|
-      format.html { redirect_to artworks_url, notice: 'Artworks were successfully deleted' }
+      format.html { redirect_to artworks_url, notice: "Artworks were successfully deleted" }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_artwork
-      @artwork = Artwork.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def artwork_params
-      params.require(:artwork).permit(:coll_id, :collection_redirect, :ojbId, :artType, :title, :date, :medium, :image, :description, :dimensions, :frame_dimensions, :condition, :currentLocation, :source, :dateAcquired, :amountPaid, :currentValue, :notes, :notesImage, :notesImageTwo, :additionalInfoLabel, :additionalInfoText, :additionalInfoImage, :additionalInfoImageTwo, :additionalPdf, :reviewedBy, :reviewedDate, :provenance, :artist_id, :customer_id, :remove_image, :remove_additionalInfoImage, :remove_additionalInfoImageTwo, :remove_notesImage, :remove_notesImageTwo, :collection_id, :dateAcquiredLabel, :remove_additionalPdf, :general_information_id, :show_general_info)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_artwork
+    @artwork = Artwork.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def artwork_params
+    params.require(:artwork).permit(:coll_id, :collection_redirect, :ojbId, :artType, :title, :date, :medium, :image, :description, :dimensions, :frame_dimensions, :condition, :currentLocation, :source, :dateAcquired, :amountPaid, :currentValue, :notes, :notesImage, :notesImageTwo, :additionalInfoLabel, :additionalInfoText, :additionalInfoImage, :additionalInfoImageTwo, :additionalPdf, :reviewedBy, :reviewedDate, :provenance, :artist_id, :customer_id, :remove_image, :remove_additionalInfoImage, :remove_additionalInfoImageTwo, :remove_notesImage, :remove_notesImageTwo, :collection_id, :dateAcquiredLabel, :remove_additionalPdf, :general_information_id, :show_general_info, :custom_title)
+  end
 end
