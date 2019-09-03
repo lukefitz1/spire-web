@@ -19,7 +19,7 @@
 		<div class="main">
 			<div class="title">
         <% if @artwork.custom_title && @artwork.custom_title != '' %>
-          <p class="avenirnext collection-title" id="coll-title"><span class="avenirnextbold"><%= @artwork.custom_title %></span> <span class="avenirnextultralight"><%= @artwork.collection.collectionName %></span></p>
+          <p class="avenirnext collection-title" id="coll-title"><span class="avenirnextbold"><%= @artwork.custom_title %></span> <span class="avenirnextultralight">ART COLLECTION</span></p>
         <% else %>
           <p class="avenirnext collection-title" id="coll-title"><span class="avenirnextbold"><%= @artwork.collection.identifier %></span> <span class="avenirnextultralight"><%= @artwork.collection.collectionName %></span></p>
         <% end %>
