@@ -70,7 +70,7 @@ class ArtworksController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: "filename",
+        render pdf: "artwork_pdf",
           template: "artworks/preview_pdf.pdf.erb",
           show_as_html: params.key?("debug"),
           encoding: "UTF-8",
@@ -91,7 +91,7 @@ class ArtworksController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: "filename",
+        render pdf: "artwork_pdf",
           template: "artworks/preview_pdf.pdf.erb",
           encoding: "UTF-8",
           save_to_file: Rails.root.join("tmp", "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"),
@@ -128,10 +128,10 @@ class ArtworksController < ApplicationController
     end
 
     # run the conversion and write the result to a file
-    client.convertToFile("#{Rails.root}/tmp/offer.pdf")
+    client.convertToFile("#{Rails.root}/tmp/#{@artwork.ojbId} #{@artwork.artist.firstName} #{@artwork.artist.lastName} (#{@artwork.title}) - #{@artwork.currentLocation}.pdf")
 
     # download the combined pdf file
-    send_file("#{Rails.root}/tmp/offer.pdf")
+    send_file("#{Rails.root}/tmp/#{@artwork.ojbId} #{@artwork.artist.firstName} #{@artwork.artist.lastName} (#{@artwork.title}) - #{@artwork.currentLocation}.pdf")
   end
 
   def search_by_objid
