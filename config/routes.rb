@@ -1,20 +1,20 @@
 Rails.application.routes.draw do
   namespace :admin do
-      resources :users
-      resources :artists
-      resources :artworks
-      resources :collections
-      resources :customers
-      resources :general_informations
-      resources :media
-      resources :visits
+    resources :users
+    resources :artists
+    resources :artworks
+    resources :collections
+    resources :customers
+    resources :general_informations
+    resources :media
+    resources :visits
 
-      root to: "users#index"
-    end
+    root to: "users#index"
+  end
+
   resources :media
   resources :general_informations
   resources :visits
-  # get '/collections/pdf_crowd_table/:id', to: 'collections#pdf_crowd_table', as: 'pdf_crowd_table'
 
   # for the api calls
   namespace :api, :defaults => { :format => :json } do
