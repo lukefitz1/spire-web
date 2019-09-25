@@ -115,6 +115,7 @@ GEM
       ruby-rc4 (>= 0.1.5)
     concurrent-ruby (1.1.5)
     crass (1.0.4)
+    database_cleaner (1.7.0)
     datetime_picker_rails (0.0.7)
       momentjs-rails (>= 2.8.1)
     devise (4.6.2)
@@ -234,10 +235,6 @@ GEM
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
-    rspec (3.8.0)
-      rspec-core (~> 3.8.0)
-      rspec-expectations (~> 3.8.0)
-      rspec-mocks (~> 3.8.0)
     rspec-core (3.8.2)
       rspec-support (~> 3.8.0)
     rspec-expectations (3.8.4)
@@ -347,6 +344,7 @@ DEPENDENCIES
   carrierwave-aws
   coffee-rails (~> 4.2)
   combine_pdf
+  database_cleaner
   devise (~> 4.3)
   dotenv-rails
   jbuilder (~> 2.5)
@@ -359,7 +357,6 @@ DEPENDENCIES
   pg (~> 0.18)
   puma (~> 3.7)
   rails (~> 5.2.2)
-  rspec (~> 3.8)
   rspec-rails
   rubocop
   rufo

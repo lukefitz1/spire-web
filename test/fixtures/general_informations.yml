@@ -1,9 +1,0 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
-one:
-  information_label: MyString
-  information: MyText
-
-two:
-  information_label: MyString
-  information: MyText
