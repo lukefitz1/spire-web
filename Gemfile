@@ -43,6 +43,7 @@ group :development, :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
+  gem 'rspec', '~> 3.8'
 end
 
 group :development do
@@ -74,3 +75,6 @@ gem 'pdf-reader'
 gem 'kaminari', '~> 1.1', '>= 1.1.1'
 gem 'rubocop'
 gem 'rufo'
+
+gem 'administrate'
+gem 'bourbon'
