@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
+  namespace :admin do
+      resources :users
+      resources :artists
+      resources :artworks
+      resources :collections
+      resources :customers
+      resources :general_informations
+      resources :media
+      resources :visits
+      resources :admin_users
+
+      root to: "users#index"
+    end
   resources :media
   resources :general_informations
   resources :visits
