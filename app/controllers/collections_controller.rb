@@ -35,21 +35,21 @@ class CollectionsController < ApplicationController
   def table_of_contents_pdf
     @collection = Collection.find(params[:coll_id])
 
-    puts 'At least we are hitting the correct controller!'
+    puts "At least we are hitting the correct controller!"
 
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: 'toc-pdf',
-          template: 'collections/table_of_contents_pdf.pdf.erb',
+        render pdf: "toc-pdf",
+          template: "collections/table_of_contents_pdf.pdf.erb",
           # orientation: 'Landscape',
-          show_as_html: params.key?('debug'),
-          encoding: 'UTF-8'
+          show_as_html: params.key?("debug"),
+          encoding: "UTF-8"
       end
     end
   end
 
-  # GET 
+  # GET
   def preview_table
     @collection = Collection.find(params[:coll_id])
   end
@@ -58,7 +58,7 @@ class CollectionsController < ApplicationController
   def download_pdf_table
     begin
       @collection = Collection.find(params[:coll_id])
-      
+
       # create the API client instance
       # client = Pdfcrowd::HtmlToPdfClient.new("spireart", "4ca5bdb67c50b7a3ca5d9a207de070e0")
       client = Pdfcrowd::HtmlToPdfClient.new("lukefitz1", "4340f6a216a4039b0ca0c8035c738f4e")
@@ -69,9 +69,9 @@ class CollectionsController < ApplicationController
       client.setMarginBottom("0.1in")
       client.setMarginRight("0.1in")
       client.setMarginLeft("0.1in")
-      
+
       # create output file for conversion result
-      output_file = open(Rails.root.join('tmp', 'example.pdf'), 'wb')
+      output_file = open(Rails.root.join("tmp", "example.pdf"), "wb")
 
       # run the conversion and store the result into a pdf variable
       pdf = client.convertUrl("https://spire-art-services.herokuapp.com/collections/preview_table/#{params[:id]}?coll_id=#{params[:coll_id]}")
@@ -92,7 +92,7 @@ class CollectionsController < ApplicationController
       raise
     end
   end
-  
+
   def send_that_file
     # download the combined pdf file
     send_file("#{Rails.root}/tmp/example.pdf")
@@ -105,11 +105,11 @@ class CollectionsController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: 'table-preview',
-          template: 'collections/pdf_table.pdf.erb',
-          orientation: 'Landscape',
-          show_as_html: params.key?('debug'),
-          encoding: 'UTF-8'
+        render pdf: "table-preview",
+          template: "collections/pdf_table.pdf.erb",
+          orientation: "Landscape",
+          show_as_html: params.key?("debug"),
+          encoding: "UTF-8"
       end
     end
   end
@@ -128,10 +128,10 @@ class CollectionsController < ApplicationController
     respond_to do |format|
       if @collection.save
         if redirect
-          format.html { redirect_to customer_url(cust_id), notice: 'Collection was successfully created.' }
+          format.html { redirect_to customer_url(cust_id), notice: "Collection was successfully created." }
           format.json { render :show, status: :created, location: @collection }
         else
-          format.html { redirect_to @collection, notice: 'Collection was successfully created.' }
+          format.html { redirect_to @collection, notice: "Collection was successfully created." }
           format.json { render :show, status: :created, location: @collection }
         end
       else
@@ -146,7 +146,7 @@ class CollectionsController < ApplicationController
   def update
     respond_to do |format|
       if @collection.update(collection_params)
-        format.html { redirect_to @collection, notice: 'Collection was successfully updated.' }
+        format.html { redirect_to @collection, notice: "Collection was successfully updated." }
         format.json { render :show, status: :ok, location: @collection }
       else
         format.html { render :edit }
@@ -160,19 +160,20 @@ class CollectionsController < ApplicationController
   def destroy
     @collection.destroy
     respond_to do |format|
-      format.html { redirect_to collections_url, notice: 'Collection was successfully destroyed.' }
+      format.html { redirect_to collections_url, notice: "Collection was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_collection
-      @collection = Collection.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def collection_params
-      params.require(:collection).permit(:collectionName, :customer_id, :identifier, :year, {customer_proposals: []}, {customer_invoices: []}, {additional_photos: []}, :remove_customer_proposals, :remove_customer_invoices)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_collection
+    @collection = Collection.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def collection_params
+    params.require(:collection).permit(:collectionName, :customer_id, :identifier, :year, { customer_proposals: [] }, { customer_invoices: [] }, { additional_photos: [] }, :remove_customer_proposals, :remove_customer_invoices, { files: [] })
+  end
 end

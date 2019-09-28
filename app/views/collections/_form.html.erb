@@ -69,6 +69,21 @@
     <% end %>
   </div>
 
+  <div class="field">
+    <%= form.label :files, 'Upload collection images & PDFs' %>
+    <% collection.files.each do |file| %>
+      <%= hidden_field :collection, :files, multiple: true, value: file.identifier %>
+      File ID: <%= file.filename %>
+    <% end %>
+    <%= form.file_field :files, id: :collection_files, multiple: true %>
+
+    <% if form.object.files? %>
+      <% @collection.files.each do |img| %>
+        <%= image_tag img.thumb.url %>
+      <% end %>
+    <% end %>
+  </div>
+
   <div class="actions">
     <% if params[:redirect] %>
       <%= hidden_field_tag(:redirect, 'true') %>
