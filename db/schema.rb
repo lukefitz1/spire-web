@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_25_013219) do
+ActiveRecord::Schema.define(version: 2019_09_28_010335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -78,6 +78,7 @@ ActiveRecord::Schema.define(version: 2019_09_25_013219) do
     t.string "customer_proposals", default: [], array: true
     t.string "customer_invoices", default: [], array: true
     t.string "additional_photos", default: [], array: true
+    t.json "files"
     t.index ["customer_id"], name: "index_collections_on_customer_id"
   end
 
