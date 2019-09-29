@@ -47,7 +47,6 @@
 
 <p>
   <strong>Files:</strong>
-  <%= @collection.files[0].path %>
   <% @collection.files.each do |img| %>
     <%= image_tag img.thumb.url %>
   <% end %>

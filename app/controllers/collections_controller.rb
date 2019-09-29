@@ -114,6 +114,9 @@ class CollectionsController < ApplicationController
     end
   end
 
+  def remove_photos
+  end
+
   # GET /collections/1/edit
   def edit
   end
@@ -144,6 +147,10 @@ class CollectionsController < ApplicationController
   # PATCH/PUT /collections/1
   # PATCH/PUT /collections/1.json
   def update
+    puts "Outputting the parameters here"
+    puts collection_params
+    puts collection_params[:remove_files]
+
     respond_to do |format|
       if @collection.update(collection_params)
         format.html { redirect_to @collection, notice: "Collection was successfully updated." }
@@ -174,6 +181,6 @@ class CollectionsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def collection_params
-    params.require(:collection).permit(:collectionName, :customer_id, :identifier, :year, { customer_proposals: [] }, { customer_invoices: [] }, { additional_photos: [] }, :remove_customer_proposals, :remove_customer_invoices, { files: [] })
+    params.require(:collection).permit(:collectionName, :customer_id, :identifier, :year, { customer_proposals: [] }, { customer_invoices: [] }, { additional_photos: [] }, :remove_customer_proposals, :remove_customer_invoices, { files: [] }, :remove_files)
   end
 end

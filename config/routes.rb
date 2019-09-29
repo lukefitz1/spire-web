@@ -1,17 +1,17 @@
 Rails.application.routes.draw do
   namespace :admin do
-      resources :users
-      resources :artists
-      resources :artworks
-      resources :collections
-      resources :customers
-      resources :general_informations
-      resources :media
-      resources :visits
-      resources :admin_users
+    resources :users
+    resources :artists
+    resources :artworks
+    resources :collections
+    resources :customers
+    resources :general_informations
+    resources :media
+    resources :visits
+    resources :admin_users
 
-      root to: "users#index"
-    end
+    root to: "users#index"
+  end
   resources :media
   resources :general_informations
   resources :visits
@@ -67,6 +67,8 @@ Rails.application.routes.draw do
     post "/general_informations/ajax_create", to: "general_informations#ajax_create", as: "gi_ajax_create"
     delete "artworks/destroy_multiple", to: "artworks#destroy_multiple"
     delete "artists/destroy_multiple", to: "artists#destroy_multiple"
+
+    post "/collections/remove_photos", to: "collections#remove_photos", as: "remove_photos"
 
     resources :artworks do
       collection { post :import }

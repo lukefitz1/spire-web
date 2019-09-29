@@ -62,13 +62,13 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise', '~> 4.3'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
-gem 'carrierwave', '~> 1.1'
+gem 'carrierwave', '~> 2.0'
 gem 'mini_magick', '~> 4.8'
 gem 'smarter_csv', '~> 1.1', '>= 1.1.4'
 gem 'awesome_print', '~> 1.8'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary', '~> 0.12.3.1'
-gem 'carrierwave-aws'
+gem "fog-aws"
 gem 'aws-sdk', '~> 2'
 gem 'combine_pdf'
 gem 'net-http2'
