@@ -69,7 +69,24 @@
     <% end %>
   </div>
 
+  <div class="field">
+    <%= form.label :files, 'Upload collection images' %>
+    <% collection.files.each do |file| %>
+      <%= hidden_field :collection, :files, multiple: true, value: file.identifier %>
+    <% end %>
+    <%= form.file_field :files, id: :collection_files, multiple: true %>
 
+    <% if form.object.files? %>
+      <% @collection.files.each_with_index do |img, index| %>
+        <%= image_tag img.thumb.url %>
+        <%= index %>
+      <% end %>
+      <%= form.check_box :remove_files %>
+    <% end %>
+
+    <!-- Trigger/Open The Modal -->
+  <%= link_to "Edit Photos", new_artist_path, remote: true, id: "myBtn" %>
+  </div>
 
   <div class="actions">
     <% if params[:redirect] %>
@@ -106,9 +123,9 @@
 	// var submitBtn = document.getElementById("submitBtn");
 
   // When the user clicks the button, open the modal 
-	// btn.onclick = function() {
-	//     modal.style.display = "block";
-	// }
+	btn.onclick = function() {
+	    modal.style.display = "block";
+	}
 
 	// When the user clicks on <span> (x), close the modal
 	span.onclick = function() {

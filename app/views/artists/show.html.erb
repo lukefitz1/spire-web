@@ -3,6 +3,11 @@
 <% content_for :title, "Show Artist" %>
 
 <p>
+  <strong>ID:</strong>
+  <%= @artist.id %>
+</p>
+
+<p>
   <strong>Artist Image:</strong>
   <% if @artist.artist_image.thumb.url %>
     <%= image_tag @artist.artist_image.thumb.url %>

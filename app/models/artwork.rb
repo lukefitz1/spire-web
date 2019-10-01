@@ -1,5 +1,5 @@
 class Artwork < ApplicationRecord
-  require 'csv'
+  require "csv"
 
   default_scope { order(ojbId: :asc) }
 
@@ -21,22 +21,23 @@ class Artwork < ApplicationRecord
 
   def self.import(file, customer_id, collection_id)
     # loops through csv data
-  	CSV.foreach(file.path, headers:true) do |row|
-  		# create new artwork
+    CSV.foreach(file.path, headers: true) do |row|
+      if row["firstName"]
+        new_artist = Artist.create(firstName: row["firstName"], lastName: row["lastName"], biography: row["biography"], additionalInfo: row["additionalInfo"])
+      end
+
+      # create new artwork
       hash = row.to_hash
       hash[:customer_id] = customer_id
       hash[:collection_id] = collection_id
+      hash[:artist_id] = new_artist.id
 
-  		Artwork.create! hash
-  	end
+      hash.delete("firstName")
+      hash.delete("lastName")
+      hash.delete("biography")
+      hash.delete("additionalInfo")
+
+      Artwork.create! hash
+    end
   end
-
-  # ORIGINAL IMPORT FUNCTION
-  # def self.import(file)
-  #   # loops through csv data
-  #   CSV.foreach(file.path, headers:true) do |row|
-  #     # Artwork.create! row.to_hash
-  #   end
-  # end
-
 end
