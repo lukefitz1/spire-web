@@ -79,8 +79,18 @@
       <% @collection.artworks.each do |artwork| %>
         <tr>
           <td>
+            <% @collection.files.each do |filename| %>
+              <% if filename.identifier == "#{artwork.ojbId}_Main.jpg" %>
+                <% @mainImageExists = true %>
+              <% elsif filename.identifier != "#{artwork.ojbId}_Main.jpg" && !@mainImageExists %>
+                <% @mainImageExists = false %>
+              <% end %>
+            <% end %>
+
             <% if artwork.image.thumb.url %>
               <%= image_tag artwork.image.thumb.url %>
+            <% elsif @mainImageExists %>
+              <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@collection.id}/thumb_#{artwork.ojbId}_Main.jpg" %>
             <% end %>
           </td>
 
