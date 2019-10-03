@@ -29,8 +29,44 @@
 
 <p>
   <strong>Main Image:</strong>
+  <% @artwork.collection.files.each do |filename| %>
+    <% if filename.identifier == "#{@artwork.ojbId}_Main.jpg" %>
+      <% @mainImageExists = true %>
+    <% elsif filename.identifier != "#{@artwork.ojbId}_Main.jpg" && !@mainImageExists %>
+      <% @mainImageExists = false %>
+    <% end %> 
+
+    <% if filename.identifier == "#{@artwork.ojbId}_Notes_1.jpg" %>
+      <% @notesImageOneExists = true %>
+    <% elsif filename.identifier != "#{@artwork.ojbId}_Notes_1.jpg" && !@notesImageOneExists %>
+      <% @notesImageOneExists = false %>
+    <% end %>
+    
+    <% if filename.identifier == "#{@artwork.ojbId}_Notes_2.jpg" %>
+      <% @notesImageTwoExists = true %>
+    <% elsif filename.identifier != "#{@artwork.ojbId}_Notes_2.jpg" && !@notesImageTwoExists %>
+      <% @notesImageTwoExists = false %>
+    <% end %>
+
+    <% if filename.identifier == "#{@artwork.ojbId}_Additional_1.jpg" %>
+      <% @additionalImageOneExists = true %>
+    <% elsif filename.identifier != "#{@artwork.ojbId}_Additional_1.jpg" && !@additionalImageOneExists %>
+      <% @additionalImageOneExists = false %>
+    <% end %>
+
+    <% if filename.identifier == "#{@artwork.ojbId}_Additional_2.jpg" %>
+      <% @additionalImageTwoExists = true %>
+    <% elsif filename.identifier != "#{@artwork.ojbId}_Additional_2.jpg" && !@additionalImageTwoExists %>
+      <% @additionalImageTwoExists = false %>
+    <% end %> 
+  <% end %>
+
   <% if @artwork.image.thumb.url %>
     <%= image_tag @artwork.image.thumb.url %>
+  <% elsif @artwork.collection %>
+    <% if @mainImageExists %>
+      <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/thumb_#{@artwork.ojbId}_Main.jpg" %>
+    <% end %>
   <% end %>
 </p>
 
@@ -93,13 +129,21 @@
   <strong>Notes Image:</strong>
   <% if @artwork.notesImage.thumb.url %>
     <%= image_tag @artwork.notesImage.thumb.url %>
+  <% elsif @artwork.collection %>
+    <% if @notesImageOneExists %>
+      <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/thumb_#{@artwork.ojbId}_Notes_1.jpg" %>
+    <% end %>
   <% end %>
 </p>
 
 <p>
-  <strong>Notes Image:</strong>
+  <strong>Notes Image Two:</strong>
   <% if @artwork.notesImageTwo.thumb.url %>
     <%= image_tag @artwork.notesImageTwo.thumb.url %>
+  <% elsif @artwork.collection %>
+    <% if @notesImageTwoExists %>
+      <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/thumb_#{@artwork.ojbId}_Notes_2.jpg" %>
+    <% end %>
   <% end %>
 </p>
 
@@ -115,15 +159,23 @@
 
 <p>
   <strong>Additional Info Image:</strong>
-  <% if @artwork.additionalInfoImage.thumb.url %>
-    <%= image_tag @artwork.additionalInfoImage.thumb.url %>
+  <% if @artwork.notesImage.thumb.url %>
+    <%= image_tag @artwork.notesImage.thumb.url %>
+  <% elsif @artwork.collection %>
+    <% if @additionalImageOneExists %>
+      <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/thumb_#{@artwork.ojbId}_Additional_1.jpg" %>
+    <% end %>
   <% end %>
 </p>
 
 <p>
   <strong>Additional Info Image Two:</strong>
-  <% if @artwork.additionalInfoImageTwo.thumb.url %>
-    <%= image_tag @artwork.additionalInfoImageTwo.thumb.url %>
+  <% if @artwork.notesImage.thumb.url %>
+    <%= image_tag @artwork.notesImage.thumb.url %>
+  <% elsif @artwork.collection %>
+    <% if @additionalImageTwoExists %>
+      <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/thumb_#{@artwork.ojbId}_Additional_2.jpg" %>
+    <% end %>
   <% end %>
 </p>
 
