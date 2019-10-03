@@ -102,6 +102,37 @@
         <p class="block-value provenance-content-area"> <%= @artwork.provenance %></p>
       </div>
       <div class="label-block">
+        <% @artwork.collection.files.each do |filename| %>
+          <% if filename.identifier == "#{@artwork.ojbId}_Notes_1.jpg" %>
+            <% @notesImageOneExists = true %>
+          <% elsif filename.identifier != "#{@artwork.ojbId}_Notes_1.jpg" && !@notesImageOneExists %>
+            <% @notesImageOneExists = false %>
+          <% end %>
+          
+          <% if filename.identifier == "#{@artwork.ojbId}_Notes_2.jpg" %>
+            <% @notesImageTwoExists = true %>
+          <% elsif filename.identifier != "#{@artwork.ojbId}_Notes_2.jpg" && !@notesImageTwoExists %>
+            <% @notesImageTwoExists = false %>
+          <% end %>
+
+          <% if filename.identifier == "#{@artwork.ojbId}_Additional_1.jpg" %>
+            <% @additionalImageOneExists = true %>
+          <% elsif filename.identifier != "#{@artwork.ojbId}_Additional_1.jpg" && !@additionalImageOneExists %>
+            <% @additionalImageOneExists = false %>
+          <% end %>
+
+          <% if filename.identifier == "#{@artwork.ojbId}_Additional_2.jpg" %>
+            <% @additionalImageTwoExists = true %>
+          <% elsif filename.identifier != "#{@artwork.ojbId}_Additional_2.jpg" && !@additionalImageTwoExists %>
+            <% @additionalImageTwoExists = false %>
+          <% end %>
+        <% end %>
+
+        <%= @notesImageOneExists %>
+        <%= @notesImageTwoExists %>
+        <%= @additionalImageOneExists %>
+        <%= @additionalImageTwoExists %>
+
         <% if @artwork.notesImage.thumb.url %>
           <div class="notes-images-block">
             <div class="notes-image-one padding-bottom-five">
@@ -114,9 +145,11 @@
             <% end %>
           </div>
         <% end %>
+        
         <p class="label-heading avenirnextbold">Note:</p>
         <p class="block-value notes-content-area"><%= @artwork.notes %></p>
       </div>
+
       <% if @artwork.additionalInfoText && @artwork.additionalInfoText != ""%>
         <div class="label-block">
           <% if @artwork.additionalInfoImage.thumb.url %>
@@ -131,6 +164,7 @@
               <% end %>
             </div>
           <% end %>
+
           <p class="label-heading avenirnextbold"><%= @artwork.additionalInfoLabel %>:</p>
           <p class="block-value additional-info-content-area"> <%= @artwork.additionalInfoText %></p>
         </div>
@@ -139,8 +173,10 @@
 
     <div class="column-right">
       <div class="big-img">
-        <% if @artwork.image %>
-          <%= wicked_pdf_image_tag @artwork.image unless @artwork.image.blank? %>
+        <% if @artwork.image.present? %>
+				  <%= wicked_pdf_image_tag @artwork.image.url unless @artwork.image.nil? %>
+        <% else %>
+          <%= wicked_pdf_image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Main.jpg" %>
         <% end %>
       </div>
       <div class="bio">
