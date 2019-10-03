@@ -1,6 +1,37 @@
 <h1>Editing Artwork</h1>
 
 <% content_for :title, "Edit Artwork" %>
+  <% @artwork.collection.files.each do |filename| %>
+    <% if filename.identifier == "#{@artwork.ojbId}_Main.jpg" %>
+      <% @mainImageExists = true %>
+    <% elsif filename.identifier != "#{@artwork.ojbId}_Main.jpg" && !@mainImageExists %>
+      <% @mainImageExists = false %>
+    <% end %> 
+
+    <% if filename.identifier == "#{@artwork.ojbId}_Notes_1.jpg" %>
+      <% @notesImageOneExists = true %>
+    <% elsif filename.identifier != "#{@artwork.ojbId}_Notes_1.jpg" && !@notesImageOneExists %>
+      <% @notesImageOneExists = false %>
+    <% end %>
+    
+    <% if filename.identifier == "#{@artwork.ojbId}_Notes_2.jpg" %>
+      <% @notesImageTwoExists = true %>
+    <% elsif filename.identifier != "#{@artwork.ojbId}_Notes_2.jpg" && !@notesImageTwoExists %>
+      <% @notesImageTwoExists = false %>
+    <% end %>
+
+    <% if filename.identifier == "#{@artwork.ojbId}_Additional_1.jpg" %>
+      <% @additionalImageOneExists = true %>
+    <% elsif filename.identifier != "#{@artwork.ojbId}_Additional_1.jpg" && !@additionalImageOneExists %>
+      <% @additionalImageOneExists = false %>
+    <% end %>
+
+    <% if filename.identifier == "#{@artwork.ojbId}_Additional_2.jpg" %>
+      <% @additionalImageTwoExists = true %>
+    <% elsif filename.identifier != "#{@artwork.ojbId}_Additional_2.jpg" && !@additionalImageTwoExists %>
+      <% @additionalImageTwoExists = false %>
+    <% end %> 
+  <% end %>
 
 <%= render 'form', artwork: @artwork %>
 

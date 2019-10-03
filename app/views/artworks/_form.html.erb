@@ -44,6 +44,8 @@
       <%= image_tag form.object.image.thumb.url %>
       <%= form.label :remove_image %>
       <%= form.check_box :remove_image %> 
+    <% elsif @mainImageExists %>
+      <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/thumb_#{@artwork.ojbId}_Main.jpg" %>
     <% end %>
   </div>
 
@@ -109,6 +111,8 @@
       <%= image_tag form.object.notesImage.thumb.url %>
       <%= form.label :remove_notesImage %>
       <%= form.check_box :remove_notesImage %> 
+    <% elsif @notesImageOneExists %>
+      <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/thumb_#{@artwork.ojbId}_Notes_1.jpg" %>
     <% end %>
   </div>
 
@@ -119,6 +123,8 @@
       <%= image_tag form.object.notesImageTwo.thumb.url %>
       <%= form.label :remove_notesImageTwo %>
       <%= form.check_box :remove_notesImageTwo %> 
+    <% elsif @notesImageTwoExists %>
+      <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/thumb_#{@artwork.ojbId}_Notes_2.jpg" %>
     <% end %>
   </div>
 
@@ -139,6 +145,8 @@
       <%= image_tag form.object.additionalInfoImage.thumb.url %>
       <%= form.label :remove_additionalInfoImage %>
       <%= form.check_box :remove_additionalInfoImage %> 
+    <% elsif @additionalImageOneExists %>
+      <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/thumb_#{@artwork.ojbId}_Additional_1.jpg" %>
     <% end %>
   </div>
 
@@ -149,6 +157,8 @@
       <%= image_tag form.object.additionalInfoImageTwo.thumb.url %>
       <%= form.label :remove_additionalInfoImageTwo %>
       <%= form.check_box :remove_additionalInfoImageTwo %> 
+    <% elsif @additionalImageTwoExists %>
+      <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/thumb_#{@artwork.ojbId}_Additional_2.jpg" %>
     <% end %>
   </div>
 
@@ -328,6 +338,7 @@
       <p class="artist-exists-error">Artist Already Exists!</p>
 	  </div>
 	<% end %>
+
 	</div>
 </div>
 
