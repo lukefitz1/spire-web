@@ -29,36 +29,38 @@
 
 <p>
   <strong>Main Image:</strong>
-  <% @artwork.collection.files.each do |filename| %>
-    <% if filename.identifier == "#{@artwork.ojbId}_Main.jpg" %>
-      <% @mainImageExists = true %>
-    <% elsif filename.identifier != "#{@artwork.ojbId}_Main.jpg" && !@mainImageExists %>
-      <% @mainImageExists = false %>
-    <% end %> 
+  <% if @artwork.collection_id.present? %>
+    <% @artwork.collection.files.each do |filename| %>
+      <% if filename.identifier == "#{@artwork.ojbId}_Main.jpg" %>
+        <% @mainImageExists = true %>
+      <% elsif filename.identifier != "#{@artwork.ojbId}_Main.jpg" && !@mainImageExists %>
+        <% @mainImageExists = false %>
+      <% end %> 
 
-    <% if filename.identifier == "#{@artwork.ojbId}_Notes_1.jpg" %>
-      <% @notesImageOneExists = true %>
-    <% elsif filename.identifier != "#{@artwork.ojbId}_Notes_1.jpg" && !@notesImageOneExists %>
-      <% @notesImageOneExists = false %>
-    <% end %>
-    
-    <% if filename.identifier == "#{@artwork.ojbId}_Notes_2.jpg" %>
-      <% @notesImageTwoExists = true %>
-    <% elsif filename.identifier != "#{@artwork.ojbId}_Notes_2.jpg" && !@notesImageTwoExists %>
-      <% @notesImageTwoExists = false %>
-    <% end %>
+      <% if filename.identifier == "#{@artwork.ojbId}_Notes_1.jpg" %>
+        <% @notesImageOneExists = true %>
+      <% elsif filename.identifier != "#{@artwork.ojbId}_Notes_1.jpg" && !@notesImageOneExists %>
+        <% @notesImageOneExists = false %>
+      <% end %>
+      
+      <% if filename.identifier == "#{@artwork.ojbId}_Notes_2.jpg" %>
+        <% @notesImageTwoExists = true %>
+      <% elsif filename.identifier != "#{@artwork.ojbId}_Notes_2.jpg" && !@notesImageTwoExists %>
+        <% @notesImageTwoExists = false %>
+      <% end %>
 
-    <% if filename.identifier == "#{@artwork.ojbId}_Additional_1.jpg" %>
-      <% @additionalImageOneExists = true %>
-    <% elsif filename.identifier != "#{@artwork.ojbId}_Additional_1.jpg" && !@additionalImageOneExists %>
-      <% @additionalImageOneExists = false %>
-    <% end %>
+      <% if filename.identifier == "#{@artwork.ojbId}_Additional_1.jpg" %>
+        <% @additionalImageOneExists = true %>
+      <% elsif filename.identifier != "#{@artwork.ojbId}_Additional_1.jpg" && !@additionalImageOneExists %>
+        <% @additionalImageOneExists = false %>
+      <% end %>
 
-    <% if filename.identifier == "#{@artwork.ojbId}_Additional_2.jpg" %>
-      <% @additionalImageTwoExists = true %>
-    <% elsif filename.identifier != "#{@artwork.ojbId}_Additional_2.jpg" && !@additionalImageTwoExists %>
-      <% @additionalImageTwoExists = false %>
-    <% end %> 
+      <% if filename.identifier == "#{@artwork.ojbId}_Additional_2.jpg" %>
+        <% @additionalImageTwoExists = true %>
+      <% elsif filename.identifier != "#{@artwork.ojbId}_Additional_2.jpg" && !@additionalImageTwoExists %>
+        <% @additionalImageTwoExists = false %>
+      <% end %> 
+    <% end %>
   <% end %>
 
   <% if @artwork.image.thumb.url %>
