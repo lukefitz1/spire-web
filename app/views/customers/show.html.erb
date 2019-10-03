@@ -122,11 +122,22 @@
 
           <tbody>
             <% collection.artworks.each do |artwork| %>
+
+              <% if collection.files.present? %>
+                <% collection.files.each do |filename| %>
+                  <% if filename.identifier == "#{artwork.ojbId}_Main.jpg" %>
+                    <% @mainImageExists = true %>
+                  <% elsif filename.identifier != "#{artwork.ojbId}_Main.jpg" && !@mainImageExists %>
+                    <% @mainImageExists = false %>
+                  <% end %> 
+                <% end %>
+              <% end %> 
+
               <tr>
                 <td>
                   <% if artwork.image.thumb.url %>
                     <%= image_tag artwork.image.thumb.url %>
-                  <% else %>
+                  <% elsif @mainImageExists %>
                     <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{collection.id}/thumb_#{artwork.ojbId}_Main.jpg" %>
                   <% end %>
                 </td>

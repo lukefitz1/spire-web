@@ -31,11 +31,24 @@
 
   <tbody>
     <% @artworks.each do |artwork| %>
+      
+      <% if artwork.collection_id.present? %>
+        <% if artwork.collection.files.present? %>
+          <% artwork.collection.files.each do |filename| %>
+            <% if filename.identifier == "#{artwork.ojbId}_Main.jpg" %>
+              <% @mainImageExists = true %>
+            <% elsif filename.identifier != "#{artwork.ojbId}_Main.jpg" && !@mainImageExists %>
+              <% @mainImageExists = false %>
+            <% end %> 
+          <% end %>
+        <% end %>
+      <% end %>
+
       <tr>
         <td>
           <% if artwork.image.thumb.url %>
             <%= image_tag artwork.image.thumb.url %>
-          <% elsif artwork.collection %>
+          <% elsif @mainImageExists %>
             <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{artwork.collection.id}/thumb_#{artwork.ojbId}_Main.jpg" %>
           <% end %>
         </td>
