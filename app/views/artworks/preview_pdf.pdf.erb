@@ -128,19 +128,33 @@
           <% end %>
         <% end %>
 
-        <%= @notesImageOneExists %>
-        <%= @notesImageTwoExists %>
-        <%= @additionalImageOneExists %>
-        <%= @additionalImageTwoExists %>
-
         <% if @artwork.notesImage.thumb.url %>
           <div class="notes-images-block">
             <div class="notes-image-one padding-bottom-five">
-              <%= wicked_pdf_image_tag @artwork.notesImage %>
+              <%= wicked_pdf_image_tag @artwork.notesImage  unless @artwork.notesImage.nil? %>
             </div>
             <% if @artwork.notesImageTwo.thumb.url %>
               <div class="notes-image-two">
-                <%= wicked_pdf_image_tag @artwork.notesImageTwo %>
+                <%= wicked_pdf_image_tag @artwork.notesImageTwo unless @artwork.notesImageTwo.nil? %>
+              </div>
+            <% elsif @notesImageTwoExists %>
+              <div class="notes-image-two">
+                <%= wicked_pdf_image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Notes_2.jpg", class: 'info-image' %>
+              </div>
+            <% end %>
+          </div>
+        <% elsif @notesImageOneExists %>
+          <div class="notes-images-block">
+            <div class="notes-image-one padding-bottom-five">
+              <%= wicked_pdf_image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Notes_1.jpg", class: 'info-image' %>
+            </div>
+            <% if @artwork.notesImageTwo.thumb.url %>
+              <div class="notes-image-two">
+                <%= wicked_pdf_image_tag @artwork.notesImageTwo.url unless @artwork.notesImageTwo.nil? %>
+              </div>
+            <% elsif @notesImageTwoExists %>
+              <div class="notes-image-two">
+                <%= wicked_pdf_image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Notes_2.jpg", class: 'info-image' %>
               </div>
             <% end %>
           </div>
@@ -160,6 +174,25 @@
               <% if @artwork.additionalInfoImageTwo.thumb.url %>
                 <div class="add-info-image-two">
                   <%= wicked_pdf_image_tag @artwork.additionalInfoImageTwo, class: 'info-image' %>
+                </div>
+              <% elsif @additionalImageTwoExists %>
+                <div class="add-info-image-two">
+                  <%= wicked_pdf_image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Additional_2.jpg", class: 'info-image' %>
+                </div>
+              <% end %>
+            </div>
+          <% elsif @additionalImageOneExists %>
+            <div class="add-info-images-block">
+              <div class="add-info-image-one">
+                <%= wicked_pdf_image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Additional_1.jpg", class: 'info-image' %>
+              </div>
+              <% if @artwork.additionalInfoImageTwo.thumb.url %>
+                <div class="add-info-image-two">
+                  <%= wicked_pdf_image_tag @artwork.additionalInfoImageTwo.url, class: 'info-image' %>
+                </div>
+              <% elsif @additionalImageTwoExists %>
+                <div class="add-info-image-two">
+                  <%= wicked_pdf_image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Additional_2.jpg", class: 'info-image' %>
                 </div>
               <% end %>
             </div>
