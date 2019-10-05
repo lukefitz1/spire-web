@@ -22,20 +22,29 @@ class Artwork < ApplicationRecord
   def self.import(file, customer_id, collection_id)
     # loops through csv data
     CSV.foreach(file.path, headers: true) do |row|
+      # create new artist if the firstName column has info in it
       if row["firstName"]
         new_artist = Artist.create(firstName: row["firstName"], lastName: row["lastName"], biography: row["biography"], additionalInfo: row["additionalInfo"])
+      end
+
+      # create new general info if the information_label column has info in it
+      if row["information_label"]
+        new_general_info = GeneralInformation.create(information_label: row["information_label"], information: row["information"])
       end
 
       # create new artwork
       hash = row.to_hash
       hash[:customer_id] = customer_id
       hash[:collection_id] = collection_id
-      hash[:artist_id] = new_artist.id
+      hash[:artist_id] = new_artist.id unless new_artist.nil?
+      hash[:general_information_id] = new_general_info.id unless new_general_info.nil?
 
       hash.delete("firstName")
       hash.delete("lastName")
       hash.delete("biography")
       hash.delete("additionalInfo")
+      hash.delete("information_label")
+      hash.delete("information")
 
       Artwork.create! hash
     end
