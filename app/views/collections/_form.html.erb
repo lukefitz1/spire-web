@@ -77,15 +77,18 @@
     <%= form.file_field :files, id: :collection_files, multiple: true %>
 
     <% if form.object.files? %>
-      <% @collection.files.each_with_index do |img, index| %>
-        <%= image_tag img.thumb.url %>
-        <%= index %>
+      <% @collection.files.each_with_index do |file, index| %>
+        <% if file.thumb.url %>
+          <%= image_tag file.thumb.url %>
+          <%= index %>
+        <% else %>
+          <%= link_to "#{file.file.filename}", file.url, target: :_blank %>
+        <% end %>
       <% end %>
       <%= form.check_box :remove_files %>
     <% end %>
 
     <!-- Trigger/Open The Modal -->
-  
   </div>
 
   <div class="actions">
@@ -103,9 +106,13 @@
     <p>Edit Photos</p>
     <%= form_with(url: {:controller => "collections", :action => "remove_photos"}, model: @collection, id: 'remove-photos-form', scope: "collection") do |form| %>
       <% if form.object.files? %>
-        <% @collection.files.each_with_index do |img, index| %>
-          <%= image_tag img.thumb.url %>
-          <%= index %>
+        <% @collection.files.each_with_index do |file, index| %>
+          <% if file.thumb.url %>
+            <%= image_tag file.thumb.url %>
+            <%= index %>
+          <% else %>
+            <%= link_to "#{file.file.filename}", file.url, target: :_blank %>
+          <% end %>
         <% end %>
       <% end %>
 

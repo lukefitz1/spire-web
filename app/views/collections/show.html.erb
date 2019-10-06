@@ -47,8 +47,12 @@
 
 <p>
   <strong>Files:</strong>
-  <% @collection.files.each do |img| %>
-    <%= image_tag img.thumb.url %>
+  <% @collection.files.each do |file| %>
+    <% if file.thumb.url %>
+      <%= image_tag file.thumb.url %>
+    <% else %>
+      <%= link_to "#{file.file.filename}", file.url, target: :_blank %>
+    <% end %>
   <% end %>
 </p>
 
