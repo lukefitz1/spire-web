@@ -67,8 +67,8 @@ Rails.application.routes.draw do
     post "/general_informations/ajax_create", to: "general_informations#ajax_create", as: "gi_ajax_create"
     delete "artworks/destroy_multiple", to: "artworks#destroy_multiple"
     delete "artists/destroy_multiple", to: "artists#destroy_multiple"
-
     post "/collections/remove_photos", to: "collections#remove_photos", as: "remove_photos"
+    get "/artworks/download_pdfs/:id", to: "artworks#download_pdfs", as: "download_pdfs"
 
     resources :artworks do
       collection { post :import }

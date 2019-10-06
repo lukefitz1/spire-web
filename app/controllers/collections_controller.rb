@@ -1,9 +1,5 @@
 class CollectionsController < ApplicationController
   before_action :set_collection, only: [:show, :edit, :update, :destroy]
-  # skip_before_action :pdf_crowd_table
-  # skip_before_action :set_collection, only: [:pdf_crowd_table]
-  # skip_before_action :require_login!, only: [:pdf_crowd_table]
-  # before_action :authenticate_user!
 
   # GET /collections
   # GET /collections.json
@@ -34,8 +30,6 @@ class CollectionsController < ApplicationController
   # GET
   def table_of_contents_pdf
     @collection = Collection.find(params[:coll_id])
-
-    puts "At least we are hitting the correct controller!"
 
     respond_to do |format|
       format.html
@@ -147,10 +141,6 @@ class CollectionsController < ApplicationController
   # PATCH/PUT /collections/1
   # PATCH/PUT /collections/1.json
   def update
-    puts "Outputting the parameters here"
-    puts collection_params
-    puts collection_params[:remove_files]
-
     respond_to do |format|
       if @collection.update(collection_params)
         format.html { redirect_to @collection, notice: "Collection was successfully updated." }

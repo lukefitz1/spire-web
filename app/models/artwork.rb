@@ -38,6 +38,7 @@ class Artwork < ApplicationRecord
       hash[:collection_id] = collection_id
       hash[:artist_id] = new_artist.id unless new_artist.nil?
       hash[:general_information_id] = new_general_info.id unless new_general_info.nil?
+      hash[:show_general_info] = true unless new_general_info.nil?
 
       hash.delete("firstName")
       hash.delete("lastName")
