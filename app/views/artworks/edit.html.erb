@@ -32,6 +32,12 @@
       <% elsif filename.identifier != "#{@artwork.ojbId}_Additional_2.jpg" && !@additionalImageTwoExists %>
         <% @additionalImageTwoExists = false %>
       <% end %> 
+
+      <% if filename.identifier == "#{@artwork.ojbId}_PDF.pdf" %>
+        <% @additionalPDFExists = true %>
+      <% elsif filename.identifier != "#{@artwork.ojbId}_PDF.pdf" && !@additionalPDFExists %>
+        <% @additionalPDFExists = false %>
+      <% end %> 
     <% end %>
   <% end %>
 

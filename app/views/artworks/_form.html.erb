@@ -170,6 +170,8 @@
       <%= form.label :additionalPdf, id: :artwork_additionalPdf %>
       <%= form.label :remove_additionalPdf %>
       <%= form.check_box :remove_additionalPdf %> 
+    <% elsif @additionalPDFExists %>
+      <%= link_to "#{@artwork.ojbId}_PDF.pdf", "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_PDF.pdf", target: :_blank %>
     <% end %>
   </div>
 

@@ -59,6 +59,12 @@
         <% @additionalImageTwoExists = true %>
       <% elsif filename.identifier != "#{@artwork.ojbId}_Additional_2.jpg" && !@additionalImageTwoExists %>
         <% @additionalImageTwoExists = false %>
+      <% end %>
+
+      <% if filename.identifier == "#{@artwork.ojbId}_PDF.pdf" %>
+        <% @additionalPDFExists = true %>
+      <% elsif filename.identifier != "#{@artwork.ojbId}_PDF.pdf" && !@additionalPDFExists %>
+        <% @additionalPDFExists = false %>
       <% end %> 
     <% end %>
   <% end %>
@@ -185,6 +191,8 @@
   <strong>Additional PDF:</strong>
   <% if @artwork.additionalPdf.file %>
     <%= link_to "#{@artwork.additionalPdf.file.filename}", "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/artwork/additionalPdf/#{@artwork.id}/#{@artwork.additionalPdf.file.filename}", target: :_blank %>
+  <% elsif @additionalPDFExists %>
+    <%= link_to "#{@artwork.ojbId}_PDF.pdf", "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_PDF.pdf", target: :_blank %>
   <% end %>
 </p>
 
