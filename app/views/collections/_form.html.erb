@@ -80,11 +80,11 @@
       <% @collection.files.each_with_index do |file, index| %>
         <% if file.thumb.url %>
           <%= image_tag file.thumb.url %>
-          <%= index %>
         <% else %>
           <%= link_to "#{file.file.filename}", file.url, target: :_blank %>
         <% end %>
       <% end %>
+      <%= form.label :remove_files %>
       <%= form.check_box :remove_files %>
     <% end %>
 
