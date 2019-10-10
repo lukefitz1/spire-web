@@ -64,6 +64,138 @@ class ArtworksController < ApplicationController
   end
 
   # GET artworks/preview_pdf/1
+  def download_pdfs
+    customer_id = params[:id]
+    collection_id = params[:coll_id]
+    collection = Collection.find(collection_id)
+    upload = TempPdfUploader.new
+    pdf = CombinePDF.new
+    timestamp = Time.now.strftime("%y%m%d%H%M%S")
+    art_array = []
+    @additional_pdf_found = false
+
+    s3 = Aws::S3::Client.new(region: ENV.fetch("AWS_REGION"),
+                               access_key_id: ENV.fetch("AWS_ACCESS_KEY_ID"),
+                               secret_access_key: ENV.fetch("AWS_SECRET_ACCESS_KEY"))
+                              
+    # create new bucket
+    bucket_name = "#{timestamp}-#{collection_id}"
+    s3.create_bucket(bucket: bucket_name)
+    
+    collection.artworks.each do |art|
+      # create the API client instance
+      client = Pdfcrowd::PdfToPdfClient.new("spireart", "4ca5bdb67c50b7a3ca5d9a207de070e0")
+
+      @artwork = Artwork.find(art.id)
+
+      if collection.files?
+        collection.files.each do |file|
+          if file.identifier == "#{@artwork.ojbId}_PDF.pdf"
+            @additional_pdf_found = true
+          end
+        end
+      end
+
+      respond_to do |format|
+        format.html
+        format.pdf do
+          render pdf: "artwork_pdf",
+            template: "artworks/preview_pdf.pdf.erb",
+            encoding: "UTF-8",
+            save_to_file: Rails.root.join("tmp", "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"),
+            save_only: true,
+            page_size: "Letter"
+        end
+      end
+
+      temp_art_name = "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"
+      art_file_name = "#{@artwork.ojbId} #{@artwork.artist.firstName} #{@artwork.artist.lastName} (#{@artwork.title}) - #{@artwork.currentLocation}.pdf"
+      art_array.push(art_file_name)
+      File.open(Rails.root.join("tmp", temp_art_name)) do |file|
+        if @artwork[:additionalPdf]
+          # check if there is an additional PDF stored with the artwork itself
+          url = "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/artwork/additionalPdf/#{@artwork[:id]}/#{@artwork[:additionalPdf]}"
+          open(Rails.root.join("tmp", "crossing_fingers.pdf"), "wb") do |file|
+            file << open(url).read
+    
+            open(Rails.root.join("tmp", "template.pdf"), "wb") do |file2|
+              file2 << open(Rails.root.join("tmp", temp_art_name)).read
+            end
+          end
+    
+          # combine files
+          client.addPdfFile(Rails.root.join("tmp", "template.pdf"))
+          client.addPdfFile(Rails.root.join("tmp", "crossing_fingers.pdf"))
+          
+          # run the conversion and write the result to a file
+          client.convertToFile("#{Rails.root}/tmp/#{@artwork.ojbId} #{@artwork.artist.firstName} #{@artwork.artist.lastName} (#{@artwork.title}) - #{@artwork.currentLocation}.pdf")
+
+          # clean up some files
+          File.delete("#{Rails.root}/tmp/template.pdf") if File.exist?("#{Rails.root}/tmp/template.pdf")
+          File.delete("#{Rails.root}/tmp/crossing_fingers.pdf") if File.exist?("#{Rails.root}/tmp/crossing_fingers.pdf")
+        elsif @additional_pdf_found
+          # check if there is an additional PDF uploaded to the collection
+          url = "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{collection_id}/#{@artwork.ojbId}_PDF.pdf"
+          open(Rails.root.join("tmp", "crossing_fingers.pdf"), "wb") do |file|
+            file << open(url).read
+    
+            open(Rails.root.join("tmp", "template.pdf"), "wb") do |file2|
+              file2 << open(Rails.root.join("tmp", temp_art_name)).read
+            end
+          end
+    
+          # combine files
+          client.addPdfFile(Rails.root.join("tmp", "template.pdf"))
+          client.addPdfFile(Rails.root.join("tmp", "crossing_fingers.pdf"))
+          
+          # run the conversion and write the result to a file
+          client.convertToFile("#{Rails.root}/tmp/#{@artwork.ojbId} #{@artwork.artist.firstName} #{@artwork.artist.lastName} (#{@artwork.title}) - #{@artwork.currentLocation}.pdf")
+          
+          # clean up some files
+          File.delete("#{Rails.root}/tmp/template.pdf") if File.exist?("#{Rails.root}/tmp/template.pdf")
+          File.delete("#{Rails.root}/tmp/crossing_fingers.pdf") if File.exist?("#{Rails.root}/tmp/crossing_fingers.pdf")
+        else
+          open(Rails.root.join("tmp", "#{Rails.root}/tmp/#{@artwork.ojbId} #{@artwork.artist.firstName} #{@artwork.artist.lastName} (#{@artwork.title}) - #{@artwork.currentLocation}.pdf"), "wb") do |file|
+            file << open(Rails.root.join("tmp", temp_art_name)).read
+          end
+        end
+      end
+    
+      # cleaning up the temp_art_name file
+      File.delete("#{Rails.root}/tmp/#{temp_art_name}") if File.exist?("#{Rails.root}/tmp/#{temp_art_name}")
+
+      # upload pdf to S3
+      File.open("#{Rails.root}/tmp/#{art_file_name}", "r") do |final_pdf|
+        s3.put_object(bucket: bucket_name, key: art_file_name, body: final_pdf)
+      end
+    end
+
+    # Create S3 resource
+    s3_resource = Aws::S3::Resource.new(region: ENV.fetch("AWS_REGION"),
+                               access_key_id: ENV.fetch("AWS_ACCESS_KEY_ID"),
+                               secret_access_key: ENV.fetch("AWS_SECRET_ACCESS_KEY"))
+    bucket = s3_resource.bucket(bucket_name)
+
+    # create temp folder for storage
+    Dir.mkdir("#{Rails.root}/tmp/#{bucket_name}")
+
+    # Download the files from S3 to a local folder
+    art_array.each do |file_name|
+      file_obj = bucket.object("#{file_name}")
+      file_obj.get(response_target: "tmp/#{bucket_name}/#{file_name}")
+    end
+
+    # zip up downloads folder
+    Zip::File.open("tmp/#{bucket_name}/pages.zip", Zip::File::CREATE) do |zipfile|
+      art_array.each do |filename|
+        zipfile.add(filename, "tmp/#{bucket_name}/#{filename}")
+      end
+    end
+
+    send_file("#{Rails.root}/tmp/#{bucket_name}/pages.zip")
+  end
+
+  # GET artworks/preview_pdf/1
   def preview_pdf
     @artwork = Artwork.find(params[:id])
 
@@ -224,6 +356,15 @@ class ArtworksController < ApplicationController
   end
 
   private
+
+  def set_s3_object(filename)
+    s3 = Aws::S3::Resource.new(region: ENV.fetch("AWS_REGION"),
+                               access_key_id: ENV.fetch("AWS_ACCESS_KEY_ID"),
+                               secret_access_key: ENV.fetch("AWS_SECRET_ACCESS_KEY"))
+    bucket_name = ENV.fetch("S3_BUCKET_PDF")
+    @key = filename
+    @s3_obj = s3.bucket(bucket_name).object(@key)
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_artwork

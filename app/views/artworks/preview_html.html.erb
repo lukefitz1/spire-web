@@ -221,7 +221,7 @@
 				<% else %>
           <% if @artwork.artist %>
             <h3 class="bold">Artist&#39s Biography</h3>
-            <p class="text-justify avenirnext" id="artist-bio"><%= @artwork.artist.biography %></p>
+            <p class="text-justify avenirnext" id="artist-bio"><%= sanitize @artwork.artist.biography, tags: %w(span), attributes: %w(style) %></p>
           <% end %>
 				<% end %>
 			</div>
