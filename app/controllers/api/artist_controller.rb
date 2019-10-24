@@ -3,6 +3,7 @@ class Api::ArtistController < Api::BaseController
 
 	def index
 		@artist = Artist.all
+
 		respond_to do |format|
 			format.json { render :json => @artist }
 		end
@@ -11,6 +12,11 @@ class Api::ArtistController < Api::BaseController
 	# GET /artists/1
 	# GET /artists/1.json
 	def show
+		@artist = Artist.find(params[:id])
+
+		respond_to do |format|
+			format.json { render :json => @artist }
+		end
 	end
 
 	# GET /artists/new
@@ -36,6 +42,20 @@ class Api::ArtistController < Api::BaseController
 		end
 	end
 
+	# PATCH/PUT /api/artists/1
+  # PATCH/PUT /api/artists/1.json
+  def update
+		@artist = Artist.find(params[:id])
+
+		respond_to do |format|
+      if @artist.update(artist_params)
+        format.json { render :json => @artist, status: :ok }
+      else
+        format.json { render json: @artist.errors, status: :unprocessable_entity }
+      end
+    end
+	end
+	
 	# DELETE /api/artists/1
   # DELETE /api/artists/1.json
 	def destroy

@@ -13,10 +13,17 @@ class Api::GeneralInformationsController < Api::BaseController
 		end
   end
 
-  # # GET /general_informations/1
-  # # GET /general_informations/1.json
-  # def show
-  # end
+  # GET /general_informations/1
+  # GET /general_informations/1.json
+  def show
+    @general_information = GeneralInformation.find(params[:id])
+
+    respond_to do |format|
+			format.json { 
+				render :json => @general_information
+			}
+		end
+  end
 
   # # GET /general_informations/new
   # def new
@@ -27,35 +34,33 @@ class Api::GeneralInformationsController < Api::BaseController
   # def edit
   # end
 
-  # # POST /general_informations
-  # # POST /general_informations.json
-  # def create
-  #   @general_information = GeneralInformation.new(general_information_params)
+  # POST /api/general_informations
+  # POST /api/general_informations.json
+  def create
+    @general_information = GeneralInformation.new(general_information_params)
 
-  #   respond_to do |format|
-  #     if @general_information.save
-  #       format.html { redirect_to @general_information, notice: 'General information was successfully created.' }
-  #       format.json { render :show, status: :created, location: @general_information }
-  #     else
-  #       format.html { render :new }
-  #       format.json { render json: @general_information.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
+    respond_to do |format|
+			if @general_information.save 
+		  		format.json { render :json => @general_information, status: :created }
+		  	else
+		  		format.json { render json: @general_information.errors, status: :unprocessable_entity }
+		  	end
+		end
+  end
 
-  # # PATCH/PUT /general_informations/1
-  # # PATCH/PUT /general_informations/1.json
-  # def update
-  #   respond_to do |format|
-  #     if @general_information.update(general_information_params)
-  #       format.html { redirect_to @general_information, notice: 'General information was successfully updated.' }
-  #       format.json { render :show, status: :ok, location: @general_information }
-  #     else
-  #       format.html { render :edit }
-  #       format.json { render json: @general_information.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
+  # PATCH/PUT /api/general_informations/1
+  # PATCH/PUT /api/general_informations/1.json
+  def update
+    @general_information = GeneralInformation.find(params[:id])
+
+    respond_to do |format|
+      if @general_information.update(general_information_params)
+        format.json { render :json => @general_information, status: :ok }
+      else
+        format.json { render json: @general_information.errors, status: :unprocessable_entity }
+      end
+    end
+  end
 
   # DELETE /api/general_informations/1
   # DELETE /api/general_informations/1.json
