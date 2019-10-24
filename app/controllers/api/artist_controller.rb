@@ -2,7 +2,7 @@ class Api::ArtistController < Api::BaseController
 	before_action :require_login!
 
 	def index
-	@artist = Artist.all
+		@artist = Artist.all
 		respond_to do |format|
 			format.json { render :json => @artist }
 		end
@@ -35,6 +35,17 @@ class Api::ArtistController < Api::BaseController
 		  	end
 		end
 	end
+
+	# DELETE /api/artists/1
+  # DELETE /api/artists/1.json
+	def destroy
+		@artist = Artist.find(params[:id])
+		@artist.destroy
+		
+    respond_to do |format|
+      format.json { render :json => @artist.to_json(only: [:id]) , head: :ok }
+    end
+  end
 
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def artist_params

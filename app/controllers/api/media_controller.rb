@@ -49,8 +49,6 @@ class Api::MediaController < Api::BaseController
   # PATCH/PUT /media/1.json
   # DOESNT WORK YET
   def update
-    puts "Paramters: #{medium_params}"
-
     respond_to do |format|
       if @medium.update(medium_params)
         format.html { redirect_to @medium, notice: 'Medium was successfully updated.' }
@@ -66,10 +64,11 @@ class Api::MediaController < Api::BaseController
   # DELETE /media/1.json
   # DOESNT WORK YET
   def destroy
+    @medium = Medium.find(params[:id])
     @medium.destroy
+
     respond_to do |format|
-      format.html { redirect_to media_url, notice: 'Medium was successfully destroyed.' }
-      format.json { head :no_content }
+      format.json { render :json => @medium.to_json(only: [:id]) , head: :ok }
     end
   end
 

@@ -1,8 +1,8 @@
 class Api::CustomerController < Api::BaseController	
 	before_action :require_login!
 
-	# GET /customers
-  	# GET /customers.json
+	# GET /api/customers
+  # GET /api/customers.json
 	def index
 		@customer = Customer.all
 
@@ -13,8 +13,8 @@ class Api::CustomerController < Api::BaseController
 		end
 	end
 
-	# GET /customers/1
-	# GET /customers/1.json
+	# GET /api/customers/1
+	# GET /api/customers/1.json
 	def show
 		@customer = Customer.find(params[:id])
 
@@ -23,7 +23,7 @@ class Api::CustomerController < Api::BaseController
 		end
 	end
 
-	# GET /customers/new
+	# GET /api/customers/new
 	def new
 		@customer = Customer.new
 		respond_to do |format|
@@ -31,12 +31,12 @@ class Api::CustomerController < Api::BaseController
 		end
 	end
 
-	# GET /customers/1/edit
+	# GET /api/customers/1/edit
 	def edit
 	end
 
-	# POST /customers
-	# POST /customers.json
+	# POST /api/customers
+	# POST /api/customers.json
 	def create
 		@customer = Customer.new(customer_params)
 
@@ -48,6 +48,33 @@ class Api::CustomerController < Api::BaseController
 		  	end
 		end
 	end
+
+	# PATCH/PUT /api/customers/1
+  # PATCH/PUT /api/customers/1.json
+	def update
+		puts "UPDATING THIS SHIT"
+    respond_to do |format|
+      if @customer.update(customer_params)
+        format.html { redirect_to @customer, notice: 'Customer was successfully updated.' }
+        format.json { render :show, status: :ok, location: @customer }
+      else
+        format.html { render :edit }
+        format.json { render json: @customer.errors, status: :unprocessable_entity }
+      end
+    end
+	end
+	
+	# DELETE /api/customers/1
+  # DELETE /api/customers/1.json
+	def destroy
+		@customer = Customer.find(params[:id])
+		@customer.destroy
+		
+		respond_to do |format|
+      format.json { render :json => @customer.to_json(only: [:id]) , head: :ok }
+    end
+  end
+
 
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def customer_params

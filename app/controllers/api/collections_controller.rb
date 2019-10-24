@@ -2,28 +2,28 @@ class Api::CollectionsController < Api::BaseController
 	before_action :require_login!
 
 	# GET /collections
-    # GET /collections.json
-    def index
-      @collections = Collection.all
+	# GET /collections.json
+	def index
+		@collections = Collection.all
 
-      respond_to do |format|
-			format.json { 
-				render :json => @collections, :include => { 
-					:collection => {}
-				} 
-			}
-		end
-    end
+		respond_to do |format|
+		format.json { 
+			render :json => @collections, :include => { 
+				:collection => {}
+			} 
+		}
+	end
+	end
 
 	# GET /collections/1
-    # GET /collections/1.json
-    def show
-    	@collection = Collection.find(params[:id])
+	# GET /collections/1.json
+	def show
+		@collection = Collection.find(params[:id])
 
-    	respond_to do |format|
-			format.json { render :json => @collection }
-		end
-    end
+		respond_to do |format|
+		format.json { render :json => @collection }
+	end
+	end
 
 	# GET /collections/new
 	def new
@@ -37,8 +37,8 @@ class Api::CollectionsController < Api::BaseController
     def edit
     end
 
-	# POST /collections
-	# POST /collections.json
+	# POST /api/collections
+	# POST /api/collections.json
 	def create
 		@collection = Collection.new(collection_params)
 		cust_id = collection_params[:customer_id]
@@ -52,6 +52,17 @@ class Api::CollectionsController < Api::BaseController
 		  	end
 		end
 	end
+
+	# DELETE /api/collections/1
+  # DELETE /api/collections/1.json
+  def destroy
+		@collection = Collection.find(params[:id])
+		@collection.destroy
+		
+    respond_to do |format|
+      format.json { render :json => @collection.to_json(only: [:id]) , head: :ok }
+    end
+  end
 
 	# Never trust parameters from the scary internet, only allow the white list through.
     def collection_params

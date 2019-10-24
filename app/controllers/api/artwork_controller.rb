@@ -38,6 +38,17 @@ class Api::ArtworkController < Api::BaseController
 		end
 	end
 
+	# DELETE /api/artworks/1
+  # DELETE /api/artworks/1.json
+	def destroy
+		@artwork = Artwork.find(params[:id])
+    @artwork.destroy
+
+    respond_to do |format|
+      format.json { render :json => @artwork.to_json(only: [:id]) , head: :ok }
+    end
+  end
+
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def artwork_params
 		params.require(:artwork).permit(:id, :ojbId, :artType, :title, :date, :medium, :image, :description, :dimensions, :frame_dimensions, :condition, :currentLocation, :source, :dateAcquired, :amountPaid, :currentValue, :notes, :notesImage, :additionalInfoLabel, :additionalInfoText, :additionalInfoImage, :additionalPdf, :reviewedBy, :reviewedDate, :provenance, :artist_id, :customer_id, :remove_image, :remove_additionalInfoImage, :remove_notesImage, :collection_id, :dateAcquiredLabel)

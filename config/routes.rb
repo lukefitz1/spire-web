@@ -36,6 +36,9 @@ Rails.application.routes.draw do
 
       # media api route
       resources :media
+
+      # general information api route
+      resources :general_informations
     end
   end
 
