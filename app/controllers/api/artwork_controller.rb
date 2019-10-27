@@ -11,6 +11,11 @@ class Api::ArtworkController < Api::BaseController
 	# GET /artworks/1
 	# GET /artworks/1.json
 	def show
+		@artwork = Artwork.find(params[:id])
+
+		respond_to do |format|
+			format.json { render :json => @artwork }
+		end
 	end
 
 	# GET /artworks/new
@@ -38,6 +43,20 @@ class Api::ArtworkController < Api::BaseController
 		end
 	end
 
+	# PATCH/PUT /api/artworks/1
+  # PATCH/PUT /api/artworks/1.json
+	def update
+		@artwork = Artwork.find(params[:id])
+
+    respond_to do |format|
+      if @artwork.update(artwork_params)
+        format.json { render :json => @artwork, status: :ok }
+      else
+				format.json { render json: @artwork.errors, status: :unprocessable_entity }
+      end
+    end
+	end
+	
 	# DELETE /api/artworks/1
   # DELETE /api/artworks/1.json
 	def destroy

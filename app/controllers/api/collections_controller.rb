@@ -21,8 +21,8 @@ class Api::CollectionsController < Api::BaseController
 		@collection = Collection.find(params[:id])
 
 		respond_to do |format|
-		format.json { render :json => @collection }
-	end
+			format.json { render :json => @collection }
+		end
 	end
 
 	# GET /collections/new
@@ -41,8 +41,6 @@ class Api::CollectionsController < Api::BaseController
 	# POST /api/collections.json
 	def create
 		@collection = Collection.new(collection_params)
-		cust_id = collection_params[:customer_id]
-		redirect = params[:redirect]
 
 		respond_to do |format|
 		 	if @collection.save 
@@ -53,6 +51,20 @@ class Api::CollectionsController < Api::BaseController
 		end
 	end
 
+	# PATCH/PUT /api/collections/1
+  # PATCH/PUT /api/collections/1.json
+	def update
+		@collection = Collection.find(params[:id])
+
+    respond_to do |format|
+      if @collection.update(collection_params)
+        format.json { render :json => @collection, status: :ok }
+      else
+        format.json { render json: @collection.errors, status: :unprocessable_entity }
+      end
+    end
+	end
+	
 	# DELETE /api/collections/1
   # DELETE /api/collections/1.json
   def destroy
