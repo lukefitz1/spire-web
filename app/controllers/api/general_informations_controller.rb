@@ -1,4 +1,4 @@
-class Api::GeneralInformationsController < Api::BaseController	
+class Api::GeneralInformationsController < Api::BaseController
 	before_action :require_login!
 
   # GET /api/general_informations

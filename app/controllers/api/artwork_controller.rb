@@ -70,7 +70,7 @@ class Api::ArtworkController < Api::BaseController
 
 	# Never trust parameters from the scary internet, only allow the white list through.
 	def artwork_params
-		params.require(:artwork).permit(:id, :ojbId, :artType, :title, :date, :medium, :image, :description, :dimensions, :frame_dimensions, :condition, :currentLocation, :source, :dateAcquired, :amountPaid, :currentValue, :notes, :notesImage, :additionalInfoLabel, :additionalInfoText, :additionalInfoImage, :additionalPdf, :reviewedBy, :reviewedDate, :provenance, :artist_id, :customer_id, :remove_image, :remove_additionalInfoImage, :remove_notesImage, :collection_id, :dateAcquiredLabel)
+		params.require(:artwork).permit(:id, :ojbId, :artType, :title, :date, :medium, :image, :description, :dimensions, :frame_dimensions, :condition, :currentLocation, :source, :dateAcquired, :amountPaid, :currentValue, :notes, :notesImage, :notesImageTwo, :additionalInfoLabel, :additionalInfoText, :additionalInfoImage, :additionalInfoImageTwo, :additionalPdf, :reviewedBy, :reviewedDate, :provenance, :artist_id, :customer_id, :remove_image, :remove_additionalInfoImage, :remove_additionalInfoImageTwo, :remove_notesImage, :remove_notesImageTwo, :collection_id, :dateAcquiredLabel, :remove_additionalPdf, :general_information_id, :show_general_info, :custom_title)
 	end
 
 end

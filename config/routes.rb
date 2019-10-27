@@ -39,6 +39,9 @@ Rails.application.routes.draw do
 
       # general information api route
       resources :general_informations
+
+      # general information api route
+      resources :visits
     end
   end
 

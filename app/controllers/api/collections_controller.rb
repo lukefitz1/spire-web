@@ -78,7 +78,7 @@ class Api::CollectionsController < Api::BaseController
 
 	# Never trust parameters from the scary internet, only allow the white list through.
     def collection_params
-      	params.require(:collection).permit(:id, :collectionName, :customer_id, :identifier)
+      params.require(:collection).permit(:id, :collectionName, :customer_id, :identifier, :year)
     end
 
 end
