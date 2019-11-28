@@ -5,7 +5,7 @@ class Artist < ApplicationRecord
 
   has_many :artworks
 
-  mount_uploader :artist_image, ImageUploader
+  mount_base64_uploader :artist_image, ImageUploader
 
   def self.import(file)
     # loops through csv data

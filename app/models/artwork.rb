@@ -8,12 +8,12 @@ class Artwork < ApplicationRecord
   belongs_to :collection, optional: true
   belongs_to :general_information, optional: true
 
-  mount_uploader :image, ImageUploader
-  mount_uploader :notesImage, ImageUploader
-  mount_uploader :additionalInfoImage, ImageUploader
-  mount_uploader :notesImageTwo, ImageUploader
-  mount_uploader :additionalInfoImageTwo, ImageUploader
-  mount_uploader :additionalPdf, PdfUploader
+  mount_base64_uploader :image, ImageUploader
+  mount_base64_uploader :notesImage, ImageUploader
+  mount_base64_uploader :notesImageTwo, ImageUploader
+  mount_base64_uploader :additionalInfoImage, ImageUploader
+  mount_base64_uploader :additionalInfoImageTwo, ImageUploader
+  mount_base64_uploader :additionalPdf, PdfUploader
 
   validates_uniqueness_of :ojbId
 

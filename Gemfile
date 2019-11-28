@@ -63,6 +63,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise', '~> 4.3'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 gem 'carrierwave', '~> 2.0'
+gem 'carrierwave-base64'
 gem 'mini_magick', '~> 4.8'
 gem 'smarter_csv', '~> 1.1', '>= 1.1.4'
 gem 'awesome_print', '~> 1.8'
