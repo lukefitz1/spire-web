@@ -894,6 +894,11 @@ GEM
     database_cleaner (1.7.0)
     datetime_picker_rails (0.0.7)
       momentjs-rails (>= 2.8.1)
+    delayed_job (4.1.8)
+      activesupport (>= 3.0, < 6.1)
+    delayed_job_active_record (4.1.4)
+      activerecord (>= 3.0, < 6.1)
+      delayed_job (>= 3.0, < 5)
     devise (4.6.2)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -1151,6 +1156,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   combine_pdf
   database_cleaner
+  delayed_job_active_record
   devise (~> 4.3)
   dotenv-rails
   factory_girl_rails (~> 4.9)

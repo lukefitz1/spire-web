@@ -82,3 +82,4 @@ gem 'rubyzip'
 
 gem 'administrate'
 gem 'bourbon'
+gem 'delayed_job_active_record'
