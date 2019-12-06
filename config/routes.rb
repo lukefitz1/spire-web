@@ -75,6 +75,9 @@ Rails.application.routes.draw do
     delete "artists/destroy_multiple", to: "artists#destroy_multiple"
     post "/collections/remove_photos", to: "collections#remove_photos", as: "remove_photos"
     get "/artworks/download_pdfs/:id", to: "artworks#download_pdfs", as: "download_pdfs"
+    get "/artworks/download_pdfs_background/:id", to: "artworks#download_pdfs_background", as: "download_pdfs_background"
+    post "/collections/get_bucket_status", to: "collections#get_bucket_status", as: "get_bucket_status"
+    get "/collections/download_pdfs_s3", to: "collections#download_pdfs_s3", as: "download_pdfs_s3"
 
     resources :artworks do
       collection { post :import }

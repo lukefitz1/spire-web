@@ -4,6 +4,9 @@
 <%= wicked_pdf_stylesheet_link_tag "customers" %>
 <%= wicked_pdf_stylesheet_link_tag "artworks" %>
 
+<% if defined?(artwork) %>
+  <% @artwork = artwork %>
+<% end %>
 <div class="preview-container black">
 	<div class="banner">
 		<div class="top avenirnext twelve">

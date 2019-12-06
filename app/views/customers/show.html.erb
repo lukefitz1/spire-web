@@ -104,9 +104,24 @@
     <%= link_to 'PDF Table', pdf_table_path(:coll_id => collection.id, format: :pdf) %><br /><br />
     <%= link_to 'PDF Crowd Table', download_pdf_table_path(:coll_id => collection.id, format: :pdf) %><br /><br />
     <%= link_to 'New Artwork', new_from_customer_collection_path(:cust_id => @customer.id, :coll_id => collection.id, :customer_redirect => true) %><br /><br />
-
     <%= link_to 'Generate & Download PDFs', download_pdfs_path(:coll_id => collection.id, format: :pdf) %><br /><br />
-    
+    <%= link_to 'Generate PDFs - Background Job', download_pdfs_background_path(:cust_id => @customer.id, :coll_id => collection.id) %><br /><br />
+    <%= hidden_field_tag(:collection_bucket_name, collection.bucket_name) %>
+
+    <% if collection.bucket_name.present? %>
+      <a href='javascript:;' id='get-bucket-status'>Get PDFs status</a><br />
+
+      <div id="download-button">
+        <br /><%= link_to 'Download PDFs from S3', download_pdfs_s3_path(:id=> collection.id, :bucket_name => collection.bucket_name, format: :pdf) %><br /><br />
+      </div>
+      <div id="no-download-button">
+        <p>The number of pieces of art in this collection does not match the number of PDFs that have been generated. You will need to generate them again.</p>
+      </div>
+
+    <% else %>
+      No PDFs have been generated yet. Generate some and then you can download them!
+    <% end %>
+
     <% unless collection.artworks.blank? %>
       <div>
         <table>
@@ -163,6 +178,7 @@
                     True
                   <% elsif @additionalPDFExists %>
                     True
+                    <% @additionalPDFExists = false %>
                   <% end %>
                 </td>
                 <td><%= link_to 'HTML Preview', preview_html_path(artwork) %></td>
@@ -185,6 +201,7 @@
         <%= hidden_field_tag(:collection_id, collection.id) %>
         <%= submit_tag "Import Artwork" %>
     <% end %>
+    <%= csrf_meta_tag %>
   </div>
 
 <% end %>
@@ -212,4 +229,32 @@
       }
     });
   }
+</script>
+
+<script>
+  $("#get-bucket-status").on("click", function() {
+      let name = $('#collection_bucket_name').val();
+      let timestamp = name.split('-', 1)[0];
+      let collId = name.replace(`${timestamp}-`, '');
+
+      $.ajax({
+          url: "/collections/get_bucket_status",
+          type: 'POST',
+          beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+          contentType: 'application/json',
+          data: JSON.stringify({ "bucketName": $('#collection_bucket_name').val(), "timestamp": timestamp, "coll_id": collId }),
+          success: function(data) {
+              console.log(`Function run successfully! ${data.response}`);
+
+              if (data.response === "good") {
+                  $('#download-button').css("display", "block");
+                  $('#no-download-button').css("display", "none");
+              } else {
+                  $('#no-download-button').css("display", "block");
+                  $('#download-button').css("display", "none");
+              }
+          },
+          cache: false
+      })
+  });
 </script>

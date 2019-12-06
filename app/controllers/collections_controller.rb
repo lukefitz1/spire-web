@@ -162,6 +162,78 @@ class CollectionsController < ApplicationController
     end
   end
 
+  def get_bucket_status
+    bucket_name = params[:bucketName]
+    collection_id = params[:coll_id]
+
+    # Create S3 resource
+    s3 = Aws::S3::Client.new(region: ENV.fetch("AWS_REGION"),
+                             access_key_id: ENV.fetch("AWS_ACCESS_KEY_ID"),
+                             secret_access_key: ENV.fetch("AWS_SECRET_ACCESS_KEY"))
+
+    @collection = Collection.find(collection_id)
+
+    resp = s3.list_objects_v2(bucket: bucket_name)
+    s3_bucket_length = resp.contents.length
+    collection_artworks_length = @collection.artworks.length
+
+    if request.xhr?
+      respond_to do |format|
+        if s3_bucket_length === collection_artworks_length
+          format.json { render json: { response: "good" } }
+        else
+          format.json { render json: { response: "The number of PDFs in bucket does not match pieces of art in collection" } }
+        end
+      end
+    end
+  end
+
+  def download_pdfs_s3
+    bucket_name = params[:bucket_name]
+    art_array = []
+    timestamp = Time.now.strftime("%y%m%d%H%M%S")
+
+    # Create S3 resource
+    s3 = Aws::S3::Client.new(region: ENV.fetch("AWS_REGION"),
+                             access_key_id: ENV.fetch("AWS_ACCESS_KEY_ID"),
+                             secret_access_key: ENV.fetch("AWS_SECRET_ACCESS_KEY"))
+
+     # Create S3 resource
+    s3_resource = Aws::S3::Resource.new(region: ENV.fetch("AWS_REGION"),
+                                        access_key_id: ENV.fetch("AWS_ACCESS_KEY_ID"),
+                                        secret_access_key: ENV.fetch("AWS_SECRET_ACCESS_KEY"))
+
+    # PASS IN BUCKETNAME TO THIS FUNCTION
+    bucket_name = bucket_name
+    bucket = s3_resource.bucket(bucket_name)
+
+    # create temp folder for storage
+    Dir.mkdir("#{Rails.root}/tmp/#{bucket_name}")
+
+    # Download the files from S3 to a local folder
+    resp = s3.list_objects_v2(bucket: bucket_name)
+    resp.contents.each do |object|
+      art_array.push(object.key)
+
+      file_obj = bucket.object("#{object.key}")
+      file_obj.get(response_target: "tmp/#{bucket_name}/#{object.key}")
+    end
+
+    # zip up downloads folder
+    Zip::File.open("tmp/#{timestamp}_pages.zip", Zip::File::CREATE) do |zipfile|
+      art_array.each do |filename|
+        zipfile.add(filename, "tmp/#{bucket_name}/#{filename}")
+      end
+    end
+
+    send_file("#{Rails.root}/tmp/#{timestamp}_pages.zip")
+
+    art_array.each do |filename|
+      File.delete("#{Rails.root}/tmp/#{bucket_name}/#{filename}")
+    end
+    Dir.delete("#{Rails.root}/tmp/#{bucket_name}")
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

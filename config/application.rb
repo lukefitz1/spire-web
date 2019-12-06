@@ -20,5 +20,6 @@ module ArtCollectorWeb
     
     config.serve_static_assets = true
 
+    config.active_job.queue_adapter = :delayed_job
     end
 end

@@ -1,3 +1,5 @@
+require_relative('../../app/jobs/generate_pdf_job')
+
 class ArtworksController < ApplicationController
   before_action :set_artwork, only: [:show, :edit, :update, :destroy]
 
@@ -32,6 +34,9 @@ class ArtworksController < ApplicationController
 
   def preview_html
     @artwork = Artwork.find(params[:id])
+
+    # enqueue our custom job object that uses delayed_job methods
+    GeneratePdfJob.perform_later @artwork
   end
 
   # GET /artworks/1/edit
@@ -64,8 +69,55 @@ class ArtworksController < ApplicationController
   end
 
   def create_bucket(s3_client, bucket_name)
-    puts "Bucket name: #{bucket_name}"
     s3_client.create_bucket(bucket: bucket_name)
+  end
+
+  def download_pdfs_background
+    customer_id = params[:cust_id]
+    collection_id = params[:coll_id]
+    timestamp = Time.now.strftime("%y%m%d%H%M%S")
+    bucket_name = "#{timestamp}-#{collection_id}"
+    collection = Collection.find(collection_id)
+    art_array = []
+    files_array = []
+    @additional_pdf_found = false
+
+    s3 = Aws::S3::Client.new(region: ENV.fetch("AWS_REGION"),
+                             access_key_id: ENV.fetch("AWS_ACCESS_KEY_ID"),
+                             secret_access_key: ENV.fetch("AWS_SECRET_ACCESS_KEY"))
+    create_bucket(s3, bucket_name)
+
+    puts bucket_name
+    collection.update_attribute(:bucket_name, bucket_name)
+
+    if collection.files?
+      collection.files.each do |file|
+        if file.identifier.include? "_PDF.pdf"
+          files_array.push(file.identifier)
+        end
+      end
+    end
+
+    collection.artworks.each do |art|
+      @artwork = Artwork.find(art.id)
+      puts "Art ID: #{@artwork.ojbId}"
+      temp_art_name = "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"
+      art_file_name = "#{@artwork.ojbId} #{@artwork.artist.firstName} #{@artwork.artist.lastName} (#{@artwork.title}) - #{@artwork.currentLocation}.pdf"
+      art_array.push(art_file_name)
+
+      if files_array.include? "#{@artwork.ojbId}_PDF.pdf"
+        @additional_pdf_found = true
+      else
+        @additional_pdf_found = false
+      end
+
+       # enqueue our custom job object that uses delayed_job methods
+       GeneratePdfJob.perform_later(@artwork, timestamp, bucket_name, temp_art_name, art_file_name, @additional_pdf_found, collection_id)
+    end
+
+    respond_to do |format|
+      format.html { redirect_to customer_url(customer_id), notice: "PDF Generation was successfully kicked off" }
+    end
   end
 
   # GET artworks/preview_pdf/1
@@ -76,6 +128,7 @@ class ArtworksController < ApplicationController
     collection = Collection.find(collection_id)
     client = Pdfcrowd::PdfToPdfClient.new("spireart", "4ca5bdb67c50b7a3ca5d9a207de070e0")
     art_array = []
+    files_array = []
     @additional_pdf_found = false
     ct = 1
 
@@ -86,16 +139,23 @@ class ArtworksController < ApplicationController
 
     # set timestamp var to nil
     timestamp = nil
-    
+
+    if collection.files?
+      collection.files.each do |file|
+        if file.identifier.include? "_PDF.pdf"
+          files_array.push(file.identifier)
+        end
+      end
+    end
+
     collection.artworks.each do |art|
       @artwork = Artwork.find(art.id)
+      temp_art_name = "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"
+      art_file_name = "#{@artwork.ojbId} #{@artwork.artist.firstName} #{@artwork.artist.lastName} (#{@artwork.title}) - #{@artwork.currentLocation}.pdf"
+      art_array.push(art_file_name)
 
-      if collection.files?
-        collection.files.each do |file|
-          if file.identifier == "#{@artwork.ojbId}_PDF.pdf"
-            @additional_pdf_found = true
-          end
-        end
+      if files_array.include? "#{@artwork.ojbId}_PDF.pdf"
+        @additional_pdf_found = true
       end
 
       respond_to do |format|
@@ -104,15 +164,12 @@ class ArtworksController < ApplicationController
           render pdf: "artwork_pdf",
                  template: "artworks/preview_pdf.pdf.erb",
                  encoding: "UTF-8",
-                 save_to_file: Rails.root.join("tmp", "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"),
+                 save_to_file: Rails.root.join("tmp", temp_art_name),
                  save_only: true,
                  page_size: "Letter"
         end
       end
 
-      temp_art_name = "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"
-      art_file_name = "#{@artwork.ojbId} #{@artwork.artist.firstName} #{@artwork.artist.lastName} (#{@artwork.title}) - #{@artwork.currentLocation}.pdf"
-      art_array.push(art_file_name)
       puts "Starting the file reading & joining #{ct}"
       File.open(Rails.root.join("tmp", temp_art_name)) do |file|
         if @artwork[:additionalPdf]
