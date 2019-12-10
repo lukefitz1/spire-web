@@ -167,8 +167,8 @@
 
 <p>
   <strong>Additional Info Image:</strong>
-  <% if @artwork.notesImage.thumb.url %>
-    <%= image_tag @artwork.notesImage.thumb.url %>
+  <% if @artwork.additionalInfoImage.thumb.url %>
+    <%= image_tag @artwork.additionalInfoImage.thumb.url %>
   <% elsif @artwork.collection %>
     <% if @additionalImageOneExists %>
       <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/thumb_#{@artwork.ojbId}_Additional_1.jpg" %>
@@ -178,8 +178,8 @@
 
 <p>
   <strong>Additional Info Image Two:</strong>
-  <% if @artwork.notesImage.thumb.url %>
-    <%= image_tag @artwork.notesImage.thumb.url %>
+  <% if @artwork.additionalInfoImageTwo.thumb.url %>
+    <%= image_tag @artwork.additionalInfoImageTwo.thumb.url %>
   <% elsif @artwork.collection %>
     <% if @additionalImageTwoExists %>
       <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/thumb_#{@artwork.ojbId}_Additional_2.jpg" %>
