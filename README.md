@@ -21,4 +21,8 @@ Things you may want to cover:
 
 * Deployment instructions
 
+* To run the rails server with https locally, use this command (and set up your self signed cert)
+rails s -b 'ssl://localhost:3000?key=localhost.key&cert=localhost.crt'
+* Chrome probably won't work with https, but Firefox will
+* Also, uncomment the last line in development.rb 
 * ...

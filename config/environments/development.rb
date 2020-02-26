@@ -59,4 +59,7 @@ Rails.application.configure do
   AWS_SECRET_ACCESS_KEY = ENV['AWS_SECRET_ACCESS_KEY']
   AWS_REGION = ENV["AWS_REGION"]
 
+  # Turn this on when you need https
+  # config.force_ssl = true
+
 end
