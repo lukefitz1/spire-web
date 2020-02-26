@@ -220,7 +220,7 @@
       <div>
         <% if form.object.notesImage? %>
           <%= image_tag form.object.notesImage.url, :class => "show-additional-images" %>
-          <%= form.label :remove_notesImage %>
+          <%= form.label :remove_notesImage, "Remove Notes Image" %>
           <%= form.check_box :remove_notesImage %>
         <% elsif @notesImageOneExists %>
           <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Notes_1.jpg", :class => "show-additional-images" %>
@@ -240,7 +240,7 @@
       <div>
         <% if form.object.notesImageTwo? %>
           <%= image_tag form.object.notesImageTwo.url, :class => "show-additional-images" %>
-          <%= form.label :remove_notesImageTwo %>
+          <%= form.label :remove_notesImageTwo, "Remove Notes Image 2" %>
           <%= form.check_box :remove_notesImageTwo %>
         <% elsif @notesImageTwoExists %>
           <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Notes_2.jpg", :class => "show-additional-images" %>
@@ -260,7 +260,7 @@
       <div>
         <% if form.object.additionalInfoImage? %>
           <%= image_tag form.object.additionalInfoImage.url, :class => "show-additional-images"  %>
-          <%= form.label :remove_additionalInfoImage %>
+          <%= form.label :remove_additionalInfoImage, "Remove Additional Image" %>
           <%= form.check_box :remove_additionalInfoImage %>
         <% elsif @additionalImageOneExists %>
           <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Additional_1.jpg", :class => "show-additional-images" %>
@@ -280,7 +280,7 @@
       <div>
         <% if form.object.additionalInfoImageTwo? %>
           <%= image_tag form.object.additionalInfoImageTwo.url, :class => "show-additional-images"  %>
-          <%= form.label :remove_additionalInfoImageTwo %>
+          <%= form.label :remove_additionalInfoImageTwo, "Remove Additional Image 2" %>
           <%= form.check_box :remove_additionalInfoImageTwo %>
         <% elsif @additionalImageTwoExists %>
           <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Additional_2.jpg", :class => "show-additional-images" %>
