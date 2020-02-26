@@ -2,248 +2,262 @@
 
 <% content_for :title, "Show Artwork" %>
 
-<p>
-  <strong>Object ID:</strong>
-  <%= @artwork.ojbId %>
-</p>
+<div class="artwork-info-left">
+  <p>
+    <strong>Object ID:</strong>
+    <%= @artwork.ojbId %>
+  </p>
 
-<p>
-  <strong>Art Type:</strong>
-  <%= @artwork.artType %>
-</p>
+  <p>
+    <strong>Art Type:</strong>
+    <%= @artwork.artType %>
+  </p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @artwork.title %>
-</p>
+  <p>
+    <strong>Title:</strong>
+    <%= @artwork.title %>
+  </p>
 
-<p>
-  <strong>Date:</strong>
-  <%= @artwork.date %>
-</p>
+  <p>
+    <strong>Date:</strong>
+    <%= @artwork.date %>
+  </p>
 
-<p>
-  <strong>Medium:</strong>
-  <%= @artwork.medium %>
-</p>
+  <p>
+    <strong>Medium:</strong>
+    <%= @artwork.medium %>
+  </p>
 
-<p>
-  <strong>Main Image:</strong>
-  <% if @artwork.collection_id.present? %>
-    <% @artwork.collection.files.each do |filename| %>
-      <% if filename.identifier == "#{@artwork.ojbId}_Main.jpg" %>
-        <% @mainImageExists = true %>
-      <% elsif filename.identifier != "#{@artwork.ojbId}_Main.jpg" && !@mainImageExists %>
-        <% @mainImageExists = false %>
-      <% end %> 
+  <p>
+    <strong>Description:</strong>
+    <%= @artwork.description %>
+  </p>
 
-      <% if filename.identifier == "#{@artwork.ojbId}_Notes_1.jpg" %>
-        <% @notesImageOneExists = true %>
-      <% elsif filename.identifier != "#{@artwork.ojbId}_Notes_1.jpg" && !@notesImageOneExists %>
-        <% @notesImageOneExists = false %>
+  <p>
+    <strong>Dimensions:</strong>
+    <%= @artwork.dimensions %>
+  </p>
+
+  <p>
+    <strong>Frame Dimensions:</strong>
+    <%= @artwork.frame_dimensions %>
+  </p>
+
+  <p>
+    <strong>Condition:</strong>
+    <%= @artwork.condition %>
+  </p>
+
+  <p>
+    <strong>Current Location:</strong>
+    <%= @artwork.currentLocation %>
+  </p>
+
+  <p>
+    <strong>Source:</strong>
+    <%= @artwork.source %>
+  </p>
+
+  <p>
+    <strong>Date Acquired Label:</strong>
+    <%= @artwork.dateAcquiredLabel %>
+  </p>
+
+  <p>
+    <strong>Date Acquired:</strong>
+    <%= @artwork.dateAcquired %>
+  </p>
+
+  <p>
+    <strong>Amount Paid:</strong>
+    <%= @artwork.amountPaid %>
+  </p>
+
+  <p>
+    <strong>Current Value:</strong>
+    <%= @artwork.currentValue %>
+  </p>
+
+  <p>
+    <strong>Notes:</strong>
+    <%= @artwork.notes %>
+  </p>
+
+  <p>
+    <strong>Additional Info Label:</strong>
+    <%= @artwork.additionalInfoLabel %>
+  </p>
+
+  <p>
+    <strong>Additional Info Text:</strong>
+    <%= @artwork.additionalInfoText %>
+  </p>
+
+  <p>
+    <strong>Additional PDF:</strong>
+    <% if @artwork.additionalPdf.file %>
+      <%= link_to "#{@artwork.additionalPdf.file.filename}", "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/artwork/additionalPdf/#{@artwork.id}/#{@artwork.additionalPdf.file.filename}", target: :_blank %>
+    <% elsif @additionalPDFExists %>
+      <%= link_to "#{@artwork.ojbId}_PDF.pdf", "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_PDF.pdf", target: :_blank %>
+    <% end %>
+  </p>
+
+  <p>
+    <strong>Reviewed By:</strong>
+    <%= @artwork.reviewedBy %>
+  </p>
+
+  <p>
+    <strong>Reviewed Date:</strong>
+    <%= @artwork.reviewedDate %>
+  </p>
+
+  <p>
+    <strong>Provenance:</strong>
+    <%= @artwork.provenance %>
+  </p>
+
+  <p>
+    <strong>Custom Title:</strong>
+    <%= @artwork.custom_title %>
+  </p>
+
+  <p>
+    <strong>Artist:</strong>
+    <% unless @artwork.artist.blank? %>
+      <%= @artwork.artist.firstName %><%= ' ' %><%= @artwork.artist.lastName %>
+    <% end %>
+  </p>
+
+  <p>
+    <strong>Customer:</strong>
+    <% unless @artwork.customer.blank? %>
+      <%= @artwork.customer.firstName %><%= ' ' %><%= @artwork.customer.lastName %>
+    <% end %>
+  </p>
+
+  <p>
+    <strong>Collection:</strong>
+    <% unless @artwork.collection.blank? %>
+      <%= @artwork.collection.collectionName %>
+    <% end %>
+  </p>
+
+  <p>
+    <strong>General Information:</strong>
+    <% unless @artwork.general_information.blank? %>
+      <%= @artwork.general_information.information_label %>
+    <% end %>
+  </p>
+
+  <%= link_to 'Edit', edit_artwork_path(@artwork) %> |
+  <%= link_to 'Back', artworks_path %>
+
+</div>
+
+<div class="artwork-info-right">
+  <p>
+    <div class="main-image-label">
+      <strong>Main Image</strong>
+    </div>
+    <% if @artwork.collection_id.present? %>
+      <% @artwork.collection.files.each do |filename| %>
+        <% if filename.identifier == "#{@artwork.ojbId}_Main.jpg" %>
+          <% @mainImageExists = true %>
+        <% elsif filename.identifier != "#{@artwork.ojbId}_Main.jpg" && !@mainImageExists %>
+          <% @mainImageExists = false %>
+        <% end %>
+
+        <% if filename.identifier == "#{@artwork.ojbId}_Notes_1.jpg" %>
+          <% @notesImageOneExists = true %>
+        <% elsif filename.identifier != "#{@artwork.ojbId}_Notes_1.jpg" && !@notesImageOneExists %>
+          <% @notesImageOneExists = false %>
+        <% end %>
+
+        <% if filename.identifier == "#{@artwork.ojbId}_Notes_2.jpg" %>
+          <% @notesImageTwoExists = true %>
+        <% elsif filename.identifier != "#{@artwork.ojbId}_Notes_2.jpg" && !@notesImageTwoExists %>
+          <% @notesImageTwoExists = false %>
+        <% end %>
+
+        <% if filename.identifier == "#{@artwork.ojbId}_Additional_1.jpg" %>
+          <% @additionalImageOneExists = true %>
+        <% elsif filename.identifier != "#{@artwork.ojbId}_Additional_1.jpg" && !@additionalImageOneExists %>
+          <% @additionalImageOneExists = false %>
+        <% end %>
+
+        <% if filename.identifier == "#{@artwork.ojbId}_Additional_2.jpg" %>
+          <% @additionalImageTwoExists = true %>
+        <% elsif filename.identifier != "#{@artwork.ojbId}_Additional_2.jpg" && !@additionalImageTwoExists %>
+          <% @additionalImageTwoExists = false %>
+        <% end %>
+
+        <% if filename.identifier == "#{@artwork.ojbId}_PDF.pdf" %>
+          <% @additionalPDFExists = true %>
+        <% elsif filename.identifier != "#{@artwork.ojbId}_PDF.pdf" && !@additionalPDFExists %>
+          <% @additionalPDFExists = false %>
+        <% end %>
       <% end %>
-      
-      <% if filename.identifier == "#{@artwork.ojbId}_Notes_2.jpg" %>
-        <% @notesImageTwoExists = true %>
-      <% elsif filename.identifier != "#{@artwork.ojbId}_Notes_2.jpg" && !@notesImageTwoExists %>
-        <% @notesImageTwoExists = false %>
+    <% end %>
+
+    <% if @artwork.image.thumb.url %>
+      <%= image_tag @artwork.image.url, :class => "show-main-image" %>
+    <% elsif @artwork.collection %>
+      <% if @mainImageExists %>
+        <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Main.jpg", :class => "show-main-image" %>
       <% end %>
+    <% end %>
+  </p>
 
-      <% if filename.identifier == "#{@artwork.ojbId}_Additional_1.jpg" %>
-        <% @additionalImageOneExists = true %>
-      <% elsif filename.identifier != "#{@artwork.ojbId}_Additional_1.jpg" && !@additionalImageOneExists %>
-        <% @additionalImageOneExists = false %>
+  <p>
+    <div>
+      <strong>Notes Image</strong>
+    </div>
+    <% if @artwork.notesImage.thumb.url %>
+      <%= image_tag @artwork.notesImage.url, :class => "show-additional-images" %>
+    <% elsif @artwork.collection %>
+      <% if @notesImageOneExists %>
+        <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Notes_1.jpg", :class => "show-additional-images" %>
       <% end %>
+    <% end %>
+  </p>
 
-      <% if filename.identifier == "#{@artwork.ojbId}_Additional_2.jpg" %>
-        <% @additionalImageTwoExists = true %>
-      <% elsif filename.identifier != "#{@artwork.ojbId}_Additional_2.jpg" && !@additionalImageTwoExists %>
-        <% @additionalImageTwoExists = false %>
+  <p>
+    <div>
+      <strong>Notes Image Two</strong>
+    </div>
+    <% if @artwork.notesImageTwo.thumb.url %>
+      <%= image_tag @artwork.notesImageTwo.url, :class => "show-additional-images" %>
+    <% elsif @artwork.collection %>
+      <% if @notesImageTwoExists %>
+        <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Notes_2.jpg", :class => "show-additional-images" %>
       <% end %>
-
-      <% if filename.identifier == "#{@artwork.ojbId}_PDF.pdf" %>
-        <% @additionalPDFExists = true %>
-      <% elsif filename.identifier != "#{@artwork.ojbId}_PDF.pdf" && !@additionalPDFExists %>
-        <% @additionalPDFExists = false %>
-      <% end %> 
     <% end %>
-  <% end %>
+  </p>
 
-  <% if @artwork.image.thumb.url %>
-    <%= image_tag @artwork.image.thumb.url %>
-  <% elsif @artwork.collection %>
-    <% if @mainImageExists %>
-      <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/thumb_#{@artwork.ojbId}_Main.jpg" %>
+  <p>
+    <div>
+      <strong>Additional Info Image</strong>
+    </div>
+    <% if @artwork.additionalInfoImage.thumb.url %>
+      <%= image_tag @artwork.additionalInfoImage.url, :class => "show-additional-images" %>
+    <% elsif @artwork.collection %>
+      <% if @additionalImageOneExists %>
+        <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Additional_1.jpg", :class => "show-additional-images" %>
+      <% end %>
     <% end %>
-  <% end %>
-</p>
+  </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @artwork.description %>
-</p>
-
-<p>
-  <strong>Dimensions:</strong>
-  <%= @artwork.dimensions %>
-</p>
-
-<p>
-  <strong>Frame Dimensions:</strong>
-  <%= @artwork.frame_dimensions %>
-</p>
-
-<p>
-  <strong>Condition:</strong>
-  <%= @artwork.condition %>
-</p>
-
-<p>
-  <strong>Current Location:</strong>
-  <%= @artwork.currentLocation %>
-</p>
-
-<p>
-  <strong>Source:</strong>
-  <%= @artwork.source %>
-</p>
-
-<p>
-  <strong>Date Acquired Label:</strong>
-  <%= @artwork.dateAcquiredLabel %>
-</p>
-
-<p>
-  <strong>Date Acquired:</strong>
-  <%= @artwork.dateAcquired %>
-</p>
-
-<p>
-  <strong>Amount Paid:</strong>
-  <%= @artwork.amountPaid %>
-</p>
-
-<p>
-  <strong>Current Value:</strong>
-  <%= @artwork.currentValue %>
-</p>
-
-<p>
-  <strong>Notes:</strong>
-  <%= @artwork.notes %>
-</p>
-
-<p>
-  <strong>Notes Image:</strong>
-  <% if @artwork.notesImage.thumb.url %>
-    <%= image_tag @artwork.notesImage.thumb.url %>
-  <% elsif @artwork.collection %>
-    <% if @notesImageOneExists %>
-      <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/thumb_#{@artwork.ojbId}_Notes_1.jpg" %>
+  <p>
+    <div>
+      <strong>Additional Info Image Two</strong>
+    </div>
+    <% if @artwork.additionalInfoImageTwo.thumb.url %>
+      <%= image_tag @artwork.additionalInfoImageTwo.url, :class => "show-additional-images" %>
+    <% elsif @artwork.collection %>
+      <% if @additionalImageTwoExists %>
+        <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Additional_2.jpg", :class => "show-additional-images" %>
+      <% end %>
     <% end %>
-  <% end %>
-</p>
-
-<p>
-  <strong>Notes Image Two:</strong>
-  <% if @artwork.notesImageTwo.thumb.url %>
-    <%= image_tag @artwork.notesImageTwo.thumb.url %>
-  <% elsif @artwork.collection %>
-    <% if @notesImageTwoExists %>
-      <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/thumb_#{@artwork.ojbId}_Notes_2.jpg" %>
-    <% end %>
-  <% end %>
-</p>
-
-<p>
-  <strong>Additional Info Label:</strong>
-  <%= @artwork.additionalInfoLabel %>
-</p>
-
-<p>
-  <strong>Additional Info Text:</strong>
-  <%= @artwork.additionalInfoText %>
-</p>
-
-<p>
-  <strong>Additional Info Image:</strong>
-  <% if @artwork.additionalInfoImage.thumb.url %>
-    <%= image_tag @artwork.additionalInfoImage.thumb.url %>
-  <% elsif @artwork.collection %>
-    <% if @additionalImageOneExists %>
-      <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/thumb_#{@artwork.ojbId}_Additional_1.jpg" %>
-    <% end %>
-  <% end %>
-</p>
-
-<p>
-  <strong>Additional Info Image Two:</strong>
-  <% if @artwork.additionalInfoImageTwo.thumb.url %>
-    <%= image_tag @artwork.additionalInfoImageTwo.thumb.url %>
-  <% elsif @artwork.collection %>
-    <% if @additionalImageTwoExists %>
-      <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/thumb_#{@artwork.ojbId}_Additional_2.jpg" %>
-    <% end %>
-  <% end %>
-</p>
-
-<p>
-  <strong>Additional PDF:</strong>
-  <% if @artwork.additionalPdf.file %>
-    <%= link_to "#{@artwork.additionalPdf.file.filename}", "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/artwork/additionalPdf/#{@artwork.id}/#{@artwork.additionalPdf.file.filename}", target: :_blank %>
-  <% elsif @additionalPDFExists %>
-    <%= link_to "#{@artwork.ojbId}_PDF.pdf", "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_PDF.pdf", target: :_blank %>
-  <% end %>
-</p>
-
-<p>
-  <strong>Reviewed By:</strong>
-  <%= @artwork.reviewedBy %>
-</p>
-
-<p>
-  <strong>Reviewed Date:</strong>
-  <%= @artwork.reviewedDate %>
-</p>
-
-<p>
-  <strong>Provenance:</strong>
-  <%= @artwork.provenance %>
-</p>
-
-<p>
-  <strong>Custom Title:</strong>
-  <%= @artwork.custom_title %>
-</p>
-
-<p>
-  <strong>Artist:</strong>
-  <% unless @artwork.artist.blank? %>
-    <%= @artwork.artist.firstName %><%= ' ' %><%= @artwork.artist.lastName %>
-  <% end %>
-</p>
-
-<p>
-  <strong>Customer:</strong>
-  <% unless @artwork.customer.blank? %>
-    <%= @artwork.customer.firstName %><%= ' ' %><%= @artwork.customer.lastName %>
-  <% end %>
-</p>
-
-<p>
-  <strong>Collection:</strong>
-  <% unless @artwork.collection.blank? %>
-    <%= @artwork.collection.collectionName %>
-  <% end %>
-</p>
-
-<p>
-  <strong>General Information:</strong>
-  <% unless @artwork.general_information.blank? %>
-    <%= @artwork.general_information.information_label %>
-  <% end %>
-</p>
-
-
-<%= link_to 'Edit', edit_artwork_path(@artwork) %> |
-<%= link_to 'Back', artworks_path %>
+  </p>
+</div>

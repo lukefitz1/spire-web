@@ -11,243 +11,287 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :ojbId, 'Object ID' %>
-    <%= form.text_field :ojbId, id: :artwork_ojbId %>
-    <p class="obj-id-error">This ID is already taken</p>
-  </div>
+  <div class="artwork-info-edit-left">
+    <div class="field">
+      <%= form.label :ojbId, 'Object ID' %>
+      <%= form.text_field :ojbId, id: :artwork_ojbId %>
+      <p class="obj-id-error">This ID is already taken</p>
+    </div>
 
-  <div class="field">
-    <%= form.label :artType, 'Art Type' %>
-    <%= form.text_field :artType, id: :artwork_artType %>
-  </div>
+    <div class="field">
+      <%= form.label :artType, 'Art Type' %>
+      <%= form.text_field :artType, id: :artwork_artType %>
+    </div>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title, id: :artwork_title %>
-  </div>
+    <div class="field">
+      <%= form.label :title %>
+      <%= form.text_field :title, id: :artwork_title %>
+    </div>
 
-  <div class="field">
-    <%= form.label :date %>
-    <%= form.text_field :date, id: :artwork_date %>
-  </div>
+    <div class="field">
+      <%= form.label :date %>
+      <%= form.text_field :date, id: :artwork_date %>
+    </div>
 
-  <div class="field">
-    <%= form.label :medium %>
-    <%= form.text_field :medium, id: :artwork_medium %>
-  </div>
+    <div class="field">
+      <%= form.label :medium %>
+      <%= form.text_field :medium, id: :artwork_medium %>
+    </div>
 
-  <div class="field">
-    <%= form.label :image, 'Main Image' %>
-    <%= form.file_field :image, id: :artwork_image %>
-    <% if form.object.image? %>
-      <%= image_tag form.object.image.thumb.url %>
-      <%= form.label :remove_image %>
-      <%= form.check_box :remove_image %> 
-    <% elsif @mainImageExists %>
-      <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/thumb_#{@artwork.ojbId}_Main.jpg" %>
-    <% end %>
-  </div>
+    <div class="field">
+      <%= form.label :description %>
+      <%= form.text_area :description, id: :artwork_description, cols: "50", rows: "10" %>
+    </div>
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description, id: :artwork_description, cols: "50", rows: "10" %>
-  </div>
+    <div class="field">
+      <%= form.label :dimensions %>
+      <%= form.text_field :dimensions, id: :artwork_dimensions %>
+    </div>
 
-  <div class="field">
-    <%= form.label :dimensions %>
-    <%= form.text_field :dimensions, id: :artwork_dimensions %>
-  </div>
+    <div class="field">
+      <%= form.label :frame_dimensions, "Frame Dimensions" %>
+      <%= form.text_field :frame_dimensions, id: :artwork_frame_dimensions %>
+    </div>
 
-  <div class="field">
-    <%= form.label :frame_dimensions, "Frame Dimensions" %>
-    <%= form.text_field :frame_dimensions, id: :artwork_frame_dimensions %>
-  </div>
+    <div class="field">
+      <%= form.label :condition %>
+      <%= form.text_field :condition, id: :artwork_condition %>
+    </div>
 
-  <div class="field">
-    <%= form.label :condition %>
-    <%= form.text_field :condition, id: :artwork_condition %>
-  </div>
+    <div class="field">
+      <%= form.label :currentLocation, 'Current Location' %>
+      <%= form.text_field :currentLocation, id: :artwork_currentLocation %>
+    </div>
 
-  <div class="field">
-    <%= form.label :currentLocation, 'Current Location' %>
-    <%= form.text_field :currentLocation, id: :artwork_currentLocation %>
-  </div>
+    <div class="field">
+      <%= form.label :source %>
+      <%= form.text_field :source, id: :artwork_source %>
+    </div>
 
-  <div class="field">
-    <%= form.label :source %>
-    <%= form.text_field :source, id: :artwork_source %>
-  </div>
+    <div class="field">
+      <%= form.label :dateAcquiredLabel, 'Date Acquired Label' %>
+      <%= form.text_field :dateAcquiredLabel, id: :artwork_dateAcquiredLabel %>
+    </div>
 
-  <div class="field">
-    <%= form.label :dateAcquiredLabel, 'Date Acquired Label' %>
-    <%= form.text_field :dateAcquiredLabel, id: :artwork_dateAcquiredLabel %>
-  </div>
+    <div class="field">
+      <%= form.label :dateAcquired, 'Date Acquired' %>
+      <%= form.text_field :dateAcquired, id: :artwork_dateAcquired %>
+    </div>
 
-  <div class="field">
-    <%= form.label :dateAcquired, 'Date Acquired' %>
-    <%= form.text_field :dateAcquired, id: :artwork_dateAcquired %>
-  </div>
+    <div class="field">
+      <%= form.label :amountPaid, 'Amount Paid' %>
+      <%= form.text_field :amountPaid, id: :artwork_amountPaid %>
+    </div>
 
-  <div class="field">
-    <%= form.label :amountPaid, 'Amount Paid' %>
-    <%= form.text_field :amountPaid, id: :artwork_amountPaid %>
-  </div>
+    <div class="field">
+      <%= form.label :currentValue, 'Current Value' %>
+      <%= form.text_field :currentValue, id: :artwork_currentValue %>
+    </div>
 
-  <div class="field">
-    <%= form.label :currentValue, 'Current Value' %>
-    <%= form.text_field :currentValue, id: :artwork_currentValue %>
-  </div>
+    <div class="field">
+      <%= form.label :notes %>
+      <%= form.text_area :notes, id: :artwork_notes, cols: "50", rows: "10" %>
+    </div>
 
-  <div class="field">
-    <%= form.label :notes %>
-    <%= form.text_area :notes, id: :artwork_notes, cols: "50", rows: "10" %>
-  </div>
+    <div class="field">
+      <%= form.label :additionalInfoLabel, 'Additional Info Label' %>
+      <%= form.text_field :additionalInfoLabel, id: :artwork_additionalInfoLabel %>
+    </div>
 
-  <div class="field">
-    <%= form.label :notesImage, 'Notes Image' %>
-    <%= form.file_field :notesImage, id: :artwork_notesImage %>
-    <% if form.object.notesImage? %>
-      <%= image_tag form.object.notesImage.thumb.url %>
-      <%= form.label :remove_notesImage %>
-      <%= form.check_box :remove_notesImage %> 
-    <% elsif @notesImageOneExists %>
-      <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/thumb_#{@artwork.ojbId}_Notes_1.jpg" %>
-    <% end %>
-  </div>
+    <div class="field">
+      <%= form.label :additionalInfoText, 'Additional Info Text' %>
+      <%= form.text_area :additionalInfoText, id: :artwork_additionalInfoText, cols: "50", rows: "10" %>
+    </div>
 
-  <div class="field">
-    <%= form.label :notesImageTwo, 'Notes Image Two' %>
-    <%= form.file_field :notesImageTwo, id: :artwork_notesImageTwo %>
-    <% if form.object.notesImageTwo? %>
-      <%= image_tag form.object.notesImageTwo.thumb.url %>
-      <%= form.label :remove_notesImageTwo %>
-      <%= form.check_box :remove_notesImageTwo %> 
-    <% elsif @notesImageTwoExists %>
-      <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/thumb_#{@artwork.ojbId}_Notes_2.jpg" %>
-    <% end %>
-  </div>
+    <div class="field">
+      <%= form.label :additionalPdf, 'Additional PDF' %>
+      <%= form.file_field :additionalPdf, id: :additionalPdf %>
 
-  <div class="field">
-    <%= form.label :additionalInfoLabel, 'Additional Info Label' %>
-    <%= form.text_field :additionalInfoLabel, id: :artwork_additionalInfoLabel %>
-  </div>
+      <% if form.object.additionalPdf? %>
+        <%= form.label :additionalPdf, id: :artwork_additionalPdf %>
+        <%= form.label :remove_additionalPdf %>
+        <%= form.check_box :remove_additionalPdf %>
+      <% elsif @additionalPDFExists %>
+        <%= link_to "#{@artwork.ojbId}_PDF.pdf", "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_PDF.pdf", target: :_blank %>
+      <% end %>
+    </div>
 
-  <div class="field">
-    <%= form.label :additionalInfoText, 'Additional Info Text' %>
-    <%= form.text_area :additionalInfoText, id: :artwork_additionalInfoText, cols: "50", rows: "10" %>
-  </div>
+    <div class="field">
+      <%= form.label :reviewedBy, 'Reviewed By' %>
+      <%= form.text_field :reviewedBy, id: :artwork_reviewedBy %>
+    </div>
 
-  <div class="field">
-    <%= form.label :additionalInfoImage, 'Additional Info Image' %>
-    <%= form.file_field :additionalInfoImage, id: :artwork_additionalInfoImage %>
-    <% if form.object.additionalInfoImage? %>
-      <%= image_tag form.object.additionalInfoImage.thumb.url %>
-      <%= form.label :remove_additionalInfoImage %>
-      <%= form.check_box :remove_additionalInfoImage %> 
-    <% elsif @additionalImageOneExists %>
-      <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/thumb_#{@artwork.ojbId}_Additional_1.jpg" %>
-    <% end %>
-  </div>
+    <div class="field">
+      <%= form.label :reviewedDate, 'Reviewed Date' %>
+      <%= form.text_field :reviewedDate, id: :artwork_reviewedDate %>
+    </div>
 
-  <div class="field">
-    <%= form.label :additionalInfoImageTwo, 'Additional Info Image Two' %>
-    <%= form.file_field :additionalInfoImageTwo, id: :artwork_additionalInfoImageTwo %>
-    <% if form.object.additionalInfoImageTwo? %>
-      <%= image_tag form.object.additionalInfoImageTwo.thumb.url %>
-      <%= form.label :remove_additionalInfoImageTwo %>
-      <%= form.check_box :remove_additionalInfoImageTwo %> 
-    <% elsif @additionalImageTwoExists %>
-      <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/thumb_#{@artwork.ojbId}_Additional_2.jpg" %>
-    <% end %>
-  </div>
+    <div class="field">
+      <%= form.label :provenance %>
+      <%= form.text_area :provenance, id: :artwork_provenance, cols: "50", rows: "10" %>
+    </div>
 
-  <div class="field">
-    <%= form.label :additionalPdf, 'Additional PDF' %>
-    <%= form.file_field :additionalPdf, id: :additionalPdf %>
+    <div class="field">
+      <%= form.label :custom_title %>
+      <%= form.text_field :custom_title, id: :custom_title %>
+    </div>
 
-    <% if form.object.additionalPdf? %>
-      <%= form.label :additionalPdf, id: :artwork_additionalPdf %>
-      <%= form.label :remove_additionalPdf %>
-      <%= form.check_box :remove_additionalPdf %> 
-    <% elsif @additionalPDFExists %>
-      <%= link_to "#{@artwork.ojbId}_PDF.pdf", "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_PDF.pdf", target: :_blank %>
-    <% end %>
-  </div>
+    <div class="field">
+      <%= form.label :artist_id %>
+      <%= form.select(:artist_id, Artist.all.collect { |artist| [artist.firstName + ' ' + artist.lastName, artist.id]}.sort, include_blank: true) %>
+    </div>
 
-  <div class="field">
-    <%= form.label :reviewedBy, 'Reviewed By' %>
-    <%= form.text_field :reviewedBy, id: :artwork_reviewedBy %>
-  </div>
+    <div class="field">
+      <%= form.label :customer_id %>
 
-  <div class="field">
-    <%= form.label :reviewedDate, 'Reviewed Date' %>
-    <%= form.text_field :reviewedDate, id: :artwork_reviewedDate %>
-  </div>
+      <% if params[:cust_id] %>
+        <%= form.select(:customer_id, Customer.all.collect { |customer| [customer.firstName + ' ' + customer.lastName, customer.id]}, include_blank: true, :selected => params[:cust_id]) %>
+      <% else %>
+        <%= form.select(:customer_id, Customer.all.collect { |customer| [customer.firstName + ' ' + customer.lastName, customer.id]}, include_blank: true) %>
+      <% end %>
+    </div>
 
-  <div class="field">
-    <%= form.label :provenance %>
-    <%= form.text_area :provenance, id: :artwork_provenance, cols: "50", rows: "10" %>
-  </div>
-  
-  <div class="field">
-    <%= form.label :custom_title %>
-    <%= form.text_field :custom_title, id: :custom_title %>
-  </div>
+    <div class="field">
+      <%= form.label :collection_id %>
 
-  <div class="field">
-    <%= form.label :artist_id %>
-    <%= form.select(:artist_id, Artist.all.collect { |artist| [artist.firstName + ' ' + artist.lastName, artist.id]}.sort, include_blank: true) %>
-  </div>
+      <% if params[:coll_id] %>
+        <%= form.select(:collection_id, Collection.all.collect { |collection| [collection.collectionName, collection.id]}, include_blank: true, :selected => params[:coll_id]) %>
+      <% else %>
+        <%= form.select(:collection_id, Collection.all.collect { |collection| [collection.collectionName, collection.id]}, include_blank: true) %>
+      <% end %>
+    </div>
 
-  <div class="field">
-    <%= form.label :customer_id %>
+    <div class="field">
+      <%= form.label :show_general_info, "Need to add general information about this piece of art?" %>
+      <%= form.check_box :show_general_info, id: "add-general-info" %>
+    </div>
 
-    <% if params[:cust_id] %>
-      <%= form.select(:customer_id, Customer.all.collect { |customer| [customer.firstName + ' ' + customer.lastName, customer.id]}, include_blank: true, :selected => params[:cust_id]) %>
-    <% else %>
-      <%= form.select(:customer_id, Customer.all.collect { |customer| [customer.firstName + ' ' + customer.lastName, customer.id]}, include_blank: true) %>
-    <% end %>
-  </div>
+    <div class="field" id="general-info_block">
+      <%= form.label :general_information_id %>
 
-  <div class="field">
-    <%= form.label :collection_id %>
+      <% if params[:general_information_id] %>
+        <%= form.select(:general_information_id, GeneralInformation.all.collect { |general_info| [general_info.information_label, general_info.id]}, include_blank: true, :selected => params[:general_informations_id]) %>
+      <% else %>
+        <%= form.select(:general_information_id, GeneralInformation.all.collect { |general_info| [general_info.information_label, general_info.id]}, include_blank: true) %>
+      <% end %>
 
-    <% if params[:coll_id] %>
-      <%= form.select(:collection_id, Collection.all.collect { |collection| [collection.collectionName, collection.id]}, include_blank: true, :selected => params[:coll_id]) %>
-    <% else %>
-      <%= form.select(:collection_id, Collection.all.collect { |collection| [collection.collectionName, collection.id]}, include_blank: true) %>
-    <% end %>
-  </div>
+      <!-- Trigger/Open The Modal -->
+      <%= link_to "New General Information", new_general_information_path, remote: true, id: "open-gi-btn" %>
+    </div>
 
-  <div class="field">
-    <%= form.label :show_general_info, "Need to add general information about this piece of art?" %>
-    <%= form.check_box :show_general_info, id: "add-general-info" %>
-  </div>
-  
-  <div class="field" id="general-info_block">
-    <%= form.label :general_information_id %>
+    <div class="actions">
+      <% if params[:redirect] %>
+        <%= hidden_field_tag(:redirect, 'true') %>
+      <% end %>
 
-    <% if params[:general_information_id] %>
-      <%= form.select(:general_information_id, GeneralInformation.all.collect { |general_info| [general_info.information_label, general_info.id]}, include_blank: true, :selected => params[:general_informations_id]) %>
-    <% else %>
-      <%= form.select(:general_information_id, GeneralInformation.all.collect { |general_info| [general_info.information_label, general_info.id]}, include_blank: true) %>
-    <% end %>
-  
+      <%= form.submit %>
+    </div>
+
     <!-- Trigger/Open The Modal -->
-    <%= link_to "New General Information", new_general_information_path, remote: true, id: "open-gi-btn" %>
+    <%= link_to "New Artist", new_artist_path, remote: true, id: "myBtn" %>
   </div>
 
-  <div class="actions">
-    <% if params[:redirect] %>
-      <%= hidden_field_tag(:redirect, 'true') %>
-    <% end %>
-    
-    <%= form.submit %>
-  </div>
+  <div class="artwork-info-edit-right">
+    <div class="field">
+      <div>
+        <%= form.label :image, 'Main Image' %>
+      </div>
 
-  <!-- Trigger/Open The Modal -->
-  <%= link_to "New Artist", new_artist_path, remote: true, id: "myBtn" %>
+      <div>
+        <% if form.object.image? %>
+          <%= image_tag form.object.image.url, :class => "show-main-image" %>
+          <%= form.label :remove_image %>
+          <%= form.check_box :remove_image %>
+        <% elsif @mainImageExists %>
+          <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Main.jpg", :class => "show-main-image"  %>
+        <% end %>
+      </div>
+
+      <div>
+        <%= form.file_field :image, id: :artwork_image %>
+      </div>
+    </div>
+
+    <div class="field">
+      <div>
+        <%= form.label :notesImage, 'Notes Image' %>
+      </div>
+
+      <div>
+        <% if form.object.notesImage? %>
+          <%= image_tag form.object.notesImage.url, :class => "show-additional-images" %>
+          <%= form.label :remove_notesImage %>
+          <%= form.check_box :remove_notesImage %>
+        <% elsif @notesImageOneExists %>
+          <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Notes_1.jpg", :class => "show-additional-images" %>
+        <% end %>
+      </div>
+
+      <div>
+        <%= form.file_field :notesImage, id: :artwork_notesImage %>
+      </div>
+    </div>
+
+    <div class="field">
+      <div>
+        <%= form.label :notesImageTwo, 'Notes Image Two' %>
+      </div>
+
+      <div>
+        <% if form.object.notesImageTwo? %>
+          <%= image_tag form.object.notesImageTwo.url, :class => "show-additional-images" %>
+          <%= form.label :remove_notesImageTwo %>
+          <%= form.check_box :remove_notesImageTwo %>
+        <% elsif @notesImageTwoExists %>
+          <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Notes_2.jpg", :class => "show-additional-images" %>
+        <% end %>
+      </div>
+
+      <div>
+        <%= form.file_field :notesImageTwo, id: :artwork_notesImageTwo %>
+      </div>
+    </div>
+
+    <div class="field">
+      <div>
+        <%= form.label :additionalInfoImage, 'Additional Info Image' %>
+      </div>
+
+      <div>
+        <% if form.object.additionalInfoImage? %>
+          <%= image_tag form.object.additionalInfoImage.url, :class => "show-additional-images"  %>
+          <%= form.label :remove_additionalInfoImage %>
+          <%= form.check_box :remove_additionalInfoImage %>
+        <% elsif @additionalImageOneExists %>
+          <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Additional_1.jpg", :class => "show-additional-images" %>
+        <% end %>
+      </div>
+
+      <div>
+        <%= form.file_field :additionalInfoImage, id: :artwork_additionalInfoImage %>
+      </div>
+    </div>
+
+    <div class="field">
+      <div>
+        <%= form.label :additionalInfoImageTwo, 'Additional Info Image Two' %>
+      </div>
+
+      <div>
+        <% if form.object.additionalInfoImageTwo? %>
+          <%= image_tag form.object.additionalInfoImageTwo.url, :class => "show-additional-images"  %>
+          <%= form.label :remove_additionalInfoImageTwo %>
+          <%= form.check_box :remove_additionalInfoImageTwo %>
+        <% elsif @additionalImageTwoExists %>
+          <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Additional_2.jpg", :class => "show-additional-images" %>
+        <% end %>
+      </div>
+
+      <div>
+        <%= form.file_field :additionalInfoImageTwo, id: :artwork_additionalInfoImageTwo %>
+      </div>
+    </div>
+  </div>
 <% end %>
 
 <!-- The General Information Modal -->
