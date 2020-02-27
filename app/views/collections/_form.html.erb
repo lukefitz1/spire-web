@@ -28,7 +28,11 @@
 
   <div class="field">
     <%= form.label :customer_id %>
-    <%= form.select(:customer_id, Customer.all.collect { |customer| [customer.firstName + ' ' + customer.lastName, customer.id]}, include_blank: true, :selected => params[:cust_id]) %>
+    <% if params[:cust_id] %>
+      <%= form.select(:customer_id, Customer.all.collect { |customer| [customer.firstName + ' ' + customer.lastName, customer.id]}, include_blank: true, :selected => params[:cust_id]) %>
+    <% else %>
+      <%= form.select(:customer_id, Customer.all.collect { |customer| [customer.firstName + ' ' + customer.lastName, customer.id]}, include_blank: true) %>
+    <% end %>
   </div>
 
   <div class="field">
