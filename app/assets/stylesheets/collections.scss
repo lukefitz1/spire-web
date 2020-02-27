@@ -7,6 +7,8 @@ table {
 	font-size: 10px;
 }
 
+tr { page-break-inside: avoid }
+
 .art-table-data {
 	padding: 0px 10px;
 	/* border-left: .5px solid gray; */

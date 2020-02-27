@@ -35,10 +35,10 @@ class CollectionsController < ApplicationController
       format.html
       format.pdf do
         render pdf: "toc-pdf",
-          template: "collections/table_of_contents_pdf.pdf.erb",
+               template: "collections/table_of_contents_pdf.pdf.erb",
           # orientation: 'Landscape',
-          show_as_html: params.key?("debug"),
-          encoding: "UTF-8"
+               show_as_html: params.key?("debug"),
+               encoding: "UTF-8"
       end
     end
   end
@@ -54,8 +54,7 @@ class CollectionsController < ApplicationController
       @collection = Collection.find(params[:coll_id])
 
       # create the API client instance
-      # client = Pdfcrowd::HtmlToPdfClient.new("spireart", "4ca5bdb67c50b7a3ca5d9a207de070e0")
-      client = Pdfcrowd::HtmlToPdfClient.new("lukefitz1", "4340f6a216a4039b0ca0c8035c738f4e")
+      client = Pdfcrowd::HtmlToPdfClient.new("spireart", "4ca5bdb67c50b7a3ca5d9a207de070e0")
       client.setCookies("_art_collector_web_session=#{cookies[:_art_collector_web_session]}")
       client.setOrientation("landscape")
       client.setViewport(1400, 768)
@@ -99,11 +98,11 @@ class CollectionsController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        render pdf: "table-preview",
-          template: "collections/pdf_table.pdf.erb",
-          orientation: "Landscape",
-          show_as_html: params.key?("debug"),
-          encoding: "UTF-8"
+        render pdf: 'table-preview',
+               template: 'collections/pdf_table.pdf.erb',
+               orientation: 'Landscape',
+               show_as_html: params.key?('debug'),
+               encoding: 'UTF-8'
       end
     end
   end
