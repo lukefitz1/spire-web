@@ -126,7 +126,7 @@ class ArtworksController < ApplicationController
     timestamp = Time.now.strftime("%y%m%d%H%M%S")
     bucket_name = "#{timestamp}-#{collection_id}"
     collection = Collection.find(collection_id)
-    client = Pdfcrowd::PdfToPdfClient.new("spireart", "4ca5bdb67c50b7a3ca5d9a207de070e0")
+    client = Pdfcrowd::PdfToPdfClient.new(ENV['PDF_CROWD_USER'], ENV['PDF_CROWD_KEY'])
     art_array = []
     files_array = []
     @additional_pdf_found = false
@@ -289,7 +289,7 @@ class ArtworksController < ApplicationController
     timestamp = Time.now.strftime("%y%m%d%H%M%S")
 
     # create the API client instance
-    client = Pdfcrowd::PdfToPdfClient.new("spireart", "4ca5bdb67c50b7a3ca5d9a207de070e0")
+    client = Pdfcrowd::PdfToPdfClient.new(ENV['PDF_CROWD_USER'], ENV['PDF_CROWD_KEY'])
 
     respond_to do |format|
       format.html

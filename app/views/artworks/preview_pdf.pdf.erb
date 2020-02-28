@@ -237,8 +237,10 @@
     if (title) {
       if (title.textContent.length < 30) {
         title.style.fontSize = '32px';
+      } else if (title.textContent.length < 40) {
+          title.style.fontSize = '28px';
       } else {
-        title.style.fontSize = '28px';
+        title.style.fontSize = '26px';
       }
     }
   })();
