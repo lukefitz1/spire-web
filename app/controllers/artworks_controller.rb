@@ -126,7 +126,6 @@ class ArtworksController < ApplicationController
     timestamp = Time.now.strftime("%y%m%d%H%M%S")
     bucket_name = "#{timestamp}-#{collection_id}"
     collection = Collection.find(collection_id)
-    puts "User: #{ENV['PDF_CROWD_USER']}, Key: #{ENV['PDF_CROWD_KEY']}"
     client = Pdfcrowd::PdfToPdfClient.new(ENV["PDF_CROWD_USER"], ENV["PDF_CROWD_KEY"])
     art_array = []
     files_array = []
@@ -284,14 +283,12 @@ class ArtworksController < ApplicationController
   end
 
   def fancy_report
-    puts "Fancy Report!"
     @artwork = Artwork.find(params[:id])
     upload = TempPdfUploader.new
     pdf = CombinePDF.new
     timestamp = Time.now.strftime("%y%m%d%H%M%S")
 
     # create the API client instance
-    puts "User: #{ENV["PDF_CROWD_USER"]}, Key: #{ENV["PDF_CROWD_KEY"]}"
     client = Pdfcrowd::PdfToPdfClient.new(ENV["PDF_CROWD_USER"], ENV["PDF_CROWD_KEY"])
 
     respond_to do |format|

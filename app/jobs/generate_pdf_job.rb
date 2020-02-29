@@ -11,7 +11,7 @@ class GeneratePdfJob < ApplicationJob
     collection_id = args[6]
     puts "Bucket name: #{bucket_name}"
     puts "Is there an additional PDF: #{@additional_pdf_found}"
-    client = Pdfcrowd::PdfToPdfClient.new(ENV['PDF_CROWD_USER'], ENV['PDF_CROWD_KEY'])
+    client = Pdfcrowd::PdfToPdfClient.new(ENV["PDF_CROWD_USER"], ENV["PDF_CROWD_KEY"])
 
     s3 = Aws::S3::Client.new(region: ENV.fetch('AWS_REGION'),
                              access_key_id: ENV.fetch('AWS_ACCESS_KEY_ID'),
