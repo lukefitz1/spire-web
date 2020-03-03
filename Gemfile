@@ -68,7 +68,7 @@ gem 'mini_magick', '~> 4.8'
 gem 'smarter_csv', '~> 1.1', '>= 1.1.4'
 gem 'awesome_print', '~> 1.8'
 gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary', '~> 0.12.3.1'
+gem 'wkhtmltopdf-binary', '~> 0.12.5'
 gem "fog-aws"
 gem 'aws-sdk', '~> 3'
 gem 'combine_pdf'
