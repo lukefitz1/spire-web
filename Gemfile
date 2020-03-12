@@ -74,7 +74,7 @@ gem "fog-aws"
 gem 'aws-sdk', '~> 3'
 gem 'combine_pdf'
 gem 'pdfcrowd', '~> 4.4', '>= 4.4.2'
-gem 'pdf-reader'                        # delete maybe
+gem 'pdf-reader'                        # delete maybee
 
 # pagination gem
 gem 'kaminari', '~> 1.1', '>= 1.1.1'
