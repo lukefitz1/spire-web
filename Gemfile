@@ -65,21 +65,19 @@ gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 gem 'carrierwave', '~> 2.0'
 gem 'carrierwave-base64'
 gem 'mini_magick', '~> 4.8'
-gem 'smarter_csv', '~> 1.1', '>= 1.1.4'
-gem 'awesome_print', '~> 1.8'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary', '~> 0.12.5'
 gem "fog-aws"
 gem 'aws-sdk', '~> 3'
 gem 'combine_pdf'
-gem 'net-http2'
 gem 'pdfcrowd', '~> 4.4', '>= 4.4.2'
-gem 'pdf-reader'
+gem 'pdf-reader'                        # delete maybe
+
+# pagination gem
 gem 'kaminari', '~> 1.1', '>= 1.1.1'
 gem 'rubocop'
 gem 'rufo'
 gem 'rubyzip'
-
 gem 'administrate'
 gem 'bourbon'
 gem 'delayed_job_active_record'

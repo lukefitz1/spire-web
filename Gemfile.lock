@@ -66,7 +66,6 @@ GEM
     ast (2.4.0)
     autoprefixer-rails (9.6.1)
       execjs
-    awesome_print (1.8.0)
     aws-eventstream (1.0.3)
     aws-partitions (1.220.0)
     aws-sdk (3.0.1)
@@ -939,7 +938,6 @@ GEM
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     hashery (2.1.2)
-    http-2 (0.10.1)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
     image_processing (1.9.3)
@@ -990,8 +988,6 @@ GEM
     momentjs-rails (2.20.1)
       railties (>= 3.1)
     multi_json (1.13.1)
-    net-http2 (0.18.2)
-      http-2 (~> 0.10.1)
     nio4r (2.4.0)
     nokogiri (1.10.4)
       mini_portile2 (~> 2.4.0)
@@ -1099,7 +1095,6 @@ GEM
     selenium-webdriver (3.142.3)
       childprocess (>= 0.5, < 2.0)
       rubyzip (~> 1.2, >= 1.2.2)
-    smarter_csv (1.2.6)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -1145,7 +1140,6 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers (~> 0.10.0)
   administrate
-  awesome_print (~> 1.8)
   aws-sdk (~> 3)
   bootstrap-sass (~> 3.3, >= 3.3.6)
   bourbon
@@ -1165,7 +1159,6 @@ DEPENDENCIES
   kaminari (~> 1.1, >= 1.1.1)
   listen (>= 3.0.5, < 3.2)
   mini_magick (~> 4.8)
-  net-http2
   pdf-reader
   pdfcrowd (~> 4.4, >= 4.4.2)
   pg (~> 0.18)
@@ -1177,7 +1170,6 @@ DEPENDENCIES
   rufo
   sass-rails (~> 5.0)
   selenium-webdriver
-  smarter_csv (~> 1.1, >= 1.1.4)
   spring
   spring-watcher-listen (~> 2.0.0)
   turbolinks (~> 5)
