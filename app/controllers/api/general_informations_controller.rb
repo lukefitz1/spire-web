@@ -81,6 +81,6 @@ class Api::GeneralInformationsController < Api::BaseController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def general_information_params
-      params.require(:general_information).permit(:information_label, :information)
+      params.require(:general_information).permit(:information_label, :information, :created_at, :updated_at)
     end
 end
