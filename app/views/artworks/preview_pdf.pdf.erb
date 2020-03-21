@@ -76,7 +76,7 @@
         <span class="avenirnextbold">Medium:</span><p class="value"> <%= @artwork.medium %></p>
       </div>
       <div class="label-block">
-        <span class="avenirnextbold">Description:</span><p class="value"> <%= @artwork.description %></p>
+        <span class="avenirnextbold">Description:</span><p class="value"> <%= sanitize @artwork.description, tags: %w(span), attributes: %w(style) %></p>
       </div>
       <div class="label-block">  
         <span class="avenirnextbold">Dimensions (HxWxD):</span><p class="value"> <%= @artwork.dimensions %></p>
@@ -218,7 +218,7 @@
       <div class="bio">
         <% if @artwork.show_general_info %>
           <h3 class="bold"><%= @artwork.general_information.information_label %></h3>
-          <p class="text-justify avenirnext" id="artist-bio"><%= @artwork.general_information.information %></p>
+          <p class="text-justify avenirnext" id="artist-bio"><%= sanitize @artwork.general_information.information, tags: %w(span), attributes: %w(style) %></p>
         <% else %>
           <% if @artwork.artist %>
             <h3 class="bold">Artist&#39s Biography</h3>
