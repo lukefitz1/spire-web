@@ -102,7 +102,7 @@
       </div><br />
       <div class="label-block">
         <p class="label-heading avenirnextbold">Provenance:</p>
-        <p class="block-value provenance-content-area"> <%= @artwork.provenance %></p>
+        <p class="block-value provenance-content-area"> <%= sanitize @artwork.provenance , tags: %w(br), attributes: %w(style) %></p>
       </div>
       <div class="label-block">
         <% @artwork.collection.files.each do |filename| %>
