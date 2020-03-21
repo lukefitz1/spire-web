@@ -139,7 +139,7 @@
               <div class="notes-image-two">
                 <%= image_tag @artwork.notesImageTwo.url unless @artwork.notesImageTwo.nil? %>
               </div>
-            <% elsif notesImageTwoExists %>
+            <% elsif @notesImageTwoExists %>
               <div class="notes-image-two">
                 <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Notes_2.jpg", class: 'info-image' %>
               </div>
