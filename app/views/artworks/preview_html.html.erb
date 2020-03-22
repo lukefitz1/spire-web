@@ -305,6 +305,8 @@
           if (addInfoOneImage) {
               console.log("Image height: " + addInfoOneImage.height)
               console.log("Image width: " + addInfoOneImage.width)
+
+              addInfoOneImage.style.maxHeight = '145px';
           }
           if (addInfoTwo) {
               addInfoTwoImages = true
@@ -315,8 +317,8 @@
                   console.log("Image width: " + addInfoTwoImage.width)
                   // console.log("Found add info image 2")
 
-                  addInfoOneImage.style.maxHeight = '135px';
-                  addInfoTwoImage.style.maxHeight = '135px';
+                  addInfoOneImage.style.maxHeight = '145px';
+                  addInfoTwoImage.style.maxHeight = '145px';
               }
           }
       }
