@@ -132,30 +132,30 @@
 
         <% if @artwork.notesImage.thumb.url %>
           <div class="notes-images-block">
-            <div class="notes-image-one padding-bottom-five">
+            <div class="notes-image-one padding-bottom-five" id="notes-one">
               <%= image_tag @artwork.notesImage.url unless @artwork.notesImage.nil? %>
             </div>
             <% if @artwork.notesImageTwo.thumb.url %>
-              <div class="notes-image-two">
+              <div class="notes-image-two" id="notes-two">
                 <%= image_tag @artwork.notesImageTwo.url unless @artwork.notesImageTwo.nil? %>
               </div>
             <% elsif @notesImageTwoExists %>
-              <div class="notes-image-two">
+              <div class="notes-image-two" id="notes-two">
                 <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Notes_2.jpg", class: 'info-image' %>
               </div>
             <% end %>
           </div>
         <% elsif @notesImageOneExists %>
           <div class="notes-images-block">
-            <div class="notes-image-one padding-bottom-five">
+            <div class="notes-image-one padding-bottom-five" id="notes-one">
               <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Notes_1.jpg", class: 'info-image' %>
             </div>
             <% if @artwork.notesImageTwo.thumb.url %>
-              <div class="notes-image-two">
+              <div class="notes-image-two" id="notes-two">
                 <%= image_tag @artwork.notesImageTwo.url unless @artwork.notesImageTwo.nil? %>
               </div>
             <% elsif @notesImageTwoExists %>
-              <div class="notes-image-two">
+              <div class="notes-image-two" id="notes-two">
                 <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Notes_2.jpg", class: 'info-image' %>
               </div>
             <% end %>
@@ -170,30 +170,30 @@
         <div class="label-block">
           <% if @artwork.additionalInfoImage.thumb.url %>
             <div class="add-info-images-block">
-              <div class="add-info-image-one">
+              <div class="add-info-image-one" id="add-info-one">
                 <%= image_tag @artwork.additionalInfoImage.url, class: 'info-image' %>
               </div>
               <% if @artwork.additionalInfoImageTwo.thumb.url %>
-                <div class="add-info-image-two">
+                <div class="add-info-image-two" id="add-info-two">
                   <%= image_tag @artwork.additionalInfoImageTwo.url, class: 'info-image' %>
                 </div>
               <% elsif @additionalImageTwoExists %>
-                <div class="add-info-image-two">
+                <div class="add-info-image-two" id="add-info-two">
                   <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Additional_2.jpg", class: 'info-image' %>
                 </div>
               <% end %>
             </div>
           <% elsif @additionalImageOneExists %>
             <div class="add-info-images-block">
-              <div class="add-info-image-one">
+              <div class="add-info-image-one" id="add-info-one">
                 <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Additional_1.jpg", class: 'info-image' %>
               </div>
               <% if @artwork.additionalInfoImageTwo.thumb.url %>
-                <div class="add-info-image-two">
+                <div class="add-info-image-two" id="add-info-two">
                   <%= image_tag @artwork.additionalInfoImageTwo.url, class: 'info-image' %>
                 </div>
               <% elsif @additionalImageTwoExists %>
-                <div class="add-info-image-two">
+                <div class="add-info-image-two" id="add-info-two">
                   <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Additional_2.jpg", class: 'info-image' %>
                 </div>
               <% end %>
@@ -252,5 +252,59 @@
         bio.style.fontSize = '15px';
       }
     }
+  })();
+
+  // self executing function here
+  (function() {
+      noteContent = document.getElementById('notes-content-area');
+      if (noteContent) {
+          if (noteContent.textContent.length < 200) {
+              noteContent.style.fontSize = '16px';
+          } else {
+              noteContent.style.fontSize = '15px';
+          }
+      }
+  })();
+
+  // self executing function here
+  (function() {
+      notesOne = document.getElementById('notes-one')
+      notesOneImage = document.querySelector('#notes-one > img')
+      notesTwo = document.getElementById('notes-two')
+      notesTwoImage = document.querySelector('#notes-two > img')
+
+      addInfoOne = document.getElementById('add-info-one')
+      addInfoOneImage = document.querySelector('#add-info-one > img')
+      addInfoTwo = document.getElementById('add-info-two')
+      addInfoTwoImage = document.querySelector('#add-info-two > img')
+
+      notesTwoImages = false
+      addInfoTwoImages = false
+
+      if (notesOne) {
+          if (notesOneImage) {}
+          if (notesTwo) {
+              notesTwoImages = true
+              // console.log(notesTwoImages)
+
+              if (notesTwoImage) {
+                  notesTwoImage.style.maxHeight = '135px';
+                  notesTwoImage.style.float = 'right';
+              }
+          }
+      }
+
+      if (addInfoOne) {
+          if (addInfoOneImage) {}
+          if (addInfoTwo) {
+              addInfoTwoImages = true
+              // console.log(addInfoTwoImages)
+
+              if (addInfoTwoImage) {
+                  // console.log("Found add info image 2")
+                  // addInfoTwoImage.style.maxHeight = '135px';
+              }
+          }
+      }
   })();
 </script>
