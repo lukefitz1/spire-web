@@ -282,12 +282,19 @@
       addInfoTwoImages = false
 
       if (notesOne) {
-          if (notesOneImage) {}
+          if (notesOneImage) {
+              console.log("Image height: " + notesOneImage.height)
+              console.log("Image width: " + notesOneImage.width)
+          }
           if (notesTwo) {
               notesTwoImages = true
               // console.log(notesTwoImages)
 
               if (notesTwoImage) {
+                  console.log("Image height: " + notesTwoImage.height)
+                  console.log("Image width: " + notesTwoImage.width)
+
+                  notesOneImage.style.maxHeight = '75px';
                   notesTwoImage.style.maxHeight = '125px';
                   notesTwoImage.style.float = 'right';
               }
@@ -295,12 +302,17 @@
       }
 
       if (addInfoOne) {
-          if (addInfoOneImage) {}
+          if (addInfoOneImage) {
+              console.log("Image height: " + addInfoOneImage.height)
+              console.log("Image width: " + addInfoOneImage.width)
+          }
           if (addInfoTwo) {
               addInfoTwoImages = true
               // console.log(addInfoTwoImages)
 
               if (addInfoTwoImage) {
+                  console.log("Image height: " + addInfoTwoImage.height)
+                  console.log("Image width: " + addInfoTwoImage.width)
                   // console.log("Found add info image 2")
                   // addInfoTwoImage.style.maxHeight = '135px';
               }
