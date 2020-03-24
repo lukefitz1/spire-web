@@ -11,6 +11,21 @@
 </p>
 
 <p>
+  <strong>ID:</strong>
+  <%= @general_information.id %>
+</p>
+
+<p>
+  <strong>Created At:</strong>
+  <%= @general_information.created_at %>
+</p>
+
+<p>
+  <strong>Updated At:</strong>
+  <%= @general_information.updated_at %>
+</p>
+
+<p>
   <strong>Pieces of Art:</strong>
   <% unless @general_information.artworks.blank? %>
   <div>
