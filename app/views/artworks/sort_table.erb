@@ -1,0 +1,77 @@
+<p id="notice"><%= notice %></p>
+
+<% content_for :title, "View Artworks" %>
+
+<h1>Artworks</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Image</th>
+    <th>Object ID</th>
+    <th>Art Type</th>
+    <th>Title</th>
+<!--    <th><%#= sort_link(@q, :title) %></th>-->
+    <th>Artist First Name</th>
+    <th>Artist Last Name</th>
+<!--    <th><%#= sort_link(@q, :lastName) %></th>-->
+    <th>Date</th>
+    <th colspan="1"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @artworks.each do |artwork| %>
+
+    <% if artwork.collection_id.present? %>
+      <% if artwork.collection.files.present? %>
+        <% artwork.collection.files.each do |filename| %>
+          <% if filename.identifier == "#{artwork.ojbId}_Main.jpg" %>
+            <% @mainImageExists = true %>
+          <% elsif filename.identifier != "#{artwork.ojbId}_Main.jpg" && !@mainImageExists %>
+            <% @mainImageExists = false %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% else %>
+      <% @mainImageExists = false %>
+    <% end %>
+
+    <tr>
+      <td>
+        <% if artwork.image.thumb.url %>
+          <%= image_tag artwork.image.thumb.url %>
+        <% elsif @mainImageExists %>
+          <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{artwork.collection.id}/thumb_#{artwork.ojbId}_Main.jpg" %>
+        <% end %>
+      </td>
+
+      <td><%= artwork.ojbId %></td>
+      <td><%= artwork.artType %></td>
+      <td><%= artwork.title %></td>
+
+<!--      <td>-->
+        <%# unless artwork.artist.blank? %>
+          <%#= artwork.artist.firstName %><%#= ' ' %><%#= artwork.artist.lastName %>
+        <%# end %>
+<!--      </td>-->
+
+      <td>
+        <% unless artwork.artist.blank? %>
+          <%= artwork.artist.firstName %>
+        <% end %>
+      </td>
+
+      <td>
+        <% unless artwork.artist.blank? %>
+          <%= artwork.artist.lastName %>
+        <% end %>
+      </td>
+
+      <td><%= artwork.date %></td>
+
+      <td><%= link_to 'Edit', edit_artwork_path(artwork) %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

@@ -9,6 +9,13 @@ class ArtworksController < ApplicationController
     @artworks = Artwork.page(params[:page]).per(10)
   end
 
+  # GET /artworks/sort_table
+  def sort_table
+    collection_id = params[:coll_id]
+
+    @artworks = Artwork.joins(:artist).where(collection_id: collection_id).merge(Artist.reorder(lastName: :asc))
+  end
+
   def search
     @artworks = Artwork.joins(:artist).where("concat_ws(' ', \"firstName\", \"lastName\") ILIKE ?", "%#{params[:search]}%").references(:artist)
   end
