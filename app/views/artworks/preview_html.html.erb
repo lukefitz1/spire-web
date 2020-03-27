@@ -74,7 +74,7 @@
       <div class="label-block">
         <span class="avenirnextbold">Medium:</span><p class="value"> <%= @artwork.medium %></p>
       </div>
-      <div class="label-block">
+      <div class="label-block text-justify">
         <span class="avenirnextbold">Description:</span><p class="value"> <%= sanitize @artwork.description, tags: %w(span), attributes: %w(style) %></p>
       </div>
       <div class="label-block">  
@@ -285,6 +285,8 @@
           if (notesOneImage) {
               console.log("Image height: " + notesOneImage.height)
               console.log("Image width: " + notesOneImage.width)
+              console.log("Image client height" + notesOneImage.clientHeight)
+              console.log("Image client width" + notesOneImage.clientWidth)
           }
           if (notesTwo) {
               notesTwoImages = true
