@@ -177,6 +177,11 @@
 
       <!-- Trigger/Open The Modal -->
       <%= link_to "New General Information", new_general_information_path, remote: true, id: "open-gi-btn" %>
+
+      <div class="field">
+        <%= form.label :include_artist_and_general_info, "Need to include both artist info & general info?" %>
+        <%= form.check_box :include_artist_and_general_info, id: "include-artist-and-gi" %>
+      </div>
     </div>
 
     <div class="actions">
