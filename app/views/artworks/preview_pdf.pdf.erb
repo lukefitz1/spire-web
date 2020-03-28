@@ -216,13 +216,24 @@
         <% end %>
       </div>
       <div class="bio">
-        <% if @artwork.show_general_info %>
-          <h3 class="bold"><%= @artwork.general_information.information_label %></h3>
-          <p class="text-justify avenirnext" id="artist-bio"><%= sanitize @artwork.general_information.information, tags: %w(span), attributes: %w(style) %></p>
-        <% else %>
+        <% if @artwork.include_artist_and_general_info %>
           <% if @artwork.artist %>
             <h3 class="bold">Artist&#39s Biography</h3>
-            <p class="text-justify avenirnext" id="artist-bio"><%= sanitize @artwork.artist.biography, tags: %w(span), attributes: %w(style) %></p>
+            <p class="text-justify avenirnext" id="artist-bio-with-gi"><%= sanitize @artwork.artist.biography, tags: %w(span), attributes: %w(style) %></p>
+          <% end %>
+          <% if @artwork.show_general_info %>
+            <h3 class="bold" id="gi-info-label"><%= @artwork.general_information.information_label %></h3>
+            <p class="text-justify avenirnext" id="gi-info-with-artist"><%= sanitize @artwork.general_information.information, tags: %w(span), attributes: %w(style) %></p>
+          <% end %>
+        <% else %>
+          <% if @artwork.show_general_info %>
+            <h3 class="bold"><%= @artwork.general_information.information_label %></h3>
+            <p class="text-justify avenirnext" id="artist-bio"><%= sanitize @artwork.general_information.information, tags: %w(span), attributes: %w(style) %></p>
+          <% else %>
+            <% if @artwork.artist %>
+              <h3 class="bold">Artist&#39s Biography</h3>
+              <p class="text-justify avenirnext" id="artist-bio"><%= sanitize @artwork.artist.biography, tags: %w(span), attributes: %w(style) %></p>
+            <% end %>
           <% end %>
         <% end %>
       </div>
@@ -231,6 +242,37 @@
 </div> <!-- End .preview-container -->
     
 <script>
+    // self executing function here
+  (function() {
+    artistBioWithGI = document.getElementById('artist-bio-with-gi');
+    giInfoWithArtist = document.getElementById('gi-info-with-artist');
+    giInfoLabel = document.getElementById('gi-info-label');
+
+    artistBioLength = artistBioWithGI.textContent.length;
+    generalInfoLength = giInfoWithArtist.textContent.length;
+
+    if (artistBioWithGI && giInfoWithArtist) {
+      console.log("Artist bio length: " + artistBioLength);
+      console.log("General Info length: " + generalInfoLength);
+      console.log("Total character count: " + (artistBioLength + generalInfoLength));
+      if ((artistBioLength + generalInfoLength) <= 1250) {
+        artistBioWithGI.style.fontSize = '16px';
+        giInfoWithArtist.style.fontSize = '16px';
+      } else if ((artistBioLength + generalInfoLength) <= 1500) {
+        artistBioWithGI.style.fontSize = '15px';
+        giInfoWithArtist.style.fontSize = '15px';
+      } else if ((artistBioLength + generalInfoLength) <= 1520){
+        giInfoLabel.style.display = 'none';
+        artistBioWithGI.style.fontSize = '15px';
+        giInfoWithArtist.style.fontSize = '15px';
+      } else {
+        giInfoLabel.style.display = 'none';
+        artistBioWithGI.style.fontSize = '14px';
+        giInfoWithArtist.style.fontSize = '14px';
+      }
+    }
+  })();
+
   // self executing function here
   (function() {
     title = document.getElementById('coll-title');
