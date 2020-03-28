@@ -79,6 +79,7 @@ Rails.application.routes.draw do
     get "/artworks/download_pdfs_background/:id", to: "artworks#download_pdfs_background", as: "download_pdfs_background"
     post "/collections/get_bucket_status", to: "collections#get_bucket_status", as: "get_bucket_status"
     get "/collections/download_pdfs_s3", to: "collections#download_pdfs_s3", as: "download_pdfs_s3"
+    put "/artworks/update_object_id", to: "artworks#update_object_id"
 
     resources :artworks do
       collection { post :import }

@@ -419,9 +419,7 @@
     $.ajax({
       url: "search_by_objid", 
       data: {"objid": $('#artwork_ojbId').val()}, 
-      success: function(data) { 
-        // console.log("Success: " + data.obj_id_exists);
-
+      success: function(data) {
         if (data.obj_id_exists) {
           $('#artwork_ojbId').removeClass('obj-id-green').addClass('obj-id-red');
           $('.obj-id-error').css("display", "block");
@@ -432,34 +430,10 @@
           $('.obj-id-error').css("display", "none");
           objIdErrorExists = false;
         }
-
       }, 
       cache: false
     });
   });
-
-  // $("#new-artwork-form").submit(function(e) {
-  //   console.log("Form submitted!");
-  //   console.log("Is there an error? " + objIdErrorExists);
-
-  //   if(objIdErrorExists) {
-  //     $('html, body').animate({scrollTop: ($('#new-artwork-form').offset().top)},500);
-  //     return false;
-  //     }
-  // });
-
-  // if ($('#add-general-info').attr('checked')) {
-  //   console.log("Checked!!");
-  //   $('#general-info_block').css("display", "block");
-  // }
-
-  // $('#add-general-info').click(function() {
-  //   if ($(this).is(':checked')) {
-  //     $('#general-info_block').css("display", "block");
-  //   } else {
-  //     $('#general-info_block').css("display", "none");
-  //   }
-  // });
 
   $('#add-general-info').click(function() {
     if ($(this).is(':checked')) {
@@ -522,18 +496,6 @@
 	        modal.style.display = "none";
 	    }
 	}
-  // When the user clicks anywhere outside of the modal, close it 
-  // window.onclick = function(event) {
-  //   if (event.target == giModal) {
-  //     console.log("DOESNT WORK"); // TODO
-  //     console.log("Closing the gi modal when clicking outside of it");
-  //     giModal.style.display = "none";
-  //   }
-
-  //   if (event.target == modal) {
-  //     modal.style.display = "none";
-  //   }
-  // }
 
 	$('#gi-ajax-form').on('ajax:success', updateGeneralInformation)
 

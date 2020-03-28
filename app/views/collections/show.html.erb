@@ -62,8 +62,6 @@
   <%= link_to 'New Artwork', new_from_collection_path(:coll_id => @collection.id, :collection_redirect => true) %><br /><br />
 <% end %>
 
-<td><%= link_to 'SORT TABLE', sort_table_path(:coll_id => @collection.id) %></td>
-
 <% unless @collection.artworks.blank? %>
   <button class="art-panel-collection">View Artwork</button>
 

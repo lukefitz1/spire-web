@@ -13,7 +13,48 @@ class ArtworksController < ApplicationController
   def sort_table
     collection_id = params[:coll_id]
 
-    @artworks = Artwork.joins(:artist).where(collection_id: collection_id).merge(Artist.reorder(lastName: :asc))
+    artworks = Artwork.joins(:artist).where(collection_id: collection_id).merge(Artist.reorder(lastName: :asc))
+    art_array_no_artist = []
+    art_array_artist = []
+    @artworks = []
+    artworks.each do |art|
+      if art.artist.lastName == ""
+        art_array_no_artist.append(art)
+      else
+        art_array_artist.append(art)
+      end
+    end
+
+    art_array_artist.each do |art|
+      @artworks.append(art)
+    end
+
+    art_array_no_artist.each do |art|
+      @artworks.append(art)
+    end
+
+    # @artworks = Artwork.joins(:artist).where(collection_id: collection_id).merge(Artist.reorder(lastName: :asc))
+    return @artworks
+  end
+
+  # PUT /artworks/update_object_id/1
+  def update_object_id
+    artId = params[:id]
+    artObjectId = params[:new_objectId]
+
+    art = Artwork.where(id: artId).first
+    respond_to do |format|
+      if art.nil?
+        format.json { render json: { "saveSuccessful": false } }
+      else
+        art.ojbId = artObjectId
+        if art.save
+          format.json { render json: { "saveSuccessful": true } }
+        else
+          format.json { render json: { "saveSuccessful": false } }
+        end
+      end
+    end
   end
 
   def search

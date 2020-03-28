@@ -122,6 +122,7 @@
       No PDFs have been generated yet. Generate some and then you can download them!
     <% end %>
 
+    <br /><%= link_to 'Sort Table', sort_table_path(:coll_id => collection.id, :sort => "lastName") %>
     <% unless collection.artworks.blank? %>
       <div>
         <table>

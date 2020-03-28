@@ -11,10 +11,9 @@
     <th>Object ID</th>
     <th>Art Type</th>
     <th>Title</th>
-<!--    <th><%#= sort_link(@q, :title) %></th>-->
     <th>Artist First Name</th>
     <th>Artist Last Name</th>
-<!--    <th><%#= sort_link(@q, :lastName) %></th>-->
+    <th>Location</th>
     <th>Date</th>
     <th colspan="1"></th>
   </tr>
@@ -46,15 +45,10 @@
         <% end %>
       </td>
 
-      <td><%= artwork.ojbId %></td>
+      <td hidden><span class="object-id"><%= artwork.id %></span></td>
+      <td><span contenteditable="true" class="object-objectID"><%= artwork.ojbId %></span></td>
       <td><%= artwork.artType %></td>
       <td><%= artwork.title %></td>
-
-<!--      <td>-->
-        <%# unless artwork.artist.blank? %>
-          <%#= artwork.artist.firstName %><%#= ' ' %><%#= artwork.artist.lastName %>
-        <%# end %>
-<!--      </td>-->
 
       <td>
         <% unless artwork.artist.blank? %>
@@ -68,10 +62,62 @@
         <% end %>
       </td>
 
+      <td><%= artwork.currentLocation %></td>
       <td><%= artwork.date %></td>
 
       <td><%= link_to 'Edit', edit_artwork_path(artwork) %></td>
     </tr>
   <% end %>
   </tbody>
+  <%= csrf_meta_tag %>
 </table>
+
+<script>
+    var IDs = document.getElementsByClassName("object-id");
+    var objectIDs = document.getElementsByClassName("object-objectID");
+
+    var originalObjectId = "";
+    var newObjectId = "";
+
+    for (index = 0; index < objectIDs.length; ++index) {
+      var objectId = objectIDs[index];
+      var id = IDs[index];
+
+       objectId.setAttribute("id", id.innerHTML);
+    };
+
+    $('.object-objectID').click(function() {
+        originalObjectId = this.innerHTML;
+    });
+
+    $('.object-objectID').blur(function() {
+        objectId = this.innerHTML;
+        newObjectId = objectId.replace('<br>', '')
+
+        updateObjectId(this.id, newObjectId)
+    });
+
+    function updateObjectId(id, objectId) {
+        console.log("ID: " + id + " - Object ID: " + objectId)
+        $.ajax({
+            url: "update_object_id",
+            type: 'PUT',
+            beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))},
+            data: {
+                "id": id,
+                "new_objectId": objectId
+            },
+            success: function(data) {
+                if (data.saveSuccessful) {
+                    idString = '#' + id
+                    $(idString).css("color", "green")
+                }
+                else {
+                    idString = '#' + id
+                    $(idString).css("color", "red")
+                    console.log("saveSuccess = false")
+                }
+            }
+        })
+    }
+</script>
