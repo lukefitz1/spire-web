@@ -164,7 +164,7 @@
         <% end %>
         
         <p class="label-heading avenirnextbold">Note:</p>
-        <p class="block-value notes-content-area"><%= @artwork.notes %></p>
+        <p class="block-value notes-content-area"><%= sanitize @artwork.notes, tags: %w(span), attributes: %w(style) %></p>
       </div>
 
       <% if @artwork.additionalInfoText && @artwork.additionalInfoText != ""%>
@@ -202,7 +202,7 @@
           <% end %>
 
           <p class="label-heading avenirnextbold"><%= @artwork.additionalInfoLabel %>:</p>
-          <p class="block-value additional-info-content-area"> <%= @artwork.additionalInfoText %></p>
+          <p class="block-value additional-info-content-area"> <%= sanitize @artwork.additionalInfoText, tags: %w(span), attributes: %w(style) %></p>
         </div>
       <% end %>
     </div> <!-- End .column-left -->
