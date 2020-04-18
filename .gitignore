@@ -49,3 +49,7 @@ tmp/db/
 # temporarily ignoring these images
 public/circle-cropped.png
 public/luke_circles.png
+
+# ignoring some random files that I want to keep but not commit
+app/views/docs/
+ignore_me

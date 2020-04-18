@@ -167,41 +167,48 @@
         <p class="block-value notes-content-area"><%= sanitize @artwork.notes, tags: %w(span), attributes: %w(style) %></p>
       </div>
 
-      <% if @artwork.additionalInfoText && @artwork.additionalInfoText != ""%>
+      <% if !@additionalImageOneExists && !@additionalImageTwoExists && !@artwork.additionalInfoImage.thumb.url && !@artwork.additionalInfoImageTwo.thumb.url && @artwork.additionalInfoLabel == "" && @artwork.additionalInfoText == "" %>
+      <% else %>
         <div class="label-block">
           <% if @artwork.additionalInfoImage.thumb.url %>
             <div class="add-info-images-block">
               <div class="add-info-image-one" id="add-info-one">
-                <%= wicked_pdf_image_tag @artwork.additionalInfoImage, class: 'info-image' %>
+                <%= image_tag @artwork.additionalInfoImage.url, class: 'info-image' %>
               </div>
               <% if @artwork.additionalInfoImageTwo.thumb.url %>
                 <div class="add-info-image-two" id="add-info-two">
-                  <%= wicked_pdf_image_tag @artwork.additionalInfoImageTwo, class: 'info-image' %>
+                  <%= image_tag @artwork.additionalInfoImageTwo.url, class: 'info-image' %>
                 </div>
               <% elsif @additionalImageTwoExists %>
                 <div class="add-info-image-two" id="add-info-two">
-                  <%= wicked_pdf_image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Additional_2.jpg", class: 'info-image' %>
+                  <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Additional_2.jpg", class: 'info-image' %>
                 </div>
               <% end %>
             </div>
           <% elsif @additionalImageOneExists %>
             <div class="add-info-images-block">
               <div class="add-info-image-one" id="add-info-one">
-                <%= wicked_pdf_image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Additional_1.jpg", class: 'info-image' %>
+                <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Additional_1.jpg", class: 'info-image' %>
               </div>
               <% if @artwork.additionalInfoImageTwo.thumb.url %>
                 <div class="add-info-image-two" id="add-info-two">
-                  <%= wicked_pdf_image_tag @artwork.additionalInfoImageTwo.url, class: 'info-image' %>
+                  <%= image_tag @artwork.additionalInfoImageTwo.url, class: 'info-image' %>
                 </div>
               <% elsif @additionalImageTwoExists %>
                 <div class="add-info-image-two" id="add-info-two">
-                  <%= wicked_pdf_image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Additional_2.jpg", class: 'info-image' %>
+                  <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Additional_2.jpg", class: 'info-image' %>
                 </div>
               <% end %>
             </div>
           <% end %>
 
-          <p class="label-heading avenirnextbold"><%= @artwork.additionalInfoLabel %>:</p>
+          <% if @artwork.additionalInfoLabel != ""  %>
+            <p class="label-heading avenirnextbold"><%= @artwork.additionalInfoLabel %>:</p>
+          <% else %>
+            <!-- Show empty label -->
+            <p class="empty-label-heading"><%= @artwork.additionalInfoLabel %></p>
+          <% end %>
+
           <p class="block-value additional-info-content-area"> <%= sanitize @artwork.additionalInfoText, tags: %w(span), attributes: %w(style) %></p>
         </div>
       <% end %>

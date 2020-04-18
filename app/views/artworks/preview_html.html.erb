@@ -165,8 +165,9 @@
         <p class="label-heading avenirnextbold">Note:</p>
         <p class="block-value notes-content-area"><%= sanitize @artwork.notes, tags: %w(span), attributes: %w(style) %></p>
       </div>
-      
-      <% if @artwork.additionalInfoText && @artwork.additionalInfoText != ""%>
+
+      <% if !@additionalImageOneExists && !@additionalImageTwoExists && !@artwork.additionalInfoImage.thumb.url && !@artwork.additionalInfoImageTwo.thumb.url && @artwork.additionalInfoLabel == "" && @artwork.additionalInfoText == "" %>
+      <% else %>
         <div class="label-block">
           <% if @artwork.additionalInfoImage.thumb.url %>
             <div class="add-info-images-block">
@@ -200,7 +201,13 @@
             </div>
           <% end %>
 
-          <p class="label-heading avenirnextbold"><%= @artwork.additionalInfoLabel %>:</p>
+          <% if @artwork.additionalInfoLabel != ""  %>
+            <p class="label-heading avenirnextbold"><%= @artwork.additionalInfoLabel %>:</p>
+          <% else %>
+            <!-- Show empty label -->
+            <p class="empty-label-heading"><%= @artwork.additionalInfoLabel %></p>
+          <% end %>
+
           <p class="block-value additional-info-content-area"> <%= sanitize @artwork.additionalInfoText, tags: %w(span), attributes: %w(style) %></p>
         </div>
       <% end %>
