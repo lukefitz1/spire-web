@@ -60,9 +60,16 @@
         <td><%= artwork.title %></td>
 
         <td>
-          <% unless artwork.artist.blank? %>
-            <%= artwork.artist.firstName %><%= ' ' %><%= artwork.artist.lastName %>
-          <% end %> 
+          <%# unless artwork.artist.blank? %>
+            <%#= artwork.artist.firstName %><%#= ' ' %><%#= artwork.artist.lastName %>
+          <%# end %>
+          <% artwork.artists.each_with_index do |artist, index| %>
+            <% if (index + 1) == artwork.artists.length %>
+              <%= artist.firstName %><%= ' ' %><%= artist.lastName %>
+            <% else %>
+              <%= artist.firstName %><%= ' ' %><%= artist.lastName %>,
+            <% end %>
+          <% end %>
         </td>
 
         <td><%= artwork.date %></td>

@@ -3,11 +3,12 @@ class Artwork < ApplicationRecord
 
   default_scope { order(ojbId: :asc) }
 
-  belongs_to :artist, optional: true
+  # belongs_to :artist, optional: true
   belongs_to :customer, optional: true
   belongs_to :collection, optional: true
   # belongs_to :general_information, optional: true
   has_and_belongs_to_many :general_informations, optional: true
+  has_and_belongs_to_many :artists, optional: true
 
   accepts_nested_attributes_for :general_informations
 
