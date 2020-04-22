@@ -176,7 +176,7 @@
 
       <div class="field">
         <%= form.label :general_information_ids %>
-        <%= form.select(:general_information_ids, GeneralInformation.all.collect { |general_info| [general_info.information_label, general_info.id]}, {:include_hidden => false, :include_blank => true},  {multiple: true, size: 5}) %>
+        <%= form.select(:general_information_ids, GeneralInformation.all.collect { |general_info| [general_info.information_label, general_info.id]}.sort, {:include_hidden => false, :include_blank => true},  {multiple: true, size: 5}) %>
       </div>
 
       <!-- Trigger/Open The Modal -->
