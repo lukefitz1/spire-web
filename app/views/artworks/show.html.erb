@@ -143,10 +143,21 @@
     <% end %>
   </p>
 
+<!--  <p>-->
+<!--    <strong>General Information:</strong>-->
+    <%# unless @artwork.general_information.blank? %>
+      <%#= @artwork.general_information.information_label %>
+    <%# end %>
+<!--  </p>-->
+
   <p>
-    <strong>General Information:</strong>
-    <% unless @artwork.general_information.blank? %>
-      <%= @artwork.general_information.information_label %>
+    <strong>General Informations:</strong>
+    <% @artwork.general_informations.each_with_index do |gi, index| %>
+      <% if (index + 1) == @artwork.general_informations.length %>
+        <%= gi.information_label %>
+      <% else %>
+        <%= gi.information_label %>,
+      <% end %>
     <% end %>
   </p>
 

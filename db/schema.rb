@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_28_224237) do
+ActiveRecord::Schema.define(version: 2020_04_18_230843) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -67,6 +67,12 @@ ActiveRecord::Schema.define(version: 2020_03_28_224237) do
     t.index ["collection_id"], name: "index_artworks_on_collection_id"
     t.index ["customer_id"], name: "index_artworks_on_customer_id"
     t.index ["general_information_id"], name: "index_artworks_on_general_information_id"
+  end
+
+  create_table "artworks_general_informations", id: false, force: :cascade do |t|
+    t.uuid "general_information_id", null: false
+    t.uuid "artwork_id", null: false
+    t.index ["general_information_id", "artwork_id"], name: "index_art_general_infos_on_general_infos_id_and_art_id", unique: true
   end
 
   create_table "collections", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
