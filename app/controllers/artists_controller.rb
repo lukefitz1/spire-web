@@ -5,8 +5,6 @@ class ArtistsController < ApplicationController
   # GET /artists.json
   def index
     @artists = Artist.page(params[:page]).per(10)
-    # @artists = Artist.all
-    # @artists = Artist.search(params[:search])
   end
 
   def search
