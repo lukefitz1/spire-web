@@ -41,23 +41,18 @@
       <div class="label-block">
         <span class="avenirnextbold">Artist:</span>
         <p class="value">
-          <%# if @artwork.artist %>
-            <%# if @artwork.artist.firstName != '' && @artwork.artist.lastName != ''%>
-<!--              <%#= @artwork.artist.lastName %>, <%#= @artwork.artist.firstName %>-->
-            <%# elsif @artwork.artist.firstName != '' && @artwork.artist.lastName == '' %>
-              <%#= @artwork.artist.firstName %>
-            <%# else %>
-              <%#= @artwork.artist.lastName %>
-            <%# end %>
-
-            <%# if @artwork.artist.additionalInfo %>
-              <%# if @artwork.artist.additionalInfo != "" %>
-<!--                (<%#= @artwork.artist.additionalInfo %>)-->
-              <%# end %>
-            <%# end %>
-          <%# end %>
           <% @artwork.artists.each do |artist| %>
-            <%= artist.lastName %>, <%= artist.firstName %> (<%= artist.additionalInfo %>)
+            <% if artist.firstName != '' && artist.lastName != '' %>
+              <%= artist.lastName %>, <%= artist.firstName %>
+            <% elsif artist.firstName != '' && artist.lastName == '' %>
+              <%= artist.firstName %>
+            <% else %>
+              <%= artist.lastName %>
+            <% end %>
+
+            <% if artist.additionalInfo != '' %>
+              (<%= artist.additionalInfo %>)
+            <% end %>
           <% end %>
         </p>
       </div>
@@ -226,11 +221,6 @@
 			</div>
 			<div class="bio">
         <% if @artwork.include_artist_and_general_info %>
-          <%# if @artwork.artist %>
-<!--            <h3 class="bold">Artist&#39s Biography</h3>-->
-<!--            <p class="text-justify avenirnext" id="artist-bio-with-gi"><%#= sanitize @artwork.artist.biography, tags: %w(span), attributes: %w(style) %></p>-->
-          <%# end %>
-
           <% @artwork.artists.each do |artist| %>
             <h3 class="bold">Artist&#39s Biography</h3>
             <p class="text-justify avenirnext" id="artist-bio-with-gi"><%= sanitize artist.biography, tags: %w(span), attributes: %w(style) %></p>
