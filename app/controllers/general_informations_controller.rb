@@ -7,6 +7,11 @@ class GeneralInformationsController < ApplicationController
     @general_informations = GeneralInformation.all
   end
 
+  # GET /general_informations/search
+  def search
+    @general_informations = GeneralInformation.where("concat_ws(' ', \"information_label\") ILIKE ?", "%#{params[:search]}%")
+  end
+
   # GET /general_informations/1
   # GET /general_informations/1.json
   def show
@@ -80,13 +85,14 @@ class GeneralInformationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_general_information
-      @general_information = GeneralInformation.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def general_information_params
-      params.require(:general_information).permit(:information_label, :information)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_general_information
+    @general_information = GeneralInformation.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def general_information_params
+    params.require(:general_information).permit(:information_label, :information, :search)
+  end
 end

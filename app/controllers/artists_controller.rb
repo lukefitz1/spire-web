@@ -7,6 +7,7 @@ class ArtistsController < ApplicationController
     @artists = Artist.page(params[:page]).per(10)
   end
 
+  # GET /artists/search
   def search
     @artists = Artist.where("concat_ws(' ', \"firstName\", \"lastName\") ILIKE ?", "%#{params[:search]}%")
   end

@@ -4,6 +4,15 @@
 
 <h1>General Informations</h1>
 
+<%= link_to 'New General Information', new_general_information_path %><br /><br />
+
+<h4>Search for General Information</h4>
+<%= form_tag(general_information_search_path, method: :get) do %>
+  <%= text_field_tag(:search) %>
+  <%= submit_tag "Search" %>
+<% end %>
+<br /><br />
+
 <table>
   <thead>
     <tr>
@@ -25,7 +34,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New General Information', new_general_information_path %>
