@@ -13,12 +13,12 @@ class ArtworksController < ApplicationController
   def sort_table
     collection_id = params[:coll_id]
 
-    artworks = Artwork.joins(:artist).where(collection_id: collection_id).merge(Artist.reorder(lastName: :asc))
+    artworks = Artwork.joins(:artists).where(collection_id: collection_id).merge(Artist.reorder(lastName: :asc))
     art_array_no_artist = []
     art_array_artist = []
     @artworks = []
     artworks.each do |art|
-      if art.artist.lastName == ""
+      if art.artists[0].lastName == ""
         art_array_no_artist.append(art)
       else
         art_array_artist.append(art)
@@ -33,7 +33,7 @@ class ArtworksController < ApplicationController
       @artworks.append(art)
     end
 
-    # @artworks = Artwork.joins(:artist).where(collection_id: collection_id).merge(Artist.reorder(lastName: :asc))
+    # @artworks = Artwork.joins(:artists).where(collection_id: collection_id).merge(Artist.reorder(lastName: :asc))
     return @artworks
   end
 
