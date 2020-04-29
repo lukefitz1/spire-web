@@ -136,10 +136,10 @@
       <%= form.text_field :custom_title, id: :custom_title %>
     </div>
 
-<!--    <div class="field">-->
-      <%#= form.label :artist_id %>
-      <%#= form.select(:artist_id, Artist.all.collect { |artist| [artist.firstName + ' ' + artist.lastName, artist.id]}.sort, include_blank: true) %>
-<!--    </div>-->
+    <div class="field">
+      <%= form.label :custom_artist_label %>
+      <%= form.text_field :custom_artist_label, id: :custom_artist_label %>
+    </div>
 
     <div class="field">
       <%= form.label :artist_ids %>
@@ -172,13 +172,6 @@
     </div>
 
     <div class="field" id="general-info_block">
-      <%#= form.label :general_information_id %>
-      <%# if params[:general_information_id] %>
-        <%#= form.select(:general_information_id, GeneralInformation.all.collect { |general_info| [general_info.information_label, general_info.id]}, include_blank: true, :selected => params[:general_informations_id]) %>
-      <%# else %>
-        <%#= form.select(:general_information_id, GeneralInformation.all.collect { |general_info| [general_info.information_label, general_info.id]}, include_blank: true) %>
-      <%# end %>
-
       <div class="field">
         <%= form.label :general_information_ids %>
         <%= form.select(:general_information_ids, GeneralInformation.all.collect { |general_info| [general_info.information_label, general_info.id]}.sort, {:include_hidden => false, :include_blank => true},  {multiple: true, size: 5}) %>

@@ -123,6 +123,11 @@
   </p>
 
   <p>
+    <strong>Custom Artist Label:</strong>
+    <%= @artwork.custom_artist_label %>
+  </p>
+
+  <p>
     <strong>Artist:</strong>
     <% @artwork.artists.each_with_index do |artist, index| %>
       <% if (index + 1) == @artwork.artists.length %>

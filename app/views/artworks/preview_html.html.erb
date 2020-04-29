@@ -39,7 +39,11 @@
         <span class="avenirnextbold">Type:</span><p class="value"> <%= @artwork.artType %></p>
       </div>
       <div class="label-block">
-        <span class="avenirnextbold">Artist:</span>
+        <% if !@artwork.custom_artist_label.nil? && @artwork.custom_artist_label != "" %>
+          <span class="avenirnextbold"><%= @artwork.custom_artist_label %>:</span>
+        <% else %>
+          <span class="avenirnextbold">Artist:</span>
+        <% end %>
         <p class="value">
           <% @artwork.artists.each do |artist| %>
             <% if artist.firstName != '' && artist.lastName != '' %>
