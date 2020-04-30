@@ -303,6 +303,26 @@
         <%= form.file_field :additionalInfoImageTwo, id: :artwork_additionalInfoImageTwo %>
       </div>
     </div>
+
+    <div class="field">
+      <div>
+        <%= form.label :provenance_image, 'Provenance Image' %>
+      </div>
+
+      <div>
+        <% if form.object.provenance_image? %>
+          <%= image_tag form.object.provenance_image.url, :class => "show-additional-images"  %>
+          <%= form.label :remove_provenance_image, "Remove Provenance Image" %>
+          <%= form.check_box :remove_provenance_image %>
+        <%# elsif @additionalImageTwoExists %>
+          <%#= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Additional_2.jpg", :class => "show-additional-images" %>
+        <% end %>
+      </div>
+
+      <div>
+        <%= form.file_field :provenance_image, id: :artwork_provenance_image %>
+      </div>
+    </div>
   </div>
 <% end %>
 

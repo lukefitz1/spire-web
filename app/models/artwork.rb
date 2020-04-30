@@ -17,6 +17,7 @@ class Artwork < ApplicationRecord
   mount_base64_uploader :notesImageTwo, ImageUploader
   mount_base64_uploader :additionalInfoImage, ImageUploader
   mount_base64_uploader :additionalInfoImageTwo, ImageUploader
+  mount_base64_uploader :provenance_image, ImageUploader
   mount_base64_uploader :additionalPdf, PdfUploader
 
   validates_uniqueness_of :ojbId

@@ -278,4 +278,17 @@
       <% end %>
     <% end %>
   </p>
+
+  <p>
+  <div>
+    <strong>Provenance Image</strong>
+  </div>
+  <% if @artwork.provenance_image.thumb.url %>
+    <%= image_tag @artwork.provenance_image.url, :class => "show-additional-images" %>
+  <% elsif @artwork.collection %>
+    <%# if @additionalImageTwoExists %>
+      <%#= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{@artwork.collection.id}/#{@artwork.ojbId}_Additional_2.jpg", :class => "show-additional-images" %>
+    <%# end %>
+  <% end %>
+  </p>
 </div>

@@ -104,6 +104,13 @@
         <% end %>        
       </div><br />
       <div class="label-block">
+        <% if @artwork.provenance_image.thumb.url %>
+          <div class="notes-images-block">
+            <div class="notes-image-one padding-bottom-five" id="notes-one">
+              <%= image_tag @artwork.provenance_image.url unless @artwork.provenance_image.nil? %>
+            </div>
+          </div>
+        <% end %>
         <p class="label-heading avenirnextbold">Provenance:</p>
         <p class="block-value provenance-content-area"> <%= sanitize @artwork.provenance , tags: %w(br), attributes: %w(style) %></p>
       </div>
