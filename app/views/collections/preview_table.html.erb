@@ -45,8 +45,8 @@
           <td class='art-table-data'><%= artwork.title %></td>
 
           <td class='art-table-data'>
-            <% unless artwork.artist.blank? %>
-              <%= artwork.artist.firstName %><%= ' ' %><%= artwork.artist.lastName %>
+            <% unless artwork.artists.empty? %>
+              <%= artwork.artists[0].firstName %><%= ' ' %><%= artwork.artists[0].lastName %>
             <% end %> 
           </td>
 
