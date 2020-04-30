@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_29_125838) do
+ActiveRecord::Schema.define(version: 2020_04_30_014345) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 2020_04_29_125838) do
     t.string "custom_title"
     t.boolean "include_artist_and_general_info"
     t.string "custom_artist_label"
+    t.string "custom_details"
     t.index ["artist_id"], name: "index_artworks_on_artist_id"
     t.index ["collection_id"], name: "index_artworks_on_collection_id"
     t.index ["customer_id"], name: "index_artworks_on_customer_id"

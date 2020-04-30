@@ -41,24 +41,25 @@
       <div class="label-block">
         <% if !@artwork.custom_artist_label.nil? && @artwork.custom_artist_label != "" %>
           <span class="avenirnextbold"><%= @artwork.custom_artist_label %>:</span>
+          <p class="value"><%= @artwork.custom_details %></p>
         <% else %>
           <span class="avenirnextbold">Artist:</span>
-        <% end %>
-        <p class="value">
-          <% @artwork.artists.each do |artist| %>
-            <% if artist.firstName != '' && artist.lastName != '' %>
-              <%= artist.lastName %>, <%= artist.firstName %>
-            <% elsif artist.firstName != '' && artist.lastName == '' %>
-              <%= artist.firstName %>
-            <% else %>
-              <%= artist.lastName %>
-            <% end %>
+          <p class="value">
+            <% @artwork.artists.each do |artist| %>
+              <% if artist.firstName != '' && artist.lastName != '' %>
+                <%= artist.lastName %>, <%= artist.firstName %>
+              <% elsif artist.firstName != '' && artist.lastName == '' %>
+                <%= artist.firstName %>
+              <% else %>
+                <%= artist.lastName %>
+              <% end %>
 
-            <% if artist.additionalInfo != '' %>
-              (<%= artist.additionalInfo %>)
+              <% if artist.additionalInfo != '' %>
+                (<%= artist.additionalInfo %>)
+              <% end %>
             <% end %>
-          <% end %>
-        </p>
+          </p>
+        <% end %>
       </div>
 
       <% if @artwork.title == 'Untitled' %>
