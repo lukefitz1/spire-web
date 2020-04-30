@@ -157,13 +157,6 @@
     <% end %>
   </p>
 
-<!--  <p>-->
-<!--    <strong>General Information:</strong>-->
-    <%# unless @artwork.general_information.blank? %>
-      <%#= @artwork.general_information.information_label %>
-    <%# end %>
-<!--  </p>-->
-
   <p>
     <strong>General Informations:</strong>
     <% @artwork.general_informations.each_with_index do |gi, index| %>

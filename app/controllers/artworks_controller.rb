@@ -33,8 +33,7 @@ class ArtworksController < ApplicationController
       @artworks.append(art)
     end
 
-    # @artworks = Artwork.joins(:artists).where(collection_id: collection_id).merge(Artist.reorder(lastName: :asc))
-    return @artworks
+    @artworks
   end
 
   # PUT /artworks/update_object_id/1
@@ -63,8 +62,7 @@ class ArtworksController < ApplicationController
 
   # GET /artworks/1
   # GET /artworks/1.json
-  def show
-  end
+  def show; end
 
   # GET /artworks/new
   def new
@@ -225,16 +223,16 @@ class ArtworksController < ApplicationController
           url = "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/artwork/additionalPdf/#{@artwork[:id]}/#{@artwork[:additionalPdf]}"
           open(Rails.root.join("tmp", "crossing_fingers.pdf"), "wb") do |file|
             file << open(url).read
-    
+
             open(Rails.root.join("tmp", "template.pdf"), "wb") do |file2|
               file2 << open(Rails.root.join("tmp", temp_art_name)).read
             end
           end
-    
+
           # combine files
           client.addPdfFile(Rails.root.join("tmp", "template.pdf"))
           client.addPdfFile(Rails.root.join("tmp", "crossing_fingers.pdf"))
-          
+
           # run the conversion and write the result to a file
           client.convertToFile("#{Rails.root}/tmp/#{@artwork.ojbId} #{@artwork.artist.firstName} #{@artwork.artist.lastName} (#{@artwork.title}) - #{@artwork.currentLocation}.pdf")
 
@@ -246,12 +244,12 @@ class ArtworksController < ApplicationController
           url = "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{collection_id}/#{@artwork.ojbId}_PDF.pdf"
           open(Rails.root.join("tmp", "crossing_fingers.pdf"), "wb") do |file|
             file << open(url).read
-    
+
             open(Rails.root.join("tmp", "template.pdf"), "wb") do |file2|
               file2 << open(Rails.root.join("tmp", temp_art_name)).read
             end
           end
-    
+
           # combine files
           client.addPdfFile(Rails.root.join("tmp", "template.pdf"))
           client.addPdfFile(Rails.root.join("tmp", "crossing_fingers.pdf"))
