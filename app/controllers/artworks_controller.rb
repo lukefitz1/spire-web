@@ -13,23 +13,36 @@ class ArtworksController < ApplicationController
   def sort_table
     collection_id = params[:coll_id]
 
-    artworks = Artwork.joins(:artists).where(collection_id: collection_id).merge(Artist.reorder(lastName: :asc))
-    art_array_no_artist = []
+    artworks = Artwork.includes(:artists).where(collection_id: collection_id).order(Artist.arel_table['lastName'].asc).references(:artist)
+    # artworks = Artwork.joins(:artists).where(collection_id: collection_id).merge(Artist.reorder(lastName: :asc))
+    art_array_no_artist_last_name = []
     art_array_artist = []
+    art_array_no_artist = []
+
     @artworks = []
     artworks.each do |art|
-      if art.artists[0].lastName == ""
-        art_array_no_artist.append(art)
+      if !art.artists.empty?
+        if art.artists[0].lastName == ""
+          art_array_no_artist_last_name.append(art)
+        else
+          art_array_artist.append(art)
+        end
       else
-        art_array_artist.append(art)
+        art_array_no_artist.append(art)
       end
     end
 
-    art_array_artist.each do |art|
+    art_array = art_array_artist.sort_by {|obj| obj.artists[0].lastName}
+    art_array.each do |art|
       @artworks.append(art)
     end
 
-    art_array_no_artist.each do |art|
+    art_array_no_artist_last_name.each do |art|
+      @artworks.append(art)
+    end
+
+    art_array_empty = art_array_no_artist.sort_by {|obj| obj.currentLocation}
+    art_array_empty.each do |art|
       @artworks.append(art)
     end
 
