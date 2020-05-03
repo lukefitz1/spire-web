@@ -391,10 +391,10 @@ class ArtworksController < ApplicationController
 
     # run the conversion and write the result to a file
     if @artwork.artists.empty?
-      client.convertToFile("#{Rails.root}/tmp/#{@artwork.ojbId} No Artist (#{@artwork.title}) - #{@artwork.currentLocation}.pdf")
+      client.convertToFile("#{Rails.root}/tmp/#{@artwork.ojbId} - (#{@artwork.title}) - #{@artwork.currentLocation}.pdf")
 
       # download the combined pdf file
-      send_file("#{Rails.root}/tmp/#{@artwork.ojbId} No Artist (#{@artwork.title}) - #{@artwork.currentLocation}.pdf")
+      send_file("#{Rails.root}/tmp/#{@artwork.ojbId} - (#{@artwork.title}) - #{@artwork.currentLocation}.pdf")
     else
       client.convertToFile("#{Rails.root}/tmp/#{@artwork.ojbId} #{@artwork.artists[0].firstName} #{@artwork.artists[0].lastName} (#{@artwork.title}) - #{@artwork.currentLocation}.pdf")
 
