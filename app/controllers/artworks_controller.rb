@@ -390,10 +390,20 @@ class ArtworksController < ApplicationController
     end
 
     # run the conversion and write the result to a file
-    client.convertToFile("#{Rails.root}/tmp/#{@artwork.ojbId} #{@artwork.artist.firstName} #{@artwork.artist.lastName} (#{@artwork.title}) - #{@artwork.currentLocation}.pdf")
+    if @artwork.artists.empty?
+      client.convertToFile("#{Rails.root}/tmp/#{@artwork.ojbId} No Artist (#{@artwork.title}) - #{@artwork.currentLocation}.pdf")
+
+      # download the combined pdf file
+      send_file("#{Rails.root}/tmp/#{@artwork.ojbId} No Artist (#{@artwork.title}) - #{@artwork.currentLocation}.pdf")
+    else
+      client.convertToFile("#{Rails.root}/tmp/#{@artwork.ojbId} #{@artwork.artists[0].firstName} #{@artwork.artists[0].lastName} (#{@artwork.title}) - #{@artwork.currentLocation}.pdf")
+
+      # download the combined pdf file
+      send_file("#{Rails.root}/tmp/#{@artwork.ojbId} #{@artwork.artists[0].firstName} #{@artwork.artists[0].lastName} (#{@artwork.title}) - #{@artwork.currentLocation}.pdf")
+    end
 
     # download the combined pdf file
-    send_file("#{Rails.root}/tmp/#{@artwork.ojbId} #{@artwork.artist.firstName} #{@artwork.artist.lastName} (#{@artwork.title}) - #{@artwork.currentLocation}.pdf")
+    # send_file("#{Rails.root}/tmp/#{@artwork.ojbId} #{@artwork.artists[0].firstName} #{@artwork.artists[0].lastName} (#{@artwork.title}) - #{@artwork.currentLocation}.pdf")
   end
 
   def search_by_objid
