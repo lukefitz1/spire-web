@@ -38,7 +38,7 @@
       <div class="label-block">
         <span class="avenirnextbold">Type:</span><p class="value"> <%= @artwork.artType %></p>
       </div>
-      <div class="label-block">
+      <div class="label-block" id="artist-border-test">
         <% if !@artwork.custom_artist_label.nil? && @artwork.custom_artist_label != "" %>
           <span class="avenirnextbold"><%= @artwork.custom_artist_label %>:</span>
           <p class="value"><%= @artwork.custom_details %></p>
@@ -269,8 +269,13 @@
     giInfoWithArtist = document.getElementById('gi-info-with-artist');
     giInfoLabel = document.getElementById('gi-info-label');
 
-    artistBioLength = artistBioWithGI.textContent.length
-    generalInfoLength = giInfoWithArtist.textContent.length
+    if (artistBioWithGI) {
+        artistBioLength = artistBioWithGI.textContent.length
+    }
+
+    if (giInfoWithArtist) {
+        generalInfoLength = giInfoWithArtist.textContent.length
+    }
 
     if (artistBioWithGI && giInfoWithArtist) {
       console.log("Artist bio length: " + artistBioLength)
@@ -389,5 +394,12 @@
               }
           }
       }
+  })();
+
+  (function() {
+      // artistBlock = document.getElementById('artist-border-test');
+      // artistBlock.style.border="1px solid red";
+      // $("#artist-border-test").css("border", "1px solid blue")
+      // $("#artist-border-test").dotter()
   })();
 </script>

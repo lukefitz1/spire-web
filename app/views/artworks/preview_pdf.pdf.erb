@@ -270,8 +270,13 @@
     giInfoWithArtist = document.getElementById('gi-info-with-artist');
     giInfoLabel = document.getElementById('gi-info-label');
 
-    artistBioLength = artistBioWithGI.textContent.length;
-    generalInfoLength = giInfoWithArtist.textContent.length;
+      if (artistBioWithGI) {
+          artistBioLength = artistBioWithGI.textContent.length
+      }
+
+      if (giInfoWithArtist) {
+          generalInfoLength = giInfoWithArtist.textContent.length
+      }
 
     if (artistBioWithGI && giInfoWithArtist) {
       console.log("Artist bio length: " + artistBioLength);
