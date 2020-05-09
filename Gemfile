@@ -42,10 +42,10 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
-  gem 'selenium-webdriver'
-  gem 'rspec-rails'
   gem 'database_cleaner'
-  gem 'factory_girl_rails', '~> 4.9'
+  gem 'factory_bot_rails'
+  gem 'rspec-rails'
+  gem 'selenium-webdriver'
 end
 
 group :development do
@@ -65,6 +65,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise', '~> 4.3'
 gem 'devise_token_auth'
+gem 'omniauth'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 gem 'carrierwave', '~> 2.0'
 gem 'carrierwave-base64'
