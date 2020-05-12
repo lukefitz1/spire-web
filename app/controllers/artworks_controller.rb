@@ -70,7 +70,7 @@ class ArtworksController < ApplicationController
   end
 
   def search
-    @artworks = Artwork.joins(:artist).where("concat_ws(' ', \"firstName\", \"lastName\") ILIKE ?", "%#{params[:search]}%").references(:artist)
+    @artworks = Artwork.joins(:artists).where("concat_ws(' ', \"firstName\", \"lastName\") ILIKE ?", "%#{params[:search]}%").references(:artist)
   end
 
   # GET /artworks/1
