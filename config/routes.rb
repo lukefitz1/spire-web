@@ -1,47 +1,4 @@
 Rails.application.routes.draw do
-  namespace :admin do
-    resources :users
-    resources :artists
-    resources :artworks
-    resources :collections
-    resources :customers
-    resources :general_informations
-    resources :media
-    resources :visits
-    resources :admin_users
-
-    root to: 'users#index'
-  end
-
-  # for the api calls
-  namespace :api, :defaults => { :format => :json } do
-    as :user do
-      post '/sign-in' => 'sessions#create'
-      delete '/sign-out' => 'sessions#destroy'
-
-      # customers api route
-      resources :customer
-
-      # artist api route
-      resources :artist
-
-      # artwork api route
-      resources :artwork
-
-      # collection api route
-      resources :collections
-
-      # media api route
-      resources :media
-
-      # general information api route
-      resources :general_informations
-
-      # general information api route
-      resources :visits
-    end
-  end
-
   devise_for :users # , skip: [:registrations]
 
   authenticate :user do
@@ -100,4 +57,35 @@ Rails.application.routes.draw do
   end
 
   root to: redirect('/users/sign_in')
+
+  namespace :api, defaults: { format: :json } do
+    mount_devise_token_auth_for 'User', at: 'auth'
+
+    as :user do
+      # post '/sign-in' => 'sessions#create'
+      # delete '/sign-out' => 'sessions#destroy'
+
+      resources :customer
+      resources :artist
+      resources :artwork
+      resources :collections
+      resources :media
+      resources :general_informations
+      resources :visits
+    end
+  end
+
+  namespace :admin do
+    resources :users
+    resources :artists
+    resources :artworks
+    resources :collections
+    resources :customers
+    resources :general_informations
+    resources :media
+    resources :visits
+    resources :admin_users
+
+    root to: 'users#index'
+  end
 end

@@ -1,5 +1,6 @@
 class Api::CollectionsController < Api::BaseController
-  before_action :require_login!
+  # before_action :require_login!
+  before_action :authenticate_user!
 
   # GET /collections
   # GET /collections.json

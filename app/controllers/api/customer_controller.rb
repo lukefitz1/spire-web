@@ -1,5 +1,6 @@
 class Api::CustomerController < Api::BaseController
-  before_action :require_login!
+  # before_action :require_login!
+  before_action :authenticate_user!
 
   # GET /api/customers
   # GET /api/customers.json
@@ -41,10 +42,10 @@ class Api::CustomerController < Api::BaseController
 
     respond_to do |format|
       if @customer.save
-          format.json { render :json => @customer, status: :created }
-        else
-          format.json { render json: @customer.errors, status: :unprocessable_entity }
-        end
+        format.json { render :json => @customer, status: :created }
+      else
+        format.json { render json: @customer.errors, status: :unprocessable_entity }
+      end
     end
   end
 

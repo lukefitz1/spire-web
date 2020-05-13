@@ -1,5 +1,6 @@
 class Api::GeneralInformationsController < Api::BaseController
-	before_action :require_login!
+	# before_action :require_login!
+  before_action :authenticate_user!
 
   # GET /api/general_informations
   # GET /api/general_informations.json
