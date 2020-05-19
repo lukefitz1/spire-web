@@ -8,11 +8,7 @@ class Api::CollectionsController < Api::BaseController
     @collections = Collection.all
 
     respond_to do |format|
-      format.json {
-        render :json => @collections, :include => {
-          :collection => {}
-        }
-      }
+      format.json { render :json => @collections }
     end
   end
 
