@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_09_231050) do
+ActiveRecord::Schema.define(version: 2020_07_21_003309) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -59,23 +59,19 @@ ActiveRecord::Schema.define(version: 2020_05_09_231050) do
     t.text "provenance"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.uuid "artist_id"
     t.uuid "customer_id"
     t.uuid "collection_id"
     t.string "dateAcquiredLabel"
     t.string "notesImageTwo"
     t.string "additionalInfoImageTwo"
-    t.uuid "general_information_id"
     t.boolean "show_general_info"
     t.string "custom_title"
     t.boolean "include_artist_and_general_info"
     t.string "custom_artist_label"
     t.string "custom_details"
     t.string "provenance_image"
-    t.index ["artist_id"], name: "index_artworks_on_artist_id"
     t.index ["collection_id"], name: "index_artworks_on_collection_id"
     t.index ["customer_id"], name: "index_artworks_on_customer_id"
-    t.index ["general_information_id"], name: "index_artworks_on_general_information_id"
   end
 
   create_table "artworks_general_informations", id: false, force: :cascade do |t|
@@ -181,10 +177,8 @@ ActiveRecord::Schema.define(version: 2020_05_09_231050) do
     t.index ["collection_id"], name: "index_visits_on_collection_id"
   end
 
-  add_foreign_key "artworks", "artists"
   add_foreign_key "artworks", "collections"
   add_foreign_key "artworks", "customers"
-  add_foreign_key "artworks", "general_informations"
   add_foreign_key "collections", "customers"
   add_foreign_key "media", "customers"
   add_foreign_key "visits", "collections"
