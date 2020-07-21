@@ -1,4 +1,4 @@
-require_relative('../../app/jobs/generate_pdf_job')
+require_relative("../../app/jobs/generate_pdf_job")
 
 class ArtworksController < ApplicationController
   before_action :set_artwork, only: [:show, :edit, :update, :destroy]
@@ -13,7 +13,7 @@ class ArtworksController < ApplicationController
   def sort_table
     collection_id = params[:coll_id]
 
-    artworks = Artwork.includes(:artists).where(collection_id: collection_id).order(Artist.arel_table['lastName'].asc).references(:artist)
+    artworks = Artwork.includes(:artists).where(collection_id: collection_id).order(Artist.arel_table["lastName"].asc).references(:artist)
     # artworks = Artwork.joins(:artists).where(collection_id: collection_id).merge(Artist.reorder(lastName: :asc))
     art_array_no_artist_last_name = []
     art_array_artist = []

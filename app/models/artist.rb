@@ -4,7 +4,7 @@ class Artist < ApplicationRecord
   default_scope { order(firstName: :asc) }
 
   # has_many :artworks
-  has_and_belongs_to_many :artworks
+  has_and_belongs_to_many :artworks, dependent: :nullify
 
   mount_base64_uploader :artist_image, ImageUploader
 
