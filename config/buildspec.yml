@@ -1,0 +1,29 @@
+# AWS Build Specification
+
+version: 0.2
+
+env:
+  variables:
+    NODE_OPTIONS: '--max-old-space-size=14336'
+
+# Define the commands that occur at each phase of the automated build process. This maps directly to the
+# phases within the AWS CodeBuild console.  See
+# https://us-east-2.console.aws.amazon.com/codebuild/home?region=us-east-2#/projects
+
+phases:
+  # The INSTALL phase installs Ruby
+  install:
+    commands:
+      - APP_DIR=`pwd`
+      - echo `pwd`
+
+  # The BUILD phase
+  build:
+    commands:
+      - echo `Build Phase`
+
+  # The POST BUILD phase - Wrapped all suite executions in a retry statment
+  post_build:
+    commands:
+      - ERROR=0
+      - exit $ERROR
