@@ -80,7 +80,7 @@ gem 'pdfcrowd', '~> 4.4', '>= 4.4.2'
 gem 'pdf-reader'
 
 # pagination gem
-gem 'kaminari', '~> 1.1', '>= 1.1.1'
+gem 'kaminari', '~> 1.2'
 gem 'rubyzip'
 gem 'administrate'
 gem 'bourbon'
