@@ -15,7 +15,7 @@ application up and running.
 
 * Services (job queues, cache servers, search engines, etc.)
 
-* Deployment instructions - Deployed to Heroku
+* Deployment instructions
 
 * To run the rails server with https locally, use this command (and set up your self signed cert)
 rails s -b 'ssl://localhost:3000?key=localhost.key&cert=localhost.crt'
