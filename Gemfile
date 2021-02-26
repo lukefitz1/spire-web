@@ -86,3 +86,5 @@ gem 'administrate'
 gem 'bourbon'
 gem 'delayed_job_active_record'
 gem 'ransack'
+
+gem 'rack-cors'

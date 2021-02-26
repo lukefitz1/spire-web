@@ -1,5 +1,5 @@
 class CustomerSerializer < ActiveModel::Serializer
-  attributes :id, :created_at, :updated_at, :firstName, :lastName, :email_address, :phone_number, :street_address, :city, :state, :zip, :referred_by, :project_notes, :collections
+  attributes :id, :created_at, :updated_at, :firstName, :lastName, :email_address, :phone_number, :street_address, :city, :state, :zip, :referred_by, :project_notes, :collections, :customer_photos
 
   def collections
     object.collections.map do |collection|
