@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     post '/collections/get_bucket_status', to: 'collections#get_bucket_status', as: 'get_bucket_status'
     get '/collections/download_pdfs_s3', to: 'collections#download_pdfs_s3', as: 'download_pdfs_s3'
     put '/artworks/update_object_id', to: 'artworks#update_object_id'
+    get '/artists/export_csv', to: 'artists#export_csv', as: 'export_csv'
 
     resources :general_informations
     resources :media

@@ -142,6 +142,14 @@ class ArtistsController < ApplicationController
     end
   end
 
+  def export_csv
+    @artists = Artist.all
+    respond_to do |format|
+      format.html
+      format.csv { send_data @artists.to_csv, filename: "artists.csv" }
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

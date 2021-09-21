@@ -46,17 +46,47 @@
         <% else %>
           <span class="avenirnextbold">Artist:</span>
           <p class="value">
-            <% @artwork.artists.each do |artist| %>
+            <% @artwork.artists.each_with_index do |artist, index| %>
               <% if artist.firstName != '' && artist.lastName != '' %>
-                <%= artist.lastName %>, <%= artist.firstName %>
+                <% if (@artwork.artists.length - 1) != index  %>
+                  <% if artist.additionalInfo == '' %>
+                    <%= artist.lastName %>, <%= artist.firstName %>,
+                  <% else %>
+                    <%= artist.lastName %>, <%= artist.firstName %>
+                  <% end %>
+                <% else %>
+                  <%= artist.lastName %>, <%= artist.firstName %>
+                <% end %>
               <% elsif artist.firstName != '' && artist.lastName == '' %>
                 <%= artist.firstName %>
+                <% if (@artwork.artists.length - 1) != index  %>
+                  <% if artist.additionalInfo == '' %>
+                    <%= artist.firstName %>,
+                  <% else %>
+                    <%= artist.firstName %>
+                  <% end %>
+                <% else %>
+                  <%= artist.firstName %>
+                <% end %>
               <% else %>
                 <%= artist.lastName %>
+                <% if (@artwork.artists.length - 1) != index  %>
+                  <% if artist.additionalInfo == '' %>
+                    <%= artist.lastName %>,
+                  <% else %>
+                    <%= artist.lastName %>
+                  <% end %>
+                <% else %>
+                  <%= artist.lastName %>
+                <% end %>
               <% end %>
 
               <% if artist.additionalInfo != '' %>
-                (<%= artist.additionalInfo %>)
+                <% if (@artwork.artists.length - 1) != index  %>
+                  (<%= artist.additionalInfo %>),
+                <% else %>
+                  (<%= artist.additionalInfo %>)
+                <% end %>
               <% end %>
             <% end %>
           </p>

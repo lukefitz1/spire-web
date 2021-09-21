@@ -53,6 +53,8 @@
             <td>
               <% if artwork.image.thumb.url %>
                 <%= image_tag artwork.image.thumb.url %>
+              <% else %>
+                <%= image_tag "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/collection/files/#{artwork.collection.id}/thumb_#{artwork.ojbId}_Main.jpg" %>
               <% end %>
             </td>
             <td><%= artwork.ojbId %></td>

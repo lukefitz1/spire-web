@@ -53,6 +53,7 @@
 <%= paginate @artists %><br /><br />
 
 <%= submit_tag "Delete selected" %>
+<%= link_to( 'Export Artists as CSV', export_csv_path(format: "csv")) %>
 <% end %>
 
 <h4>Import that data!</h4>
