@@ -51,6 +51,7 @@ class MultiImageUploader < CarrierWave::Uploader::Base
   protected
   
   def image?(new_file)
-    new_file.content_type.start_with? 'image'
+    # causing a bug right now
+    # new_file.content_type.start_with? 'image'
   end
 end
