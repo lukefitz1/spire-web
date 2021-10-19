@@ -13,7 +13,7 @@ gem 'rails', '~> 5.2.6'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
 # Use Puma as the app server
-gem 'puma', '~> 3.7'
+gem 'puma', '~> 4.3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -64,11 +64,11 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'devise', '~> 4.3'
+gem 'devise', '~> 4.7'
 gem 'devise_token_auth'
 gem 'omniauth'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
-gem 'carrierwave', '~> 2.0'
+gem 'carrierwave', '~> 2.1'
 gem 'carrierwave-base64'
 gem 'mini_magick', '~> 4.8'
 gem 'wicked_pdf'
@@ -80,7 +80,7 @@ gem 'pdfcrowd', '~> 4.4', '>= 4.4.2'
 gem 'pdf-reader'
 
 # pagination gem
-gem 'kaminari', '~> 1.1', '>= 1.1.1'
+gem 'kaminari', '~> 1.2'
 gem 'rubyzip'
 gem 'administrate'
 gem 'bourbon'
