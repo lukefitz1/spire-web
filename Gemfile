@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.5.3'
+ruby '2.7.4'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -9,7 +9,7 @@ end
 gem 'dotenv-rails', groups: [:development, :test]
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.4.1'
+gem 'rails', '~> 6.0.4.1' # '~> 6.1.3.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
 # Use Puma as the app server
