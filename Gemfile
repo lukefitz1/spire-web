@@ -9,7 +9,6 @@ end
 gem 'dotenv-rails', groups: [:development, :test]
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-# gem 'rails', '~> 5.2.6'
 gem 'rails', '~> 6.0.4.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
