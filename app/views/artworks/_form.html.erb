@@ -148,7 +148,13 @@
 
     <div class="field">
       <%= form.label :artist_ids %>
-      <%= form.select(:artist_ids , Artist.all.collect { |artist| [artist.firstName + ' ' + artist.lastName, artist.id]}.sort, {:include_hidden => false, :include_blank => true},  {multiple: true, size: 5}) %>
+      <%= form.select(:artist_ids, Artist.all.collect { |artist|
+        ["#{artist.firstName} #{artist.lastName}", artist.id]
+      }.sort, {
+          :include_hidden => false
+      }, {
+          multiple: true, size: 5
+      }) %>
     </div>
 
     <div class="field">
