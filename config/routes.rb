@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
-  devise_for :users, skip: [:registrations]
+  # devise_for :users, skip: [:registrations]
 
-  authenticate :user do
+  root 'home#show'
+
+  get '/dashboard' => 'dashboard#show'
+  get '/auth/auth0/callback' => 'auth0#callback'
+  get '/auth/failure' => 'auth0#failure'
+  get '/auth/logout' => 'auth0#logout'
+  get '/auth/redirect' => 'auth0#redirect'
+
+  # authenticate :user do
     root to: 'customers#index', as: :authenticated_root
 
     get '/general_informations/search', to: 'general_informations#search',  as: 'general_information_search'
@@ -55,14 +63,14 @@ Rails.application.routes.draw do
 
     resources :collections do
     end
-  end
+  # end
 
-  root to: redirect('/users/sign_in')
+  # root to: redirect('/users/sign_in')
 
   namespace :api, defaults: { format: :json } do
-    mount_devise_token_auth_for 'User', at: 'auth'
+    # mount_devise_token_auth_for 'User', at: 'auth'
 
-    as :user do
+    # as :user do
       # post '/sign-in' => 'sessions#create'
       # delete '/sign-out' => 'sessions#destroy'
 
@@ -73,7 +81,7 @@ Rails.application.routes.draw do
       resources :media
       resources :general_informations
       resources :visits
-    end
+    # end
   end
 
   namespace :admin do

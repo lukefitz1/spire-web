@@ -1,6 +1,7 @@
 require_relative("../../app/jobs/generate_pdf_job")
 
 class ArtworksController < ApplicationController
+  # include Secured
   before_action :set_artwork, only: [:show, :edit, :update, :destroy]
 
   # GET /artworks

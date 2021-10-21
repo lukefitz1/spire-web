@@ -64,9 +64,15 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'devise', '~> 4.7'
-gem 'devise_token_auth'
-gem 'omniauth'
+# OmniAuth Auth0 strategy and CSRF protection
+gem 'omniauth-auth0', '~> 3.0'
+gem 'omniauth-rails_csrf_protection', '~> 1.0'
+
+# devise auth
+# gem 'devise', '~> 4.7'
+# gem 'devise_token_auth'
+# gem 'omniauth'
+
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.6'
 gem 'carrierwave', '~> 2.1'
 gem 'carrierwave-base64'
@@ -81,6 +87,7 @@ gem 'pdf-reader'
 
 # pagination gem
 gem 'kaminari', '~> 1.2'
+
 gem 'rubyzip'
 gem 'administrate'
 gem 'bourbon'
