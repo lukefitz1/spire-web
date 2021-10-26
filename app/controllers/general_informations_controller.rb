@@ -1,4 +1,5 @@
 class GeneralInformationsController < ApplicationController
+  include Secured
   before_action :set_general_information, only: [:show, :edit, :update, :destroy]
 
   # GET /general_informations

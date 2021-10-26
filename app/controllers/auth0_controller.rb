@@ -6,7 +6,7 @@ class Auth0Controller < ApplicationController
     # Refer to https://github.com/auth0/omniauth-auth0#authentication-hash for complete information on 'omniauth.auth' contents.
     session[:userinfo] = request.env['omniauth.auth']['extra']['raw_info']
 
-    redirect_to '/dashboard'
+    redirect_to '/customers'
   end
 
   # if user authentication fails on the provider side OmniAuth will redirect to /auth/failure,

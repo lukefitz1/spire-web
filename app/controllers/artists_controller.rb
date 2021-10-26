@@ -1,4 +1,5 @@
 class ArtistsController < ApplicationController
+  include Secured
   before_action :set_artist, only: [:show, :edit, :update, :destroy]
 
   # GET /artists
