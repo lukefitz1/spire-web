@@ -8,6 +8,7 @@ Bundler.require(*Rails.groups)
 
 module ArtCollectorWeb
   class Application < Rails::Application
+    config.eager_load_paths << Rails.root.join('lib')
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
 
@@ -17,7 +18,7 @@ module ArtCollectorWeb
     # config.assets.enabled = true
     # config.assets.paths << Rails.root.join('/app/assets/fonts')
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
-    
+
     config.serve_static_assets = true
 
     config.active_job.queue_adapter = :delayed_job

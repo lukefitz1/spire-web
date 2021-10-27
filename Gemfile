@@ -67,6 +67,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # OmniAuth Auth0 strategy and CSRF protection
 gem 'omniauth-auth0', '~> 3.0'
 gem 'omniauth-rails_csrf_protection', '~> 1.0'
+gem 'jwt'
 
 # devise auth
 # gem 'devise', '~> 4.7'

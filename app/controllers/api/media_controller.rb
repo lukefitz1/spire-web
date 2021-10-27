@@ -1,6 +1,7 @@
 class Api::MediaController < Api::BaseController
+  include ApiSecured
   # before_action :require_login!
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
 
   # GET /media
   # GET /media.json

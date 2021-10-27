@@ -1,6 +1,7 @@
 class Api::VisitsController < Api::BaseController
+  include ApiSecured
   # before_action :require_login!
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
 
   # GET /api/visits
   # GET /api/visits.json
