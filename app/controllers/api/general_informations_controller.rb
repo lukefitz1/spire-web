@@ -1,17 +1,18 @@
 class Api::GeneralInformationsController < Api::BaseController
-	# before_action :require_login!
-  before_action :authenticate_user!
+  include ApiSecured
+  # before_action :require_login!
+  # before_action :authenticate_user!
 
   # GET /api/general_informations
   # GET /api/general_informations.json
   def index
     @general_informations = GeneralInformation.all
 
-		respond_to do |format|
-			format.json { 
-				render :json => @general_informations
-			}
-		end
+    respond_to do |format|
+      format.json { 
+        render :json => @general_informations
+      }
+    end
   end
 
   # GET /general_informations/1
@@ -20,10 +21,10 @@ class Api::GeneralInformationsController < Api::BaseController
     @general_information = GeneralInformation.find(params[:id])
 
     respond_to do |format|
-			format.json { 
-				render :json => @general_information
-			}
-		end
+      format.json { 
+        render :json => @general_information
+      }
+    end
   end
 
   # # GET /general_informations/new
@@ -41,12 +42,12 @@ class Api::GeneralInformationsController < Api::BaseController
     @general_information = GeneralInformation.new(general_information_params)
 
     respond_to do |format|
-			if @general_information.save 
-		  		format.json { render :json => @general_information, status: :created }
-		  	else
-		  		format.json { render json: @general_information.errors, status: :unprocessable_entity }
-		  	end
-		end
+      if @general_information.save 
+          format.json { render :json => @general_information, status: :created }
+        else
+          format.json { render json: @general_information.errors, status: :unprocessable_entity }
+        end
+    end
   end
 
   # PATCH/PUT /api/general_informations/1

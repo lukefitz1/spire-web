@@ -1,0 +1,18 @@
+<title>Home</title>
+
+<section class="auth0-login">
+  <div class="login-block">
+    <h2 class="login-image"><img src="https://spire-art-services.herokuapp.com/spire-logo.png"></h2>
+    <h1 class="login-text">Spire Art Services</h1>
+    <%= button_to 'Login', '/auth/auth0', method: :post, class: 'login-button-auth0', id: 'qsLoginBtn' unless session[:userinfo].present? %>
+  </div>
+</section>
+
+<script>
+    // self executing function here
+    (function() {
+        title = document.title
+        nav = document.getElementById('nav')
+        nav.style.display = 'none'
+    })();
+</script>

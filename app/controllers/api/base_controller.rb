@@ -1,11 +1,11 @@
 class Api::BaseController < ActionController::Base
-  include DeviseTokenAuth::Concerns::SetUserByToken
-
-  before_action :authenticate_user!
-
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_in, keys: [:email, :password])
-  end
+  # include DeviseTokenAuth::Concerns::SetUserByToken
+  #
+  # before_action :authenticate_user!
+  #
+  # def configure_permitted_parameters
+  #   devise_parameter_sanitizer.permit(:sign_in, keys: [:email, :password])
+  # end
 
   # old Devise auth
   # before_action :require_login!

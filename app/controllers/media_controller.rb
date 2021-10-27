@@ -1,4 +1,5 @@
 class MediaController < ApplicationController
+  include Secured
   before_action :set_medium, only: [:show, :edit, :update, :destroy]
 
   # GET /media

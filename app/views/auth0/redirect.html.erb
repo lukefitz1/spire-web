@@ -1,0 +1,12 @@
+<div class="redirecting">Redirecting...</div>
+<script>
+    // self executing function here
+    (function() {
+        title = document.title
+        nav = document.getElementById('nav')
+        nav.style.display = 'none'
+    })();
+</script>
+<%= button_to 'Login', '/auth/auth0', method: :post,  style: "display:none;", id: 'redirect' %>
+<script>document.getElementById('redirect').form.submit()</script>
+<noscript><style type="text/css"> #redirect { display:block !important; } .redirecting { display: none; }</style></noscript>

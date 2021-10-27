@@ -1,4 +1,5 @@
 class CollectionsController < ApplicationController
+  include Secured
   before_action :set_collection, only: [:show, :edit, :update, :destroy]
 
   # GET /collections
