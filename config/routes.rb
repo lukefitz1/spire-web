@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get "/auth/redirect" => "auth0#redirect"
 
   # authenticate :user do
-    root to: "customers#index", as: :authenticated_root
+  #   root to: "customers#index", as: :authenticated_root
 
     get "/general_informations/search", to: "general_informations#search",  as: "general_information_search"
     get "/artists/search",              to: "artists#search",               as: "artist_search"
