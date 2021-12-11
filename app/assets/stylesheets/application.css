@@ -121,3 +121,27 @@ li a {
 
 .login-form {}
 .common-links {}
+
+.auth0-login {
+    margin-top: 11%;
+    width: 100%;
+}
+
+.login-block {
+    max-width: 196px;
+    margin: auto;
+}
+
+.login-image {
+    text-align:center;
+}
+
+.login-text {
+    text-align:center;
+}
+
+.login-button-auth0 {
+    width: 100%;
+    height: 33px;
+    font-size: 17px;
+}
