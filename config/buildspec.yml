@@ -11,12 +11,20 @@ env:
 # https://us-east-2.console.aws.amazon.com/codebuild/home?region=us-east-2#/projects
 
 phases:
-  # The INSTALL phase installs Ruby
+  # The INSTALL phase installs Ruby test
   install:
     commands:
       - APP_DIR=`pwd`
       - echo `pwd`
       - env
+      - |
+          GIT_BRANCH="$(git symbolic-ref HEAD --short 2>/dev/null)"
+          if [ "$GIT_BRANCH" = "" ] ; then
+            GIT_BRANCH="$(git rev-parse HEAD | xargs git name-rev | cut -d' ' -f2 | sed 's/remotes\/origin\///g')";
+          fi
+          - echo GIT_BRANCH - $GIT_BRANCH
+      - echo $GIT_BRANCH
+      - echo `pwd`
 
   # The BUILD phase
   build:
