@@ -16,6 +16,7 @@ phases:
     commands:
       - APP_DIR=`pwd`
       - echo `pwd`
+      - env
 
   # The BUILD phase
   build:
