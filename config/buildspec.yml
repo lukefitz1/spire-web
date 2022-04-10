@@ -18,7 +18,6 @@ phases:
       - echo `pwd`
       - env
       - bash -c "$(curl -fsSL https://raw.githubusercontent.com/thii/aws-codebuild-extras/master/install)"
-      - echo $CODEBUILD_GIT_MESSAGE
 
   # The BUILD phase
   build:
