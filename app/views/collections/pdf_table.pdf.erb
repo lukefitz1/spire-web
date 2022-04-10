@@ -6,7 +6,7 @@
 <%= wicked_pdf_stylesheet_link_tag "artworks" %>
 
 <div class='art-table'>
-	<% unless @collection.artworks.blank? %>
+	<% unless @artworks.blank? %>
 
     <!-- Artworks Table -->
     <table>
@@ -36,7 +36,7 @@
       </thead>
 
       <tbody>
-        <% @collection.artworks.each do |artwork| %>
+        <% @artworks.each do |artwork| %>
           <tr>
             <td class='art-table-data'><%= artwork.ojbId %></td>
             <td class='art-table-data'><%= artwork.artType %></td>

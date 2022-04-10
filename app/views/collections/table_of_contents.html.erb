@@ -19,7 +19,7 @@
     </div>
   </div>
 
-	<% unless @collection.artworks.blank? %>
+	<% unless @artworks.blank? %>
   <!-- Artworks Table -->
   <div class='toc-container'>
     <table class='toc'>
@@ -32,7 +32,7 @@
       </thead> %>
 
       <tbody>
-        <% @collection.artworks.each do |artwork| %>
+        <% @artworks.each do |artwork| %>
           <tr class='toc-row'>
             <td class='toc-data-left'><%= artwork.ojbId %></td>
             <td class='toc-data-middle'>
