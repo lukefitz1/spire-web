@@ -33,6 +33,8 @@ Rails.application.routes.draw do
     get "/visits/new", to: "visits#new", as: "new_visit_from_collection"
     get "/collections/table_of_contents/:id", to: "collections#table_of_contents", as: "table_of_contents"
     get "/collections/table_of_contents_pdf/:id", to: "collections#table_of_contents_pdf", as: "table_of_contents_pdf"
+    get "/collections/toc_book/:id", to: "collections#toc_book", as: "toc_book"
+    get "/collections/toc_book_pdf/:id", to: "collections#toc_book_pdf", as: "toc_book_pdf"
     post "/artists/ajax_create", to: "artists#ajax_create", as: "ajax_create"
     post "/general_informations/ajax_create", to: "general_informations#ajax_create", as: "gi_ajax_create"
     delete "artworks/destroy_multiple", to: "artworks#destroy_multiple"

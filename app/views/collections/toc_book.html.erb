@@ -1,0 +1,28 @@
+<script>
+    if (document.title = "Table Preview") {
+        document.getElementById("nav").style.display = 'none';
+        document.body.style.margin = '0px';
+    }
+</script>
+
+<div class='toc-book-layout'>
+  <% unless @artworks.blank? %>
+    <div>
+      <table>
+        <tbody>
+        <% @artworks.each do |artwork| %>
+          <div class="toc-book-row-container">
+            <div class="toc-book-table-row-1">
+              <%= artwork.artists[0].firstName %> <%= artwork.artists[0].lastName %> (<%= artwork.artists[0].additionalInfo %>)
+            </div>
+            <div class="toc-book-table-row-2"><span class="toc-book-table-row-2-text"><%= artwork.title %>,</span> <%= artwork.date %></div>
+            <div class="toc-book-table-row-3"><%= artwork.medium %></div>
+            <div class="toc-book-table-row-3"><%= artwork.dimensions %></div>
+          </div>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+
+</div>
