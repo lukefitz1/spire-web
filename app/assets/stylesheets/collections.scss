@@ -161,6 +161,46 @@ div.art-table > table > tbody > tr > td > img {
   font-style: italic;
 }
 
+.toc-book-layout {
+	width: 900px;
+	margin-top: 20px;
+	//height: 1320px;
+	margin-left: auto;
+	margin-right: auto;
+	//max-height: 1320px;
+}
+
+.toc-book-table {
+	width: 100%;
+}
+
+.toc-book-row-container {
+	padding: 15px;
+	line-height: 23px;
+	text-align: center;
+}
+
+.toc-book-table-row-1 {
+	font-size: 22px;
+	font-weight: bold;
+}
+
+.toc-book-table-row-2 {
+	font-size: 22px;
+	font-weight: 500;
+}
+
+.toc-book-table-row-2-text {
+	font-size: 20px;
+	font-style: italic;
+}
+
+.toc-book-table-row-3 {
+	font-size: 20px;
+	color: gray;
+	font-weight: 700;
+}
+
 .modal {
 	display: none; 
 	position: fixed;
