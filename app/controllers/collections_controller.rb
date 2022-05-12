@@ -113,6 +113,95 @@ class CollectionsController < ApplicationController
   end
 
   # GET
+  def toc_book
+    # @collection = Collection.find(params[:coll_id])
+    art_array_no_artist_last_name = []
+    art_array_artist = []
+    art_array_no_artist = []
+    @artworks = []
+
+    @collection = Collection.includes(:artworks).find(params[:coll_id])
+
+    @collection.artworks.each do |art|
+      if !art.artists.empty?
+        if art.artists[0].lastName == ""
+          art_array_no_artist_last_name.append(art)
+        else
+          art_array_artist.append(art)
+        end
+      else
+        art_array_no_artist.append(art)
+      end
+    end
+
+    art_array = art_array_artist.sort_by {|obj| obj.artists[0].lastName}
+    art_array.each do |art|
+      @artworks.append(art)
+    end
+
+    art_array_no_artist_last_name.each do |art|
+      @artworks.append(art)
+    end
+
+    art_array_empty = art_array_no_artist.sort_by {|obj| obj.currentLocation}
+    art_array_empty.each do |art|
+      @artworks.append(art)
+    end
+
+    @artworks
+  end
+
+  # GET
+  def toc_book_pdf
+    # @collection = Collection.find(params[:coll_id])
+    art_array_no_artist_last_name = []
+    art_array_artist = []
+    art_array_no_artist = []
+    @artworks = []
+
+    @collection = Collection.includes(:artworks).find(params[:coll_id])
+
+    @collection.artworks.each do |art|
+      if !art.artists.empty?
+        if art.artists[0].lastName == ""
+          art_array_no_artist_last_name.append(art)
+        else
+          art_array_artist.append(art)
+        end
+      else
+        art_array_no_artist.append(art)
+      end
+    end
+
+    art_array = art_array_artist.sort_by {|obj| obj.artists[0].lastName}
+    art_array.each do |art|
+      @artworks.append(art)
+    end
+
+    art_array_no_artist_last_name.each do |art|
+      @artworks.append(art)
+    end
+
+    art_array_empty = art_array_no_artist.sort_by {|obj| obj.currentLocation}
+    art_array_empty.each do |art|
+      @artworks.append(art)
+    end
+
+    @artworks
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "book-toc-pdf",
+               template: "collections/toc_book_pdf.pdf.erb",
+               # orientation: 'Landscape',
+               show_as_html: params.key?("debug"),
+               encoding: "UTF-8"
+      end
+    end
+  end
+
+  # GET
   def preview_table
     art_array_no_artist_last_name = []
     art_array_artist = []

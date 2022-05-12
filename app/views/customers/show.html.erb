@@ -106,6 +106,8 @@
     <%= link_to 'New Artwork', new_from_customer_collection_path(:cust_id => @customer.id, :coll_id => collection.id, :customer_redirect => true) %><br /><br />
     <%= link_to 'Generate & Download PDFs', download_pdfs_path(:coll_id => collection.id, format: :pdf) %><br /><br />
     <%= link_to 'Generate PDFs - Background Job', download_pdfs_background_path(:cust_id => @customer.id, :coll_id => collection.id) %><br /><br />
+    <%= link_to 'Generate Book TOC - HTML', toc_book_path(:coll_id => collection.id) %><br /><br />
+    <%= link_to 'Generate Book TOC - PDF', toc_book_pdf_path(:coll_id => collection.id, format: :pdf) %><br /><br />
     <%= hidden_field_tag(:collection_bucket_name, collection.bucket_name) %>
 
     <% if collection.bucket_name.present? %>
