@@ -8,7 +8,7 @@
 <div class='toc-book-layout'>
   <% unless @artworks.blank? %>
     <div>
-      <table>
+      <table class="toc-book-table">
         <tbody>
         <% @artworks.each_with_index do |artwork, index| %>
           <div class="toc-book-row-container toc-book-row-container-<%= index %>">
