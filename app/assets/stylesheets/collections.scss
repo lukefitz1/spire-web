@@ -178,6 +178,8 @@ div.art-table > table > tbody > tr > td > img {
 	padding: 15px;
 	line-height: 23px;
 	text-align: center;
+	height: 93px;
+	page-break-inside: avoid;
 }
 
 .toc-book-table-row-1 {
