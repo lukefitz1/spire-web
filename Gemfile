@@ -1,17 +1,17 @@
 source 'https://rubygems.org'
-ruby '2.7.6'
+ruby '3.1.2'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'dotenv-rails', groups: [:development, :test]
+gem 'dotenv-rails', '~> 2.1', '>= 2.1.1', groups: [:development, :test]
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.4.1' # '~> 6.1.3.1'
+gem 'rails', '~> 7.0', '>= 7.0.4' # '~> 6.1.3.1', 6.0.4.1
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 0.18'
+gem 'pg', '~> 1.4', '>= 1.4.4'
 # Use Puma as the app server
 gem 'puma', '~> 4.3'
 # Use SCSS for stylesheets
@@ -22,11 +22,11 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'therubyracer', platforms: :ruby
 
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.2'
+gem 'coffee-rails', '~> 5.0'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.5'
+gem 'jbuilder', '~> 2.6'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
@@ -35,18 +35,19 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'active_model_serializers', '~> 0.10.0'
+gem 'active_model_serializers', '~> 0.10.13'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'database_cleaner'
   gem 'factory_bot_rails'
   # gem 'factory_girl_rails', '~> 4.9'
   gem 'rspec-rails'
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver``'
 end
 
 group :development do
@@ -87,10 +88,10 @@ gem 'pdfcrowd', '~> 4.4', '>= 4.4.2'
 gem 'pdf-reader'
 
 # pagination gem
-gem 'kaminari', '~> 1.2'
+gem 'kaminari', '~> 1.2.2'
 
-gem 'rubyzip'
-gem 'administrate'
-gem 'bourbon'
-gem 'delayed_job_active_record'
-gem 'ransack'
+gem 'rubyzip', '~> 2.3', '>= 2.3.2'
+# gem 'administrate'
+gem 'bourbon', '~> 7.2'
+gem 'delayed_job_active_record', '~> 4.1', '>= 4.1.7'
+gem 'ransack', '~> 3.2', '>= 3.2.1'
