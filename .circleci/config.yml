@@ -1,0 +1,29 @@
+version: 2.1
+
+orbs:
+  ruby: circleci/ruby@2.0.0
+
+jobs:
+  build:
+    docker:
+      - image: 'cimg/base:stable'
+    steps:
+      - checkout
+      - ruby/install:
+          version: '2.7'
+      - run: echo "Ruby 2.7 has been installed"
+      - ruby/install-deps
+  checking:
+    docker:
+      - image: 'cimg/ruby:2.7-node'
+    steps:
+      - checkout
+      - ruby/install-deps
+      - ruby/rubocop-check:
+          format: progress
+          label: Inspecting with Rubocop
+workflows:
+  build_and_check:
+    jobs:
+      - build
+      - checking
