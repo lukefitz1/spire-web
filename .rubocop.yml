@@ -3,5 +3,3 @@ AllCops:
     - 'Gemfile'
   Exclude:
     - 'bin/**/*'
-Layout/LineLength:
-  Max: 140
