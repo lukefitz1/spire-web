@@ -27,9 +27,11 @@ jobs:
       - image: 'cimg/ruby:2.7-node'
     steps:
       - checkout
+      - ruby/install:
+          version: '2.7.6'
       - ruby/install-deps
       - ruby/rspec-test:
-          include: spec/**/*_spec.rb
+          include: spec/**/*.rb
 workflows:
   build_and_check:
     jobs:
