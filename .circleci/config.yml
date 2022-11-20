@@ -10,8 +10,8 @@ jobs:
     steps:
       - checkout
       - ruby/install:
-          version: '2.7'
-      - run: echo "Ruby 2.7 has been installed"
+          version: '2.7.6'
+      - run: echo "Ruby 2.7.6 has been installed"
       - ruby/install-deps
   checking:
     docker:
