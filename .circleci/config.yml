@@ -22,6 +22,7 @@ jobs:
       - ruby/rubocop-check:
           format: progress
           label: Inspecting with Rubocop
+          check-path: 'Gemfile'
 workflows:
   build_and_check:
     jobs:
