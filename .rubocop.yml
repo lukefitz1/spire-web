@@ -1,0 +1,7 @@
+AllCops:
+  Include:
+    - 'Gemfile'
+  Exclude:
+    - 'bin/**/*'
+Layout/LineLength:
+  Max: 140
