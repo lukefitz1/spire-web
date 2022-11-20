@@ -22,8 +22,17 @@ jobs:
       - ruby/rubocop-check:
           format: progress
           label: Inspecting with Rubocop
+  test:
+    docker:
+      - image: 'cimg/ruby:2.7-node'
+    steps:
+      - checkout
+      - ruby/install-deps
 workflows:
   build_and_check:
     jobs:
       - build
       - checking
+      - test:
+          requires:
+            - build
