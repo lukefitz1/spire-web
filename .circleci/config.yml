@@ -10,12 +10,12 @@ jobs:
     steps:
       - checkout
       - ruby/install:
-          version: '2.7.6'
-      - run: echo "Ruby 2.7.6 has been installed"
+          version: '3.1.2'
+      - run: echo "Ruby 3.1.2 has been installed"
       - ruby/install-deps
   checking:
     docker:
-      - image: 'cimg/ruby:2.7-node'
+      - image: 'cimg/ruby:3.1.2-node'
     steps:
       - checkout
       - ruby/install-deps
@@ -24,7 +24,7 @@ jobs:
           label: Inspecting with Rubocop
   test:
     docker:
-      - image: 'cimg/ruby:2.7-node'
+      - image: 'cimg/ruby:3.1.2-node'
       - environment:
           POSTGRES_DB: art-collector-web_test
           POSTGRES_PASSWORD: ''
