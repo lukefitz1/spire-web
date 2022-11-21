@@ -41,7 +41,8 @@ jobs:
     steps:
       - checkout
       - ruby/install-deps
-      - ruby/rspec-test
+      - run:
+          command: rspec
 workflows:
   build_and_check:
     jobs:
