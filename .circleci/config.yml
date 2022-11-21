@@ -43,7 +43,7 @@ jobs:
       - ruby/install:
           version: '2.7.6'
       - ruby/install-deps
-      - ruby/rspec-test:
+      - ruby/rspec-test
 workflows:
   build_and_check:
     jobs:
