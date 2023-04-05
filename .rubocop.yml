@@ -1,0 +1,7 @@
+AllCops:
+  Include:
+    - 'Gemfile'
+  Exclude:
+    - 'bin/**/*'
+    - 'vendor/**/*'
+  NewCops: disable

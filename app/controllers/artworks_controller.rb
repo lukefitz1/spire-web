@@ -334,7 +334,7 @@ class ArtworksController < ApplicationController
       format.html
       format.pdf do
         render pdf: "artwork_pdf",
-               template: "artworks/preview_pdf.pdf.erb",
+               template: "artworks/preview_pdf",
                show_as_html: params.key?("debug"),
                encoding: "UTF-8",
                page_size: "Letter"
@@ -355,7 +355,7 @@ class ArtworksController < ApplicationController
       format.html
       format.pdf do
         render pdf: "artwork_pdf",
-               template: "artworks/preview_pdf.pdf.erb",
+               template: "artworks/preview_pdf",
                encoding: "UTF-8",
                save_to_file: Rails.root.join("tmp", "#{timestamp}_#{@artwork[:ojbId]}_#{@artwork[:title]}.pdf"),
                save_only: true,
