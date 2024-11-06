@@ -58,7 +58,6 @@
                   <%= artist.lastName %>, <%= artist.firstName %>
                 <% end %>
               <% elsif artist.firstName != '' && artist.lastName == '' %>
-                <%= artist.firstName %>
                 <% if (@artwork.artists.length - 1) != index  %>
                   <% if artist.additionalInfo == '' %>
                     <%= artist.firstName %>,
