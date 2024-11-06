@@ -147,11 +147,16 @@
     </div>
 
     <div class="field">
+      <%= form.label :show_general_info, "Leave the Artist blank?" %>
+      <%= form.check_box :empty_artist, id: "leave_artist_empty" %>
+    </div>
+
+    <div class="field">
       <%= form.label :artist_ids %>
       <%= form.select(:artist_ids, Artist.all.collect { |artist|
         ["#{artist.firstName} #{artist.lastName}", artist.id]
       }.sort, {
-          :include_hidden => false
+          :include_hidden => false, :include_blank => true
       }, {
           multiple: true, size: 5
       }) %>
