@@ -20,8 +20,8 @@ if ARGV.first
 end
 
 if Gem.respond_to?(:activate_bin_path)
-load Gem.activate_bin_path('wkhtmltopdf-binary', 'wkhtmltopdf', version)
+  load Gem.activate_bin_path('wkhtmltopdf-heroku', 'wkhtmltopdf', version)
 else
-gem "wkhtmltopdf-binary", version
-load Gem.bin_path("wkhtmltopdf-binary", "wkhtmltopdf", version)
+  gem "wkhtmltopdf-heroku", version
+  load Gem.bin_path("wkhtmltopdf-heroku", "wkhtmltopdf", version)
 end
