@@ -27,7 +27,7 @@ WickedPdf.config = {
   
 #   # exe_path: wkhtmltopdf_path, wkhtmltopdf: wkhtmltopdf_path
 #   # exe_path: Rails.root.join('bin', 'wkhtmltopdf-amd64').to_s
-  exe_path: Gem.bin_path('wkhtmltopdf-heroku', 'wkhtmltopdf'),
+  # exe_path: Gem.bin_path('wkhtmltopdf-heroku', 'wkhtmltopdf'),
   enable_local_file_access: true
 }
 
