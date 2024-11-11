@@ -59,7 +59,9 @@ gem 'ransack', '~> 3.2', '>= 3.2.1'
 gem 'rubyzip', '~> 2.3', '>= 2.3.2'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'wicked_pdf'
-gem 'wkhtmltopdf-binary', '~> 0.12.6.6'
+# gem 'wkhtmltopdf-binary', '~> 0.12.6.6'
+gem 'wkhtmltopdf-binary', group: [:development, :test]
+gem 'wkhtmltopdf-heroku', group: :production
 
 # gem 'redis', '~> 3.0' # Use Redis adapter to run Action Cable in production
 # gem 'bcrypt', '~> 3.1.7' # Use ActiveModel has_secure_password
