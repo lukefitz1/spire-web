@@ -151,7 +151,7 @@
       <%= form.select(:artist_ids, Artist.all.collect { |artist|
         ["#{artist.firstName} #{artist.lastName}", artist.id]
       }.sort, {
-          :include_hidden => false
+          :include_hidden => false, :include_blank => true
       }, {
           multiple: true, size: 5
       }) %>
