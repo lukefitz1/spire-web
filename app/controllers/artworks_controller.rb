@@ -378,7 +378,8 @@ class ArtworksController < ApplicationController
     else
       url = "https://#{ENV["S3_BUCKET"]}.s3.amazonaws.com/uploads/artwork/additionalPdf/#{@artwork[:id]}/#{@artwork[:additionalPdf]}"
       open(Rails.root.join("tmp", "crossing_fingers.pdf"), "wb") do |file|
-        file << open(url).read
+        puts url
+        file << URI.open(url).read
 
         open(Rails.root.join("tmp", "template.pdf"), "wb") do |file2|
           file2 << open(Rails.root.join("tmp", temp_art_name)).read
