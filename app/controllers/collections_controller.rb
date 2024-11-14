@@ -104,7 +104,7 @@ class CollectionsController < ApplicationController
       format.html
       format.pdf do
         render pdf: "toc-pdf",
-               template: "collections/table_of_contents_pdf.pdf.erb",
+               template: "collections/table_of_contents_pdf",
           # orientation: 'Landscape',
                show_as_html: params.key?("debug"),
                encoding: "UTF-8"
@@ -193,7 +193,7 @@ class CollectionsController < ApplicationController
       format.html
       format.pdf do
         render pdf: "book-toc-pdf",
-               template: "collections/toc_book_pdf.pdf.erb",
+               template: "collections/toc_book_pdf",
                # orientation: 'Landscape',
                show_as_html: params.key?("debug"),
                encoding: "UTF-8"
@@ -324,7 +324,7 @@ class CollectionsController < ApplicationController
       format.html
       format.pdf do
         render pdf: 'table-preview',
-               template: 'collections/pdf_table.pdf.erb',
+               template: 'collections/pdf_table',
                orientation: 'Landscape',
                show_as_html: params.key?('debug'),
                encoding: 'UTF-8'
